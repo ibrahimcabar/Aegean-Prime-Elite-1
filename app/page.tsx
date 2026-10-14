@@ -2,6 +2,11 @@
 import {useMemo,useState} from 'react';
 import {Search,MapPin,ArrowUpRight,Menu,X,MessageCircle,Send,Building2,Globe2,BedDouble,Ruler,Check,ShieldCheck} from 'lucide-react';
 import {properties,packages} from '../lib/data';
+import { createClient } from '@supabase/supabase-js';
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
 export default function Home(){
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
 const filtered=useMemo(()=>properties.filter(p=>(!search||[p.city,p.country,p.address,p.title].join(' ').toLowerCase().includes(search.toLowerCase()))&&(kind==='All types'||p.type===kind)),[search,kind]);
