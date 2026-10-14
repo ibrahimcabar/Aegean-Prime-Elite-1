@@ -53,7 +53,7 @@ export default function GirisPage() {
         if (error) throw error;
 
         setMessage("Signed in successfully!");
-      }
+      }window.location.href = "/panel";
     } catch (err) {
       setMessage(
         err instanceof Error ? err.message : "An error occurred."
