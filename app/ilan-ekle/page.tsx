@@ -14,7 +14,20 @@ export default function IlanEklePage() {
   const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [loggedIn, setLoggedIn] = useState(false);
+async function handleLogin() {
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setLoggedIn(true);
+  setMessage("Login successful!");
+}
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
