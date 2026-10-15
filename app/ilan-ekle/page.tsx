@@ -49,7 +49,29 @@ if (authError || !user) {
       return;
     }
 try {
-  const { data: savedProperty, error } = await supabase
+  let imageUrl = "";
+
+  for (const photo of photos) {
+    const filePath = `${user.id}/${crypto.randomUUID()}-${photo.name}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("property-images")
+      .upload(filePath, photo, {
+        contentType: photo.type,
+      });
+
+    if (uploadError) throw uploadError;
+
+    if (!imageUrl) {
+      const { data: imageData } = supabase.storage
+        .from("property-images")
+        .getPublicUrl(filePath);
+
+      imageUrl = imageData.publicUrl;
+    }
+  }
+
+  const { error } = await supabase
     .from("properties")
     .insert({
       title,
@@ -60,44 +82,11 @@ try {
       price: Number(form.get("price") || 0),
       currency: String(form.get("currency") || "EUR"),
       description: String(form.get("description") || ""),
-    })
-.select("id")
-.single();
-
-  if (error) throw error;
-  if (!savedProperty) {
-  throw new Error("Property ID not found");
-}
-  let firstPhotoPath = "";
-for (const photo of photos) {
-  const filePath = `${user.id}/${crypto.randomUUID()}-${photo.name}`;
-
-  const { error: uploadError } = await supabase.storage
-    .from("property-images")
-    .upload(filePath, photo, {
-      contentType: photo.type,
+      image: imageUrl || null,
     });
 
-  if (uploadError) {
-  throw uploadError;
-}
+  if (error) throw error;
 
-if (!firstPhotoPath) {
-  firstPhotoPath = filePath;
-}
-}
-  if (firstPhotoPath) {
-  const { data: imageData } = supabase.storage
-    .from("property-images")
-    .getPublicUrl(firstPhotoPath);
-
-  const { error: imageError } = await supabase
-    .from("properties")
-    .update({ image: imageData.publicUrl })
-    .eq("id", savedProperty.id);
-
-  if (imageError) throw imageError;
-}
   setMessage("Property saved successfully!");
 } catch (error) {
   setMessage(
