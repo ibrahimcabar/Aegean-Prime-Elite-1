@@ -90,7 +90,18 @@ export default function IlanEklePage() {
             <option>TRY</option>
             <option>GBP</option>
           </select>
+          
+<label style={{ fontWeight: 600 }}>
+  Property Photos
+</label>
 
+<input
+  name="photos"
+  type="file"
+  accept="image/*"
+  multiple
+  style={inputStyle}
+/>
           <textarea name="description"
             placeholder="Property Description"
             rows={5}
