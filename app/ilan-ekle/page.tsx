@@ -60,9 +60,15 @@ try {
       price: Number(form.get("price") || 0),
       currency: String(form.get("currency") || "EUR"),
       description: String(form.get("description") || ""),
-    });
+    })
+.select("id")
+.single();
 
   if (error) throw error;
+  if (!savedProperty) {
+  throw new Error("Property ID not found");
+}
+  let firstPhotoPath = "";
 for (const photo of photos) {
   const filePath = `${user.id}/${crypto.randomUUID()}-${photo.name}`;
 
@@ -73,8 +79,24 @@ for (const photo of photos) {
     });
 
   if (uploadError) {
-    throw uploadError;
-  }
+  throw uploadError;
+}
+
+if (!firstPhotoPath) {
+  firstPhotoPath = filePath;
+}
+}
+  if (firstPhotoPath) {
+  const { data: imageData } = supabase.storage
+    .from("property-images")
+    .getPublicUrl(firstPhotoPath);
+
+  const { error: imageError } = await supabase
+    .from("properties")
+    .update({ image: imageData.publicUrl })
+    .eq("id", savedProperty.id);
+
+  if (imageError) throw imageError;
 }
   setMessage("Property saved successfully!");
 } catch (error) {
