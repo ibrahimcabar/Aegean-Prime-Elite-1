@@ -63,7 +63,19 @@ try {
     });
 
   if (error) throw error;
+for (const photo of photos) {
+  const filePath = `${user.id}/${crypto.randomUUID()}-${photo.name}`;
 
+  const { error: uploadError } = await supabase.storage
+    .from("property-images")
+    .upload(filePath, photo, {
+      contentType: photo.type,
+    });
+
+  if (uploadError) {
+    throw uploadError;
+  }
+}
   setMessage("Property saved successfully!");
 } catch (error) {
   setMessage(
