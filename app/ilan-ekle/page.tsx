@@ -49,7 +49,7 @@ if (authError || !user) {
       return;
     }
 try {
-  const { error } = await supabase
+  const { data: savedProperty, error } = await supabase
     .from("properties")
     .insert({
       title,
