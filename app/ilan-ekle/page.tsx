@@ -79,6 +79,8 @@ try {
       country: String(form.get("country") || ""),
       city: String(form.get("city") || ""),
       street_address: String(form.get("address") || ""),
+      beds: Number(form.get("beds") || 0),
+area_sqm: Number(form.get("area_sqm") || 0),
       price: Number(form.get("price") || 0),
       currency: String(form.get("currency") || "EUR"),
       description: String(form.get("description") || ""),
@@ -177,7 +179,21 @@ try {
           <input name="address"
             placeholder="Street / Address"
             style={inputStyle} />
+<input
+  name="beds"
+  type="number"
+  min="0"
+  placeholder="Number of Bedrooms"
+  style={inputStyle}
+/>
 
+<input
+  name="area_sqm"
+  type="number"
+  min="0"
+  placeholder="Property Area (m²)"
+  style={inputStyle}
+/>
           <input name="price" type="number"
             min="0" required
             placeholder="Price"
