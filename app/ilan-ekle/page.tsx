@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function IlanEklePage() {
   const [message, setMessage] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const title = String(form.get("title") || "").trim();
