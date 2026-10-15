@@ -1,5 +1,5 @@
 'use client';
-import {useMemo,useState} from 'react';
+import {useEffect,useMemo,useState} from 'react';
 import {Search,MapPin,ArrowUpRight,Menu,X,MessageCircle,Send,Building2,Globe2,BedDouble,Ruler,Check,ShieldCheck} from 'lucide-react';
 import {properties,packages} from '../lib/data';
 import { createClient } from '@supabase/supabase-js';
@@ -9,7 +9,9 @@ const supabase = createClient(
 );
 export default function Home(){
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
-const filtered=useMemo(()=>properties.filter(p=>(!search||[p.city,p.country,p.address,p.title].join(' ').toLowerCase().includes(search.toLowerCase()))&&(kind==='All types'||p.type===kind)),[search,kind]);
+const [dbProperties,setDbProperties]=useState<any[]>([]);
+useEffect(()=>{supabase.from('properties').select('*').then(({data,error})=>{if(error){console.error('Supabase:',error);return;}setDbProperties(data||[]);});},[]);
+const filtered=useMemo(()=>[...properties,...dbProperties].filter(p=>(!search||[p.city,p.country,p.address,p.title].join(' ').toLowerCase().includes(search.toLowerCase()))&&(kind==='All types'||p.type===kind)),[search,kind,dbProperties]);
 function submit(){setSearch(query);document.getElementById('properties')?.scrollIntoView({behavior:'smooth'})}
 function send(){if(!message.trim())return;const m=message.trim();setMessages(old=>[...old,{who:'user',text:m},{who:'bot',text:'Thanks! This is a preview assistant. Live AI recommendations will be available after connecting our property database and AI service.'}]);setMessage('')}
 return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">Properties</a><a href="#how">For Partners</a><a href="#packages">Pricing</a><a href="#about">About</a></nav><div className="header-actions"><a className="outline-btn" href="#packages">List a Property <ArrowUpRight size={15}/></a><button className="menu" aria-label="Toggle menu" onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></header>
