@@ -128,6 +128,7 @@ try {
     </button>
   </div>
 )}
+        {loggedIn && (
         <form onSubmit={handleSubmit}
           style={{ display: "grid", gap: 16 }}>
 
@@ -194,7 +195,7 @@ try {
             Continue
           </button>
         </form>
-
+)}
         {message && (
           <p role="status" style={{
             color: "#947748",
