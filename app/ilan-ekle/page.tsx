@@ -74,6 +74,7 @@ try {
   const { error } = await supabase
     .from("properties")
     .insert({
+      owner_id: user.id,
       title,
       property_type: String(form.get("type") || ""),
       country: String(form.get("country") || ""),
