@@ -10,10 +10,22 @@ const supabase = createClient(
 );
 export default function IlanEklePage() {
   const [message, setMessage] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
+    const photos = form.getAll("photos").filter(
+  (file): file is File =>
+    file instanceof File && file.size > 0
+);
+    const { data: { user }, error: authError } =
+  await supabase.auth.getUser();
+
+if (authError || !user) {
+  setMessage("Please sign in to upload property photos.");
+  return;
+}
     const title = String(form.get("title") || "").trim();
 
     if (!title) {
