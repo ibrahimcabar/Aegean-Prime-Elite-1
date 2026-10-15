@@ -103,7 +103,31 @@ try {
 
         <h2>Add New Property</h2>
         <p>List your property worldwide.</p>
+{!loggedIn && (
+  <div style={{ display: "grid", gap: 12, marginBottom: 24 }}>
+    <h3>Sign In</h3>
 
+    <input
+      type="email"
+      placeholder="Email Address"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      style={inputStyle}
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      style={inputStyle}
+    />
+
+    <button type="button" onClick={handleLogin}>
+      Sign In
+    </button>
+  </div>
+)}
         <form onSubmit={handleSubmit}
           style={{ display: "grid", gap: 16 }}>
 
