@@ -20,10 +20,28 @@ export default function IlanEklePage() {
       setMessage("Please enter a property title.");
       return;
     }
+try {
+  const { error } = await supabase
+    .from("properties")
+    .insert({
+      title,
+      property_type: String(form.get("type") || ""),
+      country: String(form.get("country") || ""),
+      city: String(form.get("city") || ""),
+      street_address: String(form.get("address") || ""),
+      price: Number(form.get("price") || 0),
+      currency: String(form.get("currency") || "EUR"),
+      description: String(form.get("description") || ""),
+    });
 
-    setMessage(
-      "Form completed successfully. Database saving will be added next."
-    );
+  if (error) throw error;
+
+  setMessage("Property saved successfully!");
+} catch (error) {
+  setMessage(
+    error instanceof Error ? error.message : "Failed to save property."
+  );
+}
   }
 
   const inputStyle: React.CSSProperties = {
