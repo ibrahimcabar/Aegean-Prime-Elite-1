@@ -11,6 +11,9 @@ const supabase = createClient(
 export default function IlanEklePage() {
   const [message, setMessage] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [loggedIn, setLoggedIn] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
