@@ -30,6 +30,7 @@ async function handleLogin() {
 }
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    alert("Continue butonu çalışıyor!");
     const form = new FormData(e.currentTarget);
     const photos = form.getAll("photos").filter(
   (file): file is File =>
