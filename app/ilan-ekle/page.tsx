@@ -111,8 +111,10 @@ if (newProperty && uploadedImageUrls.length > 0) {
   setMessage("Property saved successfully!");
 } catch (error) {
   setMessage(
-    error instanceof Error ? error.message : "Failed to save property."
-  );
+  error instanceof Error
+    ? error.message
+    : JSON.stringify(error)
+);
 }
   }
 
