@@ -52,12 +52,11 @@ const [activeImage, setActiveImage] = useState(0);
     : (photos || []).map((photo) => photo.image_url);
 
   setImages(
-    photoUrls.length > 0
-      ? photoUrls
-      : data.image
-        ? [data.image]
-        : []
-  );
+  [...new Set([
+    ...(data.image ? [data.image] : []),
+    ...photoUrls
+  ])]
+);
   setActiveImage(0);
 }
       setLoading(false);
