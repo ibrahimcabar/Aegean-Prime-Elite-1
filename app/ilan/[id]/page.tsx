@@ -126,17 +126,7 @@ const [activeImage, setActiveImage] = useState(0);
     )}
   </div>
 )}
-        <img
-          src={property.image}
-          alt={property.title}
-          style={{
-            width: "100%",
-            maxHeight: 550,
-            objectFit: "cover",
-            borderRadius: 12
-          }}
-        />
-      )}
+        
 
       <h2 style={{ color: "#b89b68", marginTop: 25 }}>
         {new Intl.NumberFormat("tr-TR", {
