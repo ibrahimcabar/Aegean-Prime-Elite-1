@@ -50,7 +50,7 @@ if (authError || !user) {
     }
 try {
   let imageUrl = "";
-
+const uploadedImageUrls: string[] = [];
   for (const photo of photos) {
     const filePath = `${user.id}/${crypto.randomUUID()}-${photo.name}`;
 
@@ -61,7 +61,11 @@ try {
       });
 
     if (uploadError) throw uploadError;
+const { data: photoData } = supabase.storage
+  .from("property-images")
+  .getPublicUrl(filePath);
 
+uploadedImageUrls.push(photoData.publicUrl);
     if (!imageUrl) {
       const { data: imageData } = supabase.storage
         .from("property-images")
@@ -71,7 +75,7 @@ try {
     }
   }
 
-  const { error } = await supabase
+ const { data: newProperty, error } = await supabase 
     .from("properties")
     .insert({
       owner_id: user.id,
@@ -86,10 +90,24 @@ area_sqm: Number(form.get("area_sqm") || 0),
       currency: String(form.get("currency") || "EUR"),
       description: String(form.get("description") || ""),
       image: imageUrl || null,
-    });
+   })
+.select("id")
+.single(); 
 
   if (error) throw error;
+if (newProperty && uploadedImageUrls.length > 0) {
+  const { error: imagesError } = await supabase
+    .from("property_images")
+    .insert(
+      uploadedImageUrls.map((url, index) => ({
+        property_id: newProperty.id,
+        image_url: url,
+        sort_order: index,
+      }))
+    );
 
+  if (imagesError) throw imagesError;
+}
   setMessage("Property saved successfully!");
 } catch (error) {
   setMessage(
