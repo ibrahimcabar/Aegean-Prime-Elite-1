@@ -92,6 +92,20 @@ if (leadError) {
       <p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
+<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12, marginTop: 20, marginBottom: 24 }}>
+  {[
+    { title: "Toplam Başvuru", count: leads.length, color: "#b89b68" },
+    { title: "Yeni Başvurular", count: leads.filter(l => (l.status || "yeni") === "yeni").length, color: "#22a447" },
+    { title: "Aranan Müşteriler", count: leads.filter(l => l.status === "arandi").length, color: "#d5a000" },
+    { title: "Tamamlanan Satışlar", count: leads.filter(l => l.status === "satis_tamamlandi").length, color: "#8b5cf6" }
+  ].map(item => (
+    <div key={item.title} style={{ background: "#fff", border: "1px solid #e5dccb", borderRadius: 12, padding: 18 }}>
+      <div style={{ color: "#555", fontSize: 14 }}>{item.title}</div>
+      <div style={{ color: item.color, fontSize: 30, fontWeight: "bold", marginTop: 8 }}>{item.count}</div>
+    </div>
+  ))}
+</div>
+
 
 <div style={{ display: "grid", gap: 16, marginTop: 24 }}>
   {leads.map((lead) => (
