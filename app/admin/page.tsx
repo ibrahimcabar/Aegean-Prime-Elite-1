@@ -107,6 +107,26 @@ async function saveLeadNote(id: number, notes: string) {
 
   alert("Müşteri notu kaydedildi! ✅");
 }
+  async function saveFollowUpDate(id: number, follow_up_date: string) {
+  const { data, error } = await supabase
+    .from("golden_life_leads")
+    .update({ follow_up_date: follow_up_date || null })
+    .eq("id", id)
+    .select("id");
+
+  if (error || !data || data.length === 0) {
+    alert("Takip tarihi kaydedilemedi: " + (error?.message || "Yetki hatası"));
+    return;
+  }
+
+  setLeads((prev) =>
+    prev.map((lead) =>
+      lead.id === id ? { ...lead, follow_up_date } : lead
+    )
+  );
+
+  alert("Takip tarihi kaydedildi! ✅");
+}
   useEffect(() => {
     async function checkAdmin() {
       const { data: { user }, error } =
