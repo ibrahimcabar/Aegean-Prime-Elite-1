@@ -82,7 +82,31 @@ async function updateLeadStatus(id: number, status: string) {
     )
   );
 }
+async function saveLeadNote(id: number, notes: string) {
+  const { data, error } = await supabase
+    .from("golden_life_leads")
+    .update({ notes })
+    .eq("id", id)
+    .select("id");
 
+  if (error) {
+    alert("Not kaydedilemedi: " + error.message);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    alert("Not kaydedilemedi. Veritabanı yetkilerini kontrol et.");
+    return;
+  }
+
+  setLeads((prev) =>
+    prev.map((lead) =>
+      lead.id === id ? { ...lead, notes } : lead
+    )
+  );
+
+  alert("Müşteri notu kaydedildi! ✅");
+}
   useEffect(() => {
     async function checkAdmin() {
       const { data: { user }, error } =
