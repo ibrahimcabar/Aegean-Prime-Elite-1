@@ -58,12 +58,22 @@ const homes = [
 export default function GoldenLifePage() {
   
   const images = [
-    "/golden-life/IMG_3794.webp",
-    "/golden-life/IMG_3795.webp",
-    "/golden-life/IMG_3796.webp",
-    "/golden-life/IMG_3797.webp",
-    "/golden-life/IMG_3798.webp",
-  ];
+  "/golden-life/IMG_3794.webp",
+  "/golden-life/IMG_3795.webp",
+  "/golden-life/IMG_3796.webp",
+  "/golden-life/IMG_3797.webp",
+  "/golden-life/IMG_3798.webp",
+  "/golden-life/IMG_3807.png",
+  "/golden-life/IMG_3808.webp",
+  "/golden-life/IMG_3809.webp",
+  "/golden-life/IMG_3810.webp",
+  "/golden-life/IMG_3811.webp",
+  "/golden-life/IMG_3812.webp",
+  "/golden-life/IMG_3813.webp",
+  "/golden-life/IMG_3814.webp",
+  "/golden-life/IMG_3815.webp",
+  "/golden-life/IMG_3816.webp",
+];
 
   const [slide, setSlide] = useState(0);
 
@@ -79,23 +89,30 @@ export default function GoldenLifePage() {
     <main style={{ background: "#f8f7f3", color: "#20372e", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
       
 <section style={{ position: "relative", height: "420px", overflow: "hidden" }}>
+  {images.map((image, index) => (
   <img
-    src={images[slide]}
-    alt="Golden Life"
+    key={image}
+    src={image}
+    alt={`Golden Life ${index + 1}`}
     style={{
+      position: "absolute",
+      inset: 0,
       width: "100%",
       height: "100%",
       objectFit: "cover",
+      opacity: slide === index ? 1 : 0,
+      transition: "opacity 1.5s ease-in-out",
     }}
   />
+))}
   <button
-    onClick={() => setSlide((slide + 4) % 5)}
+    onClick={() => setSlide((slide - 1 + images.length) % images.length)}
     style={{ position: "absolute", left: 15, top: "50%" }}
   >
     ❮
   </button>
   <button
-    onClick={() => setSlide((slide + 1) % 5)}
+    onClick={() => setSlide((slide + 1) % images.length)}
     style={{ position: "absolute", right: 15, top: "50%" }}
   >
     ❯
