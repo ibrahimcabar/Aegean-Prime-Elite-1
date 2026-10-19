@@ -17,6 +17,24 @@ export default function AdminPage() {
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
 
+async function updateLeadStatus(id: number, status: string) {
+  const { error } = await supabase
+    .from("golden_life_leads")
+    .update({ status })
+    .eq("id", id);
+
+  if (error) {
+    alert("Durum güncellenemedi: " + error.message);
+    return;
+  }
+
+  setLeads((prev) =>
+    prev.map((lead) =>
+      lead.id === id ? { ...lead, status } : lead
+    )
+  );
+}
+
   useEffect(() => {
     async function checkAdmin() {
       const { data: { user }, error } =
@@ -117,6 +135,32 @@ if (leadError) {
           WhatsApp ile İletişime Geç
         </a>
       )}
+      
+<div style={{ marginTop: 20 }}>
+  <strong>Başvuru Durumu: </strong>
+  <select
+    value={lead.status || "yeni"}
+    onChange={(e) =>
+      updateLeadStatus(lead.id, e.target.value)
+    }
+    style={{
+      padding: 12,
+      borderRadius: 8,
+      border: "1px solid #b89b68",
+      background: "#fff",
+      fontSize: 16,
+      marginTop: 8,
+      maxWidth: "100%"
+    }}
+  >
+    <option value="yeni">🟢 Yeni</option>
+    <option value="arandi">🟡 Arandı</option>
+    <option value="gorusuluyor">🔵 Görüşülüyor</option>
+    <option value="satis_tamamlandi">🟣 Satış Tamamlandı</option>
+    <option value="iptal">🔴 İptal</option>
+  </select>
+</div>
+
     </div>
   ))}
 </div>
