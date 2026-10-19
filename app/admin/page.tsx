@@ -123,7 +123,14 @@ if (leadError) {
 />
 
 <div style={{ display: "grid", gap: 16, marginTop: 24 }}>
-  {leads.map((lead) => (
+ {leads.filter((lead) =>
+  [lead.full_name, lead.phone, lead.email]
+    .some((value) =>
+      String(value ?? "")
+        .toLocaleLowerCase("tr-TR")
+        .includes(searchTerm.toLocaleLowerCase("tr-TR").trim())
+    )
+).map((lead) => (
     <div
       key={lead.id}
       style={{
