@@ -18,12 +18,38 @@ const features = [
   },
 ];
 
+
 const homes = [
-  { name: "1+0 Stüdyo Daire", description: "Açık yaşam düzeni ve fonksiyonel konut planı." },
-  { name: "1+1 Daire", description: "Ayrı yatak odası, salon, açık mutfak ve balkon." },
-  { name: "2+1 Daire", description: "İki yatak odalı, konforlu yaşam düzeni." },
-  { name: "2+1 Tek Kat Villa", description: "Özel bahçe, teras ve havuz alanı." },
+  {
+    name: "1+0 Stüdyo Daire",
+    area: 45,
+    price: 50000,
+    monthly: 1388.89,
+    description: "Açık yaşam düzeni ve fonksiyonel konut planı.",
+  },
+  {
+    name: "1+1 Daire",
+    area: 55,
+    price: 60000,
+    monthly: 1666.67,
+    description: "Ayrı yatak odası, salon, açık mutfak ve balkon.",
+  },
+  {
+    name: "2+1 Daire",
+    area: 70,
+    price: 90000,
+    monthly: 2500,
+    description: "İki yatak odalı, konforlu yaşam düzeni.",
+  },
+  {
+    name: "2+1 Tek Kat Villa",
+    area: 125,
+    price: 220000,
+    monthly: 6111.11,
+    description: "Özel bahçe, teras ve havuz alanı.",
+  },
 ];
+
 
 export default function GoldenLifePage() {
   return (
@@ -63,15 +89,55 @@ export default function GoldenLifePage() {
           <p style={{ color: "#94784a", letterSpacing: 3 }}>RESIDENCES</p>
           <h2 style={{ fontSize: 36 }}>Konut Seçenekleri</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
-            {homes.map((home) => (
-              <article key={home.name} style={{ background: "white", borderRadius: 14, padding: 30 }}>
-                <h3>{home.name}</h3>
-                <p style={{ lineHeight: 1.8, color: "#65736b" }}>{home.description}</p>
-                <p style={{ color: "#a58a59", fontWeight: "bold", marginTop: 24 }}>
-                  Detaylı bilgi için iletişime geçiniz
-                </p>
-              </article>
-            ))}
+            
+{homes.map((home) => (
+  <article
+    key={home.name}
+    style={{
+      background: "white",
+      borderRadius: 14,
+      padding: 30,
+    }}
+  >
+    <h3 style={{ fontSize: 24 }}>{home.name}</h3>
+
+    <p style={{ color: "#65736b" }}>
+      Brüt Alan: {home.area} m²
+    </p>
+
+    <p style={{ lineHeight: 1.8, color: "#65736b" }}>
+      {home.description}
+    </p>
+
+    <div
+      style={{
+        borderTop: "1px solid #e9e8df",
+        marginTop: 24,
+        paddingTop: 20,
+      }}
+    >
+      <p style={{ color: "#65736b" }}>
+        Toplam Konut Bedeli
+      </p>
+
+      <h3 style={{ fontSize: 30, color: "#18382c" }}>
+        {home.price.toLocaleString("de-DE")} €
+      </h3>
+
+      <p style={{ color: "#65736b" }}>
+        36 Ay Ödeme Planı
+      </p>
+
+      <h4 style={{ fontSize: 22, color: "#a58a59" }}>
+        {home.monthly.toLocaleString("de-DE", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })} € / Ay
+      </h4>
+    </div>
+  </article>
+))}
+
           </div>
         </div>
       </section>
