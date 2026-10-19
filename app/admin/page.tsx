@@ -74,34 +74,53 @@ if (leadError) {
       <p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
-<div style={{ overflowX: "auto" }}>
-  <table style={{ width: "100%", borderCollapse: "collapse" }}>
-    <thead>
-      <tr>
-        <th>Ad Soyad</th>
-        
-<th>Telefon</th>
 
-<th>E-posta</th>
+<div style={{ display: "grid", gap: 16, marginTop: 24 }}>
+  {leads.map((lead) => (
+    <div
+      key={lead.id}
+      style={{
+        background: "#fff",
+        border: "1px solid #e5dccb",
+        borderRadius: 14,
+        padding: 20,
+        boxShadow: "0 3px 12px rgba(0,0,0,0.04)",
+        overflowWrap: "anywhere",
+      }}
+    >
+      <h3 style={{ color: "#b89b68", marginTop: 0 }}>
+        {lead.full_name}
+      </h3>
 
-        <th>Başvuru Tarihi</th>
-      </tr>
-    </thead>
-    <tbody>
-      {leads.map((lead) => (
-        <tr key={lead.id}>
-          <td>{lead.full_name}</td>
-          
-<td>{lead.phone}</td>
+      <p><strong>Telefon:</strong> {lead.phone}</p>
+      <p><strong>E-posta:</strong> {lead.email}</p>
+      <p>
+        <strong>Başvuru Tarihi:</strong>{" "}
+        {new Date(lead.created_at).toLocaleString("tr-TR")}
+      </p>
 
-<td>{lead.email}</td>
-
-          <td>{new Date(lead.created_at).toLocaleString("tr-TR")}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+      {lead.phone && (
+        <a
+          href={`https://wa.me/${String(lead.phone).replace(/\D/g, "").replace(/^0/, "90")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-block",
+            background: "#25D366",
+            color: "#fff",
+            padding: "12px 18px",
+            borderRadius: 8,
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          WhatsApp ile İletişime Geç
+        </a>
+      )}
+    </div>
+  ))}
 </div>
+
     </main>
   );
 }
