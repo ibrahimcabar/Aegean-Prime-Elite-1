@@ -197,6 +197,51 @@ if (leadError) {
     </div>
   ))}
 </div>
+      <div style={{
+  background: "#fff",
+  border: "1px solid #b89b68",
+  borderRadius: 14,
+  padding: 20,
+  marginTop: 25,
+  marginBottom: 25
+}}>
+  <h3>📞 Bugün Aranacak Müşteriler</h3>
+
+  {(() => {
+    const today = new Date();
+    const localToday = [
+      today.getFullYear(),
+      String(today.getMonth() + 1).padStart(2, "0"),
+      String(today.getDate()).padStart(2, "0")
+    ].join("-");
+
+    const dueLeads = leads.filter(
+      (lead) =>
+        lead.follow_up_date &&
+        String(lead.follow_up_date).slice(0, 10) <= localToday
+    );
+
+    return dueLeads.length === 0 ? (
+      <p>Bugün veya geçmişten bekleyen arama yok. ✅</p>
+    ) : (
+      dueLeads.map((lead) => (
+        <div key={lead.id} style={{
+          padding: 12,
+          borderBottom: "1px solid #eee"
+        }}>
+          <strong>{lead.full_name}</strong>
+          <p>📱 {lead.phone}</p>
+          <p>
+            {String(lead.follow_up_date).slice(0, 10) < localToday
+              ? "🔴 Gecikmiş Arama"
+              : "🟢 Bugün Aranacak"}
+          </p>
+          <p>📅 {String(lead.follow_up_date).slice(0, 10)}</p>
+        </div>
+      ))
+    );
+  })()}
+</div>
 <input
   type="text"
   placeholder="🔍 İsim, telefon veya e-posta ile ara..."
