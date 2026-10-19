@@ -277,6 +277,38 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
         </div>
       </section>
 
+<section
+  id="about-golden-life"
+  style={{
+    padding: "85px 24px",
+    background: "#18382c",
+    color: "#ffffff",
+    textAlign: "center",
+  }}
+>
+  <div style={{ maxWidth: 950, margin: "0 auto" }}>
+    <p style={{ color: "#d9c18b", letterSpacing: 5 }}>
+      AEGEAN PRIME ELITE PRESENTS
+    </p>
+    <h2 style={{ fontSize: "clamp(32px, 5vw, 54px)", marginBottom: 24 }}>
+      GOLDEN LIFE
+    </h2>
+    <h3 style={{ color: "#e8c985", fontSize: 24 }}>
+      Doğanın Kalbinde Ayrıcalıklı Bir Yaşam
+    </h3>
+    <p style={{ fontSize: 18, lineHeight: 2, marginTop: 30 }}>
+      Antalya Kayadibi / Karaöz'de konumlanan Golden Life,
+      doğayla bütünleşen bir yaşam konsepti sunmayı hedefliyor.
+      Modern mimari anlayışı ve farklı ihtiyaçlara hitap eden
+      daire ve villa seçenekleriyle yeni bir yaşam deneyimi
+      için tasarlanıyor.
+    </p>
+    <p style={{ color: "#d9c18b", marginTop: 35, letterSpacing: 2 }}>
+      ANTALYA • KAYADİBİ / KARAÖZ
+    </p>
+  </div>
+</section>
+
       <section style={{ textAlign: "center", padding: "75px 24px" }}>
         <h2 style={{ fontSize: 36 }}>Golden Life'ı Keşfedin</h2>
         <p style={{ maxWidth: 600, margin: "20px auto", lineHeight: 1.8 }}>
