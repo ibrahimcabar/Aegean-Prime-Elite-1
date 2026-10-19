@@ -89,7 +89,28 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
     return () => clearInterval(timer);
   }, []);
-
+const handleLeadSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const lead = {
+  full_name: String(formData.get("full_name") || ""),
+  phone: String(formData.get("phone") || ""),
+  email: String(formData.get("email") || ""),
+  property_type: String(formData.get("property_type") || ""),
+  message: String(formData.get("message") || ""),
+};
+  const response = await fetch("/api/golden-life-leads", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(lead),
+});
+if (!response.ok) {
+  alert("Başvuru gönderilemedi. Lütfen tekrar deneyin.");
+  return;
+}  
+alert("Başvurunuz başarıyla alındı! Satış danışmanımız sizinle iletişime geçecektir.");
+setContactOpen(false);  
+};
   return (
     <main style={{ background: "#f8f7f3", color: "#20372e", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
       
@@ -456,12 +477,12 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
       <h2 style={{ color: "#18382c" }}>Golden Life – Bilgi Al</h2>
       <p>Satış danışmanımızın sizinle iletişime geçmesi için formu doldurun.</p>
 
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input required placeholder="Adınız Soyadınız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
-        <input required type="tel" placeholder="Telefon Numaranız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
-        <input type="email" placeholder="E-posta Adresiniz" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+      <form onSubmit={handleLeadSubmit}>
+        <input required name="full_name" placeholder=" Adınız Soyadınız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input required type="tel" name="phone" placeholder="Telefon Numaranız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input type="email" name="email" placeholder="E-posta Adresiniz" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
 
-        <select required defaultValue="" style={{ width: "100%", padding: 14, marginBottom: 12 }}>
+        <select required name="property_type" defaultValue="" style={{ width: "100%", padding: 14, marginBottom: 12 }}>
           <option value="" disabled>İlgilendiğiniz Konut Tipi</option>
           <option>1+0 Stüdyo Daire</option>
           <option>1+1 Daire</option>
@@ -469,7 +490,7 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
           <option>2+1 Tek Kat Villa</option>
         </select>
 
-        <textarea placeholder="Mesajınız" rows={3} style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <textarea name="message" placeholder="Mesajınız" rows={3} style={{ width: "100%", padding: 14, marginBottom: 12 }} />
 
         <button
           type="submit"
