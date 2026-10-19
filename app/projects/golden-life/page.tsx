@@ -192,7 +192,36 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
       padding: 30,
     }}
   >
-    <h3 style={{ fontSize: 24 }}>{home.name}</h3>
+    <h3
+  style={{
+    fontSize: 26,
+    color: "#18382c",
+    fontWeight: 700,
+    borderLeft: "4px solid #b99a60",
+    paddingLeft: 14,
+    marginBottom: 20,
+    letterSpacing: 0.5,
+  }}
+>
+  {home.name}
+</h3>
+    <button
+  type="button"
+  onClick={() => setSelectedPlan(home.image)}
+  style={{
+    background: "#18382c",
+    color: "#e8c985",
+    border: "1px solid #b99a60",
+    borderRadius: 8,
+    padding: "12px 18px",
+    fontSize: 14,
+    fontWeight: 600,
+    cursor: "pointer",
+    width: "100%",
+  }}
+>
+  ⛶ Mimari Planı İncele
+</button>
     <img
     onClick={() => setSelectedPlan(home.image)}  
   src={home.image}
