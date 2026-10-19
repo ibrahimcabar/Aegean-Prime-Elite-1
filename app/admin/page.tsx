@@ -131,9 +131,9 @@ if (leadError) {
 }}>
   {[
     { label: "Tüm Başvurular", value: "all" },
-    { label: "Yeni Başvurular", value: "new" },
-    { label: "Aranan Müşteriler", value: "called" },
-    { label: "Tamamlanan Satışlar", value: "completed" }
+{ label: "Yeni Başvurular", value: "yeni" },
+{ label: "Aranan Müşteriler", value: "arandi" },
+{ label: "Tamamlanan Satışlar", value: "satis_tamamlandi" }
   ].map((item) => (
     <button
       key={item.value}
