@@ -105,7 +105,22 @@ if (leadError) {
     </div>
   ))}
 </div>
-
+<input
+  type="text"
+  placeholder="🔍 İsim, telefon veya e-posta ile ara..."
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "14px",
+    marginTop: "20px",
+    marginBottom: "20px",
+    borderRadius: "10px",
+    border: "1px solid #ddd",
+    fontSize: "16px",
+    boxSizing: "border-box"
+  }}
+/>
 
 <div style={{ display: "grid", gap: 16, marginTop: 24 }}>
   {leads.map((lead) => (
