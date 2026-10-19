@@ -1,4 +1,8 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
+
 const features = [
   {
     title: "Sağlık ve Rehabilitasyon",
@@ -52,8 +56,52 @@ const homes = [
 
 
 export default function GoldenLifePage() {
+  
+  const images = [
+    "/golden-life/IMG_3794.webp",
+    "/golden-life/IMG_3795.webp",
+    "/golden-life/IMG_3796.webp",
+    "/golden-life/IMG_3797.webp",
+    "/golden-life/IMG_3798.webp",
+  ];
+
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlide((prev) => (prev + 1) % images.length);
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <main style={{ background: "#f8f7f3", color: "#20372e", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
+      
+<section style={{ position: "relative", height: "420px", overflow: "hidden" }}>
+  <img
+    src={images[slide]}
+    alt="Golden Life"
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+    }}
+  />
+  <button
+    onClick={() => setSlide((slide + 4) % 5)}
+    style={{ position: "absolute", left: 15, top: "50%" }}
+  >
+    ❮
+  </button>
+  <button
+    onClick={() => setSlide((slide + 1) % 5)}
+    style={{ position: "absolute", right: 15, top: "50%" }}
+  >
+    ❯
+  </button>
+</section>
+
       <section style={{ background: "#18382c", color: "white", textAlign: "center", padding: "90px 24px" }}>
         <p style={{ letterSpacing: 4, fontSize: 12 }}>AEGEAN PRIME ELITE PRESENTS</p>
         <h1 style={{ fontSize: "clamp(44px, 8vw, 78px)", margin: "25px 0" }}>GOLDEN LIFE</h1>
