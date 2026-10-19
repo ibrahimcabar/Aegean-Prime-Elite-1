@@ -148,7 +148,14 @@ setContactOpen(false);
   <p style={{ letterSpacing: 5, color: "#e8c985" }}>
     AEGEAN PRIME ELITE
   </p>
-  <h1 style={{ fontSize: "clamp(36px, 7vw, 76px)", margin: "12px 0" }}>
+ <h1 style={{
+  fontSize: "clamp(42px, 7vw, 110px)",
+  fontWeight: 800,
+  letterSpacing: "3px",
+  lineHeight: 1.1,
+  margin: "20px 0",
+  textShadow: "0 5px 25px rgba(0,0,0,0.7)"
+}}>
     GOLDEN LIFE
   </h1>
   <p style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>
