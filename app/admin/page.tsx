@@ -79,6 +79,11 @@ if (leadError) {
     <thead>
       <tr>
         <th>Ad Soyad</th>
+        
+<th>Telefon</th>
+
+<th>E-posta</th>
+
         <th>Başvuru Tarihi</th>
       </tr>
     </thead>
@@ -86,6 +91,11 @@ if (leadError) {
       {leads.map((lead) => (
         <tr key={lead.id}>
           <td>{lead.full_name}</td>
+          
+<td>{lead.phone}</td>
+
+<td>{lead.email}</td>
+
           <td>{new Date(lead.created_at).toLocaleString("tr-TR")}</td>
         </tr>
       ))}
