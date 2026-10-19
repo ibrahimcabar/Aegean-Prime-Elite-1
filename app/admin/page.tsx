@@ -18,6 +18,53 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  function exportToExcel() {
+  const headers = [
+    "Ad Soyad",
+    "Telefon",
+    "E-posta",
+    "Başvuru Tarihi",
+    "Durum"
+  ];
+
+  const escapeCSV = (value: unknown) => {
+    let text = String(value ?? "");
+
+    // Excel'de formül olarak çalışmasını önle
+    if (/^[\s]*[=+\-@\t\r\n]/.test(text)) {
+      text = "'" + text;
+    }
+
+    return '"' + text.replace(/"/g, '""') + '"';
+  };
+
+  const rows = leads.map((lead) => [
+    lead.full_name,
+    lead.phone,
+    lead.email,
+    lead.created_at
+      ? new Date(lead.created_at).toLocaleString("tr-TR")
+      : "",
+    lead.status || "yeni"
+  ]);
+
+  const csv = [headers, ...rows]
+    .map((row) => row.map(escapeCSV).join(";"))
+    .join("\r\n");
+
+  const blob = new Blob(["\uFEFF" + csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "golden-life-basvurular.csv";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
 async function updateLeadStatus(id: number, status: string) {
   const { error } = await supabase
     .from("golden_life_leads")
