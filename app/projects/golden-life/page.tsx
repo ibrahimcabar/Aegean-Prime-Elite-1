@@ -80,6 +80,7 @@ export default function GoldenLifePage() {
 ];
 
   const [slide, setSlide] = useState(0);
+const [contactOpen, setContactOpen] = useState(false);  
 const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   useEffect(() => {
     const timer = setInterval(() => {
@@ -352,7 +353,24 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
           Longevity & Wellness
         </a>
       </section>
-
+<section style={{ textAlign: "center", padding: "60px 24px" }}>
+  <h2>Golden Life Hakkında Bilgi Alın</h2>
+  <button
+    type="button"
+    onClick={() => setContactOpen(true)}
+    style={{
+      background: "#18382c",
+      color: "#e8c985",
+      padding: "16px 32px",
+      border: "1px solid #b99a60",
+      borderRadius: 10,
+      fontSize: 18,
+      cursor: "pointer",
+    }}
+  >
+    Bilgi Al / Satış Danışmanına Ulaş
+  </button>
+</section>
       <footer style={{ background: "#18382c", color: "white", padding: 30, textAlign: "center", fontSize: 13 }}>
         © AEGEAN PRIME ELITE — GOLDEN LIFE
       </footer>
@@ -399,6 +417,76 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
         borderRadius: 12,
       }}
     />
+  </div>
+)}
+      {contactOpen && (
+  <div
+    onClick={() => setContactOpen(false)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.8)",
+      zIndex: 10000,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20,
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: "#ffffff",
+        borderRadius: 16,
+        padding: 28,
+        width: "100%",
+        maxWidth: 480,
+        maxHeight: "90vh",
+        overflowY: "auto",
+      }}
+    >
+      <button
+        type="button"
+        onClick={() => setContactOpen(false)}
+        style={{ float: "right", cursor: "pointer" }}
+      >
+        ✕
+      </button>
+
+      <h2 style={{ color: "#18382c" }}>Golden Life – Bilgi Al</h2>
+      <p>Satış danışmanımızın sizinle iletişime geçmesi için formu doldurun.</p>
+
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input required placeholder="Adınız Soyadınız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input required type="tel" placeholder="Telefon Numaranız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input type="email" placeholder="E-posta Adresiniz" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+
+        <select required defaultValue="" style={{ width: "100%", padding: 14, marginBottom: 12 }}>
+          <option value="" disabled>İlgilendiğiniz Konut Tipi</option>
+          <option>1+0 Stüdyo Daire</option>
+          <option>1+1 Daire</option>
+          <option>2+1 Daire</option>
+          <option>2+1 Tek Kat Villa</option>
+        </select>
+
+        <textarea placeholder="Mesajınız" rows={3} style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            background: "#18382c",
+            color: "#e8c985",
+            padding: 16,
+            border: "none",
+            borderRadius: 10,
+            fontSize: 17,
+          }}
+        >
+          Başvuru Gönder
+        </button>
+      </form>
+    </div>
   </div>
 )}
     </main>
