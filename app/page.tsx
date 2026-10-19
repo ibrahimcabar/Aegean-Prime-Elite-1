@@ -22,7 +22,7 @@ return <><header className="header"><a href="#top" className="brand"><span class
     <h2 style={{ fontSize: 32, color: "#222" }}>GOLDEN LIFE</h2>
     <p style={{ color: "#555" }}>Modern yaşam ve gayrimenkul yatırım fırsatları</p>
     <p style={{ fontWeight: "bold", color: "#222" }}>Kooperatif Katılım Ücreti: 650.000 TL</p>
-    <a href="/golden-life" style={{ display: "inline-block", marginTop: 15, padding: "14px 28px", background: "#b89b68", color: "#fff", borderRadius: 8, textDecoration: "none", fontWeight: "bold" }}>
+    <a href="/projects/golden-life" style={{ display: "inline-block", marginTop: 15, padding: "14px 28px", background: "#b89b68", color: "#fff", borderRadius: 8, textDecoration: "none", fontWeight: "bold" }}>
       Projeyi İncele →
     </a>
   </div>
