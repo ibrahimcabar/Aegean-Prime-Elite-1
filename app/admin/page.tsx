@@ -368,6 +368,24 @@ if (leadError) {
     💾 Notu Kaydet
   </button>
 </div>
+     <div style={{ marginTop: 20 }}>
+  <strong>📅 Tekrar Arama Tarihi</strong>
+
+  <input
+    type="date"
+    id={`followup-${lead.id}`}
+    defaultValue={lead.follow_up_date || ""}
+    style={{
+      display: "block",
+      marginTop: 10,
+      padding: 12,
+      border: "1px solid #b89b68",
+      borderRadius: 10,
+      fontSize: 16,
+      maxWidth: "100%"
+    }}
+  />
+</div> 
     </div>
   ))}
 </div>
