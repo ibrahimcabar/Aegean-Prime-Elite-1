@@ -199,6 +199,23 @@ if (leadError) {
     </button>
   ))}
 </div>
+     <button
+  type="button"
+  onClick={exportToExcel}
+  style={{
+    background: "#b89b68",
+    color: "#fff",
+    padding: "14px 24px",
+    border: "none",
+    borderRadius: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+    cursor: "pointer",
+    marginBottom: 20
+  }}
+>
+  📥 Excel'e Aktar
+</button> 
 <div style={{ display: "grid", gap: 16, marginTop: 24 }}>
  {leads.filter((lead) => {
   const matchesSearch = [
