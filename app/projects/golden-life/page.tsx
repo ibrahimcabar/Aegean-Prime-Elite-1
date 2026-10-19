@@ -105,6 +105,30 @@ export default function GoldenLifePage() {
     }}
   />
 ))}
+  <div
+  style={{
+    position: "absolute",
+    bottom: 75,
+    left: "50%",
+    transform: "translateX(-50%)",
+    zIndex: 5,
+    textAlign: "center",
+    color: "#ffffff",
+    width: "85%",
+    textShadow: "0 3px 15px rgba(0,0,0,0.8)",
+    pointerEvents: "none",
+  }}
+>
+  <p style={{ letterSpacing: 5, color: "#e8c985" }}>
+    AEGEAN PRIME ELITE
+  </p>
+  <h1 style={{ fontSize: "clamp(36px, 7vw, 76px)", margin: "12px 0" }}>
+    GOLDEN LIFE
+  </h1>
+  <p style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>
+    Doğanın Kalbinde Ayrıcalıklı Bir Yaşam
+  </p>
+</div>
   <button
     onClick={() => setSlide((slide - 1 + images.length) % images.length)}
     style={{ position: "absolute", left: 15, top: "50%" }}
