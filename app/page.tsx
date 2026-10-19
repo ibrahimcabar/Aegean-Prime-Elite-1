@@ -16,6 +16,17 @@ function submit(){setSearch(query);document.getElementById('properties')?.scroll
 function send(){if(!message.trim())return;const m=message.trim();setMessages(old=>[...old,{who:'user',text:m},{who:'bot',text:'Thanks! This is a preview assistant. Live AI recommendations will be available after connecting our property database and AI service.'}]);setMessage('')}
 return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">Properties</a><a href="#how">For Partners</a><a href="#packages">Pricing</a><a href="#about">About</a></nav><div className="header-actions"><a className="outline-btn" href="/ilan-ekle">List a Property <ArrowUpRight size={15}/></a><button className="menu" aria-label="Toggle menu" onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></header>
 <main id="top"><section className="hero"><div className="hero-image"/><div className="hero-overlay"/><div className="hero-content"><div className="eyebrow">THE WORLD IS YOUR ADDRESS <span/></div><h1>Extraordinary properties.<br/><em>Without borders.</em></h1><p>Discover exceptional homes and investment opportunities across the globe, curated in one seamless destination.</p><div className="search-panel"><div className="search-input"><MapPin size={20}/><input aria-label="Search location" value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&submit()} placeholder="Search city, country or street (e.g. Berlin Hauptstraße)"/></div><select aria-label="Property type" value={kind} onChange={e=>setKind(e.target.value)}><option>All types</option><option>Apartment</option><option>Villa</option></select><button onClick={submit}><Search size={18}/> Explore</button></div><div className="hero-bottom"><span><Globe2 size={17}/> A WORLD OF OPPORTUNITY</span><span>01 / 04</span></div></div></section>
+  <section style={{ padding: "35px 20px", background: "#f8f7f4", textAlign: "center" }}>
+  <div style={{ maxWidth: 850, margin: "auto", padding: 30, background: "#fff", border: "1px solid #b89b68", borderRadius: 16 }}>
+    <p style={{ color: "#b89b68", fontWeight: "bold" }}>ÖZEL PROJE</p>
+    <h2 style={{ fontSize: 32, color: "#222" }}>GOLDEN LIFE</h2>
+    <p style={{ color: "#555" }}>Modern yaşam ve gayrimenkul yatırım fırsatları</p>
+    <p style={{ fontWeight: "bold", color: "#222" }}>Kooperatif Katılım Ücreti: 650.000 TL</p>
+    <a href="/golden-life" style={{ display: "inline-block", marginTop: 15, padding: "14px 28px", background: "#b89b68", color: "#fff", borderRadius: 8, textDecoration: "none", fontWeight: "bold" }}>
+      Projeyi İncele →
+    </a>
+  </div>
+</section>
 <section className="section listings" id="properties"><div className="section-heading"><div><div className="kicker">THE COLLECTION</div><h2>Explore remarkable <em>places.</em></h2><p>Explore our illustrative preview listings. Verified live properties will appear here after launch.</p></div><span className="count">{filtered.length} preview properties</span></div><div className="property-grid">{filtered.map(p=><article
   className="property"
   key={p.id}
