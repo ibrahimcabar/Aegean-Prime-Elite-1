@@ -16,7 +16,7 @@ export default function AdminPage() {
   const [leads, setLeads] = useState<any[]>([]);
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
-
+const [searchTerm, setSearchTerm] = useState("");
 async function updateLeadStatus(id: number, status: string) {
   const { error } = await supabase
     .from("golden_life_leads")
