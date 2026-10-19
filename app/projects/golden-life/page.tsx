@@ -26,7 +26,7 @@ const features = [
 const homes = [
   {
     name: "1+0 Stüdyo Daire",
-    image: "/golden-life/golden-life-1plus0.png",
+    image: "/golden-life/IMG_3833.png",
     area: 45,
     price: 50000,
     monthly: 1388.89,
@@ -34,7 +34,7 @@ const homes = [
   },
   {
     name: "1+1 Daire",
-    image: "/golden-life/golden-life-1plus1.png",
+    image: "/golden-life/IMG_3834.png",
     area: 55,
     price: 60000,
     monthly: 1666.67,
@@ -42,7 +42,7 @@ const homes = [
   },
   {
     name: "2+1 Daire",
-    image: "/golden-life/golden-life-2plus1.png",
+    image: "/golden-life/IMG_3835.png",
     area: 70,
     price: 90000,
     monthly: 2500,
@@ -50,7 +50,7 @@ const homes = [
   },
   {
     name: "2+1 Tek Kat Villa",
-    image: "/golden-life/golden-life-villa-2plus1.png",
+    image: "/golden-life/IMG_3836.png",
     area: 125,
     price: 220000,
     monthly: 6111.11,
