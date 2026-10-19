@@ -13,6 +13,7 @@ const supabase = createClient(
 export default function AdminPage() {
   
   const router = useRouter();
+  const [leads, setLeads] = useState<any[]>([]);
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -36,7 +37,16 @@ export default function AdminPage() {
         router.replace("/");
         return;
       }
+const { data: leadData, error: leadError } = await supabase
+  .from("golden_life_leads")
+  .select("*")
+  .order("created_at", { ascending: false });
 
+if (leadError) {
+  console.error("Başvurular alınamadı:", leadError);
+} else {
+  setLeads(leadData || []);
+}
       setAuthorized(true);
       setLoading(false);
     }
@@ -62,7 +72,26 @@ export default function AdminPage() {
       </h1>
       <h2>Yönetici Paneli</h2>
       <p>Golden Life Başvuru Yönetimi</p>
-      <p>Panel kurulumu devam ediyor.</p>
+      <h3>Toplam Başvuru: {leads.length}</h3>
+
+<div style={{ overflowX: "auto" }}>
+  <table style={{ width: "100%", borderCollapse: "collapse" }}>
+    <thead>
+      <tr>
+        <th>Ad Soyad</th>
+        <th>Başvuru Tarihi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {leads.map((lead) => (
+        <tr key={lead.id}>
+          <td>{lead.full_name}</td>
+          <td>{new Date(lead.created_at).toLocaleString("tr-TR")}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
     </main>
   );
 }
