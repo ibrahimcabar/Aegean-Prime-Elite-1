@@ -323,7 +323,51 @@ if (leadError) {
     <option value="iptal">🔴 İptal</option>
   </select>
 </div>
+<div style={{ marginTop: 20 }}>
+  <strong>📝 Müşteri Görüşme Notları</strong>
 
+  <textarea
+    key={lead.id}
+    defaultValue={lead.notes || ""}
+    placeholder="Müşteriyle yapılan görüşmenin detaylarını yazın..."
+    id={`note-${lead.id}`}
+    rows={4}
+    style={{
+      width: "100%",
+      padding: 12,
+      marginTop: 10,
+      border: "1px solid #b89b68",
+      borderRadius: 10,
+      fontSize: 16,
+      boxSizing: "border-box"
+    }}
+  />
+
+  <button
+    type="button"
+    onClick={() => {
+      const textarea = document.getElementById(
+        `note-${lead.id}`
+      ) as HTMLTextAreaElement | null;
+
+      if (textarea) {
+        saveLeadNote(lead.id, textarea.value);
+      }
+    }}
+    style={{
+      marginTop: 10,
+      padding: "12px 20px",
+      background: "#b89b68",
+      color: "#fff",
+      border: "none",
+      borderRadius: 8,
+      fontWeight: "bold",
+      cursor: "pointer"
+    }}
+  >
+    💾 Notu Kaydet
+  </button>
+</div>
     </div>
   ))}
 </div>
