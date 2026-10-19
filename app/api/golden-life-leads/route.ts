@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-
+import { Resend } from "resend";
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
@@ -37,7 +37,8 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = createClient(url, key);
-
+const resendKey = process.env.RESEND_API_KEY;
+const resend = resendKey ? new Resend(resendKey) : null;
     const { error } = await supabase
       .from("golden_life_leads")
       .insert({
@@ -55,7 +56,26 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+if (resend) {
+  try {
+    const { error: emailError } = await resend.emails.send({
+      from: "Golden Life <onboarding@resend.dev>",
+      to: "ibrahimcabar8@gmail.com",
+      subject: "Golden Life - Yeni Müşteri Başvurusu",
+      text: `Ad Soyad: ${full_name}
+Telefon: ${phone}
+E-posta: ${email}
+Konut Tipi: ${property_type}
+Mesaj: ${message}`,
+    });
 
+    if (emailError) {
+      console.error("E-posta hatası:", emailError.message);
+    }
+  } catch (emailError) {
+    console.error("E-posta gönderilemedi:", emailError);
+  }
+}
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json(
