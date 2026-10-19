@@ -122,16 +122,54 @@ if (leadError) {
     boxSizing: "border-box"
   }}
 />
-
+<div style={{
+  display: "flex",
+  gap: 10,
+  flexWrap: "wrap",
+  marginTop: 20,
+  marginBottom: 20
+}}>
+  {[
+    { label: "Tüm Başvurular", value: "all" },
+    { label: "Yeni Başvurular", value: "new" },
+    { label: "Aranan Müşteriler", value: "called" },
+    { label: "Tamamlanan Satışlar", value: "completed" }
+  ].map((item) => (
+    <button
+      key={item.value}
+      onClick={() => setStatusFilter(item.value)}
+      style={{
+        padding: "12px 16px",
+        borderRadius: 10,
+        border: "1px solid #b89b68",
+        background: statusFilter === item.value ? "#b89b68" : "#fff",
+        color: statusFilter === item.value ? "#fff" : "#222",
+        cursor: "pointer",
+        fontWeight: "bold"
+      }}
+    >
+      {item.label}
+    </button>
+  ))}
+</div>
 <div style={{ display: "grid", gap: 16, marginTop: 24 }}>
- {leads.filter((lead) =>
-  [lead.full_name, lead.phone, lead.email]
-    .some((value) =>
-      String(value ?? "")
-        .toLocaleLowerCase("tr-TR")
-        .includes(searchTerm.toLocaleLowerCase("tr-TR").trim())
-    )
-).map((lead) => (
+ {leads.filter((lead) => {
+  const matchesSearch = [
+    lead.full_name,
+    lead.phone,
+    lead.email
+  ].some((value) =>
+    String(value ?? "")
+      .toLocaleLowerCase("tr-TR")
+      .includes(searchTerm.toLocaleLowerCase("tr-TR").trim())
+  );
+
+  const matchesStatus =
+    statusFilter === "all" ||
+    (lead.status || "new") === statusFilter;
+
+  return matchesSearch && matchesStatus;
+}).map((lead) => (
     <div
       key={lead.id}
       style={{
