@@ -76,6 +76,45 @@ Mesaj: ${message}`,
     console.error("E-posta gönderilemedi:", emailError);
   }
 }
+    
+const whatsappToken = process.env.WHATSAPP_ACCESS_TOKEN;
+const whatsappPhoneId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+const whatsappRecipient = process.env.WHATSAPP_RECIPIENT_PHONE;
+
+if (whatsappToken && whatsappPhoneId && whatsappRecipient) {
+  try {
+    const whatsappResponse = await fetch(
+      `https://graph.facebook.com/v23.0/${whatsappPhoneId}/messages`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${whatsappToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          to: whatsappRecipient,
+          type: "template",
+          template: {
+            name: "hello_world",
+            language: { code: "en_US" },
+          },
+        }),
+      }
+    );
+
+    if (!whatsappResponse.ok) {
+      console.error(
+        "WhatsApp gönderim hatası:",
+        whatsappResponse.status,
+        await whatsappResponse.text()
+      );
+    }
+  } catch (whatsappError) {
+    console.error("WhatsApp bağlantı hatası:", whatsappError);
+  }
+}
+
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json(
