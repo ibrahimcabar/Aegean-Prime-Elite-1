@@ -405,6 +405,30 @@ if (leadError) {
       maxWidth: "100%"
     }}
   />
+     <button
+  type="button"
+  onClick={() => {
+    const input = document.getElementById(
+      `followup-${lead.id}`
+    ) as HTMLInputElement | null;
+
+    if (input) {
+      saveFollowUpDate(lead.id, input.value);
+    }
+  }}
+  style={{
+    marginTop: 10,
+    padding: "12px 20px",
+    background: "#b89b68",
+    color: "#fff",
+    border: "none",
+    borderRadius: 8,
+    fontWeight: "bold",
+    cursor: "pointer"
+  }}
+>
+  📅 Takip Tarihini Kaydet
+</button>  
 </div> 
     </div>
   ))}
