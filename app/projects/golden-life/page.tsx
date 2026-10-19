@@ -26,6 +26,7 @@ const features = [
 const homes = [
   {
     name: "1+0 Stüdyo Daire",
+    image: "/golden-life/golden-life-1plus0.png",
     area: 45,
     price: 50000,
     monthly: 1388.89,
@@ -33,6 +34,7 @@ const homes = [
   },
   {
     name: "1+1 Daire",
+    image: "/golden-life/golden-life-1plus1.png",
     area: 55,
     price: 60000,
     monthly: 1666.67,
@@ -40,6 +42,7 @@ const homes = [
   },
   {
     name: "2+1 Daire",
+    image: "/golden-life/golden-life-2plus1.png",
     area: 70,
     price: 90000,
     monthly: 2500,
@@ -47,6 +50,7 @@ const homes = [
   },
   {
     name: "2+1 Tek Kat Villa",
+    image: "/golden-life/golden-life-villa-2plus1.png",
     area: 125,
     price: 220000,
     monthly: 6111.11,
@@ -189,6 +193,18 @@ export default function GoldenLifePage() {
     }}
   >
     <h3 style={{ fontSize: 24 }}>{home.name}</h3>
+    <img
+  src={home.image}
+  alt={`${home.name} Mimari Kat Planı`}
+  style={{
+    width: "100%",
+    height: 320,
+    objectFit: "contain",
+    borderRadius: 12,
+    background: "#f8f7f3",
+    marginTop: 15,
+  }}
+/>
 
     <p style={{ color: "#65736b" }}>
       Brüt Alan: {home.area} m²
