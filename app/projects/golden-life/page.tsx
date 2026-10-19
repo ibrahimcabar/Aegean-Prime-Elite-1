@@ -309,6 +309,40 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   </div>
 </section>
 
+<section style={{ padding: "75px 24px", background: "#f8f7f3" }}>
+  <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+    <p style={{ textAlign: "center", color: "#a58a59", letterSpacing: 4 }}>
+      GOLDEN LIFE
+    </p>
+    <h2 style={{ textAlign: "center", color: "#18382c", fontSize: 34, marginBottom: 40 }}>
+      Projenin Öne Çıkan Özellikleri
+    </h2>
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
+      gap: 22
+    }}>
+      {[
+        ["01", "Antalya'da Doğayla İç İçe", "Kayadibi / Karaöz konumunda doğayla bütünleşen bir yaşam konsepti."],
+        ["02", "Modern Mimari", "Estetik ve işlevselliği bir araya getirmeyi hedefleyen mimari yaklaşım."],
+        ["03", "Farklı Konut Seçenekleri", "Stüdyo dairelerden tek katlı villalara uzanan konut alternatifleri."]
+      ].map(([number, title, description]) => (
+        <article key={number} style={{
+          background: "#ffffff",
+          padding: 30,
+          borderRadius: 16,
+          border: "1px solid #e8e1d4",
+          boxShadow: "0 8px 28px rgba(24,56,44,0.06)"
+        }}>
+          <span style={{ color: "#b99a60", fontSize: 28 }}>{number}</span>
+          <h3 style={{ color: "#18382c", fontSize: 22, marginTop: 18 }}>{title}</h3>
+          <p style={{ color: "#65736b", lineHeight: 1.8 }}>{description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
       <section style={{ textAlign: "center", padding: "75px 24px" }}>
         <h2 style={{ fontSize: 36 }}>Golden Life'ı Keşfedin</h2>
         <p style={{ maxWidth: 600, margin: "20px auto", lineHeight: 1.8 }}>
