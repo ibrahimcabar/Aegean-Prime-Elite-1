@@ -114,7 +114,7 @@ setContactOpen(false);
   return (
     <main style={{ background: "#f8f7f3", color: "#20372e", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
       
-<section style={{ position: "relative", height: "420px", overflow: "hidden" }}>
+<section style={{ position: "relative", height: "min(85vh, 900px)", minHeight: "420px", overflow: "hidden" }}>
   {images.map((image, index) => (
   <img
     key={image}
@@ -478,7 +478,7 @@ setContactOpen(false);
       <p>Satış danışmanımızın sizinle iletişime geçmesi için formu doldurun.</p>
 
       <form onSubmit={handleLeadSubmit}>
-        <input required name="full_name" placeholder=" Adınız Soyadınız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input required name="full_name" placeholder=" Adınız Soyadınızı" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
         <input required type="tel" name="phone" placeholder="Telefon Numaranız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
         <input type="email" name="email" placeholder="E-posta Adresiniz" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
 
