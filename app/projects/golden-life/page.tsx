@@ -80,7 +80,7 @@ export default function GoldenLifePage() {
 ];
 
   const [slide, setSlide] = useState(0);
-
+const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   useEffect(() => {
     const timer = setInterval(() => {
       setSlide((prev) => (prev + 1) % images.length);
@@ -194,6 +194,7 @@ export default function GoldenLifePage() {
   >
     <h3 style={{ fontSize: 24 }}>{home.name}</h3>
     <img
+    onClick={() => setSelectedPlan(home.image)}  
   src={home.image}
   alt={`${home.name} Mimari Kat Planı`}
   style={{
@@ -260,6 +261,51 @@ export default function GoldenLifePage() {
       <footer style={{ background: "#18382c", color: "white", padding: 30, textAlign: "center", fontSize: 13 }}>
         © AEGEAN PRIME ELITE — GOLDEN LIFE
       </footer>
+      {selectedPlan && (
+  <div
+    onClick={() => setSelectedPlan(null)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.92)",
+      zIndex: 9999,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 15,
+    }}
+  >
+    <button
+      onClick={() => setSelectedPlan(null)}
+      style={{
+        position: "absolute",
+        top: 25,
+        right: 25,
+        background: "#ffffff",
+        color: "#18382c",
+        border: "none",
+        borderRadius: "50%",
+        width: 44,
+        height: 44,
+        fontSize: 26,
+        cursor: "pointer",
+      }}
+    >
+      ×
+    </button>
+    <img
+      src={selectedPlan}
+      alt="Büyütülmüş Mimari Kat Planı"
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        maxWidth: "100%",
+        maxHeight: "90vh",
+        objectFit: "contain",
+        borderRadius: 12,
+      }}
+    />
+  </div>
+)}
     </main>
   );
 }
