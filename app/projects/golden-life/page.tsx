@@ -82,6 +82,7 @@ export default function GoldenLifePage() {
   const [slide, setSlide] = useState(0);
 const [contactOpen, setContactOpen] = useState(false);  
 const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [selectedHome, setSelectedHome] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
       setSlide((prev) => (prev + 1) % images.length);
