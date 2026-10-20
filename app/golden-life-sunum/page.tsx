@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import "./sunum.css";
 export default function GoldenLifeSunum() {
   const [page, setPage] = useState(0);
 const images = [
