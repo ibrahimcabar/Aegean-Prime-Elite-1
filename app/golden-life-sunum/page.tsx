@@ -1,10 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function GoldenLifeSunum() {
   const [page, setPage] = useState(0);
+const images = [
+  "/golden-life/IMG_3794.webp",
+  "/golden-life/IMG_3795.webp",
+  "/golden-life/IMG_3796.webp",
+  "/golden-life/IMG_3797.webp",
+  "/golden-life/IMG_3798.webp",
+  "/golden-life/IMG_3807.png",
+  "/golden-life/IMG_3808.webp",
+  "/golden-life/IMG_3809.webp",
+  "/golden-life/IMG_3810.webp",
+  "/golden-life/IMG_3811.webp",
+  "/golden-life/IMG_3812.webp",
+  "/golden-life/IMG_3813.webp",
+  "/golden-life/IMG_3814.webp",
+  "/golden-life/IMG_3815.webp",
+  "/golden-life/IMG_3816.webp",
+];
 
+const [slide, setSlide] = useState(0);
+  useEffect(() => {
+  if (page !== 0) return;
+
+  const timer = setInterval(() => {
+    setSlide((prev) => (prev + 1) % images.length);
+  }, 5000);
+
+  return () => clearInterval(timer);
+}, [page]);
   const sections = [
     "PROJE TANITIMI",
     "KONUT SEÇENEKLERİ",
@@ -36,7 +63,57 @@ export default function GoldenLifeSunum() {
       </h1>
 
       <h2>{sections[page]}</h2>
+{page === 0 && (
+  <div style={{
+    position: "relative",
+    width: "100%",
+    maxWidth: 1200,
+    marginTop: 30,
+  }}>
+    <img
+      src={images[slide]}
+      alt="Golden Life Projesi"
+      style={{
+        width: "100%",
+        height: "clamp(250px, 55vh, 650px)",
+        objectFit: "contain",
+        borderRadius: 16,
+      }}
+    />
 
+    <button
+      onClick={() =>
+        setSlide((slide - 1 + images.length) % images.length)
+      }
+      style={{
+        position: "absolute",
+        left: 10,
+        top: "50%",
+        transform: "translateY(-50%)",
+        padding: 15,
+        cursor: "pointer",
+      }}
+    >
+      ❮
+    </button>
+
+    <button
+      onClick={() =>
+        setSlide((slide + 1) % images.length)
+      }
+      style={{
+        position: "absolute",
+        right: 10,
+        top: "50%",
+        transform: "translateY(-50%)",
+        padding: 15,
+        cursor: "pointer",
+      }}
+    >
+      ❯
+    </button>
+  </div>
+)}
       <div style={{ display: "flex", gap: 20, marginTop: 40 }}>
         <button
           onClick={() =>
