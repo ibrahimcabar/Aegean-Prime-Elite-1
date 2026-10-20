@@ -64,7 +64,7 @@ const [slide, setSlide] = useState(0);
 
       <h2>{sections[page]}</h2>
      {page === 1 && (
-  <div style={{
+ <div className="konut-grid" style={{ 
     display: "grid",
    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
     gap: 20,
