@@ -11,10 +11,25 @@ export async function POST(request: Request) {
       );
     }
 if (process.env.AI_TEST_MODE !== "false") {
-  return NextResponse.json({
-    reply:
-      "Aegean Prime Elite'e hoş geldiniz! Size gayrimenkul yatırımları, Golden Life projesi ve konut seçenekleri hakkında yardımcı olabilirim. Hangi konuda bilgi almak istersiniz?"
-  });
+  const lastMessage = messages
+    .filter((m: any) => m.role === "user" && typeof m.content === "string")
+    .at(-1)?.content.toLocaleLowerCase("tr-TR") || "";
+
+  let reply =
+    "Aegean Prime Elite'e hoş geldiniz! Golden Life projesi ve gayrimenkul seçenekleri hakkında size yardımcı olabilirim.";
+
+  if (/fiyat|price|preis|ücret|kaç para/.test(lastMessage)) {
+    reply =
+      "Golden Life konut fiyatları: 1+0 stüdyo 50.000 €, 1+1 daire 60.000 €, 2+1 daire 90.000 € ve 2+1 tek kat villa 220.000 €. Kooperatif katılım ücreti 650.000 TL'dir. Projede 36 aylık ödeme planı belirtilmektedir. Kesin ödeme koşulları satış ekibimizden öğrenilebilir.";
+  } else if (/villa/.test(lastMessage)) {
+    reply =
+      "Golden Life projesinde 125 m² büyüklüğünde, 2+1 tek kat villa seçeneği bulunuyor. Liste fiyatı 220.000 €'dur. Güncel müsaitlik ve ödeme koşulları satış ekibimizden teyit edilmelidir.";
+  } else if (/merhaba|selam|hello|hallo/.test(lastMessage)) {
+    reply =
+      "Merhaba! Aegean Prime Elite'e hoş geldiniz. Size nasıl yardımcı olabilirim?";
+  }
+
+  return NextResponse.json({ reply });
 }
     const apiKey = process.env.OPENAI_API_KEY;
 
