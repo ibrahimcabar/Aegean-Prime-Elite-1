@@ -87,7 +87,13 @@ const [slide, setSlide] = useState(0);
         <h3>{home.name}</h3>
         <p>{home.area} m²</p>
         <h2>{home.price.toLocaleString("de-DE")} €</h2>
-        <p>36 Ay Ödeme Seçeneği</p>
+       <p>36 Ay Ödeme Seçeneği</p>
+<p style={{ fontSize: 22, fontWeight: "bold" }}>
+  Aylık {(home.price / 36).toLocaleString("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })} €
+</p> 
       </div>
     ))}
   </div>
