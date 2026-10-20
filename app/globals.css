@@ -20,3 +20,41 @@
     transform: none;
   }
 }
+.gold-btn,
+.search-panel button {
+  background: linear-gradient(
+    135deg,
+    #d8bd84 0%,
+    #b99a62 50%,
+    #98743c 100%
+  );
+  color: #ffffff;
+  border: 1px solid rgba(255, 232, 180, 0.35);
+  box-shadow: 0 8px 24px rgba(116, 83, 37, 0.20);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+@media (hover: hover) {
+  .gold-btn:hover,
+  .search-panel button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(116, 83, 37, 0.30);
+    filter: brightness(1.08);
+  }
+}
+
+.gold-btn:focus-visible,
+.search-panel button:focus-visible {
+  outline: 3px solid #8a682e;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-btn,
+  .search-panel button {
+    transition: none;
+  }
+}
