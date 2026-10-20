@@ -300,7 +300,13 @@ style={{
         36 Ay Ödeme Planı
       </p>
 
-      <h4 style={{ fontSize: 22, color: "#a58a59" }}>
+      <h4 style={{
+  fontSize: "clamp(22px, 2.5vw, 30px)",
+  color: "#b99a60",
+  fontWeight: 800,
+  margin: "10px 0",
+  letterSpacing: "-0.5px",
+}}>
         {home.monthly.toLocaleString("de-DE", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
