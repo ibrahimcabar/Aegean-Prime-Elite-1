@@ -213,13 +213,15 @@ setContactOpen(false);
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
             
 {homes.map((home) => (
-  <article
-    key={home.name}
-    style={{
-      background: "white",
-      borderRadius: 14,
-      padding: 30,
-    }}
+style={{
+  background: "white",
+  borderRadius: 18,
+  padding: 30,
+  border: "1px solid #d9c49a",
+  boxShadow: "0 12px 35px rgba(24,56,44,0.12)",
+  transition: "all 0.3s ease",
+  overflow: "hidden",
+}}  
   >
     <h3
   style={{
