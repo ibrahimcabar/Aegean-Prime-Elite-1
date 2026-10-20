@@ -133,6 +133,28 @@ const [slide, setSlide] = useState(0);
   </div>
 )}
       
+{page === 3 && (
+  <div style={{
+    background: "#18382c",
+    border: "2px solid #e8c985",
+    borderRadius: 20,
+    padding: "50px 25px",
+    width: "100%",
+    maxWidth: 900,
+    marginTop: 40,
+    textAlign: "center"
+  }}>
+    <h2>KOOPERATİF KATILIM ÜCRETİ</h2>
+    <h1 style={{
+      fontSize: "clamp(40px, 7vw, 80px)",
+      color: "#e8c985"
+    }}>
+      650.000 TL
+    </h1>
+    <p>Golden Life Projesi</p>
+  </div>
+)}
+
 {page === 0 && (
   <div style={{
     position: "relative",
