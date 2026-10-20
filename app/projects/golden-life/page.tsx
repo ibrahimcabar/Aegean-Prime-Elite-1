@@ -145,7 +145,7 @@ setContactOpen(false);
     zIndex: 5,
     textAlign: "center",
     color: "#ffffff",
-    width: "85%",
+    width: "calc(100% - 40px)",
     textShadow: "0 3px 15px rgba(0,0,0,0.8)",
     pointerEvents: "none",
   }}
