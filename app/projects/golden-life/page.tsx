@@ -88,7 +88,7 @@ const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   useEffect(() => {
     const timer = setInterval(() => {
       setSlide((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
