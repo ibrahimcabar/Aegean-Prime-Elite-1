@@ -155,6 +155,49 @@ const [slide, setSlide] = useState(0);
   </div>
 )}
 
+{page === 4 && (
+  <div style={{
+    width: "100%",
+    maxWidth: 1000,
+    marginTop: 30,
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+    gap: 20
+  }}>
+    {[
+      {
+        title: "DİJİTAL PROJE TANITIMI",
+        desc: "Golden Life projesinin görselleri, konut seçenekleri ve ödeme planları tek platformda."
+      },
+      {
+        title: "MÜŞTERİ BAŞVURULARI",
+        desc: "İlgilenen müşteriler online başvuru formuyla bilgilerini iletebilir."
+      },
+      {
+        title: "ANLIK BİLDİRİMLER",
+        desc: "Yeni başvurular e-posta ve WhatsApp bildirimleriyle takip edilir."
+      },
+      {
+        title: "YÖNETİCİ PANELİ",
+        desc: "Başvurular tek panelden görüntülenir ve müşteri görüşmelerinin durumu takip edilir."
+      }
+    ].map((item) => (
+      <div key={item.title} style={{
+        background: "#18382c",
+        border: "1px solid #e8c985",
+        borderRadius: 16,
+        padding: 28,
+        textAlign: "center"
+      }}>
+        <h2 style={{ fontSize: 23 }}>{item.title}</h2>
+        <p style={{ fontSize: 18, lineHeight: 1.6 }}>
+          {item.desc}
+        </p>
+      </div>
+    ))}
+  </div>
+)}
+
 {page === 0 && (
   <div style={{
     position: "relative",
