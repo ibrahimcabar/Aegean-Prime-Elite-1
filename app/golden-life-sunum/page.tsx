@@ -63,6 +63,35 @@ const [slide, setSlide] = useState(0);
       </h1>
 
       <h2>{sections[page]}</h2>
+     {page === 1 && (
+  <div style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+    gap: 20,
+    width: "100%",
+    maxWidth: 1100,
+    marginTop: 30,
+  }}>
+    {[
+      { name: "1+0 Stüdyo Daire", area: 45, price: 50000 },
+      { name: "1+1 Daire", area: 55, price: 60000 },
+      { name: "2+1 Daire", area: 70, price: 90000 },
+      { name: "2+1 Villa", area: 125, price: 220000 },
+    ].map((home) => (
+      <div key={home.name} style={{
+        background: "#18382c",
+        border: "1px solid #e8c985",
+        borderRadius: 16,
+        padding: 25,
+      }}>
+        <h3>{home.name}</h3>
+        <p>{home.area} m²</p>
+        <h2>{home.price.toLocaleString("de-DE")} €</h2>
+        <p>36 Ay Ödeme Seçeneği</p>
+      </div>
+    ))}
+  </div>
+)} 
 {page === 0 && (
   <div style={{
     position: "relative",
