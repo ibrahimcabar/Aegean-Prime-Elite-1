@@ -98,6 +98,41 @@ const [slide, setSlide] = useState(0);
     ))}
   </div>
 )} 
+
+{page === 2 && (
+  <div style={{
+    width: "100%",
+    maxWidth: 1000,
+    marginTop: 30,
+    textAlign: "center"
+  }}>
+    <h2>36 AYLIK ÖDEME PLANI</h2>
+    {[
+      ["1+0 Stüdyo Daire", 50000],
+      ["1+1 Daire", 60000],
+      ["2+1 Daire", 90000],
+      ["2+1 Villa", 220000]
+    ].map(([name, price]) => (
+      <div key={name} style={{
+        background: "#18382c",
+        border: "1px solid #e8c985",
+        borderRadius: 16,
+        padding: 20,
+        marginBottom: 15
+      }}>
+        <h3>{name}</h3>
+        <p>Toplam: {Number(price).toLocaleString("de-DE")} €</p>
+        <h2>
+          Aylık {(Number(price) / 36).toLocaleString("de-DE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })} €
+        </h2>
+      </div>
+    ))}
+  </div>
+)}
+      
 {page === 0 && (
   <div style={{
     position: "relative",
