@@ -10,7 +10,12 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
+if (process.env.AI_TEST_MODE !== "false") {
+  return NextResponse.json({
+    reply:
+      "Aegean Prime Elite'e hoş geldiniz! Size gayrimenkul yatırımları, Golden Life projesi ve konut seçenekleri hakkında yardımcı olabilirim. Hangi konuda bilgi almak istersiniz?"
+  });
+}
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
