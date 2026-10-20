@@ -286,7 +286,13 @@ style={{
         Toplam Konut Bedeli
       </p>
 
-      <h3 style={{ fontSize: 30, color: "#18382c" }}>
+      <h3 style={{
+  fontSize: "clamp(30px, 3vw, 42px)",
+  color: "#18382c",
+  fontWeight: 800,
+  letterSpacing: "-1px",
+  margin: "12px 0",
+}}>
         {home.price.toLocaleString("de-DE")} €
       </h3>
 
