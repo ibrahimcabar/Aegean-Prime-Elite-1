@@ -379,7 +379,24 @@ style={{
       <h3 style={{ color: "#18382c", fontSize: 28 }}>
         {homes[selectedHome].name}
       </h3>
-
+<img
+  src={homes[selectedHome].image}
+  alt={`${homes[selectedHome].name} Mimari Planı`}
+  onClick={() => setSelectedPlan(homes[selectedHome].image)}
+  style={{
+    width: "100%",
+    maxWidth: 650,
+    height: "auto",
+    maxHeight: 420,
+    objectFit: "contain",
+    borderRadius: 14,
+    margin: "20px auto",
+    display: "block",
+    cursor: "pointer",
+    background: "#f8f7f3",
+    border: "1px solid #e9e0ce"
+  }}
+/>
       <p>Brüt Alan: {homes[selectedHome].area} m²</p>
 
       <h2 style={{ color: "#18382c", fontSize: 36 }}>
