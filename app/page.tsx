@@ -47,7 +47,19 @@ return <><header className="header"><a href="#top" className="brand"><span class
     }}>
       GOLDEN LIFE
     </h2>
-
+<img
+  src="/golden-life/50991BE5-186E-470A-9857-4E8F5C432CAF.png"
+  alt="Golden Life Lüks Konut Projesi"
+  style={{
+    width: "100%",
+    maxWidth: 950,
+    height: "auto",
+    borderRadius: 16,
+    margin: "25px auto",
+    display: "block",
+    border: "1px solid #b99a60"
+  }}
+/>
     <p style={{
       color: "#d9bd82",
       fontSize: 17,
