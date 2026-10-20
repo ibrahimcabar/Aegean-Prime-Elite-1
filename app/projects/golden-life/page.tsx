@@ -688,6 +688,35 @@ style={{
         cursor: "default"
       }}
     />
+    {[-1, 1].map((direction) => (
+  <button
+    key={direction}
+    onClick={(e) => {
+      e.stopPropagation();
+      const index = images.indexOf(zoomImage);
+      const next = (index + direction + images.length) % images.length;
+      setZoomImage(images[next]);
+      setSlide(next);
+    }}
+    style={{
+      position: "absolute",
+      top: "50%",
+      [direction === -1 ? "left" : "right"]: 20,
+      transform: "translateY(-50%)",
+      zIndex: 10000,
+      background: "rgba(0,0,0,0.55)",
+      color: "white",
+      border: "1px solid rgba(255,255,255,0.4)",
+      borderRadius: "50%",
+      width: 48,
+      height: 48,
+      fontSize: 30,
+      cursor: "pointer",
+    }}
+  >
+    {direction === -1 ? "‹" : "›"}
+  </button>
+))}
   </div>
 )}    
     </main>
