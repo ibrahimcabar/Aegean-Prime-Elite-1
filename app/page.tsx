@@ -16,14 +16,122 @@ function submit(){setSearch(query);document.getElementById('properties')?.scroll
 function send(){if(!message.trim())return;const m=message.trim();setMessages(old=>[...old,{who:'user',text:m},{who:'bot',text:'Thanks! This is a preview assistant. Live AI recommendations will be available after connecting our property database and AI service.'}]);setMessage('')}
 return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">Properties</a><a href="#how">For Partners</a><a href="#packages">Pricing</a><a href="#about">About</a></nav><div className="header-actions"><a className="outline-btn" href="/ilan-ekle">List a Property <ArrowUpRight size={15}/></a><button className="menu" aria-label="Toggle menu" onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></header>
 <main id="top"><section className="hero"><div className="hero-image"/><div className="hero-overlay"/><div className="hero-content"><div className="eyebrow">THE WORLD IS YOUR ADDRESS <span/></div><h1>Extraordinary properties.<br/><em>Without borders.</em></h1><p>Discover exceptional homes and investment opportunities across the globe, curated in one seamless destination.</p><div className="search-panel"><div className="search-input"><MapPin size={20}/><input aria-label="Search location" value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&submit()} placeholder="Search city, country or street (e.g. Berlin Hauptstraße)"/></div><select aria-label="Property type" value={kind} onChange={e=>setKind(e.target.value)}><option>All types</option><option>Apartment</option><option>Villa</option></select><button onClick={submit}><Search size={18}/> Explore</button></div><div className="hero-bottom"><span><Globe2 size={17}/> A WORLD OF OPPORTUNITY</span><span>01 / 04</span></div></div></section>
-  <section style={{ padding: "35px 20px", background: "#f8f7f4", textAlign: "center" }}>
-  <div style={{ maxWidth: 850, margin: "auto", padding: 30, background: "#fff", border: "1px solid #b89b68", borderRadius: 16 }}>
-    <p style={{ color: "#b89b68", fontWeight: "bold" }}>ÖZEL PROJE</p>
-    <h2 style={{ fontSize: 32, color: "#222" }}>GOLDEN LIFE</h2>
-    <p style={{ color: "#555" }}>Modern yaşam ve gayrimenkul yatırım fırsatları</p>
-    <p style={{ fontWeight: "bold", color: "#222" }}>Kooperatif Katılım Ücreti: 650.000 TL</p>
-    <a href="/projects/golden-life" style={{ display: "inline-block", marginTop: 15, padding: "14px 28px", background: "#b89b68", color: "#fff", borderRadius: 8, textDecoration: "none", fontWeight: "bold" }}>
-      Projeyi İncele →
+<section style={{
+  padding: "65px 20px",
+  background: "#f8f7f4",
+  textAlign: "center"
+}}>
+  <div style={{
+    maxWidth: 1100,
+    margin: "auto",
+    padding: "55px 25px",
+    background: "linear-gradient(135deg, #18382c, #294c3e)",
+    border: "1px solid #b99a60",
+    borderRadius: 22,
+    boxShadow: "0 20px 55px rgba(24,56,44,0.18)"
+  }}>
+    <p style={{
+      color: "#d9bd82",
+      fontWeight: 700,
+      letterSpacing: 4,
+      fontSize: 13
+    }}>
+      AEGEAN PRIME ELITE • ÖZEL PROJE
+    </p>
+
+    <h2 style={{
+      fontSize: "clamp(38px, 6vw, 68px)",
+      color: "#ffffff",
+      margin: "25px 0 12px",
+      letterSpacing: 2
+    }}>
+      GOLDEN LIFE
+    </h2>
+
+    <p style={{
+      color: "#d9bd82",
+      fontSize: 17,
+      letterSpacing: 2
+    }}>
+      ANTALYA • KAYADİBİ / KARAÖZ
+    </p>
+
+    <p style={{
+      color: "#e8e8e2",
+      fontSize: 19,
+      margin: "25px auto",
+      maxWidth: 650,
+      lineHeight: 1.8
+    }}>
+      Doğanın kalbinde ayrıcalıklı bir yaşam.
+      Modern mimari, konforlu konutlar ve
+      gayrimenkul yatırım fırsatları.
+    </p>
+
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: 15,
+      margin: "30px 0"
+    }}>
+      {["1+0 Stüdyo", "1+1 Daire", "2+1 Daire", "Villa"].map((item) => (
+        <span key={item} style={{
+          padding: "10px 17px",
+          border: "1px solid #b99a60",
+          borderRadius: 8,
+          color: "#ffffff",
+          fontSize: 14
+        }}>
+          {item}
+        </span>
+      ))}
+    </div>
+
+    <div style={{
+      background: "rgba(255,255,255,0.08)",
+      border: "1px solid #b99a60",
+      borderRadius: 14,
+      padding: "25px 15px",
+      maxWidth: 550,
+      margin: "30px auto"
+    }}>
+      <p style={{ color: "#e8e8e2", fontSize: 16 }}>
+        Kooperatif Katılım Ücreti
+      </p>
+
+      <h3 style={{
+        color: "#d9bd82",
+        fontSize: "clamp(30px, 5vw, 44px)",
+        margin: "10px 0"
+      }}>
+        650.000 TL
+      </h3>
+
+      <p style={{ color: "#e8e8e2", fontSize: 15 }}>
+        Konut fiyatları 50.000 €'dan başlıyor
+      </p>
+    </div>
+
+    <p style={{ color: "#d9bd82", fontSize: 16 }}>
+      36 Aylık Ödeme Planı
+    </p>
+
+    <a
+      href="/projects/golden-life"
+      style={{
+        display: "inline-block",
+        marginTop: 20,
+        padding: "17px 38px",
+        background: "#b99a60",
+        color: "#18382c",
+        borderRadius: 10,
+        textDecoration: "none",
+        fontWeight: 800,
+        fontSize: 17
+      }}
+    >
+      GOLDEN LIFE'I KEŞFET →
     </a>
   </div>
 </section>
