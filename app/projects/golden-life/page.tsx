@@ -321,7 +321,82 @@ style={{
           </div>
         </div>
       </section>
+<section style={{
+  padding: "70px 24px",
+  background: "#f8f7f3",
+  textAlign: "center"
+}}>
+  <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+    <p style={{ color: "#b99a60", letterSpacing: 3 }}>
+      GOLDEN LIFE
+    </p>
 
+    <h2 style={{
+      fontSize: "clamp(30px, 4vw, 48px)",
+      color: "#18382c"
+    }}>
+      İnteraktif Konut Seçimi
+    </h2>
+
+    <p style={{ color: "#65736b" }}>
+      Size uygun konutu seçin, ödeme planınızı inceleyin.
+    </p>
+
+    <div style={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: 12,
+      margin: "30px 0"
+    }}>
+      {homes.map((home, index) => (
+        <button
+          key={home.name}
+          type="button"
+          onClick={() => setSelectedHome(index)}
+          style={{
+            padding: "14px 22px",
+            borderRadius: 10,
+            cursor: "pointer",
+            background: selectedHome === index ? "#18382c" : "white",
+            color: selectedHome === index ? "#ffffff" : "#18382c",
+            border: "1px solid #b99a60",
+            fontWeight: 700
+          }}
+        >
+          {home.name}
+        </button>
+      ))}
+    </div>
+
+    <div style={{
+      background: "white",
+      border: "1px solid #d9c49a",
+      borderRadius: 18,
+      padding: 30,
+      boxShadow: "0 12px 35px rgba(24,56,44,0.10)"
+    }}>
+      <h3 style={{ color: "#18382c", fontSize: 28 }}>
+        {homes[selectedHome].name}
+      </h3>
+
+      <p>Brüt Alan: {homes[selectedHome].area} m²</p>
+
+      <h2 style={{ color: "#18382c", fontSize: 36 }}>
+        {homes[selectedHome].price.toLocaleString("de-DE")} €
+      </h2>
+
+      <p>36 Aylık Ödeme Planı</p>
+
+      <h3 style={{ color: "#b99a60", fontSize: 30 }}>
+        {homes[selectedHome].monthly.toLocaleString("de-DE", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })} € / Ay
+      </h3>
+    </div>
+  </div>
+</section>
 <section
   id="about-golden-life"
   style={{
