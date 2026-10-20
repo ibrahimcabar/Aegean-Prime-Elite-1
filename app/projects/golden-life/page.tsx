@@ -83,6 +83,8 @@ export default function GoldenLifePage() {
 const [contactOpen, setContactOpen] = useState(false);  
 const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [selectedHome, setSelectedHome] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+ const [zoomImage, setZoomImage] = useState<string | null>(null); 
   useEffect(() => {
     const timer = setInterval(() => {
       setSlide((prev) => (prev + 1) % images.length);
@@ -120,6 +122,7 @@ setContactOpen(false);
   <img
     key={image}
     src={image}
+    onClick={() => setZoomImage(image)}
     alt={`Golden Life ${index + 1}`}
     style={{
       position: "absolute",
@@ -128,6 +131,7 @@ setContactOpen(false);
       height: "100%",
       objectFit: "cover",
       opacity: slide === index ? 1 : 0,
+     pointerEvents: slide === index ? "auto" : "none", 
       transition: "opacity 1.5s ease-in-out",
     }}
   />
@@ -625,6 +629,50 @@ style={{
     </div>
   </div>
 )}
+{zoomImage && (
+  <div
+    onClick={() => setZoomImage(null)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.95)",
+      zIndex: 9999,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20,
+      cursor: "zoom-out"
+    }}
+  >
+    <button
+      onClick={() => setZoomImage(null)}
+      style={{
+        position: "absolute",
+        top: 25,
+        right: 25,
+        color: "white",
+        background: "transparent",
+        border: "none",
+        fontSize: 36,
+        cursor: "pointer"
+      }}
+    >
+      ×
+    </button>
+    <img
+      src={zoomImage}
+      alt="Golden Life Büyük Görsel"
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        maxWidth: "100%",
+        maxHeight: "90vh",
+        objectFit: "contain",
+        borderRadius: 12,
+        cursor: "default"
+      }}
+    />
+  </div>
+)}    
     </main>
   );
 }
