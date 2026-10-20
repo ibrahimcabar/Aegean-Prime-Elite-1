@@ -66,7 +66,7 @@ const [slide, setSlide] = useState(0);
      {page === 1 && (
   <div style={{
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+   gridTemplateColumns: "repeat(2, minmax(0, 1fr))", 
     gap: 20,
     width: "100%",
     maxWidth: 1100,
