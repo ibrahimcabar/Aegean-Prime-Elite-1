@@ -154,7 +154,7 @@ setContactOpen(false);
     AEGEAN PRIME ELITE
   </p>
  <h1 style={{
-  fontSize: "clamp(42px, 7vw, 110px)",
+fontSize: "clamp(32px, 6vw, 110px)",  
   fontWeight: 800,
   letterSpacing: "3px",
   lineHeight: 1.1,
