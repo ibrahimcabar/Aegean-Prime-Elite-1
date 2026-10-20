@@ -163,7 +163,14 @@ setContactOpen(false);
 }}>
     GOLDEN LIFE
   </h1>
-  <p style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>
+<p style={{
+  fontSize: "clamp(14px, 2vw, 20px)",
+  maxWidth: "100%",
+  lineHeight: 1.5,
+  whiteSpace: "normal",
+  overflowWrap: "break-word",
+  margin: "15px auto"
+}}>  
     Doğanın Kalbinde Ayrıcalıklı Bir Yaşam
   </p>
 </div>
