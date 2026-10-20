@@ -1,0 +1,20 @@
+/* Golden Life konut kartları */
+.konut-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 20px;
+}
+
+/* Telefon ekranları */
+@media (max-width: 767px) {
+  .konut-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Bilgisayar ve televizyon */
+@media (min-width: 768px) {
+  .konut-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
