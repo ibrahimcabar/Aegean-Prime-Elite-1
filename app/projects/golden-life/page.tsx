@@ -139,6 +139,16 @@ setContactOpen(false);
   <div
   style={{
     position: "absolute",
+    inset: 0,
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, transparent 75%)",
+    pointerEvents: "none",
+    zIndex: 1,
+  }}
+/>
+  <div
+  style={{
+    position: "absolute",
     bottom: 75,
     left: "50%",
     transform: "translateX(-50%)",
