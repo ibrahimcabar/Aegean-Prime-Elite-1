@@ -719,6 +719,114 @@ style={{
 ))}
   </div>
 )}    
+ 
+<section
+  id="proje-konumu"
+  style={{
+    padding: "80px 24px",
+    background: "#101820",
+    color: "#fff",
+  }}
+>
+  <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <p style={{ color: "#d4af37", letterSpacing: 4 }}>
+      GOLDEN LIFE | ANTALYA
+    </p>
+
+    <h2 style={{ fontSize: "clamp(30px, 5vw, 52px)" }}>
+      Proje Konumu ve Tapu Bilgileri
+    </h2>
+
+    <p style={{ color: "#cbd5e1", lineHeight: 1.8 }}>
+      Golden Life projesinin konum ve parsel bilgilerini
+      inceleyin.
+    </p>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns:
+          "repeat(auto-fit, minmax(240px, 1fr))",
+        gap: 20,
+        marginTop: 36,
+      }}
+    >
+      {[
+        ["İL", "Antalya"],
+        ["İLÇE", "Aksu"],
+        ["MAHALLE / MEVKİ", "Kayadibi"],
+        ["ADA NUMARASI", "102"],
+        ["PARSEL NUMARASI", "1"],
+      ].map(([label, value]) => (
+        <div
+          key={label}
+          style={{
+            padding: 24,
+            border: "1px solid #806c3b",
+            borderRadius: 14,
+            background: "#1b2630",
+          }}
+        >
+          <div style={{ color: "#d4af37", fontSize: 12 }}>
+            {label}
+          </div>
+          <div
+            style={{
+              fontSize: 25,
+              fontWeight: 700,
+              marginTop: 12,
+            }}
+          >
+            {value}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div
+      style={{
+        marginTop: 36,
+        borderRadius: 18,
+        overflow: "hidden",
+        border: "1px solid #806c3b",
+      }}
+    >
+      <iframe
+        title="Golden Life bölge haritası"
+        src="https://www.google.com/maps?q=Kayadibi%2C%20Aksu%2C%20Antalya&output=embed"
+        width="100%"
+        height="420"
+        style={{ border: 0, display: "block" }}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
+    </div>
+
+    <p style={{ color: "#aeb8c2", fontSize: 13 }}>
+      Harita bölgeyi göstermektedir. Kesin parsel
+      sınırları için resmî kayıtlar esas alınmalıdır.
+    </p>
+
+    <a
+      href="https://parselsorgu.tkgm.gov.tr/"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "inline-block",
+        marginTop: 20,
+        padding: "16px 28px",
+        background: "#d4af37",
+        color: "#101820",
+        borderRadius: 10,
+        fontWeight: 700,
+        textDecoration: "none",
+      }}
+    >
+      Resmî Ada / Parsel Sorgulama ↗
+    </a>
+  </div>
+</section>
+     
     </main>
   );
 }
