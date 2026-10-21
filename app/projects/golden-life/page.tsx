@@ -808,7 +808,7 @@ style={{
     </p>
 
     <a
-      href="https://parselsorgu.tkgm.gov.tr/"
+      href="https://parselsorgu.tkgm.gov.tr/#ara/idari/134565/102/1/1792565213891"
       target="_blank"
       rel="noopener noreferrer"
       style={{
