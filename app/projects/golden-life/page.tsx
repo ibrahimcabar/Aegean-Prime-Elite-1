@@ -60,7 +60,18 @@ const homes = [
 
 
 export default function GoldenLifePage() {
-  
+  const [language, setLanguage] = useState("en");
+
+useEffect(() => {
+  const savedLanguage = localStorage.getItem("aegean-language");
+
+  if (
+    savedLanguage &&
+    ["en", "tr", "de", "ru", "ar"].includes(savedLanguage)
+  ) {
+    setLanguage(savedLanguage);
+  }
+}, []);
   const images = [
   "/golden-life/IMG_3794.webp",
   "/golden-life/IMG_3795.webp",
@@ -116,6 +127,35 @@ setContactOpen(false);
 };
   return (
     <main style={{ background: "#f8f7f3", color: "#20372e", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
+     <div style={{
+  display: "flex",
+  justifyContent: "flex-end",
+  padding: "15px 25px",
+  background: "#18382c"
+}}>
+  <select
+    aria-label="Select language"
+    value={language}
+    onChange={(e) => {
+      const selected = e.target.value;
+      localStorage.setItem("aegean-language", selected);
+      setLanguage(selected);
+    }}
+    style={{
+      padding: "10px",
+      borderRadius: "8px",
+      background: "#18382c",
+      color: "#ffffff",
+      border: "1px solid #b99a60"
+    }}
+  >
+    <option value="en">🇬🇧 English</option>
+    <option value="tr">🇹🇷 Türkçe</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="ru">🇷🇺 Русский</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div> 
       
 <section style={{ position: "relative", height: "min(85vh, 900px)", minHeight: "420px", overflow: "hidden" }}>
   {images.map((image, index) => (
