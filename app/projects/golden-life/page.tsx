@@ -1044,27 +1044,49 @@ alt={`${homes[selectedHome].name[
 </p> 
 
       <form onSubmit={handleLeadSubmit}>
-        <input required name="full_name" placeholder="placeholder={
-  language === "tr" ? "Ad Soyad" :
-  language === "de" ? "Vor- und Nachname" :
-  language === "ru" ? "Имя и фамилия" :
-  language === "ar" ? "الاسم الكامل" :
-  "Full Name"
-}" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
-        <input required type="tel" name="phone" placeholder="placeholder={
-  language === "tr" ? "Telefon Numarası" :
-  language === "de" ? "Telefonnummer" :
-  language === "ru" ? "Номер телефона" :
-  language === "ar" ? "رقم الهاتف" :
-  "Phone Number"
-}" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
-        <input type="email" name="email" placeholder="placeholder={
-  language === "tr" ? "E-posta Adresi" :
-  language === "de" ? "E-Mail-Adresse" :
-  language === "ru" ? "Адрес электронной почты" :
-  language === "ar" ? "البريد الإلكتروني" :
-  "Email Address"
-}" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        
+<input
+  required
+  name="full_name"
+  placeholder={
+    language === "tr" ? "Ad Soyad" :
+    language === "de" ? "Vor- und Nachname" :
+    language === "ru" ? "Имя и фамилия" :
+    language === "ar" ? "الاسم الكامل" :
+    "Full Name"
+  }
+  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+/>
+
+        
+<input
+  required
+  type="tel"
+  name="phone"
+  placeholder={
+    language === "tr" ? "Telefon Numarası" :
+    language === "de" ? "Telefonnummer" :
+    language === "ru" ? "Номер телефона" :
+    language === "ar" ? "رقم الهاتف" :
+    "Phone Number"
+  }
+  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+/>
+
+        
+<input
+  type="email"
+  name="email"
+  placeholder={
+    language === "tr" ? "E-posta Adresi" :
+    language === "de" ? "E-Mail-Adresse" :
+    language === "ru" ? "Адрес электронной почты" :
+    language === "ar" ? "البريد الإلكتروني" :
+    "Email Address"
+  }
+  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+/>
+
 
        <select
   required
@@ -1113,13 +1135,20 @@ alt={`${homes[selectedHome].name[
   </option>
 </select> 
 
-        <textarea name="message" placeholder="placeholder={
-  language === "tr" ? "Mesajınız (İsteğe Bağlı)" :
-  language === "de" ? "Ihre Nachricht (Optional)" :
-  language === "ru" ? "Ваше сообщение (необязательно)" :
-  language === "ar" ? "رسالتك (اختياري)" :
-  "Your Message (Optional)"
-}" rows={3} style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        
+<textarea
+  name="message"
+  placeholder={
+    language === "tr" ? "Mesajınız (İsteğe Bağlı)" :
+    language === "de" ? "Ihre Nachricht (Optional)" :
+    language === "ru" ? "Ваше сообщение (необязательно)" :
+    language === "ar" ? "رسالتك (اختياري)" :
+    "Your Message (Optional)"
+  }
+  rows={3}
+  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+/>
+
 
         <button
           type="submit"
