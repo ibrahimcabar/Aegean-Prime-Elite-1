@@ -257,6 +257,76 @@ return <><header className="header"><a href="#top" className="brand"><span class
   ['03', language === 'tr' ? 'Gayrimenkullerinizi ekleyin' : language === 'de' ? 'Fügen Sie Ihre Immobilien hinzu' : language === 'ru' ? 'Добавьте свои объекты' : language === 'ar' ? 'أضف عقاراتك' : 'Submit your properties'],
   ['04', language === 'tr' ? 'Uluslararası alıcılara ulaşın' : language === 'de' ? 'Erreichen Sie internationale Käufer' : language === 'ru' ? 'Привлекайте международных покупателей' : language === 'ar' ? 'تواصل مع المشترين الدوليين' : 'Connect with global buyers']
 ].map(([n,t])=><div key={n}><span>{n}</span><strong>{t}</strong><Check size={18}/></div>)}</div></section>
-<section className="section pricing" id="packages"><div className="center"><div className="kicker">FOR REAL ESTATE PROFESSIONALS</div><h2>Simple plans. <em>Global reach.</em></h2><p>Illustrative monthly pricing. Payment and subscriptions are not yet active.</p></div><div className="pricing-grid">{packages.map((p,i)=><div className={'plan '+(i===1?'featured':'')} key={p.name}><div className="plan-top"><span>{p.name}</span>{i===1&&<span className="popular">POPULAR</span>}</div><div className="price">€{p.price}<small> / month</small></div><p>Up to {p.count} active property listings</p><div className="plan-rule"/>{['Professional agency profile','Property listing management','International visibility','Buyer enquiry access'].map(x=><div className="plan-benefit" key={x}><Check size={16}/>{x}</div>)}<button onClick={()=>alert('Partner registration is planned for the next development phase. No payment is being collected.')}>Coming soon <ArrowUpRight size={16}/></button></div>)}</div></section>
+<section className="section pricing" id="packages"><div className="center"><div className="kicker">
+  {language === "tr" ? "GAYRİMENKUL PROFESYONELLERİ İÇİN" :
+   language === "de" ? "FÜR IMMOBILIENPROFIS" :
+   language === "ru" ? "ДЛЯ ПРОФЕССИОНАЛОВ НЕДВИЖИМОСТИ" :
+   language === "ar" ? "لمحترفي العقارات" :
+   "FOR REAL ESTATE PROFESSIONALS"}
+</div><h2>
+  {language === "tr" ? <>Basit paketler. <em>Küresel erişim.</em></> :
+   language === "de" ? <>Einfache Pakete. <em>Globale Reichweite.</em></> :
+   language === "ru" ? <>Простые тарифы. <em>Глобальный охват.</em></> :
+   language === "ar" ? <>باقات بسيطة. <em>انتشار عالمي.</em></> :
+   <>Simple plans. <em>Global reach.</em></>}
+</h2><p>
+  {language === "tr"
+    ? "Gösterilen aylık fiyatlar örnek amaçlıdır. Ödeme ve abonelik sistemi henüz aktif değildir."
+    : language === "de"
+    ? "Die angezeigten monatlichen Preise dienen nur zur Veranschaulichung. Zahlungen und Abonnements sind noch nicht aktiv."
+    : language === "ru"
+    ? "Указанные ежемесячные цены приведены для примера. Оплата и подписки пока недоступны."
+    : language === "ar"
+    ? "الأسعار الشهرية المعروضة توضيحية فقط. نظام الدفع والاشتراكات غير مفعل حالياً."
+    : "Illustrative monthly pricing. Payment and subscriptions are not yet active."}
+</p></div><div className="pricing-grid">{packages.map((p,i)=><div className={'plan '+(i===1?'featured':'')} key={p.name}><div className="plan-top"><span>{p.name}</span>{i===1&&<span className="popular">
+  {language === "tr" ? "POPÜLER" :
+   language === "de" ? "BELIEBT" :
+   language === "ru" ? "ПОПУЛЯРНЫЙ" :
+   language === "ar" ? "الأكثر شعبية" :
+   "POPULAR"}
+</span>}</div><div className="price">€{p.price}<small>
+  {language === "tr" ? " / ay" :
+   language === "de" ? " / Monat" :
+   language === "ru" ? " / месяц" :
+   language === "ar" ? " / شهر" :
+   " / month"}
+</small></div><p>
+  {language === "tr" ? `En fazla ${p.count} aktif gayrimenkul ilanı` :
+   language === "de" ? `Bis zu ${p.count} aktive Immobilienanzeigen` :
+   language === "ru" ? `До ${p.count} активных объявлений о недвижимости` :
+   language === "ar" ? `حتى ${p.count} إعلان عقاري نشط` :
+   `Up to ${p.count} active property listings`}
+</p><div className="plan-rule"/>{(language === "tr" ? [
+  "Profesyonel emlak ofisi profili",
+  "Gayrimenkul ilan yönetimi",
+  "Uluslararası görünürlük",
+  "Alıcı taleplerine erişim"
+] : language === "de" ? [
+  "Professionelles Maklerprofil",
+  "Verwaltung von Immobilienanzeigen",
+  "Internationale Sichtbarkeit",
+  "Zugang zu Käuferanfragen"
+] : language === "ru" ? [
+  "Профессиональный профиль агентства",
+  "Управление объявлениями",
+  "Международная видимость",
+  "Доступ к запросам покупателей"
+] : language === "ar" ? [
+  "ملف احترافي للوكالة العقارية",
+  "إدارة الإعلانات العقارية",
+  "ظهور دولي",
+  "الوصول إلى استفسارات المشترين"
+] : [
+  "Professional agency profile",
+  "Property listing management",
+  "International visibility",
+  "Buyer enquiry access"
+]).map(x=><div className="plan-benefit" key={x}><Check size={16}/>{x}</div>)}<button onClick={()=>alert('Partner registration is planned for the next development phase. No payment is being collected.')}>{language === "tr" ? "Yakında" :
+ language === "de" ? "Demnächst verfügbar" :
+ language === "ru" ? "Скоро" :
+ language === "ar" ? "قريباً" :
+ "Coming soon"}
+<ArrowUpRight size={16}/></button></div>)}</div></section>
 <section className="trust" id="about"><ShieldCheck size={28}/><div><h2>Built on trust. Designed for the world.</h2><p>We are building a multilingual marketplace with partner verification, transparent listings and intelligent property discovery.</p></div></section></main><footer><div className="footer-brand">AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>© {new Date().getFullYear()} Aegean Prime Elite. Preview website.</span><span>Global real estate, reimagined.</span></footer>
 <button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Aegean AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}</>}
