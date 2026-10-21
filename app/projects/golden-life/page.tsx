@@ -769,14 +769,26 @@ alt={`${homes[selectedHome].name[
       GOLDEN LIFE
     </h2>
     <h3 style={{ color: "#e8c985", fontSize: 24 }}>
-      Doğanın Kalbinde Ayrıcalıklı Bir Yaşam
+      
+{language === "tr" ? "Doğanın Kalbinde Ayrıcalıklı Bir Yaşam" :
+ language === "de" ? "Exklusives Leben im Herzen der Natur" :
+ language === "ru" ? "Привилегированная жизнь в сердце природы" :
+ language === "ar" ? "حياة استثنائية في قلب الطبيعة" :
+ "Exclusive Living in the Heart of Nature"}
+
     </h3>
     <p style={{ fontSize: 18, lineHeight: 2, marginTop: 30 }}>
-      Antalya Kayadibi / Karaöz'de konumlanan Golden Life,
-      doğayla bütünleşen bir yaşam konsepti sunmayı hedefliyor.
-      Modern mimari anlayışı ve farklı ihtiyaçlara hitap eden
-      daire ve villa seçenekleriyle yeni bir yaşam deneyimi
-      için tasarlanıyor.
+      
+{language === "tr"
+  ? "Antalya Kayadibi / Karaöz'de konumlanan Golden Life, doğayla bütünleşen bir yaşam konsepti sunuyor. Modern mimari anlayışı ve farklı ihtiyaçlara uygun daire ve villa seçenekleriyle yeni bir yaşam için tasarlanıyor."
+  : language === "de"
+  ? "Golden Life in Antalya Kayadibi / Karaöz bietet ein naturnahes Wohnkonzept. Mit moderner Architektur sowie Apartments und Villen für unterschiedliche Bedürfnisse entsteht hier ein neues Lebensgefühl."
+  : language === "ru"
+  ? "Golden Life, расположенный в Анталье, Каядиби / Караоз, предлагает концепцию жизни в гармонии с природой. Современная архитектура, квартиры и виллы созданы для разных потребностей."
+  : language === "ar"
+  ? "يقدم مشروع غولدن لايف في أنطاليا، كاياديبي / كاراأوز، مفهومًا سكنيًا متناغمًا مع الطبيعة، مع تصميم معماري عصري وخيارات متنوعة من الشقق والفلل."
+  : "Golden Life, located in Antalya Kayadibi / Karaöz, offers a lifestyle in harmony with nature. Featuring modern architecture and a range of apartments and villas, the project is designed for different living needs."}
+
     </p>
     <p style={{ color: "#d9c18b", marginTop: 35, letterSpacing: 2 }}>
       ANTALYA • KAYADİBİ / KARAÖZ
