@@ -742,6 +742,32 @@ style={{
       inceleyin.
     </p>
 
+<div style={{ marginTop: 32, marginBottom: 32 }}>
+  <img
+    src="/golden-life/06F8BE84-97ED-4220-8DFB-15A567A84222.png"
+    alt="Golden Life Antalya Aksu Kayadibi 102 ada 1 parsel temsili arazi görselleştirmesi"
+    style={{
+      display: "block",
+      width: "100%",
+      height: "auto",
+      borderRadius: 18,
+      border: "1px solid #d4af37",
+    }}
+  />
+  <p
+    style={{
+      color: "#cbd5e1",
+      fontSize: 13,
+      marginTop: 12,
+      lineHeight: 1.7,
+    }}
+  >
+    Temsili arazi görselleştirmesidir. Kesin parsel
+    sınırları ve resmî bilgiler için TKGM Parsel
+    Sorgu sistemi esas alınmalıdır.
+  </p>
+</div>
+
     <div
       style={{
         display: "grid",
