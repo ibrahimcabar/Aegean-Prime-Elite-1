@@ -410,12 +410,24 @@ fontSize: "clamp(32px, 6vw, 110px)",
 
       <section style={{ maxWidth: 1100, margin: "auto", padding: "75px 24px" }}>
         <p style={{ color: "#a58a59", letterSpacing: 3 }}>THE GOLDEN LIFE EXPERIENCE</p>
-        <h2 style={{ fontSize: 36 }}>Yeni Bir Yaşam Anlayışı</h2>
+        <h2 style={{ fontSize: 36 }}>
+  {language === "tr" ? "Yeni Bir Yaşam Anlayışı" :
+   language === "de" ? "Ein neues Lebenskonzept" :
+   language === "ru" ? "Новая концепция жизни" :
+   language === "ar" ? "مفهوم جديد للحياة" :
+   "A New Way of Living"}
+</h2>
         <p style={{ lineHeight: 1.9, color: "#65736b" }}>
-          Golden Life, Antalya Kayadibi / Karaöz bölgesinde planlanan;
-          konut yaşamını sağlık, rehabilitasyon, doğa ve sosyal yaşam
-          olanaklarıyla birleştirmeyi hedefleyen bir projedir.
-        </p>
+  {language === "tr"
+    ? "Golden Life, Antalya Kayadibi / Karaöz bölgesinde planlanan; konut yaşamını sağlık, rehabilitasyon, doğa ve sosyal yaşam olanaklarıyla birleştirmeyi hedefleyen bir projedir."
+    : language === "de"
+    ? "Golden Life ist ein in der Region Kayadibi / Karaöz in Antalya geplantes Projekt, das Wohnen mit Gesundheits-, Rehabilitations-, Natur- und sozialen Angeboten verbinden soll."
+    : language === "ru"
+    ? "Golden Life — это проект, планируемый в районе Каядиби / Караёз в Анталье, который призван объединить комфортное проживание с возможностями для здоровья, реабилитации, отдыха на природе и социальной жизни."
+    : language === "ar"
+    ? "غولدن لايف هو مشروع مخطط له في منطقة كاياديبي / كاراأوز في أنطاليا، ويهدف إلى الجمع بين الحياة السكنية وخدمات الصحة وإعادة التأهيل والطبيعة والأنشطة الاجتماعية."
+    : "Golden Life is a planned residential project in the Kayadibi / Karaöz area of Antalya, designed to combine residential living with health, rehabilitation, nature, and social amenities."}
+</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
           {features.map((item) => (
             <article key={item.title.tr} style={{ background: "white", borderRadius: 14, padding: 28 }}>
@@ -439,7 +451,13 @@ fontSize: "clamp(32px, 6vw, 110px)",
       <section id="homes" style={{ background: "#e9e8df", padding: "75px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "auto" }}>
           <p style={{ color: "#94784a", letterSpacing: 3 }}>RESIDENCES</p>
-          <h2 style={{ fontSize: 36 }}>Konut Seçenekleri</h2>
+          <h2 style={{ fontSize: 36 }}>
+  {language === "tr" ? "Konut Seçenekleri" :
+   language === "de" ? "Wohnmöglichkeiten" :
+   language === "ru" ? "Варианты жилья" :
+   language === "ar" ? "الخيارات السكنية" :
+   "Residential Options"}
+</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
             
 {homes.map((home) => (
@@ -882,14 +900,28 @@ alt={`${homes[selectedHome].name[
       <section style={{ textAlign: "center", padding: "75px 24px" }}>
         <h2 style={{ fontSize: 36 }}>Golden Life'ı Keşfedin</h2>
         <p style={{ maxWidth: 600, margin: "20px auto", lineHeight: 1.8 }}>
-          Proje hakkında detaylı bilgi ve konut seçenekleri için bizimle iletişime geçebilirsiniz.
+         {language === "tr"
+  ? "Proje hakkında detaylı bilgi ve konut seçenekleri için bizimle iletişime geçebilirsiniz."
+  : language === "de"
+  ? "Kontaktieren Sie uns für weitere Informationen über das Projekt und die verfügbaren Wohnmöglichkeiten."
+  : language === "ru"
+  ? "Свяжитесь с нами для получения подробной информации о проекте и доступных вариантах жилья."
+  : language === "ar"
+  ? "يمكنكم التواصل معنا للحصول على معلومات مفصلة حول المشروع والخيارات السكنية المتاحة."
+  : "Contact us for detailed information about the project and available residential options."}
         </p>
         <a href="/longevity" style={{ display: "inline-block", background: "#18382c", color: "white", padding: "16px 30px", borderRadius: 6, textDecoration: "none" }}>
           Longevity & Wellness
         </a>
       </section>
 <section style={{ textAlign: "center", padding: "60px 24px" }}>
-  <h2>Golden Life Hakkında Bilgi Alın</h2>
+ <h2>
+  {language === "tr" ? "Golden Life Hakkında Bilgi Alın" :
+   language === "de" ? "Mehr über Golden Life erfahren" :
+   language === "ru" ? "Узнайте больше о Golden Life" :
+   language === "ar" ? "تعرف على المزيد عن غولدن لايف" :
+   "Learn More About Golden Life"}
+</h2> 
   <button
     type="button"
     onClick={() => setContactOpen(true)}
@@ -903,7 +935,11 @@ alt={`${homes[selectedHome].name[
       cursor: "pointer",
     }}
   >
-    Bilgi Al / Satış Danışmanına Ulaş
+  {language === "tr" ? "Bilgi Al / Satış Danışmanına Ulaş" :
+ language === "de" ? "Informationen anfordern / Verkaufsberater kontaktieren" :
+ language === "ru" ? "Получить информацию / Связаться с консультантом" :
+ language === "ar" ? "طلب معلومات / التواصل مع مستشار المبيعات" :
+ "Get Information / Contact a Sales Advisor"}
   </button>
 </section>
       <footer style={{ background: "#18382c", color: "white", padding: 30, textAlign: "center", fontSize: 13 }}>
@@ -988,23 +1024,102 @@ alt={`${homes[selectedHome].name[
         ✕
       </button>
 
-      <h2 style={{ color: "#18382c" }}>Golden Life – Bilgi Al</h2>
-      <p>Satış danışmanımızın sizinle iletişime geçmesi için formu doldurun.</p>
+     <h2 style={{ color: "#18382c" }}>
+  {language === "tr" ? "Golden Life Hakkında Bilgi Al" :
+   language === "de" ? "Informationen über Golden Life anfordern" :
+   language === "ru" ? "Получить информацию о Golden Life" :
+   language === "ar" ? "احصل على معلومات حول جولدن لايف" :
+   "Get Information About Golden Life"}
+</h2> 
+     <p>
+  {language === "tr"
+    ? "Satış danışmanımızın sizinle iletişime geçmesi için formu doldurun."
+    : language === "de"
+    ? "Füllen Sie das Formular aus, damit unser Verkaufsberater Sie kontaktieren kann."
+    : language === "ru"
+    ? "Заполните форму, чтобы наш консультант по продажам связался с вами."
+    : language === "ar"
+    ? "يرجى ملء النموذج ليتواصل معك مستشار المبيعات لدينا."
+    : "Fill out the form so our sales consultant can contact you."}
+</p> 
 
       <form onSubmit={handleLeadSubmit}>
-        <input required name="full_name" placeholder=" Adınız Soyadınızı" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
-        <input required type="tel" name="phone" placeholder="Telefon Numaranız" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
-        <input type="email" name="email" placeholder="E-posta Adresiniz" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input required name="full_name" placeholder="placeholder={
+  language === "tr" ? "Ad Soyad" :
+  language === "de" ? "Vor- und Nachname" :
+  language === "ru" ? "Имя и фамилия" :
+  language === "ar" ? "الاسم الكامل" :
+  "Full Name"
+}" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input required type="tel" name="phone" placeholder="placeholder={
+  language === "tr" ? "Telefon Numarası" :
+  language === "de" ? "Telefonnummer" :
+  language === "ru" ? "Номер телефона" :
+  language === "ar" ? "رقم الهاتف" :
+  "Phone Number"
+}" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+        <input type="email" name="email" placeholder="placeholder={
+  language === "tr" ? "E-posta Adresi" :
+  language === "de" ? "E-Mail-Adresse" :
+  language === "ru" ? "Адрес электронной почты" :
+  language === "ar" ? "البريد الإلكتروني" :
+  "Email Address"
+}" style={{ width: "100%", padding: 14, marginBottom: 12 }} />
 
-        <select required name="property_type" defaultValue="" style={{ width: "100%", padding: 14, marginBottom: 12 }}>
-          <option value="" disabled>İlgilendiğiniz Konut Tipi</option>
-          <option>1+0 Stüdyo Daire</option>
-          <option>1+1 Daire</option>
-          <option>2+1 Daire</option>
-          <option>2+1 Tek Kat Villa</option>
-        </select>
+       <select
+  required
+  name="property_type"
+  defaultValue=""
+  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+>
+  <option value="" disabled>
+    {language === "tr" ? "İlgilendiğiniz Konut Tipi" :
+     language === "de" ? "Gewünschter Immobilientyp" :
+     language === "ru" ? "Интересующий тип недвижимости" :
+     language === "ar" ? "نوع العقار الذي تهتم به" :
+     "Property Type You're Interested In"}
+  </option>
 
-        <textarea name="message" placeholder="Mesajınız" rows={3} style={{ width: "100%", padding: 14, marginBottom: 12 }} />
+  <option value="1+0 Stüdyo Daire">
+    {language === "tr" ? "1+0 Stüdyo Daire" :
+     language === "de" ? "1+0 Studio-Apartment" :
+     language === "ru" ? "1+0 Квартира-студия" :
+     language === "ar" ? "استوديو 1+0" :
+     "1+0 Studio Apartment"}
+  </option>
+
+  <option value="1+1 Daire">
+    {language === "tr" ? "1+1 Daire" :
+     language === "de" ? "1+1 Wohnung" :
+     language === "ru" ? "1+1 Квартира" :
+     language === "ar" ? "شقة 1+1" :
+     "1+1 Apartment"}
+  </option>
+
+  <option value="2+1 Daire">
+    {language === "tr" ? "2+1 Daire" :
+     language === "de" ? "2+1 Wohnung" :
+     language === "ru" ? "2+1 Квартира" :
+     language === "ar" ? "شقة 2+1" :
+     "2+1 Apartment"}
+  </option>
+
+  <option value="2+1 Tek Kat Villa">
+    {language === "tr" ? "2+1 Tek Kat Villa" :
+     language === "de" ? "2+1 Einstöckige Villa" :
+     language === "ru" ? "2+1 Одноэтажная вилла" :
+     language === "ar" ? "فيلا من طابق واحد 2+1" :
+     "2+1 Single-Storey Villa"}
+  </option>
+</select> 
+
+        <textarea name="message" placeholder="placeholder={
+  language === "tr" ? "Mesajınız (İsteğe Bağlı)" :
+  language === "de" ? "Ihre Nachricht (Optional)" :
+  language === "ru" ? "Ваше сообщение (необязательно)" :
+  language === "ar" ? "رسالتك (اختياري)" :
+  "Your Message (Optional)"
+}" rows={3} style={{ width: "100%", padding: 14, marginBottom: 12 }} />
 
         <button
           type="submit"
@@ -1018,7 +1133,11 @@ alt={`${homes[selectedHome].name[
             fontSize: 17,
           }}
         >
-          Başvuru Gönder
+          {language === "tr" ? "Başvuru Gönder" :
+ language === "de" ? "Anfrage senden" :
+ language === "ru" ? "Отправить заявку" :
+ language === "ar" ? "إرسال الطلب" :
+ "Submit Application"}
         </button>
       </form>
     </div>
