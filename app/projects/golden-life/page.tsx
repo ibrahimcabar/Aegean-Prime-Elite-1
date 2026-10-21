@@ -742,6 +742,15 @@ style={{
       inceleyin.
     </p>
 
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))",
+    gap: 32,
+    alignItems: "start",
+  }}
+>
+
 <div style={{ marginTop: 32, marginBottom: 32 }}>
   <img
     src="/golden-life/06F8BE84-97ED-4220-8DFB-15A567A84222.png"
@@ -774,7 +783,7 @@ style={{
         gridTemplateColumns:
           "repeat(auto-fit, minmax(240px, 1fr))",
         gap: 20,
-        marginTop: 36,
+        marginTop: 32,
       }}
     >
       {[
@@ -809,6 +818,7 @@ style={{
         </div>
       ))}
     </div>
+  </div>
 
     <div
       style={{
