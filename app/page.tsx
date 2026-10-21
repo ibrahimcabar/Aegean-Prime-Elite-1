@@ -187,7 +187,36 @@ return <><header className="header"><a href="#top" className="brand"><span class
     </a>
   </div>
 </section>
-<section className="section listings" id="properties"><div className="section-heading"><div><div className="kicker">THE COLLECTION</div><h2>Explore remarkable <em>places.</em></h2><p>Explore our illustrative preview listings. Verified live properties will appear here after launch.</p></div><span className="count">{filtered.length} preview properties</span></div><div className="property-grid">{filtered.map(p=><article
+<section className="section listings" id="properties"><div className="section-heading"><div><div className="kicker">
+  {language === "tr" ? "GAYRİMENKUL KOLEKSİYONU" :
+   language === "de" ? "IMMOBILIENKOLLEKTION" :
+   language === "ru" ? "КОЛЛЕКЦИЯ НЕДВИЖИМОСТИ" :
+   language === "ar" ? "مجموعة العقارات" :
+   "THE COLLECTION"}
+</div><h2>
+  {language === "tr" ? <>Olağanüstü <em>gayrimenkulleri keşfedin.</em></> :
+   language === "de" ? <>Entdecken Sie außergewöhnliche <em>Immobilien.</em></> :
+   language === "ru" ? <>Откройте для себя уникальную <em>недвижимость.</em></> :
+   language === "ar" ? <>اكتشف <em>عقارات استثنائية.</em></> :
+   <>Explore remarkable <em>places.</em></>}
+</h2><p>
+  {language === "tr"
+    ? "Örnek gayrimenkul ilanlarımızı keşfedin. Doğrulanmış gerçek ilanlar yayına alındıkça burada görüntülenecektir."
+    : language === "de"
+    ? "Entdecken Sie unsere Beispielimmobilien. Verifizierte Immobilienangebote werden nach der Veröffentlichung hier angezeigt."
+    : language === "ru"
+    ? "Ознакомьтесь с нашими примерами объектов недвижимости. Проверенные объявления появятся здесь после публикации."
+    : language === "ar"
+    ? "استكشف قوائمنا العقارية التجريبية. ستظهر العقارات الحقيقية الموثقة هنا بعد إطلاقها."
+    : "Explore our illustrative preview listings. Verified live properties will appear here after launch."}
+</p></div><span className="count">
+  {filtered.length}{" "}
+  {language === "tr" ? "örnek gayrimenkul" :
+   language === "de" ? "Beispielimmobilien" :
+   language === "ru" ? "примеров недвижимости" :
+   language === "ar" ? "عقارات تجريبية" :
+   "preview properties"}
+</span></div><div className="property-grid">{filtered.map(p=><article
   className="property"
   key={p.id}
   onClick={() => {
