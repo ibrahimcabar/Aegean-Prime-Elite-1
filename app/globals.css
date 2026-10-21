@@ -336,3 +336,59 @@
     transition: none;
   }
 }
+
+/* GOLDEN LIFE - PREMIUM SHOWCASE */
+
+.golden-life-showcase {
+  position: relative;
+  overflow: hidden;
+  background: #f7f5f0 !important;
+}
+
+.golden-life-showcase > div {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px !important;
+  box-shadow: 0 30px 80px rgba(15, 35, 26, 0.22) !important;
+}
+
+.golden-life-showcase h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 5px;
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.golden-life-showcase img {
+  width: 100%;
+  border-radius: 16px !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  transition: transform 0.6s ease;
+}
+
+@media (hover: hover) {
+  .golden-life-showcase img:hover {
+    transform: scale(1.015);
+  }
+}
+
+@media (max-width: 700px) {
+  .golden-life-showcase {
+    padding: 45px 12px !important;
+  }
+
+  .golden-life-showcase > div {
+    padding: 38px 18px !important;
+  }
+
+  .golden-life-showcase h2 {
+    font-size: clamp(34px, 8vw, 48px) !important;
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .golden-life-showcase img {
+    transition: none;
+  }
+}
