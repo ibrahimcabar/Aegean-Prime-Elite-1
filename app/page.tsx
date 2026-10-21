@@ -11,6 +11,14 @@ export default function Home(){
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
 const [dbProperties,setDbProperties]=useState<any[]>([]);
   const [language, setLanguage] = useState("en");
+  useEffect(() => {
+  const savedLanguage = localStorage.getItem("aegean-language");
+  if (savedLanguage && ["en", "tr", "de", "ru", "ar"].includes(savedLanguage)) {
+    setLanguage(savedLanguage);
+  }
+}, []);
+
+
  const translations = {
   en: ["Properties", "For Partners", "Pricing", "About"],
   tr: ["Gayrimenkuller", "İş Ortaklarımız", "Fiyatlandırma", "Hakkımızda"],
@@ -27,7 +35,11 @@ function send(){if(!message.trim())return;const m=message.trim();setMessages(old
 return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">{t[0]}</a><a href="#how"></a>{t[1]}<a href="#packages">{t[2]}</a><a href="#about">{t[3]}</a></nav><div className="header-actions"><select
   aria-label="Select language"
   value={language}
-  onChange={(e) => setLanguage(e.target.value)}
+  onChange={(e) => {
+  const selectedLanguage = e.target.value;
+  localStorage.setItem("aegean-language", selectedLanguage);
+  setLanguage(selectedLanguage);
+}}
   style={{
     padding: "9px",
     borderRadius: "8px",
