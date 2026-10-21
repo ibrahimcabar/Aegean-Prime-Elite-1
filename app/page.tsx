@@ -117,11 +117,13 @@ return <><header className="header"><a href="#top" className="brand"><span class
  language === "ru" ? "МИР ВОЗМОЖНОСТЕЙ" :
  language === "ar" ? "عالم من الفرص" :
  "A WORLD OF OPPORTUNITY"}</span><span>01 / 04</span></div></div></section>
-<section style={{
+
+<section className="golden-life-showcase" style={{
   padding: "65px 20px",
   background: "#f8f7f4",
   textAlign: "center"
 }}>
+
   <div style={{
     maxWidth: 1100,
     margin: "auto",
