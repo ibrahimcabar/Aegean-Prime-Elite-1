@@ -392,3 +392,23 @@
     transition: none;
   }
 }
+
+/* PREMIUM PROPERTY PHOTO EFFECT */
+
+.property-photo {
+  position: relative;
+  background-repeat: no-repeat;
+  transition: filter 0.4s ease;
+}
+
+@media (hover: hover) {
+  .property:hover .property-photo {
+    filter: brightness(1.07) saturate(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .property-photo {
+    transition: none;
+  }
+}
