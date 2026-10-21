@@ -263,3 +263,76 @@
     top: 76px;
   }
 }
+
+/* AEGEAN PRIME ELITE - LUXURY PROPERTY CARDS */
+
+.property-grid {
+  gap: 26px;
+}
+
+.property {
+  border: 1px solid #e9e3d8;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 12px 35px rgba(25, 40, 32, 0.06);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.property-photo {
+  height: 265px;
+  overflow: hidden;
+  transition: background-size 0.4s ease;
+}
+
+.property::before {
+  content: "";
+  display: none;
+}
+
+.property-details {
+  padding: 24px;
+}
+
+.property h3 {
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.property-footer strong {
+  font-size: 19px;
+  color: #18382c;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(185, 154, 98, 0.35);
+  border-radius: 5px;
+  color: #18382c;
+  font-weight: 600;
+}
+
+@media (hover: hover) {
+  .property:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 55px rgba(25, 40, 32, 0.14);
+  }
+}
+
+@media (max-width: 700px) {
+  .property-grid {
+    gap: 22px;
+  }
+
+  .property-photo {
+    height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .property {
+    transition: none;
+  }
+}
