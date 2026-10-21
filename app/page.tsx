@@ -224,7 +224,39 @@ return <><header className="header"><a href="#top" className="brand"><span class
   }}
   style={{ cursor: p.isLive ? "pointer" : "default" }}
 ><div className="property-photo" style={{backgroundImage:`url('${p.image}')`}}><span className="pill">{p.type}</span></div><div className="property-details"><div className="location"><MapPin size={13}/>{p.city}, {p.country}</div><h3>{p.title}</h3><div className="property-meta"><span><BedDouble size={16}/>{p.beds} beds</span><span><Ruler size={16}/>{p.area} m²</span></div><div className="property-footer"><strong>{new Intl.NumberFormat('tr-TR',{style:'currency',currency:('currency' in p && typeof p.currency==='string' ? p.currency : 'EUR'),maximumFractionDigits:0}).format(p.price)}</strong><span>Preview listing</span></div></div></article>)}</div>{filtered.length===0&&<div className="empty">No preview properties match this search. Live global listings will be available as partners join.</div>}</section>
-<section className="partner" id="how"><div><div className="kicker light">GROW WITH US</div><h2>Your portfolio.<br/><em>A global audience.</em></h2><p>For real estate agents, developers and agencies: create your professional profile, choose a listing plan, and reach international buyers.</p><a className="gold-btn" href="#packages">Explore partner plans <ArrowUpRight size={17}/></a></div><div className="partner-steps">{[['01','Create your account'],['02','Choose a listing package'],['03','Submit your properties'],['04','Connect with global buyers']].map(([n,t])=><div key={n}><span>{n}</span><strong>{t}</strong><Check size={18}/></div>)}</div></section>
+<section className="partner" id="how"><div><div className="kicker light">
+  {language === "tr" ? "BİZİMLE BÜYÜYÜN" :
+   language === "de" ? "WACHSEN SIE MIT UNS" :
+   language === "ru" ? "РАСТИТЕ ВМЕСТЕ С НАМИ" :
+   language === "ar" ? "انمُ معنا" :
+   "GROW WITH US"}
+</div><h2>
+  {language === "tr" ? <>Portföyünüz.<br/><em>Küresel bir müşteri kitlesi.</em></> :
+   language === "de" ? <>Ihr Portfolio.<br/><em>Ein globales Publikum.</em></> :
+   language === "ru" ? <>Ваше портфолио.<br/><em>Клиенты со всего мира.</em></> :
+   language === "ar" ? <>محفظتك العقارية.<br/><em>عملاء من جميع أنحاء العالم.</em></> :
+   <>Your portfolio.<br/><em>A global audience.</em></>}
+</h2><p>
+  {language === "tr"
+    ? "Emlak danışmanları, inşaat firmaları ve gayrimenkul ofisleri için: Profesyonel profilinizi oluşturun, ilan paketinizi seçin ve uluslararası alıcılara ulaşın."
+    : language === "de"
+    ? "Für Immobilienmakler, Bauträger und Agenturen: Erstellen Sie Ihr professionelles Profil, wählen Sie ein Anzeigenpaket und erreichen Sie internationale Käufer."
+    : language === "ru"
+    ? "Для риелторов, застройщиков и агентств: создайте профессиональный профиль, выберите пакет объявлений и привлекайте международных покупателей."
+    : language === "ar"
+    ? "للوكلاء العقاريين والمطورين والشركات: أنشئ ملفك المهني، واختر باقة الإعلانات المناسبة، وتواصل مع المشترين الدوليين."
+    : "For real estate agents, developers and agencies: create your professional profile, choose a listing plan, and reach international buyers."}
+</p><a className="gold-btn" href="#packages">{language === "tr" ? "İş Ortaklığı Paketlerini İncele" :
+ language === "de" ? "Partnerpakete entdecken" :
+ language === "ru" ? "Посмотреть партнёрские пакеты" :
+ language === "ar" ? "استكشف باقات الشراكة" :
+ "Explore partner plans"}
+<ArrowUpRight size={17}/></a></div><div className="partner-steps">{[
+  ['01', language === 'tr' ? 'Hesabınızı oluşturun' : language === 'de' ? 'Erstellen Sie Ihr Konto' : language === 'ru' ? 'Создайте аккаунт' : language === 'ar' ? 'أنشئ حسابك' : 'Create your account'],
+  ['02', language === 'tr' ? 'İlan paketinizi seçin' : language === 'de' ? 'Wählen Sie ein Anzeigenpaket' : language === 'ru' ? 'Выберите пакет объявлений' : language === 'ar' ? 'اختر باقة الإعلانات' : 'Choose a listing package'],
+  ['03', language === 'tr' ? 'Gayrimenkullerinizi ekleyin' : language === 'de' ? 'Fügen Sie Ihre Immobilien hinzu' : language === 'ru' ? 'Добавьте свои объекты' : language === 'ar' ? 'أضف عقاراتك' : 'Submit your properties'],
+  ['04', language === 'tr' ? 'Uluslararası alıcılara ulaşın' : language === 'de' ? 'Erreichen Sie internationale Käufer' : language === 'ru' ? 'Привлекайте международных покупателей' : language === 'ar' ? 'تواصل مع المشترين الدوليين' : 'Connect with global buyers']
+].map(([n,t])=><div key={n}><span>{n}</span><strong>{t}</strong><Check size={18}/></div>)}</div></section>
 <section className="section pricing" id="packages"><div className="center"><div className="kicker">FOR REAL ESTATE PROFESSIONALS</div><h2>Simple plans. <em>Global reach.</em></h2><p>Illustrative monthly pricing. Payment and subscriptions are not yet active.</p></div><div className="pricing-grid">{packages.map((p,i)=><div className={'plan '+(i===1?'featured':'')} key={p.name}><div className="plan-top"><span>{p.name}</span>{i===1&&<span className="popular">POPULAR</span>}</div><div className="price">€{p.price}<small> / month</small></div><p>Up to {p.count} active property listings</p><div className="plan-rule"/>{['Professional agency profile','Property listing management','International visibility','Buyer enquiry access'].map(x=><div className="plan-benefit" key={x}><Check size={16}/>{x}</div>)}<button onClick={()=>alert('Partner registration is planned for the next development phase. No payment is being collected.')}>Coming soon <ArrowUpRight size={16}/></button></div>)}</div></section>
 <section className="trust" id="about"><ShieldCheck size={28}/><div><h2>Built on trust. Designed for the world.</h2><p>We are building a multilingual marketplace with partner verification, transparent listings and intelligent property discovery.</p></div></section></main><footer><div className="footer-brand">AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>© {new Date().getFullYear()} Aegean Prime Elite. Preview website.</span><span>Global real estate, reimagined.</span></footer>
 <button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Aegean AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}</>}
