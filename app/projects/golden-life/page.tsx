@@ -5,20 +5,84 @@ import { useEffect, useState } from "react";
 
 const features = [
   {
-    title: "Sağlık ve Rehabilitasyon",
-    description: "Hekim muayene alanları, hemşirelik birimleri, fizik tedavi, rehabilitasyon ve hidroterapi için planlanan tesisler.",
+   
+title: {
+  tr: "Sağlık ve Rehabilitasyon",
+  en: "Health & Rehabilitation",
+  de: "Gesundheit & Rehabilitation",
+  ru: "Здоровье и реабилитация",
+  ar: "الصحة وإعادة التأهيل"
+},
+ 
+    
+description: {
+  tr: "Hekim muayene alanları, hemşirelik birimleri, fizik tedavi, rehabilitasyon ve hidroterapi için planlanan tesisler.",
+  en: "Facilities planned for medical examination areas, nursing units, physiotherapy, rehabilitation, and hydrotherapy.",
+  de: "Geplante Einrichtungen für ärztliche Untersuchungen, Pflegebereiche, Physiotherapie, Rehabilitation und Hydrotherapie.",
+  ru: "Планируемые помещения для врачебных осмотров, сестринского ухода, физиотерапии, реабилитации и гидротерапии.",
+  ar: "مرافق مخطط لها تشمل عيادات الفحص الطبي ووحدات التمريض والعلاج الطبيعي وإعادة التأهيل والعلاج المائي."
+},
+
   },
   {
-    title: "Longevity & Wellness",
-    description: "Kişisel sağlıklı yaşam programları, beslenme danışmanlığı, egzersiz, yoga, meditasyon ve spa deneyimleri.",
+    
+title: {
+  tr: "Uzun Ömür ve Sağlıklı Yaşam",
+  en: "Longevity & Wellness",
+  de: "Langlebigkeit & Wohlbefinden",
+  ru: "Долголетие и благополучие",
+  ar: "طول العمر والعافية"
+},
+
+   
+description: {
+  tr: "Kişisel sağlıklı yaşam programları, beslenme danışmanlığı, egzersiz, yoga, meditasyon ve spa deneyimleri.",
+  en: "Personalized wellness programs, nutritional counseling, exercise, yoga, meditation, and spa experiences.",
+  de: "Individuelle Gesundheitsprogramme, Ernährungsberatung, Bewegung, Yoga, Meditation und Spa-Erlebnisse.",
+  ru: "Индивидуальные оздоровительные программы, консультации по питанию, физические упражнения, йога, медитация и спа-процедуры.",
+  ar: "برامج العافية الشخصية، والاستشارات الغذائية، والتمارين الرياضية، واليوغا، والتأمل، وتجارب السبا."
+},
+ 
   },
   {
-    title: "Sosyal Yaşam",
-    description: "Restoranlar, kafeler, sanat atölyeleri, hobi bahçeleri, spor alanları ve sosyal etkinlik mekanları.",
+    
+title: {
+  tr: "Sosyal Yaşam",
+  en: "Social Life",
+  de: "Soziales Leben",
+  ru: "Социальная жизнь",
+  ar: "الحياة الاجتماعية"
+},
+
+    
+description: {
+  tr: "Restoranlar, kafeler, sanat atölyeleri, hobi bahçeleri, spor alanları ve sosyal etkinlik mekanları.",
+  en: "Restaurants, cafés, art workshops, hobby gardens, sports facilities, and social event venues.",
+  de: "Restaurants, Cafés, Kunstwerkstätten, Hobbygärten, Sportanlagen und Veranstaltungsräume für soziale Aktivitäten.",
+  ru: "Рестораны, кафе, художественные мастерские, любительские сады, спортивные площадки и пространства для общественных мероприятий.",
+  ar: "مطاعم ومقاهٍ وورش فنية وحدائق للهوايات ومرافق رياضية ومساحات للفعاليات الاجتماعية."
+},
+
   },
   {
-    title: "Doğayla Bütünleşen Mimari",
-    description: "Yeşil alanlar, yürüyüş yolları, peyzaj düzenlemeleri ve doğayla uyumlu yaşam alanları.",
+   
+title: {
+  tr: "Doğayla Bütünleşen Mimari",
+  en: "Architecture in Harmony with Nature",
+  de: "Architektur im Einklang mit der Natur",
+  ru: "Архитектура в гармонии с природой",
+  ar: "هندسة معمارية متناغمة مع الطبيعة"
+},
+ 
+    
+description: {
+  tr: "Yeşil alanlar, yürüyüş yolları, peyzaj düzenlemeleri ve doğayla uyumlu yaşam alanları.",
+  en: "Green spaces, walking paths, landscaped gardens, and living areas designed in harmony with nature.",
+  de: "Grünflächen, Spazierwege, Landschaftsgärten und naturnah gestaltete Wohnbereiche.",
+  ru: "Зелёные зоны, прогулочные дорожки, ландшафтные сады и жилые пространства в гармонии с природой.",
+  ar: "مساحات خضراء وممرات للمشي وحدائق منسقة ومساحات معيشية مصممة بانسجام مع الطبيعة."
+},
+
   },
 ];
 
@@ -221,7 +285,17 @@ fontSize: "clamp(32px, 6vw, 110px)",
   overflowWrap: "break-word",
   margin: "15px auto"
 }}>  
-    Doğanın Kalbinde Ayrıcalıklı Bir Yaşam
+   
+{language === "tr"
+  ? "Doğanın Kalbinde Ayrıcalıklı Bir Yaşam"
+  : language === "de"
+  ? "Exklusives Leben im Herzen der Natur"
+  : language === "ru"
+  ? "Привилегированная жизнь в сердце природы"
+  : language === "ar"
+  ? "حياة استثنائية في قلب الطبيعة"
+  : "Exclusive Living in the Heart of Nature"}
+ 
   </p>
 </div>
   <button
@@ -243,10 +317,30 @@ fontSize: "clamp(32px, 6vw, 110px)",
         <h1 style={{ fontSize: "clamp(44px, 8vw, 78px)", margin: "25px 0" }}>GOLDEN LIFE</h1>
         <p style={{ color: "#d6bd88", letterSpacing: 3 }}>KAYADİBİ / KARAÖZ · ANTALYA</p>
         <p style={{ maxWidth: 650, margin: "30px auto", lineHeight: 1.9, fontSize: 18 }}>
-          Doğanın kalbinde sağlıklı yaşam, konfor ve sosyal deneyimleri bir araya getiren özel bir yaşam projesi.
+          
+{language === "tr"
+  ? "Doğanın kalbinde sağlıklı yaşam, konfor ve sosyal deneyimleri bir araya getiren özel bir yaşam projesi."
+  : language === "de"
+  ? "Ein exklusives Wohnprojekt im Herzen der Natur, das gesundes Leben, Komfort und soziale Erlebnisse vereint."
+  : language === "ru"
+  ? "Уникальный жилой проект в окружении природы, объединяющий здоровый образ жизни, комфорт и возможности для общения."
+  : language === "ar"
+  ? "مشروع سكني مميز في قلب الطبيعة يجمع بين الحياة الصحية والراحة والتجارب الاجتماعية."
+  : "An exclusive residential project in the heart of nature, combining healthy living, comfort, and social experiences."}
+
         </p>
         <a href="#homes" style={{ display: "inline-block", background: "#c8ad75", color: "#18382c", padding: "16px 30px", borderRadius: 6, textDecoration: "none" }}>
-          Konutları Keşfet
+         
+{language === "tr"
+  ? "Konutları Keşfet"
+  : language === "de"
+  ? "Wohnungen entdecken"
+  : language === "ru"
+  ? "Посмотреть недвижимость"
+  : language === "ar"
+  ? "اكتشف الوحدات السكنية"
+  : "Explore Residences"}
+ 
         </a>
       </section>
 
@@ -260,9 +354,19 @@ fontSize: "clamp(32px, 6vw, 110px)",
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
           {features.map((item) => (
-            <article key={item.title} style={{ background: "white", borderRadius: 14, padding: 28 }}>
-              <h3>{item.title}</h3>
-              <p style={{ lineHeight: 1.8, color: "#65736b" }}>{item.description}</p>
+            <article key={item.title.tr} style={{ background: "white", borderRadius: 14, padding: 28 }}>
+              
+<h3>
+  {typeof item.title === "string"
+    ? item.title
+    : item.title[language as keyof typeof item.title] ?? item.title.tr}
+</h3>
+
+              <p style={{ lineHeight: 1.8, color: "#65736b" }}>
+{typeof item.description === "string"
+  ? item.description
+  : item.description[language as keyof typeof item.description] ?? item.description.tr}
+</p>
             </article>
           ))}
         </div>
