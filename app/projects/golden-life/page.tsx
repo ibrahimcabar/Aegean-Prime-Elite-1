@@ -89,36 +89,100 @@ description: {
 
 const homes = [
   {
-    name: "1+0 Stüdyo Daire",
+    
+name: {
+  tr: "1+0 Stüdyo Daire",
+  en: "Studio Apartment",
+  de: "Studio-Apartment",
+  ru: "Квартира-студия",
+  ar: "شقة استوديو"
+},
+
     image: "/golden-life/IMG_3833.png",
     area: 45,
     price: 50000,
     monthly: 1388.89,
-    description: "Açık yaşam düzeni ve fonksiyonel konut planı.",
+    
+description: {
+  tr: "Açık yaşam düzeni ve fonksiyonel konut planı.",
+  en: "Open-plan living space with a functional residential layout.",
+  de: "Offener Wohnbereich mit einem funktionalen Grundriss.",
+  ru: "Открытая планировка жилого пространства с функциональным дизайном.",
+  ar: "مساحة معيشة مفتوحة مع تصميم سكني عملي."
+},
+
   },
   {
-    name: "1+1 Daire",
+    
+name: {
+  tr: "1+1 Daire",
+  en: "1+1 Apartment",
+  de: "1+1 Wohnung",
+  ru: "Квартира 1+1",
+  ar: "شقة 1+1"
+},
+
     image: "/golden-life/IMG_3834.png",
     area: 55,
     price: 60000,
     monthly: 1666.67,
-    description: "Ayrı yatak odası, salon, açık mutfak ve balkon.",
+    
+description: {
+  tr: "Ayrı yatak odası, salon, açık mutfak ve balkon.",
+  en: "Separate bedroom, living room, open-plan kitchen, and balcony.",
+  de: "Separates Schlafzimmer, Wohnzimmer, offene Küche und Balkon.",
+  ru: "Отдельная спальня, гостиная, кухня открытой планировки и балкон.",
+  ar: "غرفة نوم منفصلة وغرفة معيشة ومطبخ مفتوح وشرفة."
+},
+
   },
   {
-    name: "2+1 Daire",
+    
+name: {
+  tr: "2+1 Daire",
+  en: "2+1 Apartment",
+  de: "2+1 Wohnung",
+  ru: "Квартира 2+1",
+  ar: "شقة 2+1"
+},
+
     image: "/golden-life/IMG_3835.png",
     area: 70,
     price: 90000,
     monthly: 2500,
-    description: "İki yatak odalı, konforlu yaşam düzeni.",
+    
+description: {
+  tr: "İki yatak odalı, konforlu yaşam düzeni.",
+  en: "Comfortable living layout with two bedrooms.",
+  de: "Komfortabler Wohnbereich mit zwei Schlafzimmern.",
+  ru: "Комфортная планировка с двумя спальнями.",
+  ar: "تصميم سكني مريح يضم غرفتي نوم."
+},
+
   },
   {
-    name: "2+1 Tek Kat Villa",
+    
+name: {
+  tr: "2+1 Tek Kat Villa",
+  en: "2+1 Single-Storey Villa",
+  de: "2+1 Einstöckige Villa",
+  ru: "Одноэтажная вилла 2+1",
+  ar: "فيلا من طابق واحد 2+1"
+},
+
     image: "/golden-life/IMG_3836.png",
     area: 125,
     price: 220000,
     monthly: 6111.11,
-    description: "Özel bahçe, teras ve havuz alanı.",
+    
+description: {
+  tr: "Özel bahçe, teras ve havuz alanı.",
+  en: "Private garden, terrace, and swimming pool area.",
+  de: "Privater Garten, Terrasse und Poolbereich.",
+  ru: "Частный сад, терраса и зона бассейна.",
+  ar: "حديقة خاصة وتراس ومنطقة مسبح."
+},
+
   },
 ];
 
@@ -379,7 +443,9 @@ fontSize: "clamp(32px, 6vw, 110px)",
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
             
 {homes.map((home) => (
- <article key={home.name} 
+ <article 
+key={typeof home.name === "string" ? home.name : home.name.tr}
+
 style={{
   background: "white",
   borderRadius: 18,
@@ -401,7 +467,11 @@ style={{
     letterSpacing: 0.5,
   }}
 >
-  {home.name}
+
+{typeof home.name === "string"
+  ? home.name
+  : home.name[language as keyof typeof home.name] ?? home.name.tr}
+  
 </h3>
     <button
   type="button"
@@ -418,12 +488,28 @@ style={{
     width: "100%",
   }}
 >
-  ⛶ Mimari Planı İncele
+  
+{language === "tr" ? "Mimari Planı İncele" :
+ language === "de" ? "Grundriss ansehen" :
+ language === "ru" ? "Посмотреть планировку" :
+ language === "ar" ? "عرض المخطط المعماري" :
+ "View Floor Plan"}
+
 </button>
     <img
     onClick={() => setSelectedPlan(home.image)}  
   src={home.image}
-  alt={`${home.name} Mimari Kat Planı`}
+  
+alt={`${typeof home.name === "string"
+  ? home.name
+  : home.name[language as keyof typeof home.name] ?? home.name.tr} ${
+  language === "tr" ? "Mimari Kat Planı" :
+  language === "de" ? "Architektonischer Grundriss" :
+  language === "ru" ? "Архитектурный план" :
+  language === "ar" ? "المخطط المعماري" :
+  "Architectural Floor Plan"
+}`}
+
   style={{
     width: "100%",
     height: 320,
@@ -435,11 +521,21 @@ style={{
 />
 
     <p style={{ color: "#65736b" }}>
-      Brüt Alan: {home.area} m²
+      
+{language === "tr" ? "Brüt Alan" :
+ language === "de" ? "Bruttofläche" :
+ language === "ru" ? "Общая площадь" :
+ language === "ar" ? "المساحة الإجمالية" :
+ "Gross Area"}: {home.area} m²
+
     </p>
 
     <p style={{ lineHeight: 1.8, color: "#65736b" }}>
-      {home.description}
+      
+{typeof home.description === "string"
+  ? home.description
+  : home.description[language as keyof typeof home.description] ?? home.description.tr}
+
     </p>
 
     <div
@@ -450,7 +546,13 @@ style={{
       }}
     >
       <p style={{ color: "#65736b" }}>
-        Toplam Konut Bedeli
+        
+{language === "tr" ? "Toplam Konut Bedeli" :
+ language === "de" ? "Gesamtkaufpreis" :
+ language === "ru" ? "Полная стоимость жилья" :
+ language === "ar" ? "السعر الإجمالي للعقار" :
+ "Total Property Price"}
+
       </p>
 
       <h3 style={{
@@ -464,7 +566,13 @@ style={{
       </h3>
 
       <p style={{ color: "#65736b" }}>
-        36 Ay Ödeme Planı
+        
+{language === "tr" ? "36 Ay Ödeme Planı" :
+ language === "de" ? "36-Monats-Zahlungsplan" :
+ language === "ru" ? "План оплаты на 36 месяцев" :
+ language === "ar" ? "خطة الدفع على 36 شهراً" :
+ "36-Month Payment Plan"}
+
       </p>
 
       <h4 style={{
@@ -477,7 +585,13 @@ style={{
         {home.monthly.toLocaleString("de-DE", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
-        })} € / Ay
+        })} 
+€ / {language === "tr" ? "Ay" :
+     language === "de" ? "Monat" :
+     language === "ru" ? "мес." :
+     language === "ar" ? "شهر" :
+     "Month"}
+
       </h4>
     </div>
   </article>
@@ -500,11 +614,27 @@ style={{
       fontSize: "clamp(30px, 4vw, 48px)",
       color: "#18382c"
     }}>
-      İnteraktif Konut Seçimi
+      
+{language === "tr" ? "İnteraktif Konut Seçimi" :
+ language === "de" ? "Interaktive Wohnungsauswahl" :
+ language === "ru" ? "Интерактивный выбор жилья" :
+ language === "ar" ? "اختيار الوحدة السكنية التفاعلي" :
+ "Interactive Residence Selection"}
+
     </h2>
 
     <p style={{ color: "#65736b" }}>
-      Size uygun konutu seçin, ödeme planınızı inceleyin.
+      
+{language === "tr"
+  ? "Size uygun konutu seçin, ödeme planınızı inceleyin."
+  : language === "de"
+  ? "Wählen Sie Ihre passende Immobilie und prüfen Sie Ihren Zahlungsplan."
+  : language === "ru"
+  ? "Выберите подходящее жильё и ознакомьтесь с планом оплаты."
+  : language === "ar"
+  ? "اختر الوحدة السكنية المناسبة لك واطلع على خطة الدفع."
+  : "Choose your ideal residence and review your payment plan."}
+
     </p>
 
     <div style={{
@@ -516,7 +646,9 @@ style={{
     }}>
       {homes.map((home, index) => (
         <button
-          key={home.name}
+          
+key={index}
+
           type="button"
           onClick={() => setSelectedHome(index)}
           style={{
@@ -529,7 +661,11 @@ style={{
             fontWeight: 700
           }}
         >
-          {home.name}
+          
+{typeof home.name === "string"
+  ? home.name
+  : home.name[language as keyof typeof home.name] ?? home.name.tr}
+
         </button>
       ))}
     </div>
@@ -542,11 +678,27 @@ style={{
       boxShadow: "0 12px 35px rgba(24,56,44,0.10)"
     }}>
       <h3 style={{ color: "#18382c", fontSize: 28 }}>
-        {homes[selectedHome].name}
+      
+{typeof homes[selectedHome].name === "string"
+  ? homes[selectedHome].name
+  : homes[selectedHome].name[
+      language as keyof typeof homes[number]["name"]
+    ] ?? homes[selectedHome].name.tr}
+
       </h3>
 <img
   src={homes[selectedHome].image}
-  alt={`${homes[selectedHome].name} Mimari Planı`}
+ 
+alt={`${homes[selectedHome].name[
+  language as keyof typeof homes[number]["name"]
+] ?? homes[selectedHome].name.tr} ${
+  language === "tr" ? "Mimari Planı" :
+  language === "de" ? "Architektonischer Grundriss" :
+  language === "ru" ? "Архитектурный план" :
+  language === "ar" ? "المخطط المعماري" :
+  "Architectural Floor Plan"
+}`}
+ 
   onClick={() => setSelectedPlan(homes[selectedHome].image)}
   style={{
     width: "100%",
@@ -562,19 +714,40 @@ style={{
     border: "1px solid #e9e0ce"
   }}
 />
-      <p>Brüt Alan: {homes[selectedHome].area} m²</p>
-
+     
+<p>
+  {language === "tr" ? "Brüt Alan" :
+   language === "de" ? "Bruttofläche" :
+   language === "ru" ? "Общая площадь" :
+   language === "ar" ? "المساحة الإجمالية" :
+   "Gross Area"}: {homes[selectedHome].area} m²
+</p>
+ 
       <h2 style={{ color: "#18382c", fontSize: 36 }}>
         {homes[selectedHome].price.toLocaleString("de-DE")} €
       </h2>
 
-      <p>36 Aylık Ödeme Planı</p>
+      
+<p>
+  {language === "tr" ? "36 Aylık Ödeme Planı" :
+   language === "de" ? "36-Monats-Zahlungsplan" :
+   language === "ru" ? "План оплаты на 36 месяцев" :
+   language === "ar" ? "خطة الدفع على 36 شهرًا" :
+   "36-Month Payment Plan"}
+</p>
+
 
       <h3 style={{ color: "#b99a60", fontSize: 30 }}>
         {homes[selectedHome].monthly.toLocaleString("de-DE", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
-        })} € / Ay
+        })} € 
+/ {language === "tr" ? "Ay" :
+   language === "de" ? "Monat" :
+   language === "ru" ? "мес." :
+   language === "ar" ? "شهر" :
+   "Month"}
+
       </h3>
     </div>
   </div>
