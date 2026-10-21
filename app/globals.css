@@ -204,3 +204,62 @@
     font-size: 14px;
   }
 }
+
+/* AEGEAN PRIME ELITE - MOBILE PREMIUM HEADER */
+
+@media (max-width: 700px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 12px;
+    height: 76px;
+  }
+
+  .brand {
+    flex: 1;
+    min-width: 0;
+    gap: 7px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-symbol {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    font-size: 25px;
+  }
+
+  .brand small {
+    font-size: 6px;
+    letter-spacing: 1.4px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 8px;
+  }
+
+  .header-actions select {
+    width: 115px;
+    max-width: 115px;
+    padding: 8px 4px !important;
+    font-size: 12px;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: #18382c;
+  }
+
+  .nav {
+    top: 76px;
+  }
+}
