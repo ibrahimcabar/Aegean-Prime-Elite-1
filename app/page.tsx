@@ -55,7 +55,68 @@ return <><header className="header"><a href="#top" className="brand"><span class
   <option value="ru">🇷🇺 Русский</option>
   <option value="ar">🇸🇦 العربية</option>
 </select><a className="outline-btn" href="/ilan-ekle">List a Property <ArrowUpRight size={15}/></a><button className="menu" aria-label="Toggle menu" onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></header>
-<main id="top"><section className="hero"><div className="hero-image"/><div className="hero-overlay"/><div className="hero-content"><div className="eyebrow">THE WORLD IS YOUR ADDRESS <span/></div><h1>Extraordinary properties.<br/><em>Without borders.</em></h1><p>Discover exceptional homes and investment opportunities across the globe, curated in one seamless destination.</p><div className="search-panel"><div className="search-input"><MapPin size={20}/><input aria-label="Search location" value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&submit()} placeholder="Search city, country or street (e.g. Berlin Hauptstraße)"/></div><select aria-label="Property type" value={kind} onChange={e=>setKind(e.target.value)}><option>All types</option><option>Apartment</option><option>Villa</option></select><button onClick={submit}><Search size={18}/> Explore</button></div><div className="hero-bottom"><span><Globe2 size={17}/> A WORLD OF OPPORTUNITY</span><span>01 / 04</span></div></div></section>
+<main id="top"><section className="hero"><div className="hero-image"/><div className="hero-overlay"/><div className="hero-content"><div className="eyebrow">
+  {language === "tr" ? "DÜNYA SİZİN ADRESİNİZ" :
+   language === "de" ? "DIE WELT IST IHRE ADRESSE" :
+   language === "ru" ? "ВЕСЬ МИР — ВАШ АДРЕС" :
+   language === "ar" ? "العالم هو عنوانك" :
+   "THE WORLD IS YOUR ADDRESS"}
+  <span/>
+</div><h1>
+  {language === "tr" ? <>Olağanüstü gayrimenkuller.<br/><em>Sınırların ötesinde.</em></> :
+   language === "de" ? <>Außergewöhnliche Immobilien.<br/><em>Grenzenlos.</em></> :
+   language === "ru" ? <>Исключительная недвижимость.<br/><em>Без границ.</em></> :
+   language === "ar" ? <>عقارات استثنائية.<br/><em>بلا حدود.</em></> :
+   <>Extraordinary properties.<br/><em>Without borders.</em></>}
+</h1><p>
+  {language === "tr"
+    ? "Dünyanın dört bir yanındaki seçkin konutları ve yatırım fırsatlarını tek bir platformda keşfedin."
+    : language === "de"
+    ? "Entdecken Sie exklusive Immobilien und Investitionsmöglichkeiten aus aller Welt auf einer einzigen Plattform."
+    : language === "ru"
+    ? "Откройте для себя эксклюзивную недвижимость и инвестиционные возможности по всему миру на одной платформе."
+    : language === "ar"
+    ? "اكتشف العقارات الفاخرة والفرص الاستثمارية حول العالم في منصة واحدة."
+    : "Discover exceptional homes and investment opportunities across the globe, curated in one seamless destination."}
+</p><div className="search-panel"><div className="search-input"><MapPin size={20}/><input aria-label="Search location" value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&submit()} placeholder={
+  language === "tr" ? "Şehir, ülke veya sokak ara (örn. Berlin Hauptstraße)" :
+  language === "de" ? "Stadt, Land oder Straße suchen (z. B. Berlin Hauptstraße)" :
+  language === "ru" ? "Поиск по городу, стране или улице" :
+  language === "ar" ? "ابحث عن مدينة أو دولة أو شارع" :
+  "Search city, country or street (e.g. Berlin Hauptstraße)"
+}/></div><select aria-label="Property type" value={kind} onChange={e=>setKind(e.target.value)}><option value="All types">
+  {language === "tr" ? "Tüm Türler" :
+   language === "de" ? "Alle Typen" :
+   language === "ru" ? "Все типы" :
+   language === "ar" ? "جميع الأنواع" :
+   "All types"}
+</option>
+<option value="Apartment">
+  {language === "tr" ? "Daire" :
+   language === "de" ? "Wohnung" :
+   language === "ru" ? "Квартира" :
+   language === "ar" ? "شقة" :
+   "Apartment"}
+</option>
+<option value="Villa">
+  {language === "tr" ? "Villa" :
+   language === "de" ? "Villa" :
+   language === "ru" ? "Вилла" :
+   language === "ar" ? "فيلا" :
+   "Villa"}
+</option></select><button onClick={submit}>
+  <Search size={18}/>
+  {language === "tr" ? "Keşfet" :
+   language === "de" ? "Entdecken" :
+   language === "ru" ? "Исследовать" :
+   language === "ar" ? "استكشف" :
+   "Explore"}
+</button></div><div className="hero-bottom"><span><Globe2 size={17}/>
+{language === "tr" ? "FIRSATLARLA DOLU BİR DÜNYA" :
+ language === "de" ? "EINE WELT VOLLER MÖGLICHKEITEN" :
+ language === "ru" ? "МИР ВОЗМОЖНОСТЕЙ" :
+ language === "ar" ? "عالم من الفرص" :
+ "A WORLD OF OPPORTUNITY"}</span><span>01 / 04</span></div></div></section>
 <section style={{
   padding: "65px 20px",
   background: "#f8f7f4",
