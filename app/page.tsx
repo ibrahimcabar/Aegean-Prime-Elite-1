@@ -328,5 +328,34 @@ return <><header className="header"><a href="#top" className="brand"><span class
  language === "ar" ? "قريباً" :
  "Coming soon"}
 <ArrowUpRight size={16}/></button></div>)}</div></section>
-<section className="trust" id="about"><ShieldCheck size={28}/><div><h2>Built on trust. Designed for the world.</h2><p>We are building a multilingual marketplace with partner verification, transparent listings and intelligent property discovery.</p></div></section></main><footer><div className="footer-brand">AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>© {new Date().getFullYear()} Aegean Prime Elite. Preview website.</span><span>Global real estate, reimagined.</span></footer>
+<section className="trust" id="about"><ShieldCheck size={28}/><div><h2>
+  {language === "tr" ? "Güven üzerine kuruldu. Dünya için tasarlandı." :
+   language === "de" ? "Auf Vertrauen aufgebaut. Für die Welt entwickelt." :
+   language === "ru" ? "Основано на доверии. Создано для всего мира." :
+   language === "ar" ? "مبني على الثقة. مصمم للعالم." :
+   "Built on trust. Designed for the world."}
+</h2><p>
+  {language === "tr"
+    ? "İş ortağı doğrulaması, şeffaf gayrimenkul ilanları ve akıllı gayrimenkul arama özellikleriyle çok dilli, uluslararası bir emlak platformu oluşturuyoruz."
+    : language === "de"
+    ? "Wir entwickeln eine mehrsprachige Immobilienplattform mit verifizierten Partnern, transparenten Angeboten und intelligenter Immobiliensuche."
+    : language === "ru"
+    ? "Мы создаём многоязычную платформу недвижимости с проверкой партнёров, прозрачными объявлениями и интеллектуальным поиском объектов."
+    : language === "ar"
+    ? "نحن نطور منصة عقارية متعددة اللغات مع التحقق من الشركاء وإعلانات شفافة وبحث ذكي عن العقارات."
+    : "We are building a multilingual marketplace with partner verification, transparent listings and intelligent property discovery."}
+</p></div></section></main><footer><div className="footer-brand">AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>
+  © {new Date().getFullYear()} Aegean Prime Elite.{" "}
+  {language === "tr" ? "Ön izleme sitesi." :
+   language === "de" ? "Vorschau-Website." :
+   language === "ru" ? "Предварительная версия сайта." :
+   language === "ar" ? "نسخة تجريبية من الموقع." :
+   "Preview website."}
+</span><span>
+  {language === "tr" ? "Küresel gayrimenkule yeni bir bakış." :
+   language === "de" ? "Globale Immobilien neu gedacht." :
+   language === "ru" ? "Новый взгляд на мировую недвижимость." :
+   language === "ar" ? "رؤية جديدة للعقارات العالمية." :
+   "Global real estate, reimagined."}
+</span></footer>
 <button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Aegean AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}</>}
