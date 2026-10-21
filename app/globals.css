@@ -82,3 +82,66 @@
     letter-spacing: -1px;
   }
 }
+
+/* AEGEAN PRIME ELITE - PREMIUM HEADER */
+
+.header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(185, 154, 98, 0.25);
+  box-shadow: 0 8px 35px rgba(24, 56, 44, 0.06);
+}
+
+.brand {
+  transition: opacity 0.3s ease;
+}
+
+.brand:hover {
+  opacity: 0.75;
+}
+
+.brand-symbol {
+  border-color: #b99a62;
+  box-shadow: 0 0 0 4px rgba(185, 154, 98, 0.07);
+}
+
+.nav a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -9px;
+  width: 0;
+  height: 1px;
+  background: #b99a62;
+  transition: width 0.3s ease;
+}
+
+@media (hover: hover) {
+  .nav a:hover::after {
+    width: 100%;
+  }
+}
+
+.outline-btn {
+  border-radius: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .outline-btn:hover {
+    background: #18382c;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav a::after {
+    display: none;
+  }
+}
