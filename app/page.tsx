@@ -11,11 +11,20 @@ export default function Home(){
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
 const [dbProperties,setDbProperties]=useState<any[]>([]);
   const [language, setLanguage] = useState("en");
+ const translations = {
+  en: ["Properties", "For Partners", "Pricing", "About"],
+  tr: ["Gayrimenkuller", "İş Ortaklarımız", "Fiyatlandırma", "Hakkımızda"],
+  de: ["Immobilien", "Für Partner", "Preise", "Über uns"],
+  ru: ["Недвижимость", "Партнёрам", "Цены", "О нас"],
+  ar: ["العقارات", "للشركاء", "الأسعار", "من نحن"]
+};
+
+const t = translations[language as keyof typeof translations]; 
 useEffect(()=>{supabase.from('properties').select('*').then(({data,error})=>{if(error){console.error('Supabase:',error);return;}setDbProperties(data||[]);});},[]);
 const filtered=useMemo(()=>[...properties,...dbProperties.map(p=>({...p,type:p.property_type==='villa'?'Villa':p.property_type==='apartment'?'Apartment':p.property_type,area:Number(p.area_sqm)||0,beds:p.beds??0,isLive:true,image:p.image||'',price:Number(p.price)||0,currency:p.currency||'TRY',address:p.street_address||''}))].filter(p=>(!search||[p.city,p.country,p.address,p.title].join(' ').toLowerCase().includes(search.toLowerCase()))&&(kind==='All types'||p.type===kind)),[search,kind,dbProperties]);
 function submit(){setSearch(query);document.getElementById('properties')?.scrollIntoView({behavior:'smooth'})}
 function send(){if(!message.trim())return;const m=message.trim();setMessages(old=>[...old,{who:'user',text:m},{who:'bot',text:'Thanks! This is a preview assistant. Live AI recommendations will be available after connecting our property database and AI service.'}]);setMessage('')}
-return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">Properties</a><a href="#how">For Partners</a><a href="#packages">Pricing</a><a href="#about">About</a></nav><div className="header-actions"><select
+return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">{t[0]}</a><a href="#how"></a>{t[1]}<a href="#packages">{t[2]}</a><a href="#about">{t[3]}</a></nav><div className="header-actions"><select
   aria-label="Select language"
   value={language}
   onChange={(e) => setLanguage(e.target.value)}
