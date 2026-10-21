@@ -145,3 +145,62 @@
     display: none;
   }
 }
+
+/* AEGEAN PRIME ELITE - CINEMATIC HERO */
+
+.hero {
+  min-height: min(850px, 95svh);
+  background: #101b17;
+}
+
+.hero-image {
+  filter: saturate(0.9) contrast(1.08);
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(9, 22, 18, 0.88) 0%,
+      rgba(9, 22, 18, 0.55) 48%,
+      rgba(9, 22, 18, 0.18) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(9, 22, 18, 0.48),
+      transparent 38%
+    );
+}
+
+.hero-content {
+  padding-top: 100px;
+  padding-bottom: 55px;
+}
+
+.hero h1 {
+  max-width: 950px;
+  font-size: clamp(44px, 5.5vw, 86px);
+}
+
+.hero-content > p {
+  max-width: 610px;
+  font-size: 16px;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: 690px;
+  }
+
+  .hero-content {
+    padding: 65px 6% 25px;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 9vw, 48px);
+  }
+
+  .hero-content > p {
+    font-size: 14px;
+  }
+}
