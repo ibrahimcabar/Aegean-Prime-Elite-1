@@ -96,10 +96,20 @@ if (whatsappToken && whatsappPhoneId && whatsappRecipient) {
           to: whatsappRecipient,
           type: "template",
           template: {
-            name: "hello_world",
-            language: { code: "en_US" },
-          },
-        }),
+  name: "golden_life_yeni_basvuru",
+  language: { code: "tr" },
+  components: [
+    {
+      type: "body",
+      parameters: [
+        { type: "text", text: full_name },
+        { type: "text", text: phone },
+        { type: "text", text: email || "Belirtilmedi" },
+        { type: "text", text: property_type },
+      ],
+    },
+  ],
+},
       }
     );
 
