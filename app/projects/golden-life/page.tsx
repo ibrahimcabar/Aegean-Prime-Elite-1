@@ -802,7 +802,13 @@ alt={`${homes[selectedHome].name[
       GOLDEN LIFE
     </p>
     <h2 style={{ textAlign: "center", color: "#18382c", fontSize: 34, marginBottom: 40 }}>
-      Projenin Öne Çıkan Özellikleri
+      
+{language === "tr" ? "Projenin Öne Çıkan Özellikleri" :
+ language === "de" ? "Die Highlights des Projekts" :
+ language === "ru" ? "Ключевые особенности проекта" :
+ language === "ar" ? "أبرز مميزات المشروع" :
+ "Project Highlights"}
+
     </h2>
     <div style={{
       display: "grid",
@@ -810,9 +816,52 @@ alt={`${homes[selectedHome].name[
       gap: 22
     }}>
       {[
-        ["01", "Antalya'da Doğayla İç İçe", "Kayadibi / Karaöz konumunda doğayla bütünleşen bir yaşam konsepti."],
-        ["02", "Modern Mimari", "Estetik ve işlevselliği bir araya getirmeyi hedefleyen mimari yaklaşım."],
-        ["03", "Farklı Konut Seçenekleri", "Stüdyo dairelerden tek katlı villalara uzanan konut alternatifleri."]
+       
+[
+  "01",
+  language === "tr" ? "Antalya'da Doğayla İç İçe" :
+  language === "de" ? "Naturverbundenes Leben in Antalya" :
+  language === "ru" ? "Жизнь в гармонии с природой Антальи" :
+  language === "ar" ? "حياة وسط الطبيعة في أنطاليا" :
+  "Living Close to Nature in Antalya",
+  language === "tr" ? "Kayadibi / Karaöz bölgesinde doğayla bütünleşen yaşam alanları." :
+  language === "de" ? "Naturnahe Wohnräume in der Region Kayadibi / Karaöz." :
+  language === "ru" ? "Жилые пространства в гармонии с природой в районе Каядиби / Караоз." :
+  language === "ar" ? "مساحات سكنية متناغمة مع الطبيعة في منطقة كاياديبي / كاراأوز." :
+  "Nature-inspired living spaces in the Kayadibi / Karaöz area."
+],
+
+        
+[
+  "02",
+  language === "tr" ? "Modern Mimari" :
+  language === "de" ? "Moderne Architektur" :
+  language === "ru" ? "Современная архитектура" :
+  language === "ar" ? "الهندسة المعمارية الحديثة" :
+  "Modern Architecture",
+  language === "tr" ? "Estetik ve işlevselliği bir araya getiren modern mimari anlayışı." :
+  language === "de" ? "Moderne Architektur, die Ästhetik und Funktionalität vereint." :
+  language === "ru" ? "Современная архитектура, сочетающая эстетику и функциональность." :
+  language === "ar" ? "تصميم معماري حديث يجمع بين الجمال والوظائف العملية." :
+  "Modern architectural design combining aesthetics and functionality."
+],
+
+       
+[
+  "03",
+  language === "tr" ? "Farklı Konut Seçenekleri" :
+  language === "de" ? "Vielfältige Wohnmöglichkeiten" :
+  language === "ru" ? "Разнообразные варианты жилья" :
+  language === "ar" ? "خيارات سكنية متنوعة" :
+  "Diverse Housing Options",
+
+  language === "tr" ? "Stüdyo dairelerden villalara kadar farklı yaşam seçenekleri." :
+  language === "de" ? "Verschiedene Wohnmöglichkeiten von Studio-Apartments bis hin zu Villen." :
+  language === "ru" ? "Различные варианты жилья от квартир-студий до вилл." :
+  language === "ar" ? "خيارات سكنية متنوعة من شقق الاستوديو إلى الفلل." :
+  "A variety of living options, from studio apartments to villas."
+],
+ 
       ].map(([number, title, description]) => (
         <article key={number} style={{
           background: "#ffffff",
