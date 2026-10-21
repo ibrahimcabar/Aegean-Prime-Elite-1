@@ -898,7 +898,13 @@ alt={`${homes[selectedHome].name[
 </section>
 
       <section style={{ textAlign: "center", padding: "75px 24px" }}>
-        <h2 style={{ fontSize: 36 }}>Golden Life'ı Keşfedin</h2>
+        <h2 style={{ fontSize: 36 }}>
+  {language === "tr" ? "Golden Life'ı Keşfedin" :
+   language === "de" ? "Golden Life entdecken" :
+   language === "ru" ? "Откройте для себя Golden Life" :
+   language === "ar" ? "اكتشف غولدن لايف" :
+   "Discover Golden Life"}
+</h2>
         <p style={{ maxWidth: 600, margin: "20px auto", lineHeight: 1.8 }}>
          {language === "tr"
   ? "Proje hakkında detaylı bilgi ve konut seçenekleri için bizimle iletişime geçebilirsiniz."
@@ -1260,13 +1266,24 @@ alt={`${homes[selectedHome].name[
     </p>
 
     <h2 style={{ fontSize: "clamp(30px, 5vw, 52px)" }}>
-      Proje Konumu ve Tapu Bilgileri
+      {language === "tr" ? "Proje Konumu ve Tapu Bilgileri" :
+ language === "de" ? "Projektstandort und Grundbuchinformationen" :
+ language === "ru" ? "Расположение проекта и кадастровые данные" :
+ language === "ar" ? "موقع المشروع ومعلومات سند الملكية" :
+ "Project Location and Land Registry Information"}
     </h2>
 
-    <p style={{ color: "#cbd5e1", lineHeight: 1.8 }}>
-      Golden Life projesinin konum ve parsel bilgilerini
-      inceleyin.
-    </p>
+<p style={{ color: "#cbd5e1", lineHeight: 1.8 }}>
+  {language === "tr"
+    ? "Golden Life projesinin konum ve parsel bilgilerini inceleyin."
+    : language === "de"
+    ? "Entdecken Sie den Standort und die Grundstücksdaten des Golden Life Projekts."
+    : language === "ru"
+    ? "Ознакомьтесь с расположением и кадастровыми данными проекта Golden Life."
+    : language === "ar"
+    ? "اطلع على موقع مشروع غولدن لايف ومعلومات قطعة الأرض."
+    : "Explore the location and land parcel details of the Golden Life project."}
+</p>    
 
 <div
   style={{
@@ -1297,9 +1314,15 @@ alt={`${homes[selectedHome].name[
       lineHeight: 1.7,
     }}
   >
-    Temsili arazi görselleştirmesidir. Kesin parsel
-    sınırları ve resmî bilgiler için TKGM Parsel
-    Sorgu sistemi esas alınmalıdır.
+    {language === "tr"
+  ? "Temsili arazi görselleştirmesidir. Kesin parsel sınırları ve resmî bilgiler için TKGM Parsel Sorgu sistemi esas alınmalıdır."
+  : language === "de"
+  ? "Dies ist eine illustrative Grundstücksdarstellung. Für genaue Grundstücksgrenzen und amtliche Angaben sind die Daten des türkischen Katasteramts (TKGM) maßgeblich."
+  : language === "ru"
+  ? "Это иллюстративное изображение участка. Точные границы и официальные сведения необходимо проверять через кадастровую систему TKGM."
+  : language === "ar"
+  ? "هذا تصوير توضيحي للأرض. يجب الرجوع إلى نظام الاستعلام عن قطع الأراضي الرسمي TKGM للتحقق من الحدود والمعلومات الرسمية."
+  : "This is an illustrative visualization of the land. Exact parcel boundaries and official information must be verified through the TKGM Land Parcel Inquiry system."}
   </p>
 </div>
 
@@ -1313,13 +1336,53 @@ alt={`${homes[selectedHome].name[
       }}
     >
       {[
-        ["İL", "Antalya"],
-        ["İLÇE", "Aksu"],
-        ["MAHALLE / MEVKİ", "Kayadibi"],
-        ["ADA NUMARASI", "102"],
-        ["PARSEL NUMARASI", "1"],
-      ["TAPU ALANI", "124.246 m² (124,25 dönüm)"],
-      ].map(([label, value]) => (
+  [
+    language === "tr" ? "İL" :
+    language === "de" ? "PROVINZ" :
+    language === "ru" ? "ПРОВИНЦИЯ" :
+    language === "ar" ? "المحافظة" : "PROVINCE",
+    "Antalya"
+  ],
+  [
+    language === "tr" ? "İLÇE" :
+    language === "de" ? "BEZIRK" :
+    language === "ru" ? "РАЙОН" :
+    language === "ar" ? "المنطقة" : "DISTRICT",
+    "Aksu"
+  ],
+  [
+    language === "tr" ? "MAHALLE / MEVKİ" :
+    language === "de" ? "ORTSTEIL / LAGE" :
+    language === "ru" ? "РАЙОН / МЕСТНОСТЬ" :
+    language === "ar" ? "الحي / الموقع" : "NEIGHBORHOOD / LOCATION",
+    "Kayadibi"
+  ],
+  [
+    language === "tr" ? "ADA NUMARASI" :
+    language === "de" ? "BLOCKNUMMER" :
+    language === "ru" ? "НОМЕР КВАРТАЛА" :
+    language === "ar" ? "رقم المربع" : "BLOCK NUMBER",
+    "102"
+  ],
+  [
+    language === "tr" ? "PARSEL NUMARASI" :
+    language === "de" ? "FLURSTÜCKNUMMER" :
+    language === "ru" ? "НОМЕР УЧАСТКА" :
+    language === "ar" ? "رقم القطعة" : "PARCEL NUMBER",
+    "1"
+  ],
+  [
+    language === "tr" ? "TAPU ALANI" :
+    language === "de" ? "GRUNDBUCHFLÄCHE" :
+    language === "ru" ? "ПЛОЩАДЬ УЧАСТКА" :
+    language === "ar" ? "مساحة الأرض المسجلة" : "REGISTERED LAND AREA",
+    language === "tr" ? "124.246 m² (124,25 dönüm)" :
+language === "de" ? "124.246 m² (12,42 Hektar)" :
+language === "ru" ? "124 246 м² (12,42 га)" :
+language === "ar" ? "124,246 م² (12.42 هكتار)" :
+"124,246 m² (12.42 hectares)"
+  ],
+].map(([label, value]) => (
         <div
           key={label}
           style={{
@@ -1366,8 +1429,15 @@ alt={`${homes[selectedHome].name[
     </div>
 
     <p style={{ color: "#aeb8c2", fontSize: 13 }}>
-      Harita bölgeyi göstermektedir. Kesin parsel
-      sınırları için resmî kayıtlar esas alınmalıdır.
+      {language === "tr"
+  ? "Harita bölgeyi göstermektedir. Kesin parsel sınırları için resmî kayıtlar esas alınmalıdır."
+  : language === "de"
+  ? "Die Karte zeigt die Region. Für die genauen Grundstücksgrenzen sind die amtlichen Katasterunterlagen maßgeblich."
+  : language === "ru"
+  ? "Карта показывает район расположения. Точные границы участка определяются официальными кадастровыми документами."
+  : language === "ar"
+  ? "تُظهر الخريطة المنطقة المحيطة. ويجب الرجوع إلى السجلات الرسمية لتحديد الحدود الدقيقة لقطعة الأرض."
+  : "The map shows the surrounding area. Official cadastral records must be consulted for exact parcel boundaries."}
     </p>
 
     <a
@@ -1385,7 +1455,11 @@ alt={`${homes[selectedHome].name[
         textDecoration: "none",
       }}
     >
-      Resmî Ada / Parsel Sorgulama ↗
+      {language === "tr" ? "Resmî Ada / Parsel Sorgulama ↗" :
+ language === "de" ? "Offizielle Grundstücksabfrage ↗" :
+ language === "ru" ? "Официальная проверка участка ↗" :
+ language === "ar" ? "الاستعلام الرسمي عن قطعة الأرض ↗" :
+ "Official Land Parcel Inquiry ↗"}
     </a>
   </div>
 </section>
