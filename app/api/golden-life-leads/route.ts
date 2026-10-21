@@ -110,7 +110,6 @@ if (whatsappToken && whatsappPhoneId && whatsappRecipient) {
     },
   ],
 },
-      }
     );
 
     if (!whatsappResponse.ok) {
