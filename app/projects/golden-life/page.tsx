@@ -757,6 +757,7 @@ style={{
         ["MAHALLE / MEVKİ", "Kayadibi"],
         ["ADA NUMARASI", "102"],
         ["PARSEL NUMARASI", "1"],
+      ["TAPU ALANI", "124.246 m² (124,25 dönüm)"],
       ].map(([label, value]) => (
         <div
           key={label}
