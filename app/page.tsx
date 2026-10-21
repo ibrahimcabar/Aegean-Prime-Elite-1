@@ -137,7 +137,11 @@ return <><header className="header"><a href="#top" className="brand"><span class
       letterSpacing: 4,
       fontSize: 13
     }}>
-      AEGEAN PRIME ELITE • ÖZEL PROJE
+      {language === "tr" ? "AEGEAN PRIME ELITE • ÖZEL PROJE" :
+ language === "de" ? "AEGEAN PRIME ELITE • EXKLUSIVES PROJEKT" :
+ language === "ru" ? "AEGEAN PRIME ELITE • ОСОБЫЙ ПРОЕКТ" :
+ language === "ar" ? "AEGEAN PRIME ELITE • مشروع خاص" :
+ "AEGEAN PRIME ELITE • SPECIAL PROJECT"}
     </p>
 
     <h2 style={{
@@ -176,9 +180,15 @@ return <><header className="header"><a href="#top" className="brand"><span class
       maxWidth: 650,
       lineHeight: 1.8
     }}>
-      Doğanın kalbinde ayrıcalıklı bir yaşam.
-      Modern mimari, konforlu konutlar ve
-      gayrimenkul yatırım fırsatları.
+     {language === "tr"
+  ? "Doğanın kalbinde ayrıcalıklı bir yaşam. Modern mimari, konforlu konutlar ve gayrimenkul yatırım fırsatları."
+  : language === "de"
+  ? "Exklusives Wohnen im Herzen der Natur. Moderne Architektur, komfortable Immobilien und attraktive Investitionsmöglichkeiten."
+  : language === "ru"
+  ? "Привилегированная жизнь в окружении природы. Современная архитектура, комфортное жильё и возможности инвестиций в недвижимость."
+  : language === "ar"
+  ? "حياة مميزة في قلب الطبيعة. هندسة معمارية حديثة ومنازل مريحة وفرص استثمار عقاري."
+  : "Exclusive living in the heart of nature. Modern architecture, comfortable homes and real estate investment opportunities."} 
     </p>
 
     <div style={{
@@ -188,7 +198,16 @@ return <><header className="header"><a href="#top" className="brand"><span class
       gap: 15,
       margin: "30px 0"
     }}>
-      {["1+0 Stüdyo", "1+1 Daire", "2+1 Daire", "Villa"].map((item) => (
+      {(language === "tr"
+  ? ["1+0 Stüdyo", "1+1 Daire", "2+1 Daire", "Villa"]
+  : language === "de"
+  ? ["1+0 Studio", "1+1 Wohnung", "2+1 Wohnung", "Villa"]
+  : language === "ru"
+  ? ["1+0 Студия", "1+1 Квартира", "2+1 Квартира", "Вилла"]
+  : language === "ar"
+  ? ["استوديو 1+0", "شقة 1+1", "شقة 2+1", "فيلا"]
+  : ["1+0 Studio", "1+1 Apartment", "2+1 Apartment", "Villa"]
+).map((item) => (
         <span key={item} style={{
           padding: "10px 17px",
           border: "1px solid #b99a60",
@@ -210,7 +229,11 @@ return <><header className="header"><a href="#top" className="brand"><span class
       margin: "30px auto"
     }}>
       <p style={{ color: "#e8e8e2", fontSize: 16 }}>
-        Kooperatif Katılım Ücreti
+       {language === "tr" ? "Kooperatif Katılım Ücreti" :
+ language === "de" ? "Genossenschaftsbeitrittsgebühr" :
+ language === "ru" ? "Вступительный взнос в кооператив" :
+ language === "ar" ? "رسوم الانضمام إلى التعاونية" :
+ "Cooperative Membership Fee"} 
       </p>
 
       <h3 style={{
@@ -222,12 +245,20 @@ return <><header className="header"><a href="#top" className="brand"><span class
       </h3>
 
       <p style={{ color: "#e8e8e2", fontSize: 15 }}>
-        Konut fiyatları 50.000 €'dan başlıyor
+       {language === "tr" ? "Konut fiyatları 50.000 €'dan başlıyor" :
+ language === "de" ? "Immobilienpreise ab 50.000 €" :
+ language === "ru" ? "Цены на жильё от 50 000 €" :
+ language === "ar" ? "تبدأ أسعار العقارات من 50,000 يورو" :
+ "Property prices start from €50,000"} 
       </p>
     </div>
 
     <p style={{ color: "#d9bd82", fontSize: 16 }}>
-      36 Aylık Ödeme Planı
+     {language === "tr" ? "36 Aylık Ödeme Planı" :
+ language === "de" ? "36-Monats-Zahlungsplan" :
+ language === "ru" ? "План оплаты на 36 месяцев" :
+ language === "ar" ? "خطة سداد لمدة 36 شهرًا" :
+ "36-Month Payment Plan"} 
     </p>
 
     <a
@@ -244,7 +275,11 @@ return <><header className="header"><a href="#top" className="brand"><span class
         fontSize: 17
       }}
     >
-      GOLDEN LIFE'I KEŞFET →
+     {language === "tr" ? "GOLDEN LIFE'I KEŞFET →" :
+ language === "de" ? "GOLDEN LIFE ENTDECKEN →" :
+ language === "ru" ? "ОТКРОЙТЕ GOLDEN LIFE →" :
+ language === "ar" ? "اكتشف جولدن لايف ←" :
+ "EXPLORE GOLDEN LIFE →"} 
     </a>
   </div>
 </section>
