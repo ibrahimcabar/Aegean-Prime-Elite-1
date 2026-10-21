@@ -10,6 +10,7 @@ const supabase = createClient(
 export default function Home(){
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
 const [dbProperties,setDbProperties]=useState<any[]>([]);
+  const [language, setLanguage] = useState("en");
 useEffect(()=>{supabase.from('properties').select('*').then(({data,error})=>{if(error){console.error('Supabase:',error);return;}setDbProperties(data||[]);});},[]);
 const filtered=useMemo(()=>[...properties,...dbProperties.map(p=>({...p,type:p.property_type==='villa'?'Villa':p.property_type==='apartment'?'Apartment':p.property_type,area:Number(p.area_sqm)||0,beds:p.beds??0,isLive:true,image:p.image||'',price:Number(p.price)||0,currency:p.currency||'TRY',address:p.street_address||''}))].filter(p=>(!search||[p.city,p.country,p.address,p.title].join(' ').toLowerCase().includes(search.toLowerCase()))&&(kind==='All types'||p.type===kind)),[search,kind,dbProperties]);
 function submit(){setSearch(query);document.getElementById('properties')?.scrollIntoView({behavior:'smooth'})}
