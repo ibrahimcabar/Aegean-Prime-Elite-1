@@ -116,7 +116,7 @@ return <><header className="header"><a href="#top" className="brand"><span class
  language === "de" ? "EINE WELT VOLLER MÖGLICHKEITEN" :
  language === "ru" ? "МИР ВОЗМОЖНОСТЕЙ" :
  language === "ar" ? "عالم من الفرص" :
- "A WORLD OF OPPORTUNITY"}</span><span>01 / 04</span></div></div></section>
+ "A WORLD OF OPPORTUNITY"}</span></div></div></section>
 
 <section className="golden-life-showcase" style={{
   padding: "65px 20px",
