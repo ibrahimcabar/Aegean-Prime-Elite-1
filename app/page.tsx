@@ -243,7 +243,7 @@ return <><header className="header"><a href="#top" className="brand"><span class
         fontSize: "clamp(30px, 5vw, 44px)",
         margin: "10px 0"
       }}>
-        650.000 TL
+        600.000 TL
       </h3>
 
       <p style={{ color: "#e8e8e2", fontSize: 15 }}>
