@@ -1173,6 +1173,33 @@ alt={`${typeof home.name === "string"
   ? "هذا تصوير توضيحي للأرض. يجب الرجوع إلى نظام الاستعلام عن قطع الأراضي الرسمي TKGM للتحقق من الحدود والمعلومات الرسمية."
   : "This is an illustrative visualization of the land. Exact parcel boundaries and official information must be verified through the TKGM Land Parcel Inquiry system."}
   </p>
+  
+<a
+  href="https://parselsorgu.tkgm.gov.tr/"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    display: "inline-block",
+    marginTop: 20,
+    padding: "16px 28px",
+    background: "#d4af37",
+    color: "#101820",
+    borderRadius: 10,
+    fontWeight: 700,
+    textDecoration: "none",
+  }}
+>
+  {language === "tr"
+    ? "Resmî Ada / Parsel Sorgulama ↗"
+    : language === "de"
+    ? "Offizielle Grundstücksabfrage ↗"
+    : language === "ru"
+    ? "Официальная проверка участка ↗"
+    : language === "ar"
+    ? "الاستعلام الرسمي عن قطعة الأرض ↗"
+    : "Official Land Parcel Inquiry ↗"}
+</a>
+
 </div>
 
     <div
@@ -1291,27 +1318,7 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
   : "The map shows the surrounding area. Official cadastral records must be consulted for exact parcel boundaries."}
     </p>
 
-    <a
-      href="https://parselsorgu.tkgm.gov.tr/#ara/idari/134565/102/1/1792565213891"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: "inline-block",
-        marginTop: 20,
-        padding: "16px 28px",
-        background: "#d4af37",
-        color: "#101820",
-        borderRadius: 10,
-        fontWeight: 700,
-        textDecoration: "none",
-      }}
-    >
-      {language === "tr" ? "Resmî Ada / Parsel Sorgulama ↗" :
- language === "de" ? "Offizielle Grundstücksabfrage ↗" :
- language === "ru" ? "Официальная проверка участка ↗" :
- language === "ar" ? "الاستعلام الرسمي عن قطعة الأرض ↗" :
- "Official Land Parcel Inquiry ↗"}
-    </a>
+    
   </div>
 </section>
      
