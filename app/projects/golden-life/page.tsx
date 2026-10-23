@@ -480,7 +480,7 @@ fontSize: "clamp(32px, 6vw, 110px)",
         </div>
       </section>
 
-      <section id="homes" style={{ background: "#e9e8df", padding: "75px 24px" }}>
+      <section id="homes" style={{ background: "#f1ede4", padding: "75px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "auto" }}>
           <p style={{ color: "#94784a", letterSpacing: 3 }}>RESIDENCES</p>
           <h2 style={{ fontSize: 36 }}>
@@ -490,28 +490,28 @@ fontSize: "clamp(32px, 6vw, 110px)",
    language === "ar" ? "الخيارات السكنية" :
    "Residential Options"}
 </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: 20, marginTop: 35 }}>
             
 {homes.map((home) => (
  <article 
 key={typeof home.name === "string" ? home.name : home.name.tr}
 
 style={{
-  background: "white",
-  borderRadius: 18,
-  padding: 30,
-  border: "1px solid #d9c49a",
-  boxShadow: "0 12px 35px rgba(24,56,44,0.12)",
+  background: "#ffffff",
+  borderRadius: 22,
+  padding: 32,
+  border: "1px solid #c8ad75",
+  boxShadow: "0 15px 45px rgba(24,56,44,0.15)",
   transition: "all 0.3s ease",
   overflow: "hidden",
 }}  
   >
     <h3
   style={{
-    fontSize: 26,
+    fontSize: "clamp(24px, 2.5vw, 32px)",
     color: "#18382c",
     fontWeight: 700,
-    borderLeft: "4px solid #b99a60",
+    borderLeft: "5px solid #c8ad75",
     paddingLeft: 14,
     marginBottom: 20,
     letterSpacing: 0.5,
@@ -590,7 +590,7 @@ alt={`${typeof home.name === "string"
 
     <div
       style={{
-        borderTop: "1px solid #e9e8df",
+        borderTop: "2px solid #c8ad75",
         marginTop: 24,
         paddingTop: 20,
       }}
@@ -607,7 +607,7 @@ alt={`${typeof home.name === "string"
 
       <h3 style={{
   fontSize: "clamp(30px, 3vw, 42px)",
-  color: "#18382c",
+  color: "#a88646",
   fontWeight: 800,
   letterSpacing: "-1px",
   margin: "12px 0",
