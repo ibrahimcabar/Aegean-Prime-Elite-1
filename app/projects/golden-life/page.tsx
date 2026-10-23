@@ -763,15 +763,15 @@ alt={`${typeof home.name === "string"
  
       ].map(([number, title, description]) => (
         <article key={number} style={{
-          background: "#ffffff",
+          background: "#18382c",
           padding: 30,
           borderRadius: 16,
           border: "1px solid #e8e1d4",
           boxShadow: "0 8px 28px rgba(24,56,44,0.06)"
         }}>
           <span style={{ color: "#b99a60", fontSize: 28 }}>{number}</span>
-          <h3 style={{ color: "#18382c", fontSize: 22, marginTop: 18 }}>{title}</h3>
-          <p style={{ color: "#65736b", lineHeight: 1.8 }}>{description}</p>
+          <h3 style={{ color: color: "#ffffff" fontSize: 22, marginTop: 18 }}>{title}</h3>
+          <p style={{ color: "#e8e5dc", lineHeight: 1.8 }}>{description}</p>
         </article>
       ))}
     </div>
