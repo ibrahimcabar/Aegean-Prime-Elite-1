@@ -17,6 +17,39 @@ const [selectedCurrency, setSelectedCurrency] = useState('EUR');
 
 const [exchangeRates, setExchangeRates] = useState<Record<string, number> | null>(null);
 
+useEffect(() => {
+  const loadExchangeRates = async () => {
+    try {
+      const response = await fetch('/api/exchange-rates');
+
+      if (!response.ok) {
+        throw new Error('Exchange rates unavailable');
+      }
+
+      const data = await response.json();
+
+      if (
+        data.base !== 'EUR' ||
+        !['EUR', 'USD', 'TRY'].every(
+          currency =>
+            typeof data.rates?.[currency] === 'number' &&
+            Number.isFinite(data.rates[currency]) &&
+            data.rates[currency] > 0
+        )
+      ) {
+        throw new Error('Invalid exchange rates');
+      }
+
+      setExchangeRates(data.rates);
+    } catch (error) {
+      console.error('Exchange rate error:', error);
+      setExchangeRates(null);
+    }
+  };
+
+  loadExchangeRates();
+}, []);
+
 const [appliedMinPrice, setAppliedMinPrice] = useState('');
 const [appliedMaxPrice, setAppliedMaxPrice] = useState('');
 const [appliedCurrency, setAppliedCurrency] = useState('EUR');
@@ -41,6 +74,25 @@ const [dbProperties,setDbProperties]=useState<any[]>([]);
 
 const t = translations[language as keyof typeof translations]; 
 useEffect(()=>{supabase.from('properties').select('*').then(({data,error})=>{if(error){console.error('Supabase:',error);return;}setDbProperties(data||[]);});},[]);
+
+const convertPrice = (
+  price: number,
+  fromCurrency: string,
+  toCurrency: string
+): number | null => {
+  if (!Number.isFinite(price) || price < 0) return null;
+
+  if (fromCurrency === toCurrency) return price;
+
+  if (!exchangeRates) return null;
+
+  const fromRate = exchangeRates[fromCurrency];
+  const toRate = exchangeRates[toCurrency];
+
+  if (!fromRate || !toRate) return null;
+
+  return (price / fromRate) * toRate;
+};
 
 const filtered = useMemo(() => {
   const allProperties = [
@@ -77,16 +129,28 @@ const filtered = useMemo(() => {
     const hasPriceFilter =
       appliedMinPrice !== '' || appliedMaxPrice !== '';
 
-    const currencyMatch =
-      !hasPriceFilter || p.currency === appliedCurrency;
+    
+const convertedPrice = convertPrice(
+  price,
+  p.currency || 'TRY',
+  appliedCurrency
+);
 
-    const minMatch =
-      appliedMinPrice === '' ||
-      price >= Number(appliedMinPrice);
+const currencyMatch =
+  !hasPriceFilter || convertedPrice !== null;
 
-    const maxMatch =
-      appliedMaxPrice === '' ||
-      price <= Number(appliedMaxPrice);
+
+    
+const minMatch =
+  appliedMinPrice === '' ||
+  (convertedPrice !== null &&
+    convertedPrice >= Number(appliedMinPrice));
+
+const maxMatch =
+  appliedMaxPrice === '' ||
+  (convertedPrice !== null &&
+    convertedPrice <= Number(appliedMaxPrice));
+
 
     return (
       locationMatch &&
@@ -102,7 +166,10 @@ const filtered = useMemo(() => {
   dbProperties,
   appliedMinPrice,
   appliedMaxPrice,
-  appliedCurrency
+  
+appliedCurrency,
+exchangeRates
+
 ]);
 
 
