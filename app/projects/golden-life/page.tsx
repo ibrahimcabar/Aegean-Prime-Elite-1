@@ -770,7 +770,7 @@ alt={`${typeof home.name === "string"
           boxShadow: "0 8px 28px rgba(24,56,44,0.06)"
         }}>
           <span style={{ color: "#b99a60", fontSize: 28 }}>{number}</span>
-          <h3 style={{ color: color: "#ffffff" fontSize: 22, marginTop: 18 }}>{title}</h3>
+          <h3 style={{ color: "#ffffff", fontSize: 22, marginTop: 18 }}>{title}</h3>
           <p style={{ color: "#e8e5dc", lineHeight: 1.8 }}>{description}</p>
         </article>
       ))}
