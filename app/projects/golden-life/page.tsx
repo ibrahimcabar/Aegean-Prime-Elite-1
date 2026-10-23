@@ -1176,14 +1176,14 @@ alt={`${typeof home.name === "string"
 </div>
 
     <div
-      style={{
-        display: "grid",
-        gridTemplateColumns:
-          "repeat(auto-fit, minmax(240px, 1fr))",
-        gap: 20,
-        marginTop: 32,
-      }}
-    >
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: 20,
+    marginTop: 32,
+    alignContent: "start",
+  }}
+>
       {[
   [
     language === "tr" ? "İL" :
@@ -1255,7 +1255,6 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
           </div>
         </div>
       ))}
-      </div>
   <div
   style={{
     gridColumn: "2",
@@ -1276,7 +1275,7 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
   />
 </div>
 </div>
-
+</div>
   
 
     <p style={{ color: "#aeb8c2", fontSize: 13 }}>
