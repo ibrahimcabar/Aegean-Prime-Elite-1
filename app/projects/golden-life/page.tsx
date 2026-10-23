@@ -894,14 +894,17 @@ alt={`${typeof home.name === "string"
     <div
       onClick={(e) => e.stopPropagation()}
       style={{
-        background: "#ffffff",
-        borderRadius: 16,
-        padding: 28,
-        width: "100%",
-        maxWidth: 480,
-        maxHeight: "90vh",
-        overflowY: "auto",
-      }}
+  background: "#f8f6f0",
+  border: "2px solid #c8ad75",
+  borderRadius: 24,
+  padding: 32,
+  width: "100%",
+  maxWidth: 500,
+  maxHeight: "90vh",
+  overflowY: "auto",
+  boxShadow: "0 25px 80px rgba(0,0,0,0.35)",
+  boxSizing: "border-box",
+}}
     >
       <button
         type="button"
@@ -911,7 +914,15 @@ alt={`${typeof home.name === "string"
         ✕
       </button>
 
-     <h2 style={{ color: "#18382c" }}>
+     <h2 style={{
+  color: "#18382c",
+  fontSize: "clamp(24px, 4vw, 30px)",
+  fontWeight: 800,
+  letterSpacing: "-0.5px",
+  borderBottom: "2px solid #c8ad75",
+  paddingBottom: 16,
+  marginBottom: 18,
+}}>
   {language === "tr" ? "Golden Life Hakkında Bilgi Al" :
    language === "de" ? "Informationen über Golden Life anfordern" :
    language === "ru" ? "Получить информацию о Golden Life" :
@@ -942,7 +953,18 @@ alt={`${typeof home.name === "string"
     language === "ar" ? "الاسم الكامل" :
     "Full Name"
   }
-  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+  style={{
+  width: "100%",
+  padding: "16px 18px",
+  marginBottom: 14,
+  background: "#f8f6f0",
+  border: "1px solid #c8ad75",
+  borderRadius: 12,
+  fontSize: 15,
+  color: "#18382c",
+  outlineColor: "#b99a60",
+  boxSizing: "border-box",
+}}
 />
 
         
@@ -957,7 +979,18 @@ alt={`${typeof home.name === "string"
     language === "ar" ? "رقم الهاتف" :
     "Phone Number"
   }
-  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+style={{
+  width: "100%",
+  padding: "16px 18px",
+  marginBottom: 14,
+  background: "#f8f6f0",
+  border: "1px solid #c8ad75",
+  borderRadius: 12,
+  fontSize: 15,
+  color: "#18382c",
+  outlineColor: "#b99a60",
+  boxSizing: "border-box",
+}}
 />
 
         
@@ -971,7 +1004,18 @@ alt={`${typeof home.name === "string"
     language === "ar" ? "البريد الإلكتروني" :
     "Email Address"
   }
-  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+  style={{
+  width: "100%",
+  padding: "16px 18px",
+  marginBottom: 14,
+  background: "#f8f6f0",
+  border: "1px solid #c8ad75",
+  borderRadius: 12,
+  fontSize: 15,
+  color: "#18382c",
+  outlineColor: "#b99a60",
+  boxSizing: "border-box",
+}}
 />
 
 
@@ -979,7 +1023,19 @@ alt={`${typeof home.name === "string"
   required
   name="property_type"
   defaultValue=""
-  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+  style={{
+  width: "100%",
+  padding: "16px 18px",
+  marginBottom: 14,
+  background: "#f8f6f0",
+  border: "1px solid #c8ad75",
+  borderRadius: 12,
+  fontSize: 15,
+  color: "#18382c",
+  outlineColor: "#b99a60",
+  boxSizing: "border-box",
+  cursor: "pointer",
+}}
 >
   <option value="" disabled>
     {language === "tr" ? "İlgilendiğiniz Konut Tipi" :
@@ -1033,7 +1089,19 @@ alt={`${typeof home.name === "string"
     "Your Message (Optional)"
   }
   rows={3}
-  style={{ width: "100%", padding: 14, marginBottom: 12 }}
+  style={{
+  width: "100%",
+  padding: "16px 18px",
+  marginBottom: 14,
+  background: "#f8f6f0",
+  border: "1px solid #c8ad75",
+  borderRadius: 12,
+  fontSize: 15,
+  color: "#18382c",
+  outlineColor: "#b99a60",
+  boxSizing: "border-box",
+  resize: "vertical",
+}}
 />
 
 
@@ -1044,7 +1112,7 @@ alt={`${typeof home.name === "string"
             background: "#18382c",
             color: "#e8c985",
             padding: 16,
-            border: "none",
+            border: "1px solid #c8ad75",
             borderRadius: 10,
             fontSize: 17,
           }}
