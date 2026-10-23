@@ -452,17 +452,16 @@ fontSize: "clamp(32px, 6vw, 110px)",
 >
 
               
-<h3>
-  {typeof item.title === "string"
-    ? item.title
-    : item.title[language as keyof typeof item.title] ?? item.title.tr}
-
+  
 <h3 style={{
   color: "#e8c985",
   fontSize: 23,
   fontWeight: 700,
   marginBottom: 18
 }}>
+  {item.title[language as keyof typeof item.title] ?? item.title.tr}
+</h3>
+
 
 
              
@@ -472,9 +471,9 @@ fontSize: "clamp(32px, 6vw, 110px)",
   fontSize: 15
 }}>
  
-{typeof item.description === "string"
-  ? item.description
-  : item.description[language as keyof typeof item.description] ?? item.description.tr}
+
+{item.description[language as keyof typeof item.description] ?? item.description.tr}
+
 </p>
             </article>
           ))}
