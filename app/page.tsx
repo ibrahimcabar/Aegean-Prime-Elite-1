@@ -207,7 +207,14 @@ return <><header className="header"><a href="#top" className="brand"><span class
   <option value="de">🇩🇪 Deutsch</option>
   <option value="ru">🇷🇺 Русский</option>
   <option value="ar">🇸🇦 العربية</option>
-</select><a className="outline-btn" href="/ilan-ekle">List a Property <ArrowUpRight size={15}/></a><button className="menu" aria-label="Toggle menu" onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></header>
+</select><a className="outline-btn" href="/ilan-ekle">
+  {language === "tr" ? "İlan Ver" :
+   language === "de" ? "Immobilie inserieren" :
+   language === "ru" ? "Разместить объявление" :
+   language === "ar" ? "أضف عقارك" :
+   "List a Property"}
+  <ArrowUpRight size={15}/>
+</a><button className="menu" aria-label="Toggle menu" onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></header>
 <main id="top"><section className="hero"><div className="hero-image"/><div className="hero-overlay"/><div className="hero-content"><div className="eyebrow">
   {language === "tr" ? "DÜNYA SİZİN ADRESİNİZ" :
    language === "de" ? "DIE WELT IST IHRE ADRESSE" :
