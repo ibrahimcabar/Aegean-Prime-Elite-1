@@ -1137,7 +1137,7 @@ alt={`${typeof home.name === "string"
 <div
   style={{
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     gap: 32,
     alignItems: "start",
   }}
@@ -1255,10 +1255,10 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
           </div>
         </div>
       ))}
-    </div>
+      </div>
   <div
   style={{
-    gridColumn: "1 / -1",
+    gridColumn: "2",
     height: 280,
     borderRadius: 18,
     overflow: "hidden",
