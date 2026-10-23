@@ -1286,7 +1286,8 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
   <div
   style={{
     gridColumn: "1 / -1",
-    height: 220,
+   height: "auto",
+minHeight: 220, 
     borderRadius: 18,
     overflow: "hidden",
     border: "1px solid #806c3b",
@@ -1296,17 +1297,12 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
     title="Golden Life bölge haritası"
     src="https://www.google.com/maps?q=Kayadibi,Aksu,Antalya&output=embed"
     width="100%"
-    height="100%"
+    height="220"
     style={{ border: 0, display: "block" }}
     loading="lazy"
     referrerPolicy="no-referrer-when-downgrade"
   />
-</div>
-</div>
-</div>
-  
-
-    <p style={{ color: "#aeb8c2", fontSize: 13 }}>
+   <p style={{ color: "#aeb8c2", fontSize: 13 }}>
       {language === "tr"
   ? "Harita bölgeyi göstermektedir. Kesin parsel sınırları için resmî kayıtlar esas alınmalıdır."
   : language === "de"
@@ -1316,7 +1312,13 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
   : language === "ar"
   ? "تُظهر الخريطة المنطقة المحيطة. ويجب الرجوع إلى السجلات الرسمية لتحديد الحدود الدقيقة لقطعة الأرض."
   : "The map shows the surrounding area. Official cadastral records must be consulted for exact parcel boundaries."}
-    </p>
+    </p> 
+</div>
+</div>
+</div>
+  
+
+    
 
     
   </div>
