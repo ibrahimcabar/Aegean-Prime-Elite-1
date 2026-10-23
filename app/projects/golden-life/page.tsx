@@ -1395,7 +1395,7 @@ minHeight: 220,
 >
   <iframe
     title="Golden Life bölge haritası"
-    src="https://www.google.com/maps?q=Kayadibi,Aksu,Antalya&output=embed"
+    src="https://www.google.com/maps?q=Kayadibi,Aksu,Antalya&output=embed&t=k"
     width="100%"
     height="220"
     style={{ border: 0, display: "block" }}
