@@ -1256,6 +1256,25 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
         </div>
       ))}
     </div>
+  <div
+  style={{
+    gridColumn: "1 / -1",
+    marginTop: 8,
+    borderRadius: 18,
+    overflow: "hidden",
+    border: "1px solid #806c3b",
+  }}
+>
+  <iframe
+    title="Golden Life bölge haritası"
+    src="https://www.google.com/maps?q=Kayadibi,Aksu,Antalya&output=embed"
+    width="100%"
+    height="280"
+    style={{ border: 0, display: "block" }}
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</div>
   </div>
 
     <div
