@@ -412,3 +412,86 @@
     transition: none;
   }
 }
+
+/* AEGEAN PRIME ELITE - PREMIUM SEARCH */
+
+.hero .search-panel {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1050px;
+  padding: 22px;
+  margin-top: 38px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(185, 154, 98, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+.hero .search-panel .search-input {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  padding: 0 16px;
+  border: 1px solid #e5dfd3;
+  border-radius: 8px;
+}
+
+.hero .search-panel > select,
+.hero .search-panel > input {
+  grid-column: span 2;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 52px;
+  padding: 0 12px;
+  border: 1px solid #e5dfd3;
+  border-radius: 8px;
+  background: #fff;
+  color: #242824;
+  font-size: 13px;
+  outline: none;
+}
+
+.hero .search-panel > input:focus,
+.hero .search-panel > select:focus,
+.hero .search-panel .search-input:focus-within {
+  border-color: #b99a62;
+}
+
+.hero .search-panel > button {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 54px;
+  border-radius: 8px;
+  background: #b99a62;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease;
+}
+
+.hero .search-panel > button:hover {
+  background: #9f804a;
+}
+
+@media (max-width: 700px) {
+  .hero .search-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .hero .search-panel > select,
+  .hero .search-panel > input {
+    grid-column: span 1;
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  .hero .search-panel > button {
+    grid-column: 1 / -1;
+  }
+}
