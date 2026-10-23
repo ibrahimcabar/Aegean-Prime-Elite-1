@@ -428,17 +428,50 @@ fontSize: "clamp(32px, 6vw, 110px)",
     ? "غولدن لايف هو مشروع مخطط له في منطقة كاياديبي / كاراأوز في أنطاليا، ويهدف إلى الجمع بين الحياة السكنية وخدمات الصحة وإعادة التأهيل والطبيعة والأنشطة الاجتماعية."
     : "Golden Life is a planned residential project in the Kayadibi / Karaöz area of Antalya, designed to combine residential living with health, rehabilitation, nature, and social amenities."}
 </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginTop: 35 }}>
+        
+<div style={{
+  display: "grid",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  gap: 24,
+  marginTop: 35
+}}>
+
           {features.map((item) => (
-            <article key={item.title.tr} style={{ background: "white", borderRadius: 14, padding: 28 }}>
+            
+<article
+  key={item.title.tr}
+  style={{
+    background: "linear-gradient(145deg, #18382c, #254d3c)",
+    border: "1px solid #b99a60",
+    borderRadius: 18,
+    padding: 32,
+    boxShadow: "0 12px 35px rgba(24,56,44,0.18)",
+    minHeight: 190,
+    transition: "all 0.3s ease"
+  }}
+>
+
               
 <h3>
   {typeof item.title === "string"
     ? item.title
     : item.title[language as keyof typeof item.title] ?? item.title.tr}
-</h3>
 
-              <p style={{ lineHeight: 1.8, color: "#65736b" }}>
+<h3 style={{
+  color: "#e8c985",
+  fontSize: 23,
+  fontWeight: 700,
+  marginBottom: 18
+}}>
+
+
+             
+<p style={{
+  lineHeight: 1.8,
+  color: "#e5e7df",
+  fontSize: 15
+}}>
+ 
 {typeof item.description === "string"
   ? item.description
   : item.description[language as keyof typeof item.description] ?? item.description.tr}
