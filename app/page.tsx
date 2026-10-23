@@ -15,6 +15,8 @@ const [maxPrice, setMaxPrice] = useState('');
 
 const [selectedCurrency, setSelectedCurrency] = useState('EUR');
 
+const [exchangeRates, setExchangeRates] = useState<Record<string, number> | null>(null);
+
 const [appliedMinPrice, setAppliedMinPrice] = useState('');
 const [appliedMaxPrice, setAppliedMaxPrice] = useState('');
 const [appliedCurrency, setAppliedCurrency] = useState('EUR');
