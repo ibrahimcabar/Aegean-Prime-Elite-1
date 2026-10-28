@@ -22,7 +22,7 @@ console.log("Kaydedilen çerez izni:", savedConsent);
     return;
   }
 
-  fetch("/api/visitor-events", {
+  fetch("/api/visitor-track", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
