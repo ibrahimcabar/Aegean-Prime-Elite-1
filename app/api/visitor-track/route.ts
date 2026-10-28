@@ -1,0 +1,92 @@
+
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+
+const allowedEvents = [
+  "page_view",
+  "property_view",
+  "contact_click",
+];
+
+export async function POST(request: NextRequest) {
+  try {
+    const contentLength = Number(
+      request.headers.get("content-length") || 0
+    );
+
+    if (contentLength > 2048) {
+      return NextResponse.json(
+        { error: "İstek çok büyük." },
+        { status: 413 }
+      );
+    }
+
+    const body = await request.json();
+
+    const {
+      event_type,
+      page_path,
+      property_id,
+      language,
+    } = body;
+
+    if (
+      !allowedEvents.includes(event_type) ||
+      typeof page_path !== "string" ||
+      !/^\/(?!\/)[a-zA-Z0-9/_-]*$/.test(page_path) ||
+      page_path.length > 200 ||
+      (property_id != null &&
+        (typeof property_id !== "string" ||
+          property_id.length > 100)) ||
+      (language != null &&
+        !["tr", "en", "de", "ru", "ar"].includes(language))
+    ) {
+      return NextResponse.json(
+        { error: "Geçersiz analitik verisi." },
+        { status: 400 }
+      );
+    }
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !serviceKey) {
+      return NextResponse.json(
+        { error: "Analitik servisi yapılandırılmadı." },
+        { status: 503 }
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, serviceKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
+
+    const { error } = await supabase
+      .from("visitor_events")
+      .insert({
+        event_type,
+        page_path,
+        property_id: property_id || null,
+        language: language || null,
+      });
+
+    if (error) {
+      console.error("Analitik kayıt hatası:", error.message);
+
+      return NextResponse.json(
+        { error: "Kayıt oluşturulamadı." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json(
+      { error: "Geçersiz istek." },
+      { status: 400 }
+    );
+  }
+}
