@@ -674,4 +674,74 @@ return <><header className="header"><a href="#top" className="brand"><span class
    language === "ar" ? "رؤية جديدة للعقارات العالمية." :
    "Global real estate, reimagined."}
 </span></footer>
-<button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Aegean AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}</>}
+<button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Aegean AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}{cookieConsent === null && (
+  <div
+    role="dialog"
+    aria-label="Cookie preferences"
+    style={{
+      position: "fixed",
+      bottom: 20,
+      left: 20,
+      right: 20,
+      maxWidth: 520,
+      margin: "0 auto",
+      padding: 24,
+      background: "#18382c",
+      color: "#ffffff",
+      border: "1px solid #b99a60",
+      borderRadius: 16,
+      boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+      zIndex: 9999,
+      direction: language === "ar" ? "rtl" : "ltr"
+    }}
+  >
+    <h3 style={{ marginTop: 0, color: "#d6bd88" }}>
+      {language === "tr" ? "Çerez Tercihleri" :
+       language === "de" ? "Cookie-Einstellungen" :
+       language === "ru" ? "Настройки файлов cookie" :
+       language === "ar" ? "إعدادات ملفات تعريف الارتباط" :
+       "Cookie Preferences"}
+    </h3>
+
+    <p style={{ lineHeight: 1.7, fontSize: 14 }}>
+      {language === "tr"
+        ? "Deneyiminizi geliştirmek ve anonim ziyaret istatistiklerini ölçmek için izninizle analiz teknolojileri kullanıyoruz."
+        : language === "de"
+        ? "Mit Ihrer Einwilligung verwenden wir Analysetechnologien, um unsere Website zu verbessern."
+        : language === "ru"
+        ? "С вашего согласия мы используем аналитику для улучшения сайта."
+        : language === "ar"
+        ? "نستخدم تقنيات التحليل بموافقتك لتحسين تجربة الموقع."
+        : "With your consent, we use analytics technologies to improve your website experience."}
+    </p>
+
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+      {[
+        { value: "rejected", tr: "Reddet", de: "Ablehnen", ru: "Отклонить", ar: "رفض", en: "Reject" },
+        { value: "accepted", tr: "Kabul Et", de: "Akzeptieren", ru: "Принять", ar: "قبول", en: "Accept" }
+      ].map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          onClick={() => {
+            localStorage.setItem("analytics_consent", option.value);
+            setCookieConsent(option.value);
+          }}
+          style={{
+            flex: 1,
+            minWidth: 120,
+            padding: "12px 18px",
+            borderRadius: 8,
+            border: "1px solid #d6bd88",
+            background: option.value === "accepted" ? "#d6bd88" : "transparent",
+            color: option.value === "accepted" ? "#18382c" : "#ffffff",
+            fontWeight: 600,
+            cursor: "pointer"
+          }}
+        >
+          {option[language as "tr" | "de" | "ru" | "ar" | "en"]}
+        </button>
+      ))}
+    </div>
+  </div>
+)}</>}
