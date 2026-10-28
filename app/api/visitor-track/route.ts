@@ -18,6 +18,18 @@ if (process.env.VISITOR_TRACKING_ENABLED !== "true") {
   );
 }
 
+const contentType = request.headers.get("content-type");
+
+if (
+  !contentType ||
+  !/^application\/json(?:\s*;|$)/i.test(contentType)
+) {
+  return NextResponse.json(
+    { error: "Yalnızca JSON istekleri kabul edilir." },
+    { status: 415 }
+  );
+}
+
 const origin = request.headers.get("origin");
 
 const allowedOrigins = [
@@ -73,6 +85,36 @@ if (
       property_id,
       language,
     } = body;
+
+const allowedFields = [
+  "event_type",
+  "page_path",
+  "property_id",
+  "language",
+];
+
+const hasUnexpectedFields = Object.keys(body).some(
+  (key) => !allowedFields.includes(key)
+);
+
+if (hasUnexpectedFields) {
+  return NextResponse.json(
+    { error: "İzin verilmeyen veri alanı." },
+    { status: 400 }
+  );
+}
+
+if (
+  (event_type === "property_view" &&
+    (!property_id || typeof property_id !== "string")) ||
+  (event_type !== "property_view" &&
+    property_id != null)
+) {
+  return NextResponse.json(
+    { error: "Geçersiz ilan bilgisi." },
+    { status: 400 }
+  );
+}
 
     if (
       !allowedEvents.includes(event_type) ||
