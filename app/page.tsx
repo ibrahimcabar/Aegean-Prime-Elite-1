@@ -11,7 +11,7 @@ export default function Home(){
   const [cookieConsent, setCookieConsent] = useState<string | null>(null);
   useEffect(() => {
   const savedConsent = localStorage.getItem("analytics_consent");
-
+console.log("Kaydedilen çerez izni:", savedConsent);
   if (savedConsent === "accepted" || savedConsent === "rejected") {
     setCookieConsent(savedConsent);
   }
