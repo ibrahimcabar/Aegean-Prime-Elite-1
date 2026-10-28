@@ -32,7 +32,16 @@ export default function Home(){
       page_path: window.location.pathname,
       language: localStorage.getItem("aegean-language") || "en",
     }),
-  }).catch((error) => {
+  })
+  .then(async (response) => {
+    const result = await response.json();
+
+    console.log("Ziyaretçi takip sonucu:", {
+      status: response.status,
+      result,
+    });
+  })
+  .catch((error) => {
     console.error("Ziyaretçi takip hatası:", error);
   });
 }, [cookieConsent]);
