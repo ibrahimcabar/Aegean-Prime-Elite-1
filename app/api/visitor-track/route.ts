@@ -10,6 +10,28 @@ const allowedEvents = [
 
 export async function POST(request: NextRequest) {
   try {
+    
+if (process.env.VISITOR_TRACKING_ENABLED !== "true") {
+  return NextResponse.json(
+    { error: "Ziyaretçi takibi henüz aktif değil." },
+    { status: 503 }
+  );
+}
+
+const origin = request.headers.get("origin");
+
+const allowedOrigins = [
+  "https://aegean-prime-elite-11.vercel.app",
+  process.env.NEXT_PUBLIC_SITE_URL,
+].filter(Boolean);
+
+if (!origin || !allowedOrigins.includes(origin)) {
+  return NextResponse.json(
+    { error: "İzin verilmeyen istek kaynağı." },
+    { status: 403 }
+  );
+}
+
     const contentLength = Number(
       request.headers.get("content-length") || 0
     );
@@ -21,7 +43,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
+    
+const rawBody = await request.text();
+
+if (new TextEncoder().encode(rawBody).length > 2048) {
+  return NextResponse.json(
+    { error: "İstek boyutu sınırı aşıldı." },
+    { status: 413 }
+  );
+}
+
+const body = JSON.parse(rawBody);
+
+if (
+  !body ||
+  typeof body !== "object" ||
+  Array.isArray(body)
+) {
+  return NextResponse.json(
+    { error: "Geçersiz veri formatı." },
+    { status: 400 }
+  );
+}
+
 
     const {
       event_type,
