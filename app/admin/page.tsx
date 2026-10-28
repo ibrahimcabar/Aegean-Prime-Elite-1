@@ -181,6 +181,44 @@ if (leadError) {
         AEGEAN PRIME ELITE
       </h1>
       <h2>Yönetici Paneli</h2>
+      
+<div
+  style={{
+    background: "#18382c",
+    color: "#ffffff",
+    padding: 24,
+    borderRadius: 16,
+    marginTop: 24,
+    marginBottom: 24,
+  }}
+>
+  <h2 style={{ color: "#d6bd88", marginTop: 0 }}>
+    📊 Ziyaretçi Analitiği
+  </h2>
+
+  <p style={{ color: "#e8e5dc" }}>
+    Aegean Prime Elite ziyaretçi ve ilan performans merkezi
+  </p>
+
+  <div
+    style={{
+      background: "rgba(255,255,255,0.08)",
+      padding: 18,
+      borderRadius: 12,
+      marginTop: 18,
+    }}
+  >
+    <strong>⚙️ Analitik sistemi hazırlanıyor</strong>
+
+    <p style={{ marginBottom: 0, lineHeight: 1.7 }}>
+      Ziyaretçi istatistikleri, popüler ilanlar,
+      trafik kaynakları ve müşteri dönüşümleri
+      güvenli veri toplama altyapısı tamamlandığında
+      burada görüntülenecek.
+    </p>
+  </div>
+</div>
+
       <p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
