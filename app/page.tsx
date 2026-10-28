@@ -8,6 +8,14 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
 );
 export default function Home(){
+  const [cookieConsent, setCookieConsent] = useState<string | null>(null);
+  useEffect(() => {
+  const savedConsent = localStorage.getItem("analytics_consent");
+
+  if (savedConsent === "accepted" || savedConsent === "rejected") {
+    setCookieConsent(savedConsent);
+  }
+}, []);
   useEffect(() => {
   // Ziyaretçi takibi için izin verilmişse çalışır.
   if (localStorage.getItem("analytics_consent") !== "accepted") {
@@ -27,7 +35,7 @@ export default function Home(){
   }).catch((error) => {
     console.error("Ziyaretçi takip hatası:", error);
   });
-}, []);
+}, [cookieConsent]);
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
   
 const [minPrice, setMinPrice] = useState('');
