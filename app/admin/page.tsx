@@ -318,7 +318,6 @@ if (accessToken) {
   </div>
 </div> 
 </div>
-
       <p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
