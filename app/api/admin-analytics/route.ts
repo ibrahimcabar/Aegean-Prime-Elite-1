@@ -138,7 +138,12 @@ const dailyViews = Array.from({ length: 7 }, (_, i) => {
   const day = new Date(sevenDaysStart);
   day.setUTCDate(day.getUTCDate() + i);
 
-  const date = day.toISOString().slice(0, 10);
+  const date = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Istanbul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(day);
 
   const views = (weeklyEvents ?? []).filter((event) => {
     const eventDate = new Intl.DateTimeFormat("en-CA", {
