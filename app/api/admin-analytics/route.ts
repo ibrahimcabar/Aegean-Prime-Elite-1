@@ -83,15 +83,20 @@ const uniqueVisitors = new Set(
     // Türkiye saatine göre bugünün başlangıcı
 const now = new Date();
 
-const turkeyDate = new Intl.DateTimeFormat("en-CA", {
+const turkeyDate = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Europe/Istanbul",
   year: "numeric",
   month: "2-digit",
   day: "2-digit",
-}).format(now);
+}).formatToParts(now);
+
+const getPart = (type: string) =>
+  turkeyDate.find((part) => part.type === type)?.value;
+
+const todayTR = `${getPart("year")}-${getPart("month")}-${getPart("day")}`;
 
 const todayStart = new Date(
-  `${turkeyDate}T00:00:00+03:00`
+  `${todayDate}T00:00:00+03:00`
 ).toISOString();
 
 // Bugünkü sayfa görüntülemeleri
@@ -107,7 +112,7 @@ if (todayError) {
 }
 // Türkiye saatine göre son 7 günün başlangıcı
 const turkeyToday = new Date(
-  `${turkeyDate}T00:00:00+03:00`
+  `${todayDate}T00:00:00+03:00`
 );
 
 const sevenDaysStart = new Date(turkeyToday);
