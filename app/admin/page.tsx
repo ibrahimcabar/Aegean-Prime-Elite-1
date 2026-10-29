@@ -414,10 +414,10 @@ setPropertyDetails(result.propertyDetails ?? []);
         key={propertyId}
         style={{
   display: "flex",
-  flexWrap: "wrap",
+  flexWrap: "nowrap",
   alignItems: "center",
-  justifyContent: "space-between",
-  gap: 16,
+  justifyContent: "flex-start",
+  gap: 12,
   padding: "16px 0",
   borderBottom: "1px solid #eee"
 }}
@@ -441,6 +441,12 @@ setPropertyDetails(result.propertyDetails ?? []);
     />
   ) : null;
 })()}
+        <div
+  style={{
+    flex: 1,
+    minWidth: 0
+  }}
+>
         <a
           href={`/ilan/${propertyId}`}
           style={{
@@ -474,6 +480,7 @@ setPropertyDetails(result.propertyDetails ?? []);
           .join(", ")
       : "";
   })()}
+  </div>
 </div>
         <strong style={{ color: "#b89b68" }}>
           {views} görüntüleme
