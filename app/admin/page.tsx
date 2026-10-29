@@ -17,7 +17,7 @@ export default function AdminPage() {
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const [totalPageViews, setTotalPageViews] = useState<number | null>(null);
-
+const [uniqueVisitors, setUniqueVisitors] = useState(0);
   const [todayPageViews, setTodayPageViews] = useState<number | null>(null);
   const [dailyViews, setDailyViews] = useState<
   { date: string; views: number }[]
@@ -186,6 +186,7 @@ if (accessToken) {
     }
 
     setTotalPageViews(result.totalPageViews ?? 0);
+    setUniqueVisitors(result.uniqueVisitors ?? 0);
     setTodayPageViews(result.todayPageViews ?? 0);
     setAnalyticsError("");
   } catch (error) {
@@ -293,7 +294,29 @@ if (accessToken) {
   </p>
 )}
 
+ <div
+  style={{
+    background: "rgba(255, 255, 255, 0.08)",
+    padding: 18,
+    borderRadius: 12,
+    marginTop: 12,
+  }}
+>
+  <strong>👥 Benzersiz Ziyaretçiler</strong>
+
+  <div
+    style={{
+      fontSize: 36,
+      fontWeight: "bold",
+      color: "#d6bd88",
+      marginTop: 12,
+    }}
+  >
+    {analyticsError
+      ? "Veri alınamadı"
+      : uniqueVisitors.toLocaleString("tr-TR")}
   </div>
+</div> 
 </div>
 
       <p>Golden Life Başvuru Yönetimi</p>
