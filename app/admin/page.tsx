@@ -17,7 +17,11 @@ export default function AdminPage() {
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const [totalPageViews, setTotalPageViews] = useState<number | null>(null);
-const [todayPageViews, setTodayPageViews] = useState<number | null>(null);
+
+  const [todayPageViews, setTodayPageViews] = useState<number | null>(null);
+  const [dailyViews, setDailyViews] = useState<
+  { date: string; views: number }[]
+>([]);
   const [analyticsError, setAnalyticsError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
