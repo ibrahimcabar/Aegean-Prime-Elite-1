@@ -423,9 +423,29 @@ setPropertyDetails(result.propertyDetails ?? []);
           href={`/ilan/${propertyId}`}
           style={{ color: "#18382c" }}
         >
-          İlan #{propertyId}
+          {propertyDetails.find(
+  (item) => String(item.id) === String(propertyId)
+)?.title || `İlan #${propertyId}`}
         </a>
+<div
+  style={{
+    fontSize: 12,
+    color: "#777",
+    marginTop: 5
+  }}
+>
+  {(() => {
+    const property = propertyDetails.find(
+      (item) => String(item.id) === String(propertyId)
+    );
 
+    return property
+      ? [property.city, property.country]
+          .filter(Boolean)
+          .join(", ")
+      : "";
+  })()}
+</div>
         <strong style={{ color: "#b89b68" }}>
           {views} görüntüleme
         </strong>
