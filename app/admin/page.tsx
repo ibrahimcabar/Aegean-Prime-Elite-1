@@ -21,6 +21,15 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
   const [todayPageViews, setTodayPageViews] = useState<number | null>(null);
   const [dailyViews, setDailyViews] = useState<
   { date: string; views: number }[]
+   const [propertyDetails, setPropertyDetails] = useState<
+  {
+    id: number;
+    title: string;
+    city: string;
+    country: string;
+    image: string | null;
+  }[]
+>([]); 
 >([]);
   const [propertyViewCounts, setPropertyViewCounts] =
   useState<Record<string, number>>({});
@@ -192,7 +201,8 @@ setUniqueVisitors(result.uniqueVisitors ?? 0);
 setTodayPageViews(result.todayPageViews ?? 0);
 setDailyViews(result.dailyViews ?? []);
   setPropertyViewCounts(result.propertyViewCounts ?? {});  
-setAnalyticsError("");
+setPropertyDetails(result.propertyDetails ?? []);
+    setAnalyticsError("");
   } catch (error) {
     console.error("Analitik verisi alınamadı:", error);
     setAnalyticsError("Ziyaretçi verileri yüklenemedi.");
