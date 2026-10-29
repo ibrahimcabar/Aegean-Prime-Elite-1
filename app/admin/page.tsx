@@ -413,15 +413,44 @@ setPropertyDetails(result.propertyDetails ?? []);
       <div
         key={propertyId}
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "14px 0",
-          borderBottom: "1px solid #eee"
-        }}
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: 16,
+  padding: "16px 0",
+  borderBottom: "1px solid #eee"
+}}
       >
+        {(() => {
+  const property = propertyDetails.find(
+    (item) => String(item.id) === String(propertyId)
+  );
+
+  return property?.image ? (
+    <img
+      src={property.image}
+      alt={property.title}
+      style={{
+        width: 90,
+        height: 70,
+        objectFit: "cover",
+        borderRadius: 10,
+        flexShrink: 0
+      }}
+    />
+  ) : null;
+})()}
         <a
           href={`/ilan/${propertyId}`}
-          style={{ color: "#18382c" }}
+          style={{
+  color: "#18382c",
+  fontWeight: 600,
+  fontSize: 15,
+  lineHeight: 1.5,
+  textDecoration: "none",
+  overflowWrap: "anywhere"
+}}
         >
           {propertyDetails.find(
   (item) => String(item.id) === String(propertyId)
