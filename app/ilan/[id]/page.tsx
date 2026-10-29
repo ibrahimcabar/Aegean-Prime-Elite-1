@@ -29,7 +29,33 @@ export default function PropertyDetail() {
   const [images, setImages] = useState<string[]>([]);
 const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(true);
+useEffect(() => {
+  if (!property?.id) return;
 
+  if (localStorage.getItem("analytics_consent") !== "accepted") {
+    return;
+  }
+
+  const visitorId = localStorage.getItem("aegean-visitor-id");
+
+  if (!visitorId) return;
+
+  fetch("/api/visitor-track", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      event_type: "property_view",
+      page_path: window.location.pathname,
+      property_id: String(property.id),
+      language: localStorage.getItem("aegean-language") || "en",
+      visitor_id: visitorId,
+    }),
+  }).catch((error) => {
+    console.error("İlan takip hatası:", error);
+  });
+}, [property?.id]);
   useEffect(() => {
     async function loadProperty() {
       const { data, error } = await supabase
