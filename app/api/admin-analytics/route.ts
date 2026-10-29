@@ -64,9 +64,36 @@ export async function GET(request: NextRequest) {
       throw countError;
     }
 
-    return NextResponse.json({
-      totalPageViews: count ?? 0
-    });
+    // Türkiye saatine göre bugünün başlangıcı
+const now = new Date();
+
+const turkeyDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Istanbul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(now);
+
+const todayStart = new Date(
+  `${turkeyDate}T00:00:00+03:00`
+).toISOString();
+
+// Bugünkü sayfa görüntülemeleri
+const { count: todayCount, error: todayError } =
+  await adminClient
+    .from("visitor_events")
+    .select("*", { count: "exact", head: true })
+    .eq("event_type", "page_view")
+    .gte("created_at", todayStart);
+
+if (todayError) {
+  throw todayError;
+}
+
+return NextResponse.json({
+  totalPageViews: count ?? 0,
+  todayPageViews: todayCount ?? 0,
+});
   } catch (error) {
     console.error("Analitik API hatası:", error);
 
