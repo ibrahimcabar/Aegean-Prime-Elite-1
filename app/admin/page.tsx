@@ -17,7 +17,8 @@ export default function AdminPage() {
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const [totalPageViews, setTotalPageViews] = useState<number | null>(null);
-const [analyticsError, setAnalyticsError] = useState("");
+const [todayPageViews, setTodayPageViews] = useState<number | null>(null);
+  const [analyticsError, setAnalyticsError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   function exportToExcel() {
@@ -181,6 +182,7 @@ if (accessToken) {
     }
 
     setTotalPageViews(result.totalPageViews ?? 0);
+    setTodayPageViews(result.todayPageViews ?? 0);
     setAnalyticsError("");
   } catch (error) {
     console.error("Analitik verisi alınamadı:", error);
@@ -256,7 +258,31 @@ if (accessToken) {
       ? "Yükleniyor..."
       : totalPageViews.toLocaleString("tr-TR")}
 </div>
+<div
+  style={{
+    background: "rgba(255,255,255,0.08)",
+    padding: 18,
+    borderRadius: 12,
+    marginTop: 12,
+  }}
+>
+  <strong>📅 Bugünkü Sayfa Görüntülemeleri</strong>
 
+  <div
+    style={{
+      fontSize: 36,
+      fontWeight: "bold",
+      color: "#d6bd88",
+      marginTop: 12,
+    }}
+  >
+    {analyticsError
+      ? "Veri alınamadı"
+      : todayPageViews === null
+        ? "Yükleniyor..."
+        : todayPageViews.toLocaleString("tr-TR")}
+  </div>
+</div>
 {analyticsError && (
   <p style={{ color: "#ffb4a8" }}>
     {analyticsError}
