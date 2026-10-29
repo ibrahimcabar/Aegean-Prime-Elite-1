@@ -179,12 +179,26 @@ const propertyViewCounts = (propertyEvents ?? []).reduce(
   },
   {} as Record<string, number>
 );
+  const propertyIds = Object.keys(propertyViewCounts);
+
+const { data: propertyDetails, error: detailsError } =
+  propertyIds.length > 0
+    ? await adminClient
+        .from("properties")
+        .select("id, title, city, country, image")
+        .in("id", propertyIds)
+    : { data: [], error: null };
+
+if (detailsError) {
+  throw detailsError;
+}  
 return NextResponse.json({
   totalPageViews: count ?? 0,
   todayPageViews: todayCount ?? 0,
   uniqueVisitors,
   dailyViews,
   propertyViewCounts,
+  propertyDetails: propertyDetails ?? [],
 }); 
   } catch (error) {
     console.error("Analitik API hatası:", error);
