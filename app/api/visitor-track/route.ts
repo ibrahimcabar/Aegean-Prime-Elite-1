@@ -80,17 +80,19 @@ if (
 
 
     const {
-      event_type,
-      page_path,
-      property_id,
-      language,
-    } = body;
+  event_type,
+  page_path,
+  property_id,
+  language,
+  visitor_id,
+} = body;
 
 const allowedFields = [
   "event_type",
   "page_path",
   "property_id",
   "language",
+  "visitor_id",
 ];
 
 const hasUnexpectedFields = Object.keys(body).some(
@@ -103,7 +105,16 @@ if (hasUnexpectedFields) {
     { status: 400 }
   );
 }
-
+if (
+  visitor_id != null &&
+  (typeof visitor_id !== "string" ||
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(visitor_id))
+) {
+  return NextResponse.json(
+    { error: "Geçersiz ziyaretçi kimliği." },
+    { status: 400 }
+  );
+}
 if (
   (event_type === "property_view" &&
     (!property_id || typeof property_id !== "string")) ||
@@ -153,11 +164,12 @@ if (
     const { error } = await supabase
       .from("visitor_events")
       .insert({
-        event_type,
-        page_path,
-        property_id: property_id || null,
-        language: language || null,
-      });
+  event_type,
+  page_path,
+  property_id: property_id || null,
+  language: language || null,
+  visitor_id: visitor_id || null,
+});
 
     if (error) {
       console.error("Analitik kayıt hatası:", error.message);
