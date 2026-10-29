@@ -63,7 +63,23 @@ export async function GET(request: NextRequest) {
     if (countError) {
       throw countError;
     }
+// Benzersiz ziyaretçi kimliklerini getir
+const { data: visitorRows, error: visitorsError } =
+  await adminClient
+    .from("visitor_events")
+    .select("visitor_id")
+    .eq("event_type", "page_view")
+    .not("visitor_id", "is", null)
+    .limit(10000);
 
+if (visitorsError) {
+  throw visitorsError;
+}
+
+// Tekrarlanan ziyaretçileri bir kez say
+const uniqueVisitors = new Set(
+  (visitorRows ?? []).map((row) => row.visitor_id)
+).size;
     // Türkiye saatine göre bugünün başlangıcı
 const now = new Date();
 
@@ -135,6 +151,7 @@ const dailyViews = Array.from({ length: 7 }, (_, i) => {
 return NextResponse.json({
   totalPageViews: count ?? 0,
   todayPageViews: todayCount ?? 0,
+  uniqueVisitors,
   dailyViews,
 }); 
   } catch (error) {
