@@ -186,9 +186,10 @@ if (accessToken) {
     }
 
     setTotalPageViews(result.totalPageViews ?? 0);
-    setUniqueVisitors(result.uniqueVisitors ?? 0);
-    setTodayPageViews(result.todayPageViews ?? 0);
-    setAnalyticsError("");
+setUniqueVisitors(result.uniqueVisitors ?? 0);
+setTodayPageViews(result.todayPageViews ?? 0);
+setDailyViews(result.dailyViews ?? []);
+setAnalyticsError("");
   } catch (error) {
     console.error("Analitik verisi alınamadı:", error);
     setAnalyticsError("Ziyaretçi verileri yüklenemedi.");
@@ -319,7 +320,67 @@ if (accessToken) {
 </div>
 </div>
 </div>
+<div style={{
+  background: "#ffffff",
+  border: "1px solid #e5dccb",
+  borderRadius: 16,
+  padding: 20,
+  marginBottom: 24
+}}>
+  <h3 style={{ color: "#18382c" }}>
+    📊 Son 7 Günlük Ziyaretçi Grafiği
+  </h3>
 
+  <div style={{
+    display: "flex",
+    alignItems: "flex-end",
+    gap: 10,
+    height: 220,
+    marginTop: 25
+  }}>
+    {dailyViews.map((day) => {
+      const maxViews = Math.max(
+        1,
+        ...dailyViews.map((item) => item.views)
+      );
+
+      const height = (day.views / maxViews) * 160;
+
+      return (
+        <div
+          key={day.date}
+          style={{
+            flex: 1,
+            minWidth: 0,
+            textAlign: "center"
+          }}
+        >
+          <div style={{
+            fontSize: 13,
+            marginBottom: 8,
+            color: "#18382c"
+          }}>
+            {day.views}
+          </div>
+
+          <div style={{
+            height: Math.max(height, 3),
+            background: "#b89b68",
+            borderRadius: "6px 6px 0 0"
+          }} />
+
+          <div style={{
+            fontSize: 11,
+            marginTop: 10,
+            color: "#666"
+          }}>
+            {day.date.slice(5)}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
 <p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
