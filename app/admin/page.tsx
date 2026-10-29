@@ -16,6 +16,8 @@ export default function AdminPage() {
   const [leads, setLeads] = useState<any[]>([]);
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [totalPageViews, setTotalPageViews] = useState<number | null>(null);
+const [analyticsError, setAnalyticsError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   function exportToExcel() {
@@ -157,6 +159,35 @@ if (leadError) {
 } else {
   setLeads(leadData || []);
 }
+      
+const { data: sessionData } =
+  await supabase.auth.getSession();
+
+const accessToken = sessionData.session?.access_token;
+
+if (accessToken) {
+  try {
+    const response = await fetch("/api/admin-analytics", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      cache: "no-store",
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Analitik hatası");
+    }
+
+    setTotalPageViews(result.totalPageViews ?? 0);
+    setAnalyticsError("");
+  } catch (error) {
+    console.error("Analitik verisi alınamadı:", error);
+    setAnalyticsError("Ziyaretçi verileri yüklenemedi.");
+  }
+}
+
       setAuthorized(true);
       setLoading(false);
     }
@@ -208,14 +239,30 @@ if (leadError) {
       marginTop: 18,
     }}
   >
-    <strong>⚙️ Analitik sistemi hazırlanıyor</strong>
+    
+<strong>📈 Toplam Sayfa Görüntülenmesi</strong>
 
-    <p style={{ marginBottom: 0, lineHeight: 1.7 }}>
-      Ziyaretçi istatistikleri, popüler ilanlar,
-      trafik kaynakları ve müşteri dönüşümleri
-      güvenli veri toplama altyapısı tamamlandığında
-      burada görüntülenecek.
-    </p>
+<div
+  style={{
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#d6bd88",
+    marginTop: 12,
+  }}
+>
+  {analyticsError
+    ? "Veri alınamadı"
+    : totalPageViews === null
+      ? "Yükleniyor..."
+      : totalPageViews.toLocaleString("tr-TR")}
+</div>
+
+{analyticsError && (
+  <p style={{ color: "#ffb4a8" }}>
+    {analyticsError}
+  </p>
+)}
+
   </div>
 </div>
 
