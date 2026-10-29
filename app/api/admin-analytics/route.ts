@@ -96,7 +96,7 @@ const getPart = (type: string) =>
 const todayTR = `${getPart("year")}-${getPart("month")}-${getPart("day")}`;
 
 const todayStart = new Date(
-  `${turkeyDate}T00:00:00+03:00`
+  `${todayTR}T00:00:00+03:00`
 ).toISOString();
 
 // Bugünkü sayfa görüntülemeleri
@@ -112,7 +112,7 @@ if (todayError) {
 }
 // Türkiye saatine göre son 7 günün başlangıcı
 const turkeyToday = new Date(
-  `${turkeyDate}T00:00:00+03:00`
+  `${todayTR}T00:00:00+03:00`
 );
 
 const sevenDaysStart = new Date(turkeyToday);
