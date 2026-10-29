@@ -21,7 +21,12 @@ console.log("Kaydedilen çerez izni:", savedConsent);
   if (localStorage.getItem("analytics_consent") !== "accepted") {
     return;
   }
+let visitorId = localStorage.getItem("aegean-visitor-id");
 
+if (!visitorId) {
+  visitorId = crypto.randomUUID();
+  localStorage.setItem("aegean-visitor-id", visitorId);
+}
   fetch("/api/visitor-track", {
     method: "POST",
     headers: {
@@ -31,6 +36,7 @@ console.log("Kaydedilen çerez izni:", savedConsent);
       event_type: "page_view",
       page_path: window.location.pathname,
       language: localStorage.getItem("aegean-language") || "en",
+    visitor_id: visitorId,
     }),
   })
   .then(async (response) => {
