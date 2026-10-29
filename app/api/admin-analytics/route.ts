@@ -96,7 +96,7 @@ const getPart = (type: string) =>
 const todayTR = `${getPart("year")}-${getPart("month")}-${getPart("day")}`;
 
 const todayStart = new Date(
-  `${todayDate}T00:00:00+03:00`
+  `${turkeyDate}T00:00:00+03:00`
 ).toISOString();
 
 // Bugünkü sayfa görüntülemeleri
