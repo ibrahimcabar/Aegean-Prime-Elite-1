@@ -89,11 +89,54 @@ const { count: todayCount, error: todayError } =
 if (todayError) {
   throw todayError;
 }
+// Türkiye saatine göre son 7 günün başlangıcı
+const turkeyToday = new Date(
+  `${turkeyDate}T00:00:00+03:00`
+);
 
+const sevenDaysStart = new Date(turkeyToday);
+sevenDaysStart.setUTCDate(
+  sevenDaysStart.getUTCDate() - 6
+);
+
+// Son 7 günlük sayfa görüntüleme kayıtları
+const { data: weeklyEvents, error: weeklyError } =
+  await adminClient
+    .from("visitor_events")
+    .select("created_at")
+    .eq("event_type", "page_view")
+    .gte("created_at", sevenDaysStart.toISOString())
+    .order("created_at", { ascending: true })
+    .limit(10000);
+
+if (weeklyError) {
+  throw weeklyError;
+}
+
+const dailyViews = Array.from({ length: 7 }, (_, i) => {
+  const day = new Date(sevenDaysStart);
+  day.setUTCDate(day.getUTCDate() + i);
+
+  const date = day.toISOString().slice(0, 10);
+
+  const views = (weeklyEvents ?? []).filter((event) => {
+    const eventDate = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Istanbul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date(event.created_at));
+
+    return eventDate === date;
+  }).length;
+
+  return { date, views };
+});
 return NextResponse.json({
   totalPageViews: count ?? 0,
   todayPageViews: todayCount ?? 0,
-});
+  dailyViews,
+}); 
   } catch (error) {
     console.error("Analitik API hatası:", error);
 
