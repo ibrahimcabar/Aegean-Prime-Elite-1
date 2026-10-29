@@ -158,11 +158,33 @@ const dailyViews = Array.from({ length: 7 }, (_, i) => {
 
   return { date, views };
 });
+    // İlan bazlı görüntüleme kayıtlarını getir
+const { data: propertyEvents, error: propertyError } =
+  await adminClient
+    .from("visitor_events")
+    .select("property_id")
+    .eq("event_type", "property_view")
+    .not("property_id", "is", null)
+    .limit(10000);
+
+if (propertyError) {
+  throw propertyError;
+}
+
+const propertyViewCounts = (propertyEvents ?? []).reduce(
+  (acc: Record<string, number>, event) => {
+    const id = String(event.property_id);
+    acc[id] = (acc[id] ?? 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>
+);
 return NextResponse.json({
   totalPageViews: count ?? 0,
   todayPageViews: todayCount ?? 0,
   uniqueVisitors,
   dailyViews,
+  propertyViewCounts,
 }); 
   } catch (error) {
     console.error("Analitik API hatası:", error);
