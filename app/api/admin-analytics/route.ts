@@ -112,7 +112,7 @@ if (todayError) {
 }
 // Türkiye saatine göre son 7 günün başlangıcı
 const turkeyToday = new Date(
-  `${todayDate}T00:00:00+03:00`
+  `${turkeyDate}T00:00:00+03:00`
 );
 
 const sevenDaysStart = new Date(turkeyToday);
