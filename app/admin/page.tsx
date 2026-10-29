@@ -21,6 +21,7 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
   const [todayPageViews, setTodayPageViews] = useState<number | null>(null);
   const [dailyViews, setDailyViews] = useState<
   { date: string; views: number }[]
+>([]);
    const [propertyDetails, setPropertyDetails] = useState<
   {
     id: number;
@@ -30,7 +31,6 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
     image: string | null;
   }[]
 >([]); 
->([]);
   const [propertyViewCounts, setPropertyViewCounts] =
   useState<Record<string, number>>({});
   const [analyticsError, setAnalyticsError] = useState("");
