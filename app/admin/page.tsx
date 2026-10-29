@@ -314,11 +314,13 @@ if (accessToken) {
   >
     {analyticsError
       ? "Veri alınamadı"
-      : uniqueVisitors.toLocaleString("tr-TR")}
+            : uniqueVisitors.toLocaleString("tr-TR")}
   </div>
-</div> 
 </div>
-      <p>Golden Life Başvuru Yönetimi</p>
+</div>
+</div>
+
+<p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12, marginTop: 20, marginBottom: 24 }}>
