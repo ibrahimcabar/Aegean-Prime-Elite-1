@@ -22,6 +22,8 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
   const [dailyViews, setDailyViews] = useState<
   { date: string; views: number }[]
 >([]);
+  const [propertyViewCounts, setPropertyViewCounts] =
+  useState<Record<string, number>>({});
   const [analyticsError, setAnalyticsError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -189,6 +191,7 @@ if (accessToken) {
 setUniqueVisitors(result.uniqueVisitors ?? 0);
 setTodayPageViews(result.todayPageViews ?? 0);
 setDailyViews(result.dailyViews ?? []);
+  setPropertyViewCounts(result.propertyViewCounts ?? {});  
 setAnalyticsError("");
   } catch (error) {
     console.error("Analitik verisi alınamadı:", error);
@@ -381,6 +384,44 @@ setAnalyticsError("");
     })}
   </div>
 </div>
+     <div style={{
+  marginTop: 35,
+  marginBottom: 35,
+  padding: 25,
+  background: "#ffffff",
+  border: "1px solid #e5dac5",
+  borderRadius: 16
+}}>
+  <h3 style={{ color: "#18382c" }}>
+    🏠 En Çok Görüntülenen İlanlar
+  </h3>
+
+  {Object.entries(propertyViewCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([propertyId, views]) => (
+      <div
+        key={propertyId}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "14px 0",
+          borderBottom: "1px solid #eee"
+        }}
+      >
+        <a
+          href={`/ilan/${propertyId}`}
+          style={{ color: "#18382c" }}
+        >
+          İlan #{propertyId}
+        </a>
+
+        <strong style={{ color: "#b89b68" }}>
+          {views} görüntüleme
+        </strong>
+      </div>
+    ))}
+</div> 
 <p>Golden Life Başvuru Yönetimi</p>
       <h3>Toplam Başvuru: {leads.length}</h3>
 
