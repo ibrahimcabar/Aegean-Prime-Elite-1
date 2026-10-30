@@ -224,11 +224,14 @@ setPropertyDetails(result.propertyDetails ?? []);
 
   return (
     <main style={{
-      minHeight: "100vh",
-      background: "#f8f7f4",
-      padding: "30px 20px",
-      color: "#222"
-    }}>
+  minHeight: "100vh",
+  background: "#f8f7f4",
+  padding: "clamp(16px, 4vw, 30px)",
+  color: "#222",
+  width: "100%",
+  boxSizing: "border-box",
+  overflowX: "hidden"
+}}>
       <h1 style={{ color: "#b89b68" }}>
         AEGEAN PRIME ELITE
       </h1>
