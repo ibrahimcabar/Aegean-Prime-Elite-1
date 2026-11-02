@@ -344,7 +344,7 @@ setPropertyDetails(result.propertyDetails ?? []);
   marginBottom: 24
 }}>
   <h3 style={{ color: "#18382c" }}>
-    📊 Son 7 Günlük Ziyaretçi Grafiği
+    📊 Son 7 Günlük Sayfa Görüntülenmeleri
   </h3>
 
   <div style={{
