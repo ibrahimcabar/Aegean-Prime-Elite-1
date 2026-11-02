@@ -34,6 +34,37 @@ const [shareSales, setShareSales] = useState<{
 const [shareSalesLoading, setShareSalesLoading] = useState(false);
 const [shareSalesError, setShareSalesError] = useState("");
 
+useEffect(() => {
+  if (!authorized) return;
+
+  const loadShareSales = async () => {
+    setShareSalesLoading(true);
+
+    const { data, error } = await supabase
+      .from("golden_life_share_sales")
+      .select(
+        "id, shares_sold, remaining_before, remaining_after, admin_user_id, created_at"
+      )
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    if (error) {
+      setShareSalesError("Satış geçmişi alınamadı.");
+    } else {
+      setShareSales(data ?? []);
+      setShareSalesError("");
+    }
+
+    setShareSalesLoading(false);
+  };
+
+  loadShareSales();
+
+  const interval = setInterval(loadShareSales, 30000);
+
+  return () => clearInterval(interval);
+}, [authorized]);
+
   const [authorized, setAuthorized] = useState(false);
  
 useEffect(() => {
@@ -426,6 +457,66 @@ setPropertyDetails(result.propertyDetails ?? []);
   )}
 </section>
   
+<section style={{
+  background: "#18382c",
+  color: "#ffffff",
+  padding: 24,
+  borderRadius: 16,
+  margin: "24px 0"
+}}>
+  <h2 style={{ color: "#d6bd88", marginTop: 0 }}>
+    Golden Life — Satış Geçmişi
+  </h2>
+
+  {shareSalesLoading && shareSales.length === 0 ? (
+    <p>Satış kayıtları yükleniyor...</p>
+  ) : shareSalesError ? (
+    <p role="alert" style={{ color: "#ffb4b4" }}>
+      {shareSalesError}
+    </p>
+  ) : shareSales.length === 0 ? (
+    <p>Henüz yeni satış kaydı bulunmuyor.</p>
+  ) : (
+    <div style={{ overflowX: "auto" }}>
+      <table style={{
+        width: "100%",
+        borderCollapse: "collapse",
+        minWidth: 520,
+        textAlign: "left"
+      }}>
+        <thead>
+          <tr style={{ color: "#d6bd88" }}>
+            <th style={{ padding: 12 }}>Tarih</th>
+            <th style={{ padding: 12 }}>Satılan</th>
+            <th style={{ padding: 12 }}>Önce</th>
+            <th style={{ padding: 12 }}>Kalan</th>
+          </tr>
+        </thead>
+        <tbody>
+          {shareSales.map((sale) => (
+            <tr key={sale.id} style={{
+              borderTop: "1px solid #ffffff30"
+            }}>
+              <td style={{ padding: 12 }}>
+                {new Date(sale.created_at).toLocaleString("tr-TR")}
+              </td>
+              <td style={{ padding: 12 }}>
+                {sale.shares_sold}
+              </td>
+              <td style={{ padding: 12 }}>
+                {sale.remaining_before}
+              </td>
+              <td style={{ padding: 12, color: "#d6bd88" }}>
+                {sale.remaining_after}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</section>
+
 <div
   style={{
     background: "#18382c",
