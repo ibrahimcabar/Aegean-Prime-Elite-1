@@ -22,6 +22,18 @@ const [shareSaving, setShareSaving] = useState(false);
 const [shareError, setShareError] = useState("");
 const [shareSuccess, setShareSuccess] = useState("");
 
+const [shareSales, setShareSales] = useState<{
+  id: number;
+  shares_sold: number;
+  remaining_before: number;
+  remaining_after: number;
+  admin_user_id: string;
+  created_at: string;
+}[]>([]);
+
+const [shareSalesLoading, setShareSalesLoading] = useState(false);
+const [shareSalesError, setShareSalesError] = useState("");
+
   const [authorized, setAuthorized] = useState(false);
  
 useEffect(() => {
