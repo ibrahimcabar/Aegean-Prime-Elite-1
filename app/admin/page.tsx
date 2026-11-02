@@ -14,7 +14,43 @@ export default function AdminPage() {
   
   const router = useRouter();
   const [leads, setLeads] = useState<any[]>([]);
+  
+const [totalShares, setTotalShares] = useState<number | null>(null);
+const [remainingShares, setRemainingShares] = useState<number | null>(null);
+const [sharesToSell, setSharesToSell] = useState("");
+const [shareSaving, setShareSaving] = useState(false);
+const [shareError, setShareError] = useState("");
+const [shareSuccess, setShareSuccess] = useState("");
+
   const [authorized, setAuthorized] = useState(false);
+ 
+useEffect(() => {
+  if (!authorized) return;
+
+  const loadShares = async () => {
+    const { data, error } = await supabase
+      .from("golden_life_shares")
+      .select("total_shares, remaining_shares")
+      .eq("id", 1)
+      .single();
+
+    if (error) {
+      setShareError("Hisse bilgileri alınamadı.");
+      return;
+    }
+
+    setTotalShares(data.total_shares);
+    setRemainingShares(data.remaining_shares);
+    setShareError("");
+  };
+
+  loadShares();
+
+  const interval = setInterval(loadShares, 30000);
+
+  return () => clearInterval(interval);
+}, [authorized]);
+
   const [loading, setLoading] = useState(true);
   const [totalPageViews, setTotalPageViews] = useState<number | null>(null);
 const [uniqueVisitors, setUniqueVisitors] = useState(0);
@@ -37,6 +73,55 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   function exportToExcel() {
+    
+async function sellShares() {
+  setShareError("");
+  setShareSuccess("");
+
+  const amount = Number(sharesToSell);
+
+  if (
+    !Number.isSafeInteger(amount) ||
+    amount <= 0 ||
+    remainingShares === null ||
+    amount > remainingShares
+  ) {
+    setShareError("Geçerli bir hisse miktarı girin.");
+    return;
+  }
+
+  const confirmed = window.confirm(
+    `${amount} hisse satışı kaydedilecek. Onaylıyor musunuz?`
+  );
+
+  if (!confirmed) return;
+
+  setShareSaving(true);
+
+  try {
+    const { data, error } = await supabase.rpc(
+      "sell_golden_life_shares",
+      { p_shares_sold: amount }
+    );
+
+    if (error) throw error;
+
+    setRemainingShares(data);
+    setSharesToSell("");
+    setShareSuccess(
+      `${amount} hisse satışı kaydedildi. Kalan: ${data}`
+    );
+  } catch (error) {
+    setShareError(
+      error instanceof Error
+        ? error.message
+        : "Satış kaydedilemedi."
+    );
+  } finally {
+    setShareSaving(false);
+  }
+}
+
   const headers = [
     "Ad Soyad",
     "Telefon",
@@ -236,7 +321,100 @@ setPropertyDetails(result.propertyDetails ?? []);
         AEGEAN PRIME ELITE
       </h1>
       <h2>Yönetici Paneli</h2>
-      
+    
+<section style={{
+  background: "#18382c",
+  color: "#ffffff",
+  padding: 24,
+  borderRadius: 16,
+  margin: "24px 0"
+}}>
+  <h2 style={{ color: "#d6bd88", marginTop: 0 }}>
+    Golden Life — Hisse Yönetimi
+  </h2>
+
+  <div style={{
+    display: "flex",
+    gap: 20,
+    flexWrap: "wrap",
+    marginBottom: 20
+  }}>
+    <div>
+      <p>Toplam Hisse</p>
+      <h2>{totalShares?.toLocaleString("tr-TR") ?? "—"}</h2>
+    </div>
+    <div>
+      <p>Satılan Hisse</p>
+      <h2>
+        {totalShares !== null && remainingShares !== null
+          ? (totalShares - remainingShares).toLocaleString("tr-TR")
+          : "—"}
+      </h2>
+    </div>
+    <div>
+      <p>Kalan Hisse</p>
+      <h2 style={{ color: "#d6bd88" }}>
+        {remainingShares?.toLocaleString("tr-TR") ?? "—"}
+      </h2>
+    </div>
+  </div>
+
+  <label htmlFor="shares-to-sell">
+    Satılan Hisse Miktarı
+  </label>
+
+  <input
+    id="shares-to-sell"
+    type="number"
+    min="1"
+    max={remainingShares ?? undefined}
+    step="1"
+    value={sharesToSell}
+    onChange={(e) => setSharesToSell(e.target.value)}
+    placeholder="Örneğin: 5"
+    style={{
+      display: "block",
+      width: "100%",
+      maxWidth: 300,
+      padding: 12,
+      margin: "12px 0",
+      borderRadius: 8,
+      border: "1px solid #d6bd88",
+      color: "#222",
+      background: "#ffffff"
+    }}
+  />
+
+  <button
+    type="button"
+    onClick={sellShares}
+    disabled={shareSaving || remainingShares === null}
+    style={{
+      background: "#d6bd88",
+      color: "#18382c",
+      padding: "12px 24px",
+      border: "none",
+      borderRadius: 8,
+      fontWeight: 700,
+      cursor: "pointer"
+    }}
+  >
+    {shareSaving ? "Kaydediliyor..." : "Satışı Onayla"}
+  </button>
+
+  {shareError && (
+    <p role="alert" style={{ color: "#ffb4b4" }}>
+      {shareError}
+    </p>
+  )}
+
+  {shareSuccess && (
+    <p role="status" style={{ color: "#b8f0c8" }}>
+      {shareSuccess}
+    </p>
+  )}
+</section>
+  
 <div
   style={{
     background: "#18382c",
