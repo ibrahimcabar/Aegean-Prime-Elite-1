@@ -72,7 +72,6 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
   const [analyticsError, setAnalyticsError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  function exportToExcel() {
     
 async function sellShares() {
   setShareError("");
@@ -121,7 +120,7 @@ async function sellShares() {
     setShareSaving(false);
   }
 }
-
+function exportToExcel() {
   const headers = [
     "Ad Soyad",
     "Telefon",
