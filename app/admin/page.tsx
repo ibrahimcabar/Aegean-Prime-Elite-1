@@ -29,10 +29,18 @@ const [shareSales, setShareSales] = useState<{
   remaining_after: number;
   admin_user_id: string;
   created_at: string;
+  
+cancelled_at: string | null;
+cancelled_by: string | null;
+cancellation_reason: string | null;
+
 }[]>([]);
 
 const [shareSalesLoading, setShareSalesLoading] = useState(false);
 const [shareSalesError, setShareSalesError] = useState("");
+
+const [cancellingSaleId, setCancellingSaleId] = useState<number | null>(null);
+const [cancelSaleError, setCancelSaleError] = useState("");
 
 useEffect(() => {
   if (!authorized) return;
@@ -42,9 +50,11 @@ useEffect(() => {
 
     const { data, error } = await supabase
       .from("golden_life_share_sales")
-      .select(
-        "id, shares_sold, remaining_before, remaining_after, admin_user_id, created_at"
-      )
+      
+.select(
+  "id, shares_sold, remaining_before, remaining_after, admin_user_id, created_at, cancelled_at, cancelled_by, cancellation_reason"
+)
+
       .order("created_at", { ascending: false })
       .limit(100);
 
@@ -115,6 +125,75 @@ const [uniqueVisitors, setUniqueVisitors] = useState(0);
 const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
     
+async function cancelShareSale(saleId: number) {
+  if (cancellingSaleId !== null) return;
+
+  setCancelSaleError("");
+
+  const reason = window.prompt(
+    "Satışın iptal nedenini yazın (en az 5 karakter):"
+  );
+
+  if (reason === null) return;
+
+  if (reason.trim().length < 5) {
+    setCancelSaleError("İptal nedeni en az 5 karakter olmalı.");
+    return;
+  }
+
+  const confirmed = window.confirm(
+    "Bu satış iptal edilecek ve hisseler geri eklenecek. Onaylıyor musunuz?"
+  );
+
+  if (!confirmed) return;
+
+  setCancellingSaleId(saleId);
+
+  try {
+    const { data, error } = await supabase.rpc(
+      "cancel_golden_life_sale",
+      {
+        p_sale_id: saleId,
+        p_reason: reason.trim()
+      }
+    );
+
+    if (error) throw error;
+
+    setRemainingShares(data);
+
+    
+const { data: updatedSale, error: refreshError } = await supabase
+  .from("golden_life_share_sales")
+  .select("*")
+  .eq("id", saleId)
+  .single();
+
+if (refreshError) {
+  setCancelSaleError(
+    "İptal başarılı, ancak satış geçmişi yenilenemedi."
+  );
+} else {
+  setShareSales((previous) =>
+    previous.map((sale) =>
+      sale.id === saleId ? updatedSale : sale
+    )
+  );
+}
+
+
+    setShareSuccess("Satış iptal edildi. Hisseler geri eklendi.");
+  } catch (error) {
+    setCancelSaleError(
+      error instanceof Error
+        ? error.message
+        : "Satış iptal edilemedi."
+    );
+  } finally {
+    setCancellingSaleId(null);
+  }
+}
+
 async function sellShares() {
   setShareError("");
   setShareSuccess("");
@@ -489,6 +568,9 @@ setPropertyDetails(result.propertyDetails ?? []);
             <th style={{ padding: 12 }}>Satılan</th>
             <th style={{ padding: 12 }}>Önce</th>
             <th style={{ padding: 12 }}>Kalan</th>
+         
+<th style={{ padding: 12 }}>İptal İşlemi</th>
+
           </tr>
         </thead>
         <tbody>
@@ -508,12 +590,59 @@ setPropertyDetails(result.propertyDetails ?? []);
               <td style={{ padding: 12, color: "#d6bd88" }}>
                 {sale.remaining_after}
               </td>
+              
+<td style={{ padding: 12 }}>
+  {sale.cancelled_at ? (
+    <div>
+      <strong style={{ color: "#b8f0c8" }}>
+        İptal Edildi
+      </strong>
+      <p style={{ fontSize: 12 }}>
+        {sale.cancellation_reason}
+      </p>
+    </div>
+  ) : (
+    <button
+      type="button"
+      disabled={cancellingSaleId !== null}
+      onClick={() => cancelShareSale(sale.id)}
+      style={{
+        background: "#d6bd88",
+        color: "#18382c",
+        padding: "10px 14px",
+        border: "none",
+        borderRadius: 8,
+        fontWeight: 600,
+        cursor: "pointer"
+      }}
+    >
+      {cancellingSaleId === sale.id
+        ? "İptal ediliyor..."
+        : "Satışı İptal Et"}
+    </button>
+  )}
+</td>
+
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   )}
+  
+{cancelSaleError && (
+  <p
+    role="alert"
+    style={{
+      color: "#ffb4b4",
+      marginTop: 16,
+      fontWeight: 600
+    }}
+  >
+    {cancelSaleError}
+  </p>
+)}
+
 </section>
 
 <div
