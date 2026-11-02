@@ -21,7 +21,7 @@ const [sharesToSell, setSharesToSell] = useState("");
 const [shareSaving, setShareSaving] = useState(false);
 const [shareError, setShareError] = useState("");
 const [shareSuccess, setShareSuccess] = useState("");
-
+const [authorized, setAuthorized] = useState(false);
 const [shareSales, setShareSales] = useState<{
   id: number;
   shares_sold: number;
@@ -65,7 +65,6 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, [authorized]);
 
-  const [authorized, setAuthorized] = useState(false);
  
 useEffect(() => {
   if (!authorized) return;
