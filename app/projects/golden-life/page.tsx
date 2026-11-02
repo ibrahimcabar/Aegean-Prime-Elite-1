@@ -3,6 +3,13 @@
 
 import { useEffect, useState } from "react";
 
+import { createClient } from "@supabase/supabase-js";
+
+const sharesSupabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
+
 const features = [
   {
    
@@ -190,6 +197,32 @@ description: {
 export default function GoldenLifePage() {
   const [language, setLanguage] = useState("en");
 
+const [totalShares, setTotalShares] = useState<number | null>(null);
+const [remainingShares, setRemainingShares] = useState<number | null>(null);
+
+useEffect(() => {
+  const loadShares = async () => {
+    const { data, error } = await sharesSupabase
+      .from("golden_life_shares")
+      .select("total_shares, remaining_shares")
+      .eq("id", 1)
+      .single();
+
+    if (error) {
+      console.error("Hisse bilgileri alınamadı:", error.message);
+      return;
+    }
+
+    setTotalShares(data.total_shares);
+    setRemainingShares(data.remaining_shares);
+  };
+
+  loadShares();
+  const interval = setInterval(loadShares, 30000);
+
+  return () => clearInterval(interval);
+}, []);
+
 useEffect(() => {
   const savedLanguage = localStorage.getItem("aegean-language");
 
@@ -284,7 +317,77 @@ setContactOpen(false);
     <option value="ar">🇸🇦 العربية</option>
   </select>
 </div> 
-      
+   
+{totalShares !== null && remainingShares !== null && (
+  <section style={{
+    background: "#18382c",
+    color: "#ffffff",
+    padding: "35px 20px",
+    textAlign: "center"
+  }}>
+    <h2 style={{ color: "#d6bd88", marginBottom: 25 }}>
+      {({
+        tr: "GOLDEN LIFE HİSSE DURUMU",
+        en: "GOLDEN LIFE SHARE AVAILABILITY",
+        de: "GOLDEN LIFE ANTEILSÜBERSICHT",
+        ru: "ДОСТУПНОСТЬ ДОЛЕЙ GOLDEN LIFE",
+        ar: "حالة حصص جولدن لايف"
+      } as Record<string, string>)[language]}
+    </h2>
+
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: 35
+    }}>
+      {[
+        {
+          label: { tr: "Toplam Hisse", en: "Total Shares", de: "Gesamtanteile", ru: "Всего долей", ar: "إجمالي الحصص" },
+          value: totalShares
+        },
+        {
+          label: { tr: "Satılan Hisse", en: "Sold Shares", de: "Verkaufte Anteile", ru: "Проданные доли", ar: "الحصص المباعة" },
+          value: totalShares - remainingShares
+        },
+        {
+          label: { tr: "Kalan Hisse", en: "Remaining Shares", de: "Verfügbare Anteile", ru: "Осталось долей", ar: "الحصص المتبقية" },
+          value: remainingShares
+        }
+      ].map((item) => (
+        <div key={item.label.en} style={{ minWidth: 130 }}>
+          <div style={{
+            fontSize: 38,
+            fontWeight: 700,
+            color: "#d6bd88"
+          }}>
+            {item.value.toLocaleString("tr-TR")}
+          </div>
+          <div style={{ fontSize: 14 }}>
+            {(item.label as Record<string, string>)[language]}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style={{
+      maxWidth: 600,
+      height: 12,
+      background: "#ffffff30",
+      borderRadius: 20,
+      margin: "30px auto 10px",
+      overflow: "hidden"
+    }}>
+      <div style={{
+        width: `${totalShares > 0 ? ((totalShares - remainingShares) / totalShares) * 100 : 0}%`,
+        height: "100%",
+        background: "#d6bd88",
+        borderRadius: 20
+      }} />
+    </div>
+  </section>
+)}
+   
 <section style={{ position: "relative", height: "min(85vh, 900px)", minHeight: "420px", overflow: "hidden" }}>
   {images.map((image, index) => (
   <img
