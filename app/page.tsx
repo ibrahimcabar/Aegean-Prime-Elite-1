@@ -8,6 +8,32 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
 );
 export default function Home(){
+  
+const [goldenLifeShares, setGoldenLifeShares] = useState<number | null>(null);
+
+useEffect(() => {
+  const loadGoldenLifeShares = async () => {
+    const { data, error } = await supabase
+      .from("golden_life_shares")
+      .select("remaining_shares")
+      .eq("id", 1)
+      .single();
+
+    if (error) {
+      console.error("Golden Life hisse hatası:", error.message);
+      return;
+    }
+
+    setGoldenLifeShares(data.remaining_shares);
+  };
+
+  loadGoldenLifeShares();
+
+  const interval = setInterval(loadGoldenLifeShares, 30000);
+
+  return () => clearInterval(interval);
+}, []);
+
   const [cookieConsent, setCookieConsent] = useState<string | null>(null);
   useEffect(() => {
   const savedConsent = localStorage.getItem("analytics_consent");
@@ -486,6 +512,71 @@ return <><header className="header"><a href="#top" className="brand"><span class
  language === "ar" ? "تبدأ أسعار العقارات من 50,000 يورو" :
  "Property prices start from €50,000"} 
       </p>
+     
+{goldenLifeShares !== null && (
+  <div style={{
+    margin: "28px auto 0",
+    padding: "24px 20px",
+    maxWidth: 450,
+    border: "1px solid #b99a60",
+    borderRadius: 16,
+    background: "rgba(24,56,44,0.65)",
+    textAlign: "center"
+  }}>
+    <div style={{
+      color: "#d6bd88",
+      fontSize: "clamp(42px, 7vw, 64px)",
+      fontWeight: 700
+    }}>
+      {goldenLifeShares.toLocaleString("tr-TR")}
+    </div>
+
+    <div style={{
+      color: "#ffffff",
+      fontSize: 18,
+      fontWeight: 600,
+      letterSpacing: 2
+    }}>
+      {({
+        tr: "KALAN HİSSE",
+        en: "REMAINING SHARES",
+        de: "VERFÜGBARE ANTEILE",
+        ru: "ОСТАЛОСЬ ДОЛЕЙ",
+        ar: "الحصص المتبقية"
+      } as Record<string, string>)[language] ?? "REMAINING SHARES"}
+    </div>
+
+    <p style={{
+      color: "#e8e5dc",
+      fontSize: 13,
+      marginTop: 12
+    }}>
+      {({
+        tr: "Toplam 1.400 hisse",
+        en: "1,400 shares in total",
+        de: "Insgesamt 1.400 Anteile",
+        ru: "Всего 1 400 долей",
+        ar: "إجمالي ١٤٠٠ حصة"
+      } as Record<string, string>)[language] ?? "1,400 shares in total"}
+    </p>
+
+    <div style={{
+      height: 9,
+      background: "rgba(255,255,255,0.2)",
+      borderRadius: 20,
+      overflow: "hidden",
+      marginTop: 16
+    }}>
+      <div style={{
+        width: `${Math.max(0, Math.min(100, ((1400 - goldenLifeShares) / 1400) * 100))}%`,
+        height: "100%",
+        background: "#d6bd88",
+        borderRadius: 20
+      }} />
+    </div>
+  </div>
+)}
+ 
     </div>
 
     <p style={{ color: "#d9bd82", fontSize: 16 }}>
