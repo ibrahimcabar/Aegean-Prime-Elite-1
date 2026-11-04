@@ -1340,7 +1340,8 @@ style={{
 <div
   style={{
     display: "grid",
-    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gridTemplateColumns:
+  "repeat(auto-fit, minmax(min(100%, 480px), 1fr))",
     gap: 32,
     alignItems: "start",
   }}
@@ -1408,7 +1409,10 @@ style={{
     <div
   style={{
     display: "grid",
-    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gridTemplateColumns:
+  "repeat(2, minmax(0, 1fr))",
+width: "100%",
+minWidth: 0,
     gap: 20,
     marginTop: 32,
     gridAutoFlow: "row",
@@ -1466,7 +1470,9 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
         <div
           key={label}
           style={{
-            padding: 24,
+            padding: "clamp(12px, 2vw, 24px)",
+minWidth: 0,
+boxSizing: "border-box",
             border: "1px solid #806c3b",
             borderRadius: 14,
             background: "#1b2630",
@@ -1477,7 +1483,9 @@ language === "ar" ? "124,246 م² (12.42 هكتار)" :
           </div>
           <div
             style={{
-              fontSize: 25,
+              fontSize: "clamp(15px, 4vw, 25px)",
+overflowWrap: "anywhere",
+lineHeight: 1.3,
               fontWeight: 700,
               marginTop: 12,
             }}
