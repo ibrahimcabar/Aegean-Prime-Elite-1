@@ -532,7 +532,7 @@ fontSize: "clamp(32px, 6vw, 110px)",
     : "Golden Life is a planned residential project in the Kayadibi / Karaöz area of Antalya, designed to combine residential living with health, rehabilitation, nature, and social amenities."}
 </p>
         
-<div style={{
+<div className="golden-features-grid" style={{
   display: "grid",
   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   gap: 24,
@@ -1534,7 +1534,37 @@ minHeight: 220,
     
   </div>
 </section>
-     
+
+      
+<style>{`
+  @media (max-width: 767px) {
+    .golden-features-grid {
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 16px !important;
+      margin-top: 24px !important;
+    }
+
+    .golden-features-grid > article {
+      min-width: 0;
+      min-height: 0 !important;
+      padding: 24px !important;
+      overflow-wrap: break-word;
+    }
+
+    .golden-features-grid > article h3 {
+      font-size: 21px !important;
+      line-height: 1.35 !important;
+      overflow-wrap: anywhere;
+    }
+
+    .golden-features-grid > article p {
+      font-size: 15px !important;
+      line-height: 1.7 !important;
+      overflow-wrap: anywhere;
+    }
+  }
+`}</style>
+
     </main>
   );
 }
