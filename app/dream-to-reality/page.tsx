@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-
+import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
 export default function DreamToRealityPage() {
   const [dream, setDream] = useState("");
 const [location, setLocation] = useState("");
@@ -10,6 +14,9 @@ const [maxBudget, setMaxBudget] = useState("");
   const [budgetCurrency, setBudgetCurrency] = useState("EUR");
  const [propertyType, setPropertyType] = useState("");
  const [purchasePurpose, setPurchasePurpose] = useState("");
+ const [matchedProperties, setMatchedProperties] = useState<any[]>([]);
+const [searchLoading, setSearchLoading] = useState(false);
+const [searchError, setSearchError] = useState(""); 
   return (
     <main
       style={{
