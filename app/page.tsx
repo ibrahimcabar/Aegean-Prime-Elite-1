@@ -83,6 +83,7 @@ const [minPrice, setMinPrice] = useState('');
   const [minBedrooms, setMinBedrooms] = useState('');
 const [minArea, setMinArea] = useState('');
 const [maxArea, setMaxArea] = useState('');
+  const [sortBy, setSortBy] = useState('default');
   const [maxPrice, setMaxPrice] = useState('');
 
 const [selectedCurrency, setSelectedCurrency] = useState('EUR');
@@ -186,7 +187,7 @@ const filtered = useMemo(() => {
     }))
   ];
 
-  return allProperties.filter(p => {
+  const filteredProperties = allProperties.filter(p => {
     const locationMatch =
       !search ||
       [p.city, p.country, p.address, p.title]
@@ -249,12 +250,54 @@ const maxMatch =
   maxMatch
 );
   });
+  if (sortBy === "price_asc" || sortBy === "price_desc") {
+  filteredProperties.sort((a, b) => {
+    const priceA = convertPrice(
+      Number(a.price),
+      a.currency || "TRY",
+      appliedCurrency
+    );
+
+    const priceB = convertPrice(
+      Number(b.price),
+      b.currency || "TRY",
+      appliedCurrency
+    );
+
+    if (priceA === null && priceB === null) return 0;
+    if (priceA === null) return 1;
+    if (priceB === null) return -1;
+
+    return sortBy === "price_asc"
+      ? priceA - priceB
+      : priceB - priceA;
+  });
+}
+  if (sortBy === "area_asc" || sortBy === "area_desc") {
+  filteredProperties.sort((a, b) => {
+    const areaA = Number(a.area);
+    const areaB = Number(b.area);
+
+    const validA = Number.isFinite(areaA) && areaA > 0;
+    const validB = Number.isFinite(areaB) && areaB > 0;
+
+    if (!validA && !validB) return 0;
+    if (!validA) return 1;
+    if (!validB) return -1;
+
+    return sortBy === "area_asc"
+      ? areaA - areaB
+      : areaB - areaA;
+  });
+}
+  return filteredProperties;
 }, [
   search,
   kind,
   minBedrooms,
   minArea,
   maxArea,
+  sortBy,
   dbProperties,
   appliedMinPrice,
   appliedMaxPrice,
@@ -403,6 +446,51 @@ return <><header className="header"><a href="#top" className="brand"><span class
   onChange={(e) => setMaxArea(e.target.value)}
   aria-label="Maximum area"
 />
+ <select
+  aria-label="Sort properties"
+  value={sortBy}
+  onChange={(e) => setSortBy(e.target.value)}
+>
+  <option value="default">
+    {language === "tr" ? "Sıralama" :
+     language === "de" ? "Sortieren" :
+     language === "ru" ? "Сортировка" :
+     language === "ar" ? "الترتيب" :
+     "Sort by"}
+  </option>
+
+  <option value="price_asc">
+    {language === "tr" ? "Fiyat: Artan" :
+     language === "de" ? "Preis: Aufsteigend" :
+     language === "ru" ? "Цена: По возрастанию" :
+     language === "ar" ? "السعر: من الأقل للأعلى" :
+     "Price: Low to High"}
+  </option>
+
+  <option value="price_desc">
+    {language === "tr" ? "Fiyat: Azalan" :
+     language === "de" ? "Preis: Absteigend" :
+     language === "ru" ? "Цена: По убыванию" :
+     language === "ar" ? "السعر: من الأعلى للأقل" :
+     "Price: High to Low"}
+  </option>
+
+  <option value="area_asc">
+    {language === "tr" ? "m²: Küçükten Büyüğe" :
+     language === "de" ? "Fläche: Aufsteigend" :
+     language === "ru" ? "Площадь: По возрастанию" :
+     language === "ar" ? "المساحة: من الأصغر للأكبر" :
+     "Area: Small to Large"}
+  </option>
+
+  <option value="area_desc">
+    {language === "tr" ? "m²: Büyükten Küçüğe" :
+     language === "de" ? "Fläche: Absteigend" :
+     language === "ru" ? "Площадь: По убыванию" :
+     language === "ar" ? "المساحة: من الأكبر للأصغر" :
+     "Area: Large to Small"}
+  </option>
+</select> 
 <input
   type="number"
   min="0"
