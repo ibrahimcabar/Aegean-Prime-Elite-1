@@ -81,7 +81,9 @@ const [query,setQuery]=useState('');const [search,setSearch]=useState('');const 
   
 const [minPrice, setMinPrice] = useState('');
   const [minBedrooms, setMinBedrooms] = useState('');
-const [maxPrice, setMaxPrice] = useState('');
+const [minArea, setMinArea] = useState('');
+const [maxArea, setMaxArea] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
 
 const [selectedCurrency, setSelectedCurrency] = useState('EUR');
 
@@ -200,6 +202,16 @@ const bedroomsMatch =
     p.beds !== '' &&
     Number.isFinite(Number(p.beds)) &&
     Number(p.beds) >= Number(minBedrooms));
+    const area =
+  p.area == null || p.area === "" || Number(p.area) <= 0
+    ? NaN
+    : Number(p.area);
+
+const areaMatch =
+  (minArea === '' ||
+    (Number.isFinite(area) && area >= Number(minArea))) &&
+  (maxArea === '' ||
+    (Number.isFinite(area) && area <= Number(maxArea)));
     const price = Number(p.price);
     const hasPriceFilter =
       appliedMinPrice !== '' || appliedMaxPrice !== '';
@@ -231,6 +243,7 @@ const maxMatch =
   locationMatch &&
   typeMatch &&
   bedroomsMatch &&
+  areaMatch &&
   currencyMatch &&
   minMatch &&
   maxMatch
@@ -240,13 +253,13 @@ const maxMatch =
   search,
   kind,
   minBedrooms,
+  minArea,
+  maxArea,
   dbProperties,
   appliedMinPrice,
   appliedMaxPrice,
-  
-appliedCurrency,
-exchangeRates
-
+  appliedCurrency,
+  exchangeRates
 ]);
 
 
@@ -361,6 +374,35 @@ return <><header className="header"><a href="#top" className="brand"><span class
   <option value="4">4+</option>
   <option value="5">5+</option>
 </select> 
+  <input
+  type="number"
+  min="0"
+  placeholder={
+    language === "tr" ? "Min. m²" :
+    language === "de" ? "Min. m²" :
+    language === "ru" ? "Мин. м²" :
+    language === "ar" ? "الحد الأدنى م²" :
+    "Min. m²"
+  }
+  value={minArea}
+  onChange={(e) => setMinArea(e.target.value)}
+  aria-label="Minimum area"
+/>
+
+<input
+  type="number"
+  min="0"
+  placeholder={
+    language === "tr" ? "Maks. m²" :
+    language === "de" ? "Max. m²" :
+    language === "ru" ? "Макс. м²" :
+    language === "ar" ? "الحد الأقصى م²" :
+    "Max. m²"
+  }
+  value={maxArea}
+  onChange={(e) => setMaxArea(e.target.value)}
+  aria-label="Maximum area"
+/>
 <input
   type="number"
   min="0"
