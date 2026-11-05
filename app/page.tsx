@@ -80,6 +80,7 @@ if (!visitorId) {
 const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
   
 const [minPrice, setMinPrice] = useState('');
+  const [minBedrooms, setMinBedrooms] = useState('');
 const [maxPrice, setMaxPrice] = useState('');
 
 const [selectedCurrency, setSelectedCurrency] = useState('EUR');
@@ -193,7 +194,12 @@ const filtered = useMemo(() => {
 
     const typeMatch =
       kind === 'All types' || p.type === kind;
-
+const bedroomsMatch =
+  minBedrooms === '' ||
+  (p.beds != null &&
+    p.beds !== '' &&
+    Number.isFinite(Number(p.beds)) &&
+    Number(p.beds) >= Number(minBedrooms));
     const price = Number(p.price);
     const hasPriceFilter =
       appliedMinPrice !== '' || appliedMaxPrice !== '';
@@ -222,16 +228,18 @@ const maxMatch =
 
 
     return (
-      locationMatch &&
-      typeMatch &&
-      currencyMatch &&
-      minMatch &&
-      maxMatch
-    );
+  locationMatch &&
+  typeMatch &&
+  bedroomsMatch &&
+  currencyMatch &&
+  minMatch &&
+  maxMatch
+);
   });
 }, [
   search,
   kind,
+  minBedrooms,
   dbProperties,
   appliedMinPrice,
   appliedMaxPrice,
@@ -335,6 +343,24 @@ return <><header className="header"><a href="#top" className="brand"><span class
    "Villa"}
 
 </option></select>
+ <select
+  aria-label="Minimum bedrooms"
+  value={minBedrooms}
+  onChange={(e) => setMinBedrooms(e.target.value)}
+>
+  <option value="">
+    {language === "tr" ? "Oda Sayısı" :
+     language === "de" ? "Schlafzimmer" :
+     language === "ru" ? "Количество спален" :
+     language === "ar" ? "عدد غرف النوم" :
+     "Bedrooms"}
+  </option>
+  <option value="1">1+</option>
+  <option value="2">2+</option>
+  <option value="3">3+</option>
+  <option value="4">4+</option>
+  <option value="5">5+</option>
+</select> 
 <input
   type="number"
   min="0"
