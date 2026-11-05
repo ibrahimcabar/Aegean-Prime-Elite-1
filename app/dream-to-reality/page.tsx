@@ -4,7 +4,12 @@ import { useState } from "react";
 
 export default function DreamToRealityPage() {
   const [dream, setDream] = useState("");
-
+const [location, setLocation] = useState("");
+  const [minBudget, setMinBudget] = useState("");
+const [maxBudget, setMaxBudget] = useState("");
+  const [budgetCurrency, setBudgetCurrency] = useState("EUR");
+ const [propertyType, setPropertyType] = useState("");
+ const [purchasePurpose, setPurchasePurpose] = useState("");
   return (
     <main
       style={{
@@ -50,10 +55,149 @@ export default function DreamToRealityPage() {
             marginTop: "30px",
           }}
         />
+<input
+  type="text"
+  value={location}
+onChange={(e) => setLocation(e.target.value)}
+  placeholder="Tercih ettiğiniz şehir veya bölge"
+  aria-label="Tercih edilen konum"
+  style={{
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "16px",
+    marginTop: "20px",
+    borderRadius: "12px",
+    border: "1px solid #b99a60",
+    fontSize: "16px",
+  }}
+/>
+       <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: "12px",
+    marginTop: "20px",
+  }}
+>
+  <input
+    type="number"
+    min="0"
+    placeholder="Min. Bütçe"
+    aria-label="Minimum bütçe"
+    value={minBudget}
+    onChange={(e) => setMinBudget(e.target.value)}
+    style={{
+      width: "100%",
+      minWidth: 0,
+      boxSizing: "border-box",
+      padding: "16px",
+      borderRadius: "12px",
+      border: "1px solid #b99a60",
+      fontSize: "16px",
+    }}
+  />
 
+  <input
+    type="number"
+    min="0"
+    placeholder="Maks. Bütçe"
+    aria-label="Maksimum bütçe"
+    value={maxBudget}
+    onChange={(e) => setMaxBudget(e.target.value)}
+    style={{
+      width: "100%",
+      minWidth: 0,
+      boxSizing: "border-box",
+      padding: "16px",
+      borderRadius: "12px",
+      border: "1px solid #b99a60",
+      fontSize: "16px",
+    }}
+  />
+</div> 
+        <select
+  aria-label="Bütçe para birimi"
+  value={budgetCurrency}
+  onChange={(e) => setBudgetCurrency(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "16px",
+    marginTop: "12px",
+    borderRadius: "12px",
+    border: "1px solid #b99a60",
+    background: "#ffffff",
+    color: "#18382c",
+    fontSize: "16px",
+  }}
+>
+  <option value="EUR">Euro (€)</option>
+  <option value="USD">Dolar ($)</option>
+  <option value="TRY">Türk Lirası (₺)</option>
+</select>
+        <select
+  aria-label="Gayrimenkul türü"
+  value={propertyType}
+  onChange={(e) => setPropertyType(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "16px",
+    marginTop: "12px",
+    borderRadius: "12px",
+    border: "1px solid #b99a60",
+    background: "#ffffff",
+    color: "#18382c",
+    fontSize: "16px",
+  }}
+>
+  <option value="">Gayrimenkul Türü Seçiniz</option>
+  <option value="Apartment">Daire</option>
+  <option value="Villa">Villa</option>
+  <option value="Land">Arsa</option>
+  <option value="Commercial">Ticari Gayrimenkul</option>
+</select>
+        <select
+  aria-label="Satın alma amacı"
+  value={purchasePurpose}
+  onChange={(e) => setPurchasePurpose(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "16px",
+    marginTop: "12px",
+    borderRadius: "12px",
+    border: "1px solid #b99a60",
+    background: "#ffffff",
+    color: "#18382c",
+    fontSize: "16px",
+  }}
+>
+  <option value="">Satın Alma Amacınız</option>
+  <option value="living">Yaşamak</option>
+  <option value="investment">Yatırım Yapmak</option>
+  <option value="both">Hem Yaşamak Hem Yatırım</option>
+</select>
+        {minBudget !== "" &&
+  maxBudget !== "" &&
+  Number(minBudget) > Number(maxBudget) && (
+    <p
+      role="alert"
+      style={{
+        color: "#b42318",
+        fontSize: "14px",
+        marginTop: "12px",
+      }}
+    >
+      Minimum bütçe, maksimum bütçeden yüksek olamaz.
+    </p>
+  )}
         <button
           type="button"
-          disabled={!dream.trim()}
+          disabled={
+  !dream.trim() ||
+  (minBudget !== "" && maxBudget !== "" &&
+    Number(minBudget) > Number(maxBudget)) ||
+  (minBudget !== "" && Number(minBudget) < 0) ||
+  (maxBudget !== "" && Number(maxBudget) < 0)
+}
           style={{
             marginTop: "20px",
             padding: "16px 35px",
@@ -62,8 +206,22 @@ export default function DreamToRealityPage() {
             background: "#18382c",
             color: "#ffffff",
             fontSize: "16px",
-            cursor: dream.trim() ? "pointer" : "not-allowed",
-            opacity: dream.trim() ? 1 : 0.5,
+            cursor:
+  !dream.trim() ||
+  (minBudget !== "" &&
+    maxBudget !== "" &&
+    Number(minBudget) > Number(maxBudget)) ||
+  (minBudget !== "" && Number(minBudget) < 0) ||
+  (maxBudget !== "" && Number(maxBudget) < 0)
+    ? "not-allowed"
+    : "pointer",
+
+opacity: !dream.trim() ||
+  (minBudget !== "" && maxBudget !== "" &&
+    Number(minBudget) > Number(maxBudget)) ||
+(minBudget !== "" && Number(minBudget) < 0) ||
+(maxBudget !== "" && Number(maxBudget) < 0)
+  ? 0.5 : 1,
           }}
         >
           Hayalime Uygun Evleri Bul
