@@ -17,6 +17,30 @@ const [maxBudget, setMaxBudget] = useState("");
  const [matchedProperties, setMatchedProperties] = useState<any[]>([]);
 const [searchLoading, setSearchLoading] = useState(false);
 const [searchError, setSearchError] = useState(""); 
+  const searchProperties = async () => {
+  setSearchLoading(true);
+  setSearchError("");
+  setMatchedProperties([]);
+
+  try {
+    const { data, error } = await supabase
+      .from("properties")
+      .select(
+        "id,title,city,country,street_address,property_type,price,currency,area_sqm,description,image,status"
+      )
+      .eq("status", "active")
+      .limit(100);
+
+    if (error) throw error;
+
+    setMatchedProperties(data ?? []);
+  } catch (error) {
+    console.error("Property search error:", error);
+    setSearchError("İlanlar yüklenirken bir hata oluştu.");
+  } finally {
+    setSearchLoading(false);
+  }
+};
   return (
     <main
       style={{
@@ -198,6 +222,7 @@ onChange={(e) => setLocation(e.target.value)}
   )}
         <button
           type="button"
+         onClick={searchProperties}
           disabled={
   !dream.trim() ||
   (minBudget !== "" && maxBudget !== "" &&
@@ -233,6 +258,23 @@ opacity: !dream.trim() ||
         >
           Hayalime Uygun Evleri Bul
         </button>
+        {searchLoading && (
+  <p style={{ marginTop: "20px", color: "#18382c" }}>
+    Gayrimenkuller aranıyor...
+  </p>
+)}
+
+{searchError && (
+  <p style={{ marginTop: "20px", color: "#b91c1c" }}>
+    {searchError}
+  </p>
+)}
+
+{matchedProperties.length > 0 && (
+  <p style={{ marginTop: "20px", color: "#18382c" }}>
+    {matchedProperties.length} gayrimenkul bulundu.
+  </p>
+)}
       </div>
     </main>
   );
