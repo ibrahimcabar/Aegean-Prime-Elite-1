@@ -438,7 +438,7 @@ setPropertyDetails(result.propertyDetails ?? []);
   overflowX: "hidden"
 }}>
       <h1 style={{ color: "#b89b68" }}>
-        VELORA ESTATE
+        VELORA PRIME ELITE
       </h1>
       <h2>Yönetici Paneli</h2>
     
