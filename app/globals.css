@@ -519,3 +519,45 @@
     grid-column: 1 / -1;
   }
 }
+/* VELORA PRIME ELITE - MOBILE LOGO FIX */
+
+@media (max-width: 700px) {
+  .header {
+    gap: 6px;
+    padding: 0 10px;
+  }
+
+  .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand img {
+    display: block;
+    width: 100% !important;
+    max-width: 125px !important;
+    height: auto !important;
+    max-height: 58px;
+    object-fit: contain;
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+
+  .header-actions select {
+    width: 100px;
+    max-width: 100px;
+    font-size: 11px;
+  }
+
+  .header-actions .outline-btn {
+    display: none;
+  }
+
+  .menu {
+    flex-shrink: 0;
+  }
+}
