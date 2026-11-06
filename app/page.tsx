@@ -318,7 +318,7 @@ function submit() {
 }
 
 function send(){if(!message.trim())return;const m=message.trim();setMessages(old=>[...old,{who:'user',text:m},{who:'bot',text:'Thanks! This is a preview assistant. Live AI recommendations will be available after connecting our property database and AI service.'}]);setMessage('')}
-return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">A<span>✦</span></span><span>AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">{t[0]}</a><a href="#how">{t[1]}</a><a href="#packages">{t[2]}</a><a href="#about">{t[3]}</a></nav><div className="header-actions"><select
+return <><header className="header"><a href="#top" className="brand"><span className="brand-symbol">V<span>✦</span></span><span>VELORA <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></span></a><nav className={mobile?'nav show':'nav'}><a href="#properties">{t[0]}</a><a href="#how">{t[1]}</a><a href="#packages">{t[2]}</a><a href="#about">{t[3]}</a></nav><div className="header-actions"><select
   aria-label="Select language"
   value={language}
   onChange={(e) => {
