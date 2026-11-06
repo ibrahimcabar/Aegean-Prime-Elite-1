@@ -438,7 +438,7 @@ setPropertyDetails(result.propertyDetails ?? []);
   overflowX: "hidden"
 }}>
       <h1 style={{ color: "#b89b68" }}>
-        AEGEAN PRIME ELITE
+        VELORA ESTATE
       </h1>
       <h2>Yönetici Paneli</h2>
     
@@ -660,7 +660,7 @@ setPropertyDetails(result.propertyDetails ?? []);
   </h2>
 
   <p style={{ color: "#e8e5dc" }}>
-    Aegean Prime Elite ziyaretçi ve ilan performans merkezi
+    VELORA ESTATE ziyaretçi ve ilan performans merkezi
   </p>
 
   <div
