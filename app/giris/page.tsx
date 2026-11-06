@@ -98,7 +98,7 @@ export default function GirisPage() {
           textAlign: "center",
           letterSpacing: 3,
         }}>
-          AEGEAN PRIME ELITE
+          VELORA PRIME ELITE
         </h1>
 
         <p style={{ textAlign: "center", color: "#777" }}>
