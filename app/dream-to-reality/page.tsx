@@ -58,7 +58,7 @@ const [searchError, setSearchError] = useState("");
         }}
       >
         <p style={{ letterSpacing: "4px", fontSize: "13px" }}>
-          AEGEAN PRIME ELITE
+         VELORA PRIME ELITE 
         </p>
 
         <h1 style={{ fontSize: "clamp(32px, 6vw, 60px)" }}>
