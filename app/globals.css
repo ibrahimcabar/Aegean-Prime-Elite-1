@@ -639,3 +639,28 @@
     top: 100%;
   }
 }
+/* VELORA - PREMIUM MOBILE NAVIGATION */
+
+@media (max-width: 700px) {
+  .nav.show {
+    padding: 12px 24px 20px;
+    gap: 0;
+    background: #fff;
+    border-top: 1px solid #e9dfcd;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.10);
+  }
+
+  .nav.show a {
+    display: block;
+    padding: 17px 8px;
+    border-bottom: 1px solid #eee8dc;
+    font-size: 14px;
+    font-weight: 500;
+    color: #18382c;
+    letter-spacing: 0.4px;
+  }
+
+  .nav.show a:last-child {
+    border-bottom: none;
+  }
+}
