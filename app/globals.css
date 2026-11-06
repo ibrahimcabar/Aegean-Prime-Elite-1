@@ -554,10 +554,32 @@
   }
 
   .header-actions .outline-btn {
-    display: none;
-  }
+  display: inline-flex;
+  padding: 7px 9px;
+  font-size: 10px;
+  gap: 4px;
+  white-space: nowrap;
+}
 
   .menu {
     flex-shrink: 0;
+  }
+    .brand img {
+    max-width: 105px !important;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .header-actions select {
+    width: 85px;
+    max-width: 85px;
+    font-size: 10px;
+  }
+
+  .header-actions .outline-btn {
+    padding: 6px;
+    font-size: 9px;
   }
 }
