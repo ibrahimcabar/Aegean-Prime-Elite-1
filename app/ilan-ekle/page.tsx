@@ -144,7 +144,7 @@ if (newProperty && uploadedImageUrls.length > 0) {
         borderRadius: 12,
       }}>
         <h1 style={{ color: "#b89b68" }}>
-          AEGEAN PRIME ELITE
+          VELORA PRIME ELITE
         </h1>
 
         <h2>Add New Property</h2>
