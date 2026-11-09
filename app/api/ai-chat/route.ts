@@ -16,7 +16,7 @@ if (process.env.AI_TEST_MODE !== "false") {
     .at(-1)?.content.toLocaleLowerCase("tr-TR") || "";
 
   let reply =
-    "Aegean Prime Elite'e hoş geldiniz! Golden Life projesi ve gayrimenkul seçenekleri hakkında size yardımcı olabilirim.";
+    Velora Prime Elite'e hoş geldiniz! Golden Life projesi ve gayrimenkul seçenekleri hakkında size yardımcı olabilirim.";
 
   if (/fiyat|price|preis|ücret|kaç para/.test(lastMessage)) {
     reply =
@@ -26,7 +26,7 @@ if (process.env.AI_TEST_MODE !== "false") {
       "Golden Life projesinde 125 m² büyüklüğünde, 2+1 tek kat villa seçeneği bulunuyor. Liste fiyatı 220.000 €'dur. Güncel müsaitlik ve ödeme koşulları satış ekibimizden teyit edilmelidir.";
   } else if (/merhaba|selam|hello|hallo/.test(lastMessage)) {
     reply =
-      "Merhaba! Aegean Prime Elite'e hoş geldiniz. Size nasıl yardımcı olabilirim?";
+      "Merhaba! Velora Prime Elite'e hoş geldiniz. Size nasıl yardımcı olabilirim?";
   }
 
   return NextResponse.json({ reply });
@@ -63,7 +63,7 @@ if (process.env.AI_TEST_MODE !== "false") {
           messages: [
             {
               role: "system",
-              content: `You are the professional real estate assistant for Aegean Prime Elite. Respond in the customer's language, supporting Turkish, German, English and Arabic. Be polite, concise and helpful.
+              content: `You are the professional real estate assistant for Velora Prime Elite. Respond in the customer's language, supporting Turkish, German, English, Russian and Arabic. Be polite, concise and helpful.
 
 Golden Life is a real estate project in Antalya, Kayadibi / Karaöz, Turkey. Property types and listed prices: 1+0 studio 45 m² €50,000; 1+1 apartment 55 m² €60,000; 2+1 apartment 70 m² €90,000; single-storey 2+1 villa 125 m² €220,000. The cooperative participation fee is 650,000 TRY. The project advertises a 36-month payment plan. Do not invent deposit amounts, financing conditions, availability, guarantees or additional fees. Explain that exact payment conditions require confirmation by the sales team.
 
