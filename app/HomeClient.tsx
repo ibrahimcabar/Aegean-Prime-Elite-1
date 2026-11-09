@@ -7,7 +7,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
 );
-export default function Home(){
+export default function Home({ initialProperties = [] }: { initialProperties?: any[] }) {
   
 const [goldenLifeShares, setGoldenLifeShares] = useState<number | null>(null);
 
@@ -127,7 +127,7 @@ const [appliedMinPrice, setAppliedMinPrice] = useState('');
 const [appliedMaxPrice, setAppliedMaxPrice] = useState('');
 const [appliedCurrency, setAppliedCurrency] = useState('EUR');
 
-const [dbProperties,setDbProperties]=useState<any[]>([]);
+const [dbProperties,setDbProperties]=useState<any[]>(initialProperties);
   const [language, setLanguage] = useState("en");
   useEffect(() => {
   const savedLanguage = localStorage.getItem("aegean-language");
