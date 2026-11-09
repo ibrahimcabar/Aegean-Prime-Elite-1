@@ -76,12 +76,21 @@ For other properties, do not invent listings or prices. Invite the customer to p
       }
     );
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: "Yapay zekâ servisine ulaşılamadı." },
-        { status: 502 }
-      );
-    }
+    
+if (!response.ok) {
+  const errorText = await response.text();
+
+  console.error("Velora AI OpenAI error:", {
+    status: response.status,
+    details: errorText.slice(0, 1500)
+  });
+
+  return NextResponse.json(
+    { error: "Yapay zekâ servisine ulaşılamadı." },
+    { status: 502 }
+  );
+}
+
 
     const data = await response.json();
     const reply = data.choices?.[0]?.message?.content;
