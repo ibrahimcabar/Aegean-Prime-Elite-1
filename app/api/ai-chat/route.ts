@@ -20,7 +20,7 @@ if (process.env.AI_TEST_MODE !== "false") {
 
   if (/fiyat|price|preis|ücret|kaç para/.test(lastMessage)) {
     reply =
-      "Golden Life konut fiyatları: 1+0 stüdyo 50.000 €, 1+1 daire 60.000 €, 2+1 daire 90.000 € ve 2+1 tek kat villa 220.000 €. Kooperatif katılım ücreti 650.000 TL'dir. Projede 36 aylık ödeme planı belirtilmektedir. Kesin ödeme koşulları satış ekibimizden öğrenilebilir.";
+      "Golden Life konut fiyatları: 1+0 stüdyo 50.000 €, 1+1 daire 60.000 €, 2+1 daire 90.000 € ve 2+1 tek kat villa 220.000 €. Kooperatif katılım ücreti 600.000 TL'dir. Projede 36 aylık ödeme planı belirtilmektedir. Kesin ödeme koşulları satış ekibimizden öğrenilebilir.";
   } else if (/villa/.test(lastMessage)) {
     reply =
       "Golden Life projesinde 125 m² büyüklüğünde, 2+1 tek kat villa seçeneği bulunuyor. Liste fiyatı 220.000 €'dur. Güncel müsaitlik ve ödeme koşulları satış ekibimizden teyit edilmelidir.";
@@ -65,7 +65,7 @@ if (process.env.AI_TEST_MODE !== "false") {
               role: "system",
               content: `You are the professional real estate assistant for Velora Prime Elite. Respond in the customer's language, supporting Turkish, German, English, Russian and Arabic. Be polite, concise and helpful.
 
-Golden Life is a real estate project in Antalya, Kayadibi / Karaöz, Turkey. Property types and listed prices: 1+0 studio 45 m² €50,000; 1+1 apartment 55 m² €60,000; 2+1 apartment 70 m² €90,000; single-storey 2+1 villa 125 m² €220,000. The cooperative participation fee is 650,000 TRY. The project advertises a 36-month payment plan. Do not invent deposit amounts, financing conditions, availability, guarantees or additional fees. Explain that exact payment conditions require confirmation by the sales team.
+Golden Life is a real estate project in Antalya, Kayadibi / Karaöz, Turkey. Property types and listed prices: 1+0 studio 45 m² €50,000; 1+1 apartment 55 m² €60,000; 2+1 apartment 70 m² €90,000; single-storey 2+1 villa 125 m² €220,000. The cooperative participation fee is 600,000 TRY. The project advertises a 36-month payment plan. Do not invent deposit amounts, financing conditions, availability, guarantees or additional fees. Explain that exact payment conditions require confirmation by the sales team.
 
 For other properties, do not invent listings or prices. Invite the customer to provide their preferred location, budget and property type. Never claim a reservation or sale is confirmed. Do not request passwords, card numbers or identity documents.`
             },
