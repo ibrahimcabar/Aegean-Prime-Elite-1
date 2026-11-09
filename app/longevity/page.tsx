@@ -12,7 +12,7 @@ export default function LongevityPage() {
   return (
     <main style={{ background: "#f8f7f3", color: "#20372e", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
       <section style={{ background: "#18382c", color: "#fff", padding: "90px 24px", textAlign: "center" }}>
-        <p style={{ letterSpacing: 4, fontSize: 12 }}>AEGEAN PRIME ELITE</p>
+        <p style={{ letterSpacing: 4, fontSize: 12 }}>VELORA PRIME ELITE</p>
         <h1 style={{ fontSize: "clamp(36px, 7vw, 68px)", marginBottom: 20 }}>Longevity & Wellness</h1>
         <p style={{ maxWidth: 650, margin: "auto", lineHeight: 1.8 }}>
           Sağlıklı yaşam, doğayla bütünleşen mimari ve premium yaşam deneyimlerini keşfedin.
@@ -48,7 +48,7 @@ export default function LongevityPage() {
       </section>
 
       <footer style={{ padding: 35, textAlign: "center", fontSize: 13 }}>
-        © AEGEAN PRIME ELITE — LONGEVITY & WELLNESS
+        © VELORA PRIME ELITE — LONGEVITY & WELLNESS
       </footer>
     </main>
   );
