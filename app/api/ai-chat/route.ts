@@ -16,7 +16,7 @@ if (process.env.AI_TEST_MODE !== "false") {
     .at(-1)?.content.toLocaleLowerCase("tr-TR") || "";
 
   let reply =
-    Velora Prime Elite'e hoş geldiniz! Golden Life projesi ve gayrimenkul seçenekleri hakkında size yardımcı olabilirim.";
+    "Velora Prime Elite'e hoş geldiniz! Golden Life projesi ve gayrimenkul seçenekleri hakkında size yardımcı olabilirim.";
 
   if (/fiyat|price|preis|ücret|kaç para/.test(lastMessage)) {
     reply =
