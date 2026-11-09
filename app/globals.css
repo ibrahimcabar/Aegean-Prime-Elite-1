@@ -83,7 +83,7 @@
   }
 }
 
-/* AEGEAN PRIME ELITE - PREMIUM HEADER */
+/* VELORA PRIME ELITE - PREMIUM HEADER */
 
 .header {
   background: rgba(255, 255, 255, 0.94);
@@ -157,7 +157,7 @@
   }
 }
 
-/* AEGEAN PRIME ELITE - CINEMATIC HERO */
+/* VELORA PRIME ELITE - CINEMATIC HERO */
 
 .hero {
   min-height: min(850px, 95svh);
@@ -216,7 +216,7 @@
   }
 }
 
-/* AEGEAN PRIME ELITE - MOBILE PREMIUM HEADER */
+/* VELORA PRIME ELITE - MOBILE PREMIUM HEADER */
 
 @media (max-width: 700px) {
   .header {
@@ -288,7 +288,7 @@
   }
 }
 
-/* AEGEAN PRIME ELITE - LUXURY PROPERTY CARDS */
+/* VELORA PRIME ELITE - LUXURY PROPERTY CARDS */
 
 .property-grid {
   gap: 26px;
@@ -437,7 +437,7 @@
   }
 }
 
-/* AEGEAN PRIME ELITE - PREMIUM SEARCH */
+/* VELORA PRIME ELITE - PREMIUM SEARCH */
 
 .hero .search-panel {
   display: grid;
