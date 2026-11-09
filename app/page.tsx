@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import HomeClient from "./HomeClient";
 import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
 export const metadata: Metadata = {
   title: "Velora Prime Elite | Luxury Real Estate in Turkey",
   description:
@@ -30,7 +34,15 @@ export const metadata: Metadata = {
  images: ["/velora-prime-elite-social-1200x630.jpg"],
   },
 };
+export const dynamic = "force-dynamic";
+export default async function HomePage() {
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*");
 
-export default function HomePage() {
-  return <HomeClient />;
+  if (error) {
+    console.error("Homepage properties:", error.message);
+  }
+
+  return <HomeClient initialProperties={data ?? []} />;
 }
