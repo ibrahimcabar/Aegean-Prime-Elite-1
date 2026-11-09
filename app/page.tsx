@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HomeClient from "./HomeClient";
-
+import { createClient } from "@supabase/supabase-js";
 export const metadata: Metadata = {
   title: "Velora Prime Elite | Luxury Real Estate in Turkey",
   description:
