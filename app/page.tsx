@@ -996,7 +996,17 @@ return <><header className="header"><a href="#top" className="brand">
    language === "ar" ? "رؤية جديدة للعقارات العالمية." :
    "Global real estate, reimagined."}
 </span></footer>
-<button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Velora AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}{cookieConsent === null && (
+<button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Velora AI</strong>
+<small>Your Global Real Estate Assistant</small>
+</div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" 
+placeholder={
+  language === "tr" ? "Gayrimenkuller hakkında sorun..." :
+  language === "de" ? "Fragen Sie nach Immobilien..." :
+  language === "ru" ? "Спросите о недвижимости..." :
+  language === "ar" ? "اسأل عن العقارات..." :
+  "Ask about properties..."
+}
+ value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}{cookieConsent === null && (
   <div
     role="dialog"
     aria-label="Cookie preferences"
