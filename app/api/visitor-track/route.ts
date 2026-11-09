@@ -33,9 +33,10 @@ if (
 const origin = request.headers.get("origin");
 
 const allowedOrigins = [
-  "https://aegean-prime-elite-11.vercel.app",
+  "https://veloraprimeelite.com",
+  "https://www.veloraprimeelite.com",
   process.env.NEXT_PUBLIC_SITE_URL,
-].filter(Boolean);
+].filter((origin): origin is string => Boolean(origin));
 
 if (!origin || !allowedOrigins.includes(origin)) {
   return NextResponse.json(
