@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import HomeClient from "./HomeClient";
+
+export const metadata: Metadata = {
+  title: "Velora Prime Elite | Luxury Real Estate in Turkey",
+  description:
+    "Discover luxury villas, apartments and premium real estate investment opportunities in Turkey with Velora Prime Elite.",
+  alternates: {
+    canonical: "https://veloraprimeelite.com/",
+  },
+  openGraph: {
+    title: "Velora Prime Elite | Luxury Real Estate in Turkey",
+    description:
+      "Explore luxury properties and international real estate investment opportunities with Velora Prime Elite.",
+    url: "https://veloraprimeelite.com/",
+    siteName: "Velora Prime Elite",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Velora Prime Elite | Luxury Real Estate in Turkey",
+    description:
+      "Discover premium villas and real estate investment opportunities in Turkey.",
+  },
+};
+
+export default function HomePage() {
+  return <HomeClient />;
+}
