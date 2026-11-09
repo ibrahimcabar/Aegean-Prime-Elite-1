@@ -98,10 +98,81 @@ const description = [
   }
 }
 
-export default function PropertyLayout({
+export default async function PropertyLayout({
   children,
-}: {
-  children: ReactNode;
-}) {
-  return <>{children}</>;
+  params,
+}: Props) {
+  const { id } = await params;
+
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  let property = null;
+
+  if (url && key) {
+    try {
+      const supabase = createClient(url, key);
+
+      const { data } = await supabase
+        .from("properties")
+        .select(
+          "title, city, country, description, image, price, currency, beds, area_sqm"
+        )
+        .eq("id", id)
+        .single();
+
+      property = data;
+    } catch (error) {
+      console.error("JSON-LD veri hatası:", error);
+    }
+  }
+    return (
+    <>
+      {property && (
+  <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+"@type": "RealEstateListing",
+name: property?.title || "Velora Prime Elite | Gayrimenkul İlanı",
+url: `https://veloraprimeelite.com/ilan/${id}`,
+description: property?.description || undefined,
+image: property?.image || undefined,
+offers: property?.price != null
+  ? {
+      "@type": "Offer",
+      price: property.price,
+      priceCurrency: property.currency || "EUR",
+      url: `https://veloraprimeelite.com/ilan/${id}`,
+    }
+  : undefined,
+            publisher: {
+  "@type": "Organization",
+  name: "Velora Prime Elite",
+  url: "https://veloraprimeelite.com",
+},
+about: {
+  "@type": "Accommodation",
+  name: property?.title || "Gayrimenkul",
+  floorSize: property?.area_sqm
+    ? {
+        "@type": "QuantitativeValue",
+        value: property.area_sqm,
+        unitCode: "MTK",
+      }
+    : undefined,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: property?.city,
+    addressCountry: property?.country,
+  },
+},
+          }).replace(/</g, "\\u003c"),
+        }}
+          />
+)}
+{children}
+    </>
+  );
 }
