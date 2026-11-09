@@ -317,7 +317,56 @@ function submit() {
   });
 }
 
-function send(){if(!message.trim())return;const m=message.trim();setMessages(old=>[...old,{who:'user',text:m},{who:'bot',text:'Thanks! This is a preview assistant. Live AI recommendations will be available after connecting our property database and AI service.'}]);setMessage('')}
+
+async function send() {
+  if (!message.trim()) return;
+
+  const m = message.trim();
+  const history = [...messages, { who: "user" as const, text: m }];
+
+  setMessages(history);
+  setMessage("");
+
+  try {
+    const response = await fetch("/api/ai-chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messages: history.map((item) => ({
+          role: item.who === "user" ? "user" : "assistant",
+          content: item.text
+        }))
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "AI bağlantı hatası");
+    }
+
+    setMessages((old) => [
+      ...old,
+      {
+        who: "bot",
+        text: data.reply || "Şu anda cevap oluşturulamıyor."
+      }
+    ]);
+  } catch (error) {
+    console.error("Velora AI:", error);
+
+    setMessages((old) => [
+      ...old,
+      {
+        who: "bot",
+        text: "Şu anda bağlantı sorunu yaşıyoruz. Lütfen tekrar deneyin."
+      }
+    ]);
+  }
+}
+
 return <><header className="header"><a href="#top" className="brand">
   <img
     src="/velora-logo.png"
