@@ -1,7 +1,7 @@
 
 import type { MetadataRoute } from "next";
 import { createClient } from "@supabase/supabase-js";
-
+// Dynamic property sitemap for Velora Prime Elite
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
