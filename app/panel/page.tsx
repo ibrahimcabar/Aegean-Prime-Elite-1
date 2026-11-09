@@ -59,7 +59,7 @@ export default function PanelPage() {
         paddingBottom: 20,
       }}>
         <h1 style={{ color: "#b89b68", fontSize: 24 }}>
-          AEGEAN PRIME ELITE
+          VELORA PRIME ELITE
         </h1>
         <button onClick={logout} style={{
           background: "#222",
