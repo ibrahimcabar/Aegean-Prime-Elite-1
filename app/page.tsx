@@ -77,7 +77,7 @@ if (!visitorId) {
     console.error("Ziyaretçi takip hatası:", error);
   });
 }, [cookieConsent]);
-const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Aegean Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
+const [query,setQuery]=useState('');const [search,setSearch]=useState('');const [kind,setKind]=useState('All types');const [chat,setChat]=useState(false);const [message,setMessage]=useState('');const [messages,setMessages]=useState<{who:'user'|'bot';text:string}[]>([{who:'bot',text:'Welcome to Velora Prime Elite. Where would you like to find your next property?'}]);const [mobile,setMobile]=useState(false);
   
 const [minPrice, setMinPrice] = useState('');
   const [minBedrooms, setMinBedrooms] = useState('');
@@ -565,11 +565,11 @@ return <><header className="header"><a href="#top" className="brand">
       letterSpacing: 4,
       fontSize: 13
     }}>
-      {language === "tr" ? "AEGEAN PRIME ELITE • ÖZEL PROJE" :
- language === "de" ? "AEGEAN PRIME ELITE • EXKLUSIVES PROJEKT" :
- language === "ru" ? "AEGEAN PRIME ELITE • ОСОБЫЙ ПРОЕКТ" :
- language === "ar" ? "AEGEAN PRIME ELITE • مشروع خاص" :
- "AEGEAN PRIME ELITE • SPECIAL PROJECT"}
+      {language === "tr" ? "VELORA PRIME ELITE • ÖZEL PROJE" :
+ language === "de" ? "VELORA PRIME ELITE • EXKLUSIVES PROJEKT" :
+ language === "ru" ? "VELORA PRIME ELITE • ОСОБЫЙ ПРОЕКТ" :
+ language === "ar" ? "VELORA PRIME ELITE • مشروع خاص" :
+ "VELORA PRIME ELITE • SPECIAL PROJECT"}
     </p>
 
     <h2 style={{
@@ -933,8 +933,8 @@ return <><header className="header"><a href="#top" className="brand">
     : language === "ar"
     ? "نحن نطور منصة عقارية متعددة اللغات مع التحقق من الشركاء وإعلانات شفافة وبحث ذكي عن العقارات."
     : "We are building a multilingual marketplace with partner verification, transparent listings and intelligent property discovery."}
-</p></div></section></main><footer><div className="footer-brand">AEGEAN <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>
-  © {new Date().getFullYear()} Aegean Prime Elite.{" "}
+</p></div></section></main><footer><div className="footer-brand">VELORA <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>
+  © {new Date().getFullYear()} Velora Prime Elite.{" "}
   {language === "tr" ? "Ön izleme sitesi." :
    language === "de" ? "Vorschau-Website." :
    language === "ru" ? "Предварительная версия сайта." :
@@ -947,7 +947,7 @@ return <><header className="header"><a href="#top" className="brand">
    language === "ar" ? "رؤية جديدة للعقارات العالمية." :
    "Global real estate, reimagined."}
 </span></footer>
-<button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Aegean AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}{cookieConsent === null && (
+<button className="chat-launch" aria-label="Open AI assistant" onClick={()=>setChat(!chat)}>{chat?<X size={24}/>:<MessageCircle size={24}/>}</button>{chat&&<div className="chat"><div className="chat-head"><div className="chat-avatar">✦</div><div><strong>Velora AI</strong><small>Preview assistant · not connected to live listings</small></div><button aria-label="Close chat" onClick={()=>setChat(false)}><X size={18}/></button></div><div className="chat-messages">{messages.map((m,i)=><div className={'bubble '+m.who} key={i}>{m.text}</div>)}</div><div className="chat-form"><input aria-label="Chat message" placeholder="Ask about properties..." value={message} onChange={e=>setMessage(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()}/><button aria-label="Send message" onClick={send}><Send size={18}/></button></div></div>}{cookieConsent === null && (
   <div
     role="dialog"
     aria-label="Cookie preferences"
