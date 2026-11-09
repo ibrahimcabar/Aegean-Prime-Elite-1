@@ -15,12 +15,19 @@ export const metadata: Metadata = {
     url: "https://veloraprimeelite.com/",
     siteName: "Velora Prime Elite",
     type: "website",
+    images: [
+  {
+    url: "/velora-logo.png",
+    alt: "Velora Prime Elite - Global Real Estate",
+  },
+],
   },
   twitter: {
     card: "summary_large_image",
     title: "Velora Prime Elite | Luxury Real Estate in Turkey",
     description:
       "Discover premium villas and real estate investment opportunities in Turkey.",
+ images: ["/velora-logo.png"],
   },
 };
 
