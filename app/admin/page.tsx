@@ -660,8 +660,8 @@ setPropertyDetails(result.propertyDetails ?? []);
   </h2>
 
   <p style={{ color: "#e8e5dc" }}>
-    VELORA ESTATE ziyaretçi ve ilan performans merkezi
-  </p>
+  VELORA PRIME ELITE ziyaretçi ve ilan performans merkezi
+</p>
 
   <div
     style={{
