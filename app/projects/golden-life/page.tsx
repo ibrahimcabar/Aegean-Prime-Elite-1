@@ -432,8 +432,8 @@ setContactOpen(false);
   }}
 >
   <p style={{ letterSpacing: 5, color: "#e8c985" }}>
-    AEGEAN PRIME ELITE
-  </p>
+  VELORA PRIME ELITE
+</p>
  <h1 style={{
 fontSize: "clamp(32px, 6vw, 110px)",  
   fontWeight: 800,
@@ -480,7 +480,7 @@ fontSize: "clamp(32px, 6vw, 110px)",
 </section>
 
       <section style={{ background: "#18382c", color: "white", textAlign: "center", padding: "90px 24px" }}>
-        <p style={{ letterSpacing: 4, fontSize: 12 }}>AEGEAN PRIME ELITE PRESENTS</p>
+        <p style={{ letterSpacing: 4, fontSize: 12 }}>VELORA PRIME ELITE PRESENTS</p>
         <h1 style={{ fontSize: "clamp(44px, 8vw, 78px)", margin: "25px 0" }}>GOLDEN LIFE</h1>
         <p style={{ color: "#d6bd88", letterSpacing: 3 }}>KAYADİBİ / KARAÖZ · ANTALYA</p>
         <p style={{ maxWidth: 650, margin: "30px auto", lineHeight: 1.9, fontSize: 18 }}>
@@ -765,8 +765,8 @@ alt={`${typeof home.name === "string"
 >
   <div style={{ maxWidth: 950, margin: "0 auto" }}>
     <p style={{ color: "#d9c18b", letterSpacing: 5 }}>
-      AEGEAN PRIME ELITE PRESENTS
-    </p>
+  VELORA PRIME ELITE PRESENTS
+</p>
     <h2 style={{ fontSize: "clamp(32px, 5vw, 54px)", marginBottom: 24 }}>
       GOLDEN LIFE
     </h2>
@@ -933,8 +933,8 @@ alt={`${typeof home.name === "string"
   </button>
 </section>
       <footer style={{ background: "#18382c", color: "white", padding: 30, textAlign: "center", fontSize: 13 }}>
-        © AEGEAN PRIME ELITE — GOLDEN LIFE
-      </footer>
+  © VELORA PRIME ELITE — GOLDEN LIFE
+</footer>
       {selectedPlan && (
   <div
     onClick={() => setSelectedPlan(null)}
