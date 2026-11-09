@@ -37,7 +37,7 @@ const [slide, setSlide] = useState(0);
     "KONUT SEÇENEKLERİ",
     "FİYATLAR VE ÖDEME PLANLARI",
     "KOOPERATİF KATILIM ÜCRETİ",
-    "AEGEAN PRIME ELITE SİSTEMİ",
+    "VELORA PRIME ELITE SİSTEMİ",
   ];
 
   return (
@@ -55,7 +55,7 @@ const [slide, setSlide] = useState(0);
       }}
     >
       <p style={{ letterSpacing: 5 }}>
-        AEGEAN PRIME ELITE
+        VELORA PRIME ELITE
       </p>
 
       <h1 style={{ fontSize: "clamp(36px, 6vw, 90px)" }}>
