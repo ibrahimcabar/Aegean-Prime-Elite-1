@@ -854,14 +854,26 @@ return <><header className="header"><a href="#top" className="brand">
    language === "ru" ? "примеров недвижимости" :
    language === "ar" ? "عقارات تجريبية" :
    "preview properties"}
-</span></div><div className="property-grid">{filtered.map(p=><article
+</span></div>
+<div className="property-grid">{filtered.map(p=><article
   className="property"
-  key={p.id}
-  onClick={() => {
-    if (p.isLive) window.location.href = `/ilan/${p.id}`;
-  }}
-  style={{ cursor: p.isLive ? "pointer" : "default" }}
-><div className="property-photo" style={{backgroundImage:`url('${p.image}')`}}><span className="pill">{p.type}</span></div><div className="property-details"><div className="location"><MapPin size={13}/>{p.city}, {p.country}</div><h3>{p.title}</h3><div className="property-meta"><span><BedDouble size={16}/>{p.beds} beds</span><span><Ruler size={16}/>{p.area} m²</span></div><div className="property-footer"><strong>{new Intl.NumberFormat('tr-TR',{style:'currency',currency:('currency' in p && typeof p.currency==='string' ? p.currency : 'EUR'),maximumFractionDigits:0}).format(p.price)}</strong><span>Preview listing</span></div></div></article>)}</div>{filtered.length===0&&<div className="empty">No preview properties match this search. Live global listings will be available as partners join.</div>}</section>
+  key={`${p.isLive ? "live" : "preview"}-${p.id}`}
+  style={{ cursor: "default" }}
+>
+<div className="property-photo" style={{backgroundImage:`url('${p.image}')`}}><span className="pill">{p.type}</span></div><div className="property-details"><div className="location"><MapPin size={13}/>{p.city}, {p.country}</div>
+<h3>
+  {p.isLive ? (
+    <a
+      href={`/ilan/${p.id}`}
+      style={{ color: "inherit", textDecoration: "none" }}
+    >
+      {p.title}
+    </a>
+  ) : (
+    p.title
+  )}
+</h3>
+<div className="property-meta"><span><BedDouble size={16}/>{p.beds} beds</span><span><Ruler size={16}/>{p.area} m²</span></div><div className="property-footer"><strong>{new Intl.NumberFormat('tr-TR',{style:'currency',currency:('currency' in p && typeof p.currency==='string' ? p.currency : 'EUR'),maximumFractionDigits:0}).format(p.price)}</strong><span>Preview listing</span></div></div></article>)}</div>{filtered.length===0&&<div className="empty">No preview properties match this search. Live global listings will be available as partners join.</div>}</section>
 <section className="partner" id="how"><div><div className="kicker light">
   {language === "tr" ? "BİZİMLE BÜYÜYÜN" :
    language === "de" ? "WACHSEN SIE MIT UNS" :
