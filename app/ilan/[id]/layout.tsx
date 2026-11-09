@@ -79,6 +79,14 @@ const description = [
           ? { images: [{ url: data.image }] }
           : {}),
       },
+      twitter: {
+  card: "summary_large_image",
+  title,
+  description,
+  ...(data.image
+    ? { images: [data.image] }
+    : {}),
+},
       robots: {
         index: true,
         follow: true,
