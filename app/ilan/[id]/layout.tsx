@@ -32,7 +32,9 @@ export async function generateMetadata({
 
     const { data, error } = await supabase
       .from("properties")
-      .select("title, city, country, description, image")
+      
+.select("title, city, country, description, image, price, currency, beds, area_sqm")
+
       .eq("id", id)
       .single();
 
@@ -40,9 +42,24 @@ export async function generateMetadata({
 
     const title = `${data.title} | Velora Prime Elite`;
 
-    const description =
-      data.description?.trim().slice(0, 155) ||
-      `${data.city}, ${data.country} konumundaki gayrimenkulü Velora Prime Elite ile keşfedin.`;
+    
+const details = [
+  data.city,
+  data.country,
+  data.area_sqm ? `${data.area_sqm} m²` : null,
+  data.beds ? `${data.beds} yatak odası` : null,
+  data.price != null
+    ? `${new Intl.NumberFormat("tr-TR").format(data.price)} ${data.currency || "EUR"}`
+    : null,
+].filter(Boolean).join(", ");
+
+const description = [
+  data.title,
+  details,
+  data.description?.trim(),
+  "Velora Prime Elite",
+].filter(Boolean).join(". ").slice(0, 160);
+
 
     const propertyUrl = `${baseUrl}/ilan/${id}`;
 
