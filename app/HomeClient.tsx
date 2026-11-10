@@ -1096,6 +1096,21 @@ onChange={(e) => {
       >
         Immobilienangebote entdecken
       </a>
+      
+<p style={{ marginTop: 20 }}>
+  <a
+    href="/de/antalya"
+    style={{
+      color: "#18382c",
+      fontWeight: 700,
+      fontSize: 17,
+      textDecoration: "underline"
+    }}
+  >
+    Immobilien in Antalya kaufen →
+  </a>
+</p>
+
     </div>
   </section>
 )}
