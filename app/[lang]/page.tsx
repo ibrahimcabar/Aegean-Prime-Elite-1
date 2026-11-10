@@ -20,9 +20,50 @@ export async function generateMetadata({
   }
 
   return {
-    title: `Velora Prime Elite | ${lang.toUpperCase()} Real Estate`,
-    description:
-      "Discover luxury properties and real estate investment opportunities with Velora Prime Elite.",
+    
+
+title:
+  lang === "de"
+    ? "Immobilien in der Türkei kaufen | Velora Prime Elite"
+    : lang === "tr"
+    ? "Türkiye'de Satılık Lüks Villa ve Daire | Velora Prime Elite"
+    
+: lang === "en"
+? "Luxury Real Estate in Turkey | Velora Prime Elite"
+
+: lang === "ru"
+    ? "Недвижимость в Турции | Виллы и квартиры | Velora Prime Elite"
+    
+: lang === "ar"
+    ? "عقارات فاخرة للبيع في تركيا | Velora Prime Elite"
+    : `Velora Prime Elite | ${lang.toUpperCase()} Real Estate`,
+
+
+
+
+
+    
+
+description:
+  lang === "de"
+    ? "Entdecken Sie exklusive Immobilien in der Türkei. Kaufen Sie luxuriöse Villen, Wohnungen und attraktive Anlageimmobilien mit Velora Prime Elite."
+    : lang === "tr"
+    ? "Türkiye'de satılık lüks villa, daire ve seçkin gayrimenkul yatırım fırsatlarını Velora Prime Elite ile keşfedin."
+    
+: lang === "en"
+    ? "Discover luxury villas, apartments and premium real estate investment opportunities in Turkey with Velora Prime Elite."
+    
+: lang === "ru"
+    ? "Элитная недвижимость в Турции: роскошные виллы, квартиры и инвестиционные возможности. Найдите свою идеальную недвижимость с Velora Prime Elite."
+    
+: lang === "ar"
+    ? "اكتشف العقارات الفاخرة للبيع في تركيا، من الفلل والشقق الراقية إلى الفرص الاستثمارية العقارية المميزة مع Velora Prime Elite."
+    : "Discover luxury properties and real estate investment opportunities with Velora Prime Elite.",
+
+
+
+
+
     alternates: {
       canonical: `https://veloraprimeelite.com/${lang}`,
       languages: {
