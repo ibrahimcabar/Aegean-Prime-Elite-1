@@ -7,6 +7,25 @@ export const revalidate = 3600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://veloraprimeelite.com";
 
+  const languages = ["en", "tr", "de", "ru", "ar"];
+
+  const languagePages: MetadataRoute.Sitemap = languages.map(
+    (lang) => ({
+      url: `${baseUrl}/${lang}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/en`,
+          tr: `${baseUrl}/tr`,
+          de: `${baseUrl}/de`,
+          ru: `${baseUrl}/ru`,
+          ar: `${baseUrl}/ar`,
+        },
+      },
+    })
+  );
+
   const pages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -34,9 +53,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-  if (!url || !key) {
-    return pages;
-  }
+  
+if (!url || !key) {
+  return [...pages, ...languagePages];
+}
+
 
   try {
     const supabase = createClient(url, key);
@@ -47,7 +68,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     if (error) {
       console.error("Sitemap ilan hatası:", error.message);
-      return pages;
+      
+return [...pages, ...languagePages];
+
     }
 
     const properties = (data || []).map((property) => ({
@@ -56,10 +79,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
-    return [...pages, ...properties];
+    
+return [...pages, ...languagePages, ...properties];
+
   } catch (error) {
     console.error("Sitemap hatası:", error);
-    return pages;
+    
+return [...pages, ...languagePages];
+
   }
 }
 
