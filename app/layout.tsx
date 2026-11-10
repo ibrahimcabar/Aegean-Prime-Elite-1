@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
+
+import { headers } from "next/headers";
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://veloraprimeelite.com'),
   openGraph: {
@@ -15,4 +18,27 @@ export const metadata: Metadata = {
   title: 'Velora Prime Elite | Luxury Global Real Estate',
   description: 'Explore exceptional luxury properties, villas, apartments and real estate investment opportunities worldwide with Velora Prime Elite.',
 };
-export default function RootLayout({children}:{children:React.ReactNode}) {return <html lang="en"><body>{children}</body></html>}
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const requestHeaders = await headers();
+
+  const requestedLanguage = requestHeaders.get("x-site-language");
+
+  const supportedLanguages = ["en", "tr", "de", "ru", "ar"];
+
+  const language =
+    requestedLanguage && supportedLanguages.includes(requestedLanguage)
+      ? requestedLanguage
+      : "en";
+
+  return (
+    <html lang={language}>
+      <body>{children}</body>
+    </html>
+  );
+}
+
