@@ -7,7 +7,15 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
 );
-export default function Home({ initialProperties = [] }: { initialProperties?: any[] }) {
+
+export default function Home({
+  initialProperties = [],
+  initialLanguage = "en",
+}: {
+  initialProperties?: any[];
+  initialLanguage?: string;
+}) {
+
   
 const [goldenLifeShares, setGoldenLifeShares] = useState<number | null>(null);
 
@@ -128,13 +136,27 @@ const [appliedMaxPrice, setAppliedMaxPrice] = useState('');
 const [appliedCurrency, setAppliedCurrency] = useState('EUR');
 
 const [dbProperties,setDbProperties]=useState<any[]>(initialProperties);
-  const [language, setLanguage] = useState("en");
-  useEffect(() => {
+  
+const [language, setLanguage] = useState(initialLanguage);
+
+  
+useEffect(() => {
+  const supportedLanguages = ["en", "tr", "de", "ru", "ar"];
+
+  const pathLanguage = window.location.pathname.split("/")[1];
+
+  if (supportedLanguages.includes(pathLanguage)) {
+    setLanguage(pathLanguage);
+    return;
+  }
+
   const savedLanguage = localStorage.getItem("aegean-language");
-  if (savedLanguage && ["en", "tr", "de", "ru", "ar"].includes(savedLanguage)) {
+
+  if (savedLanguage && supportedLanguages.includes(savedLanguage)) {
     setLanguage(savedLanguage);
   }
 }, []);
+
 
 
  const translations = {
@@ -381,11 +403,15 @@ return <><header className="header"><a href="#top" className="brand">
 </a><nav className={mobile?'nav show':'nav'}><a href="#properties">{t[0]}</a><a href="#how">{t[1]}</a><a href="#packages">{t[2]}</a><a href="#about">{t[3]}</a></nav><div className="header-actions"><select
   aria-label="Select language"
   value={language}
-  onChange={(e) => {
+  
+onChange={(e) => {
   const selectedLanguage = e.target.value;
+
   localStorage.setItem("aegean-language", selectedLanguage);
-  setLanguage(selectedLanguage);
+
+  window.location.assign(`/${selectedLanguage}`);
 }}
+
   style={{
     padding: "9px",
     borderRadius: "8px",
