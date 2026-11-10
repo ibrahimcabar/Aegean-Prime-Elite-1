@@ -1020,7 +1020,88 @@ onChange={(e) => {
     : language === "ar"
     ? "نحن نطور منصة عقارية متعددة اللغات مع التحقق من الشركاء وإعلانات شفافة وبحث ذكي عن العقارات."
     : "We are building a multilingual marketplace with partner verification, transparent listings and intelligent property discovery."}
-</p></div></section></main><footer><div className="footer-brand">VELORA <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>
+
+</p></div></section>
+
+{language === "de" && (
+  <section
+    aria-labelledby="german-seo-title"
+    style={{
+      background: "#f8f7f4",
+      padding: "65px 22px",
+      color: "#18382c"
+    }}
+  >
+    <div style={{ maxWidth: 1050, margin: "0 auto" }}>
+      <p style={{
+        color: "#9b7942",
+        fontWeight: 700,
+        letterSpacing: 2
+      }}>
+        IMMOBILIEN IN DER TÜRKEI
+      </p>
+
+      <h2 id="german-seo-title" style={{
+        fontSize: "clamp(28px, 4vw, 42px)",
+        lineHeight: 1.3
+      }}>
+        Immobilien in der Türkei kaufen
+      </h2>
+
+      <p style={{ lineHeight: 1.9, fontSize: 17 }}>
+        Ob luxuriöse Villa an der Mittelmeerküste,
+        moderne Wohnung oder Immobilie als
+        Kapitalanlage: Die Türkei bietet
+        unterschiedliche Wohnlagen und
+        Immobilienarten. Velora Prime Elite
+        unterstützt die internationale
+        Immobiliensuche mit einer mehrsprachigen
+        Plattform.
+      </p>
+
+      <h3>Beliebte Regionen für Immobilienkäufer</h3>
+
+      <p style={{ lineHeight: 1.9 }}>
+        Antalya ist besonders für seine Küstenlage
+        bekannt. Istanbul bietet das Leben in einer
+        internationalen Metropole. Izmir verbindet
+        städtische Infrastruktur mit der Nähe zur
+        Ägäis. Welche Region passt, hängt von Ihren
+        persönlichen Zielen und Ihrem Budget ab.
+      </p>
+
+      <h3>Worauf sollten Käufer achten?</h3>
+
+      <p style={{ lineHeight: 1.9 }}>
+        Vor dem Immobilienkauf sollten Eigentumsnachweise
+        (Tapu), baurechtliche Unterlagen,
+        mögliche Belastungen sowie Kaufnebenkosten
+        sorgfältig geprüft werden. Eine unabhängige
+        rechtliche Beratung ist insbesondere bei
+        internationalen Immobiliengeschäften sinnvoll.
+      </p>
+
+      <a
+        href="#properties"
+        style={{
+          display: "inline-block",
+          marginTop: 20,
+          padding: "15px 25px",
+          background: "#18382c",
+          color: "#d6bd88",
+          borderRadius: 8,
+          textDecoration: "none",
+          fontWeight: 700
+        }}
+      >
+        Immobilienangebote entdecken
+      </a>
+    </div>
+  </section>
+)}
+
+</main><footer>
+<div className="footer-brand">VELORA <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>
   © {new Date().getFullYear()} Velora Prime Elite.{" "}
   {language === "tr" ? "Ön izleme sitesi." :
    language === "de" ? "Vorschau-Website." :
