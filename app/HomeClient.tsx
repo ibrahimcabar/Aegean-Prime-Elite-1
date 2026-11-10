@@ -1102,12 +1102,7 @@ onChange={(e) => {
 
 </main><footer>
 <div className="footer-brand">VELORA <strong>PRIME ELITE</strong><small>GLOBAL REAL ESTATE</small></div><span>
-  © {new Date().getFullYear()} Velora Prime Elite.{" "}
-  {language === "tr" ? "Ön izleme sitesi." :
-   language === "de" ? "Vorschau-Website." :
-   language === "ru" ? "Предварительная версия сайта." :
-   language === "ar" ? "نسخة تجريبية من الموقع." :
-   "Preview website."}
+  © {new Date().getFullYear()} Velora Prime Elite.
 </span><span>
   {language === "tr" ? "Küresel gayrimenkule yeni bir bakış." :
    language === "de" ? "Globale Immobilien neu gedacht." :
