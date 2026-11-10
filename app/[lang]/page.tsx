@@ -64,6 +64,33 @@ description:
 
 
 
+openGraph: {
+  title: "Velora Prime Elite | Global Real Estate",
+  description:
+    "Discover luxury properties and real estate investment opportunities with Velora Prime Elite.",
+  siteName: "Velora Prime Elite",
+  type: "website",
+  url: `https://veloraprimeelite.com/${lang}`,
+  images: [
+    {
+      url: "/velora-prime-elite-social-1200x630.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Velora Prime Elite - Global Real Estate",
+    },
+  ],
+},
+
+twitter: {
+  card: "summary_large_image",
+  title: "Velora Prime Elite | Global Real Estate",
+  description:
+    "Discover luxury properties and real estate investment opportunities with Velora Prime Elite.",
+  images: [
+    "/velora-prime-elite-social-1200x630.jpg",
+  ],
+},
+
     alternates: {
       canonical: `https://veloraprimeelite.com/${lang}`,
       languages: {
