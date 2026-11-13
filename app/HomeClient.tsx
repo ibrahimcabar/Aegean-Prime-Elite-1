@@ -1,7 +1,9 @@
 'use client';
 import {useEffect,useMemo,useState} from 'react';
 import {Search,MapPin,ArrowUpRight,Menu,X,MessageCircle,Send,Building2,Globe2,BedDouble,Ruler,Check,ShieldCheck} from 'lucide-react';
-import {properties,packages} from '../lib/data';
+
+import {packages} from '../lib/data';
+
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -189,25 +191,23 @@ const convertPrice = (
   return (price / fromRate) * toRate;
 };
 
+
 const filtered = useMemo(() => {
-  const allProperties = [
-    ...properties,
-    ...dbProperties.map(p => ({
-      ...p,
-      type: p.property_type === 'villa'
-        ? 'Villa'
-        : p.property_type === 'apartment'
-        ? 'Apartment'
-        : p.property_type,
-      area: Number(p.area_sqm) || 0,
-      beds: p.beds ?? 0,
-      isLive: true,
-      image: p.image || '',
-      price: Number(p.price) || 0,
-      currency: p.currency || 'TRY',
-      address: p.street_address || ''
-    }))
-  ];
+  const allProperties = dbProperties.map(p => ({
+    ...p,
+    type: p.property_type === 'villa'
+      ? 'Villa'
+      : p.property_type === 'apartment'
+      ? 'Apartment'
+      : p.property_type,
+    area: Number(p.area_sqm) || 0,
+    beds: p.beds ?? 0,
+    isLive: true,
+    image: p.image || '',
+    price: Number(p.price) || 0,
+    currency: p.currency || 'TRY',
+    address: p.street_address || ''
+  }));
 
   const filteredProperties = allProperties.filter(p => {
     const locationMatch =
@@ -864,22 +864,26 @@ onChange={(e) => {
    language === "ar" ? <>اكتشف <em>عقارات استثنائية.</em></> :
    <>Explore remarkable <em>places.</em></>}
 </h2><p>
-  {language === "tr"
-    ? "Örnek gayrimenkul ilanlarımızı keşfedin. Doğrulanmış gerçek ilanlar yayına alındıkça burada görüntülenecektir."
-    : language === "de"
-    ? "Entdecken Sie unsere Beispielimmobilien. Verifizierte Immobilienangebote werden nach der Veröffentlichung hier angezeigt."
-    : language === "ru"
-    ? "Ознакомьтесь с нашими примерами объектов недвижимости. Проверенные объявления появятся здесь после публикации."
-    : language === "ar"
-    ? "استكشف قوائمنا العقارية التجريبية. ستظهر العقارات الحقيقية الموثقة هنا بعد إطلاقها."
-    : "Explore our illustrative preview listings. Verified live properties will appear here after launch."}
+  
+{language === "tr"
+  ? "Güncel gayrimenkul ilanlarımızı keşfedin."
+  : language === "de"
+  ? "Entdecken Sie unsere aktuellen Immobilienangebote."
+  : language === "ru"
+  ? "Ознакомьтесь с нашими актуальными объявлениями о недвижимости."
+  : language === "ar"
+  ? "اكتشف عروضنا العقارية الحالية."
+  : "Explore our current property listings."}
+
 </p></div><span className="count">
   {filtered.length}{" "}
-  {language === "tr" ? "örnek gayrimenkul" :
-   language === "de" ? "Beispielimmobilien" :
-   language === "ru" ? "примеров недвижимости" :
-   language === "ar" ? "عقارات تجريبية" :
-   "preview properties"}
+  
+{language === "tr" ? "gayrimenkul" :
+ language === "de" ? "Immobilien" :
+ language === "ru" ? "объектов недвижимости" :
+ language === "ar" ? "عقار" :
+ "properties"}
+
 </span></div>
 <div className="property-grid">{filtered.map(p=><article
   className="property"
@@ -899,7 +903,21 @@ onChange={(e) => {
     p.title
   )}
 </h3>
-<div className="property-meta"><span><BedDouble size={16}/>{p.beds} beds</span><span><Ruler size={16}/>{p.area} m²</span></div><div className="property-footer"><strong>{new Intl.NumberFormat('tr-TR',{style:'currency',currency:('currency' in p && typeof p.currency==='string' ? p.currency : 'EUR'),maximumFractionDigits:0}).format(p.price)}</strong><span>Preview listing</span></div></div></article>)}</div>{filtered.length===0&&<div className="empty">No preview properties match this search. Live global listings will be available as partners join.</div>}</section>
+<div className="property-meta"><span><BedDouble size={16}/>{p.beds} beds</span><span><Ruler size={16}/>{p.area} m²</span></div><div className="property-footer"><strong>{new Intl.NumberFormat('tr-TR',{style:'currency',currency:('currency' in p && typeof p.currency==='string' ? p.currency : 'EUR'),maximumFractionDigits:0}).format(p.price)}</strong></div></div></article>)}</div>
+{filtered.length === 0 && (
+  <div className="empty">
+    {language === "tr"
+      ? "Şu anda kriterlerinize uygun gayrimenkul bulunamadı."
+      : language === "de"
+      ? "Derzeit wurden keine passenden Immobilien gefunden."
+      : language === "ru"
+      ? "В настоящее время подходящие объекты не найдены."
+      : language === "ar"
+      ? "لا توجد عقارات مطابقة لمعايير البحث حالياً."
+      : "No properties match your search criteria at the moment."}
+  </div>
+)}
+</section>
 <section className="partner" id="how"><div><div className="kicker light">
   {language === "tr" ? "BİZİMLE BÜYÜYÜN" :
    language === "de" ? "WACHSEN SIE MIT UNS" :
