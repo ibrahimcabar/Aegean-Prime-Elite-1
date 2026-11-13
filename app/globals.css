@@ -664,3 +664,39 @@
     border-bottom: none;
   }
 }
+
+/* VELORA PRIME ELITE - PREMIUM PRICING GRID */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1320px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.pricing-grid .plan {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 28px 20px;
+}
+
+.pricing-grid .plan button {
+  margin-top: auto;
+}
+
+/* TABLET */
+@media (max-width: 1100px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
