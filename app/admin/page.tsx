@@ -36,6 +36,77 @@ const [partnerApplications, setPartnerApplications] =
 const [partnerLoading, setPartnerLoading] = useState(false);
 const [partnerError, setPartnerError] = useState("");
 
+const [partnerUpdatingId, setPartnerUpdatingId] =
+  useState<number | null>(null);
+
+const [partnerUpdateError, setPartnerUpdateError] =
+  useState("");
+
+async function updatePartnerStatus(
+  id: number,
+  status: string
+) {
+  if (
+    partnerUpdatingId !== null ||
+    !["new", "contacted", "rejected"].includes(status)
+  ) {
+    return;
+  }
+
+  setPartnerUpdatingId(id);
+  setPartnerUpdateError("");
+
+  try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+      throw new Error("Yönetici oturumu bulunamadı.");
+    }
+
+    const response = await fetch(
+      "/api/admin-partner-applications",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ id, status }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result.error || "Başvuru güncellenemedi."
+      );
+    }
+
+    setPartnerApplications((previous) =>
+      previous.map((application) =>
+        application.id === id
+          ? {
+              ...application,
+              status: result.application.status,
+            }
+          : application
+      )
+    );
+  } catch (error) {
+    setPartnerUpdateError(
+      error instanceof Error
+        ? error.message
+        : "Başvuru güncellenemedi."
+    );
+  } finally {
+    setPartnerUpdatingId(null);
+  }
+}
+
 const [totalShares, setTotalShares] = useState<number | null>(null);
 const [remainingShares, setRemainingShares] = useState<number | null>(null);
 const [sharesToSell, setSharesToSell] = useState("");
