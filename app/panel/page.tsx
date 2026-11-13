@@ -137,7 +137,7 @@ if (countError) {
       }}>
         <div style={card}>
           <h3>My Properties</h3>
-          <p>0 active listings</p>
+          <p>{activeListings} active listings</p>
         </div>
 
         
