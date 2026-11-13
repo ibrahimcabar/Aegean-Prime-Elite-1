@@ -5,4 +5,11 @@ export const properties:Property[]=[
 {id:3,title:'Palm Jumeirah Villa',city:'Dubai',country:'UAE',address:'Palm Jumeirah, Dubai',price:3200000,currency:'EUR',type:'Villa',beds:5,area:560,image:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1100&q=85'},
 {id:4,title:'Mediterranean Retreat',city:'Antalya',country:'Turkey',address:'Konyaaltı, Antalya',price:890000,currency:'EUR',type:'Villa',beds:4,area:320,image:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1100&q=85'},
 ];
-export const packages=[{name:'Starter',count:5,price:39},{name:'Professional',count:10,price:69},{name:'Business',count:20,price:119}];
+
+export const packages = [
+  { name: 'Starter', count: 5, price: 29 },
+  { name: 'Professional', count: 10, price: 59 },
+  { name: 'Business', count: 20, price: 99 },
+  { name: 'Enterprise', count: 50, price: 199 }
+];
+
