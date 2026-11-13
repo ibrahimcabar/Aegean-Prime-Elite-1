@@ -15,6 +15,27 @@ export default function AdminPage() {
   const router = useRouter();
   const [leads, setLeads] = useState<any[]>([]);
   
+const [partnerApplications, setPartnerApplications] =
+  useState<{
+    id: number;
+    created_at: string;
+    full_name: string | null;
+    agency_name: string | null;
+    email: string | null;
+    phone: string | null;
+    country: string | null;
+    city: string | null;
+    package_name: string | null;
+    monthly_price_eur: number | null;
+    listing_limit: number | null;
+    message: string | null;
+    status: string | null;
+    privacy_consent: boolean | null;
+  }[]>([]);
+
+const [partnerLoading, setPartnerLoading] = useState(false);
+const [partnerError, setPartnerError] = useState("");
+
 const [totalShares, setTotalShares] = useState<number | null>(null);
 const [remainingShares, setRemainingShares] = useState<number | null>(null);
 const [sharesToSell, setSharesToSell] = useState("");
@@ -421,6 +442,72 @@ setPropertyDetails(result.propertyDetails ?? []);
     checkAdmin();
   }, [router]);
 
+useEffect(() => {
+  if (!authorized) return;
+
+  let active = true;
+
+  async function loadPartnerApplications() {
+    setPartnerLoading(true);
+    setPartnerError("");
+
+    try {
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (sessionError || !session?.access_token) {
+        throw new Error("Yönetici oturumu bulunamadı.");
+      }
+
+      const response = await fetch(
+        "/api/admin-partner-applications",
+        {
+          headers: {
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          cache: "no-store",
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.error || "Başvurular alınamadı."
+        );
+      }
+
+      if (active) {
+        setPartnerApplications(
+          Array.isArray(result.applications)
+            ? result.applications
+            : []
+        );
+      }
+    } catch (error) {
+      if (active) {
+        setPartnerError(
+          error instanceof Error
+            ? error.message
+            : "Başvurular yüklenemedi."
+        );
+      }
+    } finally {
+      if (active) {
+        setPartnerLoading(false);
+      }
+    }
+  }
+
+  loadPartnerApplications();
+
+  return () => {
+    active = false;
+  };
+}, [authorized]);
+
   if (loading || !authorized) {
     return <main style={{ padding: 40 }}>
       Yetki kontrol ediliyor...
@@ -441,7 +528,99 @@ setPropertyDetails(result.propertyDetails ?? []);
         VELORA PRIME ELITE
       </h1>
       <h2>Yönetici Paneli</h2>
-    
+   
+<section style={{
+  background: "#18382c",
+  color: "#ffffff",
+  padding: 24,
+  borderRadius: 16,
+  margin: "24px 0"
+}}>
+  <h2 style={{ color: "#d6bd88", marginTop: 0 }}>
+    🏢 Emlakçı Üyelik Başvuruları
+  </h2>
+
+  <p>
+    Toplam Başvuru: {partnerApplications.length}
+  </p>
+
+  {partnerLoading && (
+    <p>Başvurular yükleniyor...</p>
+  )}
+
+  {partnerError && (
+    <p role="alert" style={{ color: "#ffb4b4" }}>
+      {partnerError}
+    </p>
+  )}
+
+  {!partnerLoading &&
+    !partnerError &&
+    partnerApplications.length === 0 && (
+      <p>Henüz üyelik başvurusu bulunmuyor.</p>
+    )}
+
+  <div style={{ display: "grid", gap: 16 }}>
+    {partnerApplications.map((application) => (
+      <div
+        key={application.id}
+        style={{
+          background: "#ffffff",
+          color: "#222222",
+          padding: 20,
+          borderRadius: 12,
+          overflowWrap: "anywhere"
+        }}
+      >
+        <h3 style={{ color: "#18382c" }}>
+          {application.agency_name || "Emlak Ofisi"}
+        </h3>
+
+        <p><strong>Yetkili:</strong> {application.full_name || "—"}</p>
+        <p><strong>E-posta:</strong> {application.email || "—"}</p>
+        <p><strong>Telefon:</strong> {application.phone || "—"}</p>
+        <p>
+          <strong>Konum:</strong>{" "}
+          {[application.city, application.country]
+            .filter(Boolean).join(", ") || "—"}
+        </p>
+
+        <p>
+          <strong>Seçilen Paket:</strong>{" "}
+          {application.package_name || "—"}
+        </p>
+
+        <p>
+          <strong>Aylık Ücret:</strong>{" "}
+          {application.monthly_price_eur ?? "—"} €
+        </p>
+
+        <p>
+          <strong>İlan Limiti:</strong>{" "}
+          {application.listing_limit ?? "—"}
+        </p>
+
+        <p>
+          <strong>Başvuru Tarihi:</strong>{" "}
+          {new Date(application.created_at)
+            .toLocaleString("tr-TR")}
+        </p>
+
+        <p>
+          <strong>Durum:</strong>{" "}
+          {application.status || "Beklemede"}
+        </p>
+
+        {application.message && (
+          <p>
+            <strong>Mesaj:</strong> {application.message}
+          </p>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+ 
 <section style={{
   background: "#18382c",
   color: "#ffffff",
