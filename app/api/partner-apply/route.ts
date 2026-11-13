@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
+import { createHmac } from "node:crypto";
+
 export const runtime = "nodejs";
 
 const plans: Record<string, { price: number; count: number }> = {
@@ -80,6 +82,56 @@ export async function POST(request: Request) {
       detectSessionInUrl: false
     }
   });
+
+  // Vercel üzerinden ziyaretçinin IP adresini al.
+  const ip = (
+    request.headers.get("x-vercel-forwarded-for") ??
+    request.headers.get("x-forwarded-for") ??
+    ""
+  ).split(",")[0].trim();
+
+  if (!ip) {
+    return NextResponse.json(
+      { error: "Request verification unavailable" },
+      { status: 503 }
+    );
+  }
+
+  // IP adresini açık şekilde kaydetme.
+  const ipHash = createHmac("sha256", secret)
+    .update(ip)
+    .digest("hex");
+
+  // Supabase üzerinden başvuru sınırını kontrol et.
+  const { data: allowed, error: limitError } =
+    await supabase.rpc(
+      "check_partner_application_limit",
+      { p_ip_hash: ipHash }
+    );
+
+  if (limitError) {
+    console.error(
+      "Partner rate limit error:",
+      limitError.message
+    );
+
+    return NextResponse.json(
+      { error: "Application service temporarily unavailable" },
+      { status: 503 }
+    );
+  }
+
+  if (allowed !== true) {
+    return NextResponse.json(
+      {
+        error: "Too many attempts. Please try again later."
+      },
+      {
+        status: 429,
+        headers: { "Retry-After": "3600" }
+      }
+    );
+  }
 
   const { error } = await supabase
     .from("partner_applications")
