@@ -362,7 +362,6 @@ const applicationsOpen = false;
             </p>
           </div>
 
-          {result === "success" ? (
           
 {!applicationsOpen ? (
   <div
