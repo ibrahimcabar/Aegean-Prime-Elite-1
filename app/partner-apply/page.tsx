@@ -176,7 +176,7 @@ export default function PartnerApplyPage() {
 
   const t = translations[language];
   const selected = plans[form.package_name];
-
+const applicationsOpen = false;
   const updateField = (name: string, value: string) => {
     setForm(prev => ({
       ...prev,
@@ -363,6 +363,33 @@ export default function PartnerApplyPage() {
           </div>
 
           {result === "success" ? (
+          
+{!applicationsOpen ? (
+  <div
+    role="status"
+    style={{
+      padding: 25,
+      background: "#f8f6f0",
+      border: "1px solid #b99a60",
+      borderRadius: 12,
+      textAlign: "center",
+      color: "#18382c",
+      fontWeight: 600,
+      lineHeight: 1.8
+    }}
+  >
+    {language === "tr"
+      ? "Üyelik başvuruları yakında açılıyor. Hazırlıklarımız devam ediyor."
+      : language === "de"
+      ? "Partnerbewerbungen werden in Kürze geöffnet."
+      : language === "ru"
+      ? "Приём заявок на партнёрство скоро откроется."
+      : language === "ar"
+      ? "سيتم فتح طلبات الشراكة قريباً."
+      : "Partner applications are opening soon. We are preparing for launch."}
+  </div>
+) : result === "success" ? (
+
             <div
               role="status"
               style={{
