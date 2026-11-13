@@ -14,17 +14,66 @@ export default function PanelPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
+const [packageName, setPackageName] = useState("");
+const [listingLimit, setListingLimit] = useState(0);
+const [activeListings, setActiveListings] = useState(0);
+  
+useEffect(() => {
+  let cancelled = false;
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data, error }) => {
-      if (error || !data.user) {
-        router.replace("/giris");
-      } else {
-        setEmail(data.user.email || "");
-        setLoading(false);
-      }
-    });
-  }, [router]);
+  async function loadPanel() {
+    const { data, error } = await supabase.auth.getUser();
+
+    if (cancelled) return;
+
+    if (error || !data.user) {
+      router.replace("/giris");
+      return;
+    }
+
+    setEmail(data.user.email || "");
+
+    const { data: partner, error: partnerError } = await supabase
+      .from("partner_profiles")
+      .select("package_name, listing_limit")
+      .eq("user_id", data.user.id)
+      .maybeSingle();
+
+    if (cancelled) return;
+
+    if (partnerError) {
+      console.error("Partner profile error:", partnerError);
+    }
+
+    if (partner) {
+      setPackageName(partner.package_name || "");
+      setListingLimit(partner.listing_limit || 0);
+    }
+
+const { count, error: countError } = await supabase
+  .from("properties")
+  .select("id", { count: "exact", head: true })
+  .eq("owner_id", data.user.id)
+  .eq("status", "active");
+
+if (cancelled) return;
+
+if (countError) {
+  console.error("Listing count error:", countError);
+} else {
+  setActiveListings(count ?? 0);
+}
+
+    setLoading(false);
+  }
+
+  loadPanel();
+
+  return () => {
+    cancelled = true;
+  };
+}, [router]);
+
 
   async function logout() {
     await supabase.auth.signOut();
@@ -91,10 +140,25 @@ export default function PanelPage() {
           <p>0 active listings</p>
         </div>
 
-        <div style={card}>
-          <h3>My Package</h3>
-          <p>No active package</p>
-        </div>
+        
+<div style={card}>
+  <h3>My Package</h3>
+
+  {packageName ? (
+    <>
+      <p><strong>Package:</strong> {packageName}</p>
+      <p><strong>Listing Limit:</strong> {listingLimit}</p>
+      <p><strong>Active Listings:</strong> {activeListings}</p>
+      <p>
+        <strong>Remaining Slots:</strong>{" "}
+        {Math.max(0, listingLimit - activeListings)}
+      </p>
+    </>
+  ) : (
+    <p>No active package</p>
+  )}
+</div>
+
 
         <div style={card}>
           <h3>Customer Inquiries</h3>
