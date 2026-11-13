@@ -677,10 +677,56 @@ useEffect(() => {
             .toLocaleString("tr-TR")}
         </p>
 
-        <p>
-          <strong>Durum:</strong>{" "}
-          {application.status || "Beklemede"}
-        </p>
+        
+<div style={{ marginTop: 18 }}>
+  <strong>Başvuru Durumu:</strong>
+
+  <select
+    value={application.status || "new"}
+    disabled={partnerUpdatingId !== null}
+    onChange={(e) =>
+      updatePartnerStatus(
+        application.id,
+        e.target.value
+      )
+    }
+    style={{
+      display: "block",
+      width: "100%",
+      maxWidth: 300,
+      marginTop: 10,
+      padding: 12,
+      borderRadius: 8,
+      border: "1px solid #b89b68",
+      background: "#ffffff",
+      color: "#18382c",
+      fontSize: 15,
+      fontWeight: 600
+    }}
+  >
+    <option value="new">🟢 Yeni Başvuru</option>
+    <option value="contacted">
+      🔵 İletişime Geçildi
+    </option>
+    <option value="rejected">
+      🔴 Reddedildi
+    </option>
+    <option value="approved" disabled>
+      🟡 Onaylandı (Şimdilik Kapalı)
+    </option>
+  </select>
+
+  {partnerUpdatingId === application.id && (
+    <p>Güncelleniyor...</p>
+  )}
+
+  {partnerUpdateError && (
+    <p role="alert" style={{ color: "#b91c1c" }}>
+      {partnerUpdateError}
+    </p>
+  )}
+</div>
+
 
         {application.message && (
           <p>
