@@ -14,6 +14,16 @@ const plans: Record<string, { price: number; count: number }> = {
 };
 
 export async function POST(request: Request) {
+ 
+  if (process.env.PARTNER_APPLICATIONS_ENABLED !== "true") {
+    return NextResponse.json(
+      {
+        error: "Partner applications are not yet open."
+      },
+      { status: 503 }
+    );
+  }
+ 
   const contentLength = Number(
     request.headers.get("content-length") || 0
   );
