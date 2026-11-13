@@ -998,7 +998,11 @@ onChange={(e) => {
   "Property listing management",
   "International visibility",
   "Buyer enquiry access"
-]).map(x=><div className="plan-benefit" key={x}><Check size={16}/>{x}</div>)}<button onClick={()=>alert('Partner registration is planned for the next development phase. No payment is being collected.')}>{language === "tr" ? "Yakında" :
+]).map(x=><div className="plan-benefit" key={x}><Check size={16}/>{x}</div>)}
+<button onClick={() => window.location.assign(
+  `/partner-apply?plan=${encodeURIComponent(p.name)}&lang=${encodeURIComponent(language)}`
+)}>
+{language === "tr" ? "Yakında" :
  language === "de" ? "Demnächst verfügbar" :
  language === "ru" ? "Скоро" :
  language === "ar" ? "قريباً" :
