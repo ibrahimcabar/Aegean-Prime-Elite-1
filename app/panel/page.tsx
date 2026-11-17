@@ -188,10 +188,22 @@ if (countError) {
           Manage your international real estate
           listings from one place.
         </p>
-        <p style={{ color: "#777" }}>
-          Property uploads and package purchases
-          will be available soon.
-        </p>
+        <a
+  href="/ilan-ekle"
+  style={{
+    display: "inline-block",
+    marginTop: 16,
+    padding: "14px 24px",
+    background: "#b89b68",
+    color: "#fff",
+    borderRadius: 8,
+    textDecoration: "none",
+    fontWeight: 600,
+    fontSize: 16,
+  }}
+>
+  + Add New Property
+</a>
       </section>
     </main>
   );
