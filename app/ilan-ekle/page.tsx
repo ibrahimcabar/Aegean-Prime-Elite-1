@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -14,7 +14,24 @@ export default function IlanEklePage() {
   const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [loggedIn, setLoggedIn] = useState(false);
-async function handleLogin() {
+useEffect(() => {
+  let mounted = true;
+
+  async function checkSession() {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (mounted && user) {
+      setLoggedIn(true);
+    }
+  }
+
+  checkSession();
+
+  return () => {
+    mounted = false;
+  };
+}, []);
+  async function handleLogin() {
   const { error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -77,9 +94,10 @@ uploadedImageUrls.push(photoData.publicUrl);
 
  const { data: newProperty, error } = await supabase 
     .from("properties")
-    .insert({
-      owner_id: user.id,
-      title,
+.insert({
+  owner_id: user.id,
+  status: "pending",
+  title,
       property_type: String(form.get("type") || ""),
       country: String(form.get("country") || ""),
       city: String(form.get("city") || ""),
