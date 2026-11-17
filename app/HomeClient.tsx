@@ -170,7 +170,20 @@ useEffect(() => {
 };
 
 const t = translations[language as keyof typeof translations]; 
-useEffect(()=>{supabase.from('properties').select('*').then(({data,error})=>{if(error){console.error('Supabase:',error);return;}setDbProperties(data||[]);});},[]);
+useEffect(() => {
+  supabase
+    .from("properties")
+    .select("*")
+    .eq("status", "active")
+    .then(({ data, error }) => {
+      if (error) {
+        console.error("Supabase:", error);
+        return;
+      }
+
+      setDbProperties(data || []);
+    });
+}, []);
 
 const convertPrice = (
   price: number,
