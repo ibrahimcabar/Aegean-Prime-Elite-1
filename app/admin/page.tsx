@@ -15,6 +15,24 @@ export default function AdminPage() {
   const router = useRouter();
   const [leads, setLeads] = useState<any[]>([]);
   
+const [pendingProperties, setPendingProperties] = useState<{
+  id: number;
+  title: string;
+  city: string | null;
+  country: string | null;
+  price: number | null;
+  currency: string | null;
+  image: string | null;
+  owner_id: string | null;
+  created_at: string;
+}[]>([]);
+
+const [pendingPropertiesLoading, setPendingPropertiesLoading] =
+  useState(false);
+
+const [pendingPropertiesError, setPendingPropertiesError] =
+  useState("");
+
 const [partnerApplications, setPartnerApplications] =
   useState<{
     id: number;
@@ -168,6 +186,44 @@ useEffect(() => {
 }, [authorized]);
 
  
+useEffect(() => {
+  if (!authorized) return;
+
+  let cancelled = false;
+
+  async function loadPendingProperties() {
+    setPendingPropertiesLoading(true);
+    setPendingPropertiesError("");
+
+    const { data, error } = await supabase
+      .from("properties")
+      .select(
+        "id, title, city, country, price, currency, image, owner_id, created_at"
+      )
+      .eq("status", "pending")
+      .order("created_at", { ascending: false });
+
+    if (cancelled) return;
+
+    if (error) {
+      console.error("Pending properties error:", error);
+      setPendingPropertiesError(
+        "Bekleyen ilanlar yüklenemedi."
+      );
+    } else {
+      setPendingProperties(data ?? []);
+    }
+
+    setPendingPropertiesLoading(false);
+  }
+
+  loadPendingProperties();
+
+  return () => {
+    cancelled = true;
+  };
+}, [authorized]);
+
 useEffect(() => {
   if (!authorized) return;
 
