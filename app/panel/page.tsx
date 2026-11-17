@@ -17,7 +17,7 @@ export default function PanelPage() {
 const [packageName, setPackageName] = useState("");
 const [listingLimit, setListingLimit] = useState(0);
 const [activeListings, setActiveListings] = useState(0);
-  
+  const [unlimitedListings, setUnlimitedListings] = useState(false);
 useEffect(() => {
   let cancelled = false;
 
@@ -35,7 +35,7 @@ useEffect(() => {
 
     const { data: partner, error: partnerError } = await supabase
       .from("partner_profiles")
-      .select("package_name, listing_limit")
+      .select("package_name, listing_limit, unlimited_listings")
       .eq("user_id", data.user.id)
       .maybeSingle();
 
@@ -46,9 +46,10 @@ useEffect(() => {
     }
 
     if (partner) {
-      setPackageName(partner.package_name || "");
-      setListingLimit(partner.listing_limit || 0);
-    }
+  setPackageName(partner.package_name || "");
+  setListingLimit(partner.listing_limit || 0);
+  setUnlimitedListings(partner.unlimited_listings === true);
+}
 
 const { count, error: countError } = await supabase
   .from("properties")
@@ -146,13 +147,26 @@ if (countError) {
 
   {packageName ? (
     <>
-      <p><strong>Package:</strong> {packageName}</p>
-      <p><strong>Listing Limit:</strong> {listingLimit}</p>
-      <p><strong>Active Listings:</strong> {activeListings}</p>
       <p>
-        <strong>Remaining Slots:</strong>{" "}
-        {Math.max(0, listingLimit - activeListings)}
-      </p>
+  <strong>Package:</strong>{" "}
+  {unlimitedListings ? "Special Partner" : packageName}
+</p>
+
+<p>
+  <strong>Listing Limit:</strong>{" "}
+  {unlimitedListings ? "Unlimited ♾️" : listingLimit}
+</p>
+
+<p>
+  <strong>Active Listings:</strong> {activeListings}
+</p>
+
+<p>
+  <strong>Remaining Slots:</strong>{" "}
+  {unlimitedListings
+    ? "Unlimited ♾️"
+    : Math.max(0, listingLimit - activeListings)}
+</p>
     </>
   ) : (
     <p>No active package</p>
