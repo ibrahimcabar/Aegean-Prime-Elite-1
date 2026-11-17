@@ -856,6 +856,27 @@ useEffect(() => {
       </div>
     ))}
   </div>
+  
+{propertyUpdateError && (
+  <p role="alert" style={{
+    color: "#ffb4b4",
+    marginTop: 16,
+    fontWeight: 600
+  }}>
+    {propertyUpdateError}
+  </p>
+)}
+
+{propertyUpdateSuccess && (
+  <p role="status" style={{
+    color: "#b8f0c8",
+    marginTop: 16,
+    fontWeight: 600
+  }}>
+    {propertyUpdateSuccess}
+  </p>
+)}
+
 </section>
 
 <section style={{
