@@ -37,8 +37,11 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const { data, error } = await supabase
-    .from("properties")
-    .select("*");
+    
+.from("properties")
+.select("*")
+.eq("status", "active");
+
 
   if (error) {
     console.error("Homepage properties:", error.message);
