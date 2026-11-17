@@ -33,6 +33,15 @@ const [pendingPropertiesLoading, setPendingPropertiesLoading] =
 const [pendingPropertiesError, setPendingPropertiesError] =
   useState("");
 
+const [propertyUpdatingId, setPropertyUpdatingId] =
+  useState<number | null>(null);
+
+const [propertyUpdateError, setPropertyUpdateError] =
+  useState("");
+
+const [propertyUpdateSuccess, setPropertyUpdateSuccess] =
+  useState("");
+
 const [partnerApplications, setPartnerApplications] =
   useState<{
     id: number;
