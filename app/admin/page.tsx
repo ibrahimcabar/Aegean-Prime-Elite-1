@@ -801,6 +801,58 @@ useEffect(() => {
         <p style={{ color: "#b45309" }}>
           Durum: Onay Bekliyor
         </p>
+        
+<div
+  style={{
+    display: "flex",
+    gap: 12,
+    flexWrap: "wrap",
+    marginTop: 18
+  }}
+>
+  <button
+    type="button"
+    disabled={propertyUpdatingId !== null}
+    onClick={() =>
+      updatePropertyStatus(property.id, "active")
+    }
+    style={{
+      background: "#18382c",
+      color: "#ffffff",
+      padding: "12px 20px",
+      border: "none",
+      borderRadius: 8,
+      fontWeight: 700,
+      cursor: "pointer"
+    }}
+  >
+    {propertyUpdatingId === property.id
+      ? "İşleniyor..."
+      : "✅ İlanı Onayla"}
+  </button>
+
+  <button
+    type="button"
+    disabled={propertyUpdatingId !== null}
+    onClick={() =>
+      updatePropertyStatus(property.id, "rejected")
+    }
+    style={{
+      background: "#b91c1c",
+      color: "#ffffff",
+      padding: "12px 20px",
+      border: "none",
+      borderRadius: 8,
+      fontWeight: 700,
+      cursor: "pointer"
+    }}
+  >
+    {propertyUpdatingId === property.id
+      ? "İşleniyor..."
+      : "❌ İlanı Reddet"}
+  </button>
+</div>
+
       </div>
     ))}
   </div>
