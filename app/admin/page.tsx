@@ -663,6 +663,78 @@ useEffect(() => {
   borderRadius: 16,
   margin: "24px 0"
 }}>
+  <h2 style={{ color: "#d6bd88" }}>
+    🏠 Onay Bekleyen Gayrimenkul İlanları
+  </h2>
+
+  <p>Bekleyen İlan: {pendingProperties.length}</p>
+
+  {pendingPropertiesLoading && (
+    <p>İlanlar yükleniyor...</p>
+  )}
+
+  {pendingPropertiesError && (
+    <p role="alert" style={{ color: "#ffb4b4" }}>
+      {pendingPropertiesError}
+    </p>
+  )}
+
+  {!pendingPropertiesLoading &&
+    !pendingPropertiesError &&
+    pendingProperties.length === 0 && (
+      <p>Onay bekleyen ilan bulunmuyor.</p>
+    )}
+
+  <div style={{ display: "grid", gap: 16 }}>
+    {pendingProperties.map((property) => (
+      <div key={property.id} style={{
+        background: "#ffffff",
+        color: "#222222",
+        padding: 20,
+        borderRadius: 12
+      }}>
+        {property.image && (
+          <img
+            src={property.image}
+            alt={property.title}
+            style={{
+              width: "100%",
+              maxWidth: 300,
+              borderRadius: 10
+            }}
+          />
+        )}
+
+        <h3>{property.title}</h3>
+
+        <p>
+          Konum: {property.city}, {property.country}
+        </p>
+
+        <p>
+          Fiyat: {property.price?.toLocaleString("tr-TR")}{" "}
+          {property.currency}
+        </p>
+
+        <p>
+          İlan No: {property.id}
+        </p>
+
+        <p style={{ color: "#b45309" }}>
+          Durum: Onay Bekliyor
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<section style={{
+  background: "#18382c",
+  color: "#ffffff",
+  padding: 24,
+  borderRadius: 16,
+  margin: "24px 0"
+}}>
   <h2 style={{ color: "#d6bd88", marginTop: 0 }}>
     🏢 Emlakçı Üyelik Başvuruları
   </h2>
