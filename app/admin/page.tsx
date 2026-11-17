@@ -42,6 +42,75 @@ const [propertyUpdateError, setPropertyUpdateError] =
 const [propertyUpdateSuccess, setPropertyUpdateSuccess] =
   useState("");
 
+async function updatePropertyStatus(
+  id: number,
+  status: "active" | "rejected"
+) {
+  if (propertyUpdatingId !== null) return;
+
+  const action =
+    status === "active" ? "onaylamak" : "reddetmek";
+
+  const confirmed = window.confirm(
+    `İlan #${id} için ${action} istediğine emin misin?`
+  );
+
+  if (!confirmed) return;
+
+  setPropertyUpdatingId(id);
+  setPropertyUpdateError("");
+  setPropertyUpdateSuccess("");
+
+  try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+      throw new Error("Yönetici oturumu bulunamadı.");
+    }
+
+    const response = await fetch(
+      "/api/admin-property-review",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ id, status }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result.error || "İlan güncellenemedi."
+      );
+    }
+
+    setPendingProperties((previous) =>
+      previous.filter((property) => property.id !== id)
+    );
+
+    setPropertyUpdateSuccess(
+      `İlan #${id} ${
+        status === "active" ? "onaylandı" : "reddedildi"
+      }.`
+    );
+  } catch (error) {
+    setPropertyUpdateError(
+      error instanceof Error
+        ? error.message
+        : "İlan güncellenemedi."
+    );
+  } finally {
+    setPropertyUpdatingId(null);
+  }
+}
+
 const [partnerApplications, setPartnerApplications] =
   useState<{
     id: number;
