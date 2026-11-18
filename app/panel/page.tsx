@@ -33,7 +33,13 @@ const [myProperties, setMyProperties] = useState<{
 
 const [propertiesLoading, setPropertiesLoading] = useState(true);
 const [propertiesError, setPropertiesError] = useState("");
+const pendingListings = myProperties.filter(
+  (property) => property.status === "pending"
+).length;
 
+const rejectedListings = myProperties.filter(
+  (property) => property.status === "rejected"
+).length;
   useEffect(() => {
   let cancelled = false;
 
@@ -176,9 +182,28 @@ if (countError) {
         marginTop: 35,
       }}>
         <div style={card}>
-          <h3>My Properties</h3>
-          <p>{activeListings} active listings</p>
-        </div>
+  <h3>🏠 My Properties</h3>
+
+  <p>
+    🟢 Active Listings:{" "}
+    <strong>{activeListings}</strong>
+  </p>
+
+  <p>
+    🟠 Pending Approval:{" "}
+    <strong>{pendingListings}</strong>
+  </p>
+
+  <p>
+    🔴 Rejected Listings:{" "}
+    <strong>{rejectedListings}</strong>
+  </p>
+
+  <p>
+    📋 Total Listings:{" "}
+    <strong>{myProperties.length}</strong>
+  </p>
+</div>
 
         
 <div style={card}>
