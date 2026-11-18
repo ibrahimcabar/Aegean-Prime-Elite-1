@@ -132,34 +132,43 @@ const [saveSuccess, setSaveSuccess] = useState("");
         return;
       }
 
-      const { data, error: updateError } = await supabase
-        .from("properties")
-        .update({
-          title: property.title.trim(),
-          property_type: property.property_type,
-          country: property.country,
-          city: property.city,
-          street_address: property.street_address,
-          price: property.price,
-          currency: property.currency,
-          area_sqm: property.area_sqm,
-          beds: property.beds,
-          description: property.description,
-          image: property.image,
-        })
-        .eq("id", propertyId)
-        .eq("owner_id", user.id)
-        .select("id")
-        .maybeSingle();
+      
+const { error: requestError } = await supabase
+  .from("property_edit_requests")
+  .insert({
+    property_id: propertyId,
+    requested_by: user.id,
+    status: "pending",
+    proposed_changes: {
+      title: property.title.trim(),
+      property_type: property.property_type,
+      country: property.country,
+      city: property.city,
+      street_address: property.street_address,
+      price: property.price,
+      currency: property.currency,
+      area_sqm: property.area_sqm,
+      beds: property.beds,
+      description: property.description,
+      image: property.image,
+    },
+  });
 
-      if (updateError) throw updateError;
+if (requestError) {
+  if (requestError.code === "23505") {
+    setSaveError(
+      "This property already has a pending edit request."
+    );
+    return;
+  }
 
-      if (!data) {
-        setSaveError("Property could not be updated.");
-        return;
-      }
+  throw requestError;
+}
 
-      setSaveSuccess("Property updated successfully.");
+setSaveSuccess(
+  "Your changes have been submitted for admin approval."
+);
+
     } catch (err) {
       console.error("Property update error:", err);
       setSaveError("Failed to save property changes.");
