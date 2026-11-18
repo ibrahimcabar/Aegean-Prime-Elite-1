@@ -111,6 +111,88 @@ async function updatePropertyStatus(
   }
 }
 
+const [propertyEditRequests, setPropertyEditRequests] =
+  useState<any[]>([]);
+
+const [propertyEditLoading, setPropertyEditLoading] =
+  useState(false);
+
+const [propertyEditError, setPropertyEditError] =
+  useState("");
+
+const [propertyEditUpdatingId, setPropertyEditUpdatingId] =
+  useState<number | null>(null);
+
+const [propertyEditSuccess, setPropertyEditSuccess] =
+  useState("");
+
+async function reviewPropertyEdit(
+  id: number,
+  decision: "approved" | "rejected"
+) {
+  if (propertyEditUpdatingId !== null) return;
+
+  const action =
+    decision === "approved" ? "onaylamak" : "reddetmek";
+
+  if (!window.confirm(
+    `Değişiklik talebi #${id} için ${action} istediğine emin misin?`
+  )) return;
+
+  setPropertyEditUpdatingId(id);
+  setPropertyEditError("");
+  setPropertyEditSuccess("");
+
+  try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+      throw new Error("Yönetici oturumu bulunamadı.");
+    }
+
+    const response = await fetch(
+      "/api/admin-property-edits",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ id, decision }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result.error || "Değişiklik talebi işlenemedi."
+      );
+    }
+
+    setPropertyEditRequests((previous) =>
+      previous.filter((item) => item.id !== id)
+    );
+
+    setPropertyEditSuccess(
+      `Değişiklik talebi #${id} ${
+        decision === "approved" ? "onaylandı" : "reddedildi"
+      }.`
+    );
+  } catch (error) {
+    setPropertyEditError(
+      error instanceof Error
+        ? error.message
+        : "Değişiklik talebi işlenemedi."
+    );
+  } finally {
+    setPropertyEditUpdatingId(null);
+  }
+}
+
 const [partnerApplications, setPartnerApplications] =
   useState<{
     id: number;
@@ -713,6 +795,72 @@ useEffect(() => {
   };
 }, [authorized]);
 
+useEffect(() => {
+  if (!authorized) return;
+
+  let active = true;
+
+  async function loadPropertyEditRequests() {
+    setPropertyEditLoading(true);
+    setPropertyEditError("");
+
+    try {
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (sessionError || !session?.access_token) {
+        throw new Error("Yönetici oturumu bulunamadı.");
+      }
+
+      const response = await fetch(
+        "/api/admin-property-edits",
+        {
+          headers: {
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          cache: "no-store",
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.error || "Değişiklik talepleri alınamadı."
+        );
+      }
+
+      if (active) {
+        setPropertyEditRequests(
+          Array.isArray(result.requests)
+            ? result.requests
+            : []
+        );
+      }
+    } catch (error) {
+      if (active) {
+        setPropertyEditError(
+          error instanceof Error
+            ? error.message
+            : "Değişiklik talepleri yüklenemedi."
+        );
+      }
+    } finally {
+      if (active) {
+        setPropertyEditLoading(false);
+      }
+    }
+  }
+
+  loadPropertyEditRequests();
+
+  return () => {
+    active = false;
+  };
+}, [authorized]);
+
   if (loading || !authorized) {
     return <main style={{ padding: 40 }}>
       Yetki kontrol ediliyor...
@@ -734,6 +882,130 @@ useEffect(() => {
       </h1>
       <h2>Yönetici Paneli</h2>
    
+<section style={{
+  background: "#18382c",
+  color: "#ffffff",
+  padding: 24,
+  borderRadius: 16,
+  margin: "24px 0"
+}}>
+  <h2 style={{ color: "#d6bd88" }}>
+    📝 Emlakçı İlan Değişiklik Talepleri
+  </h2>
+
+  <p>
+    Onay Bekleyen Değişiklik: {propertyEditRequests.length}
+  </p>
+
+  {propertyEditLoading && (
+    <p>Talepler yükleniyor...</p>
+  )}
+
+  {propertyEditError && (
+    <p role="alert" style={{ color: "#ffb4b4" }}>
+      {propertyEditError}
+    </p>
+  )}
+
+  {propertyEditSuccess && (
+    <p role="status" style={{ color: "#b8f0c8" }}>
+      {propertyEditSuccess}
+    </p>
+  )}
+
+  {!propertyEditLoading &&
+    !propertyEditError &&
+    propertyEditRequests.length === 0 && (
+      <p>Bekleyen değişiklik talebi bulunmuyor.</p>
+    )}
+
+  <div style={{ display: "grid", gap: 16 }}>
+    {propertyEditRequests.map((item) => (
+      <div
+        key={item.id}
+        style={{
+          background: "#ffffff",
+          color: "#222222",
+          padding: 20,
+          borderRadius: 12,
+          overflowWrap: "anywhere"
+        }}
+      >
+        <h3>Değişiklik Talebi #{item.id}</h3>
+
+        <p><strong>İlan No:</strong> {item.property_id}</p>
+
+        <p>
+          <strong>Talep Tarihi:</strong>{" "}
+          {item.created_at
+            ? new Date(item.created_at).toLocaleString("tr-TR")
+            : "—"}
+        </p>
+
+        <h4>Önerilen Değişiklikler</h4>
+
+        <pre style={{
+          background: "#f3f4f6",
+          padding: 14,
+          borderRadius: 8,
+          whiteSpace: "pre-wrap",
+          overflowWrap: "anywhere",
+          fontSize: 13
+        }}>
+          {JSON.stringify(item.proposed_changes, null, 2)}
+        </pre>
+
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 12,
+          marginTop: 18
+        }}>
+          <button
+            type="button"
+            disabled={propertyEditUpdatingId !== null}
+            onClick={() =>
+              reviewPropertyEdit(item.id, "approved")
+            }
+            style={{
+              background: "#18382c",
+              color: "#ffffff",
+              padding: "12px 18px",
+              border: "none",
+              borderRadius: 8,
+              fontWeight: 700
+            }}
+          >
+            {propertyEditUpdatingId === item.id
+              ? "İşleniyor..."
+              : "✅ Değişikliği Onayla"}
+          </button>
+
+          <button
+            type="button"
+            disabled={propertyEditUpdatingId !== null}
+            onClick={() =>
+              reviewPropertyEdit(item.id, "rejected")
+            }
+            style={{
+              background: "#b91c1c",
+              color: "#ffffff",
+              padding: "12px 18px",
+              border: "none",
+              borderRadius: 8,
+              fontWeight: 700
+            }}
+          >
+            {propertyEditUpdatingId === item.id
+              ? "İşleniyor..."
+              : "❌ Değişikliği Reddet"}
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 <section style={{
   background: "#18382c",
   color: "#ffffff",
