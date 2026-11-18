@@ -325,6 +325,24 @@ if (countError) {
             View Property
           </a>
         )}
+        
+<a
+  href={`/ilan-duzenle/${property.id}`}
+  style={{
+    display: "inline-block",
+    marginTop: 12,
+    marginRight: 12,
+    padding: "10px 18px",
+    background: "#b89b68",
+    color: "#fff",
+    borderRadius: 8,
+    textDecoration: "none",
+    fontWeight: 600,
+  }}
+>
+  ✏️ Edit Property
+</a>
+
       </div>
     ))}
   </div>
