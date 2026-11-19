@@ -220,6 +220,68 @@ const [partnerUpdatingId, setPartnerUpdatingId] =
 const [partnerUpdateError, setPartnerUpdateError] =
   useState("");
 
+async function approvePartnerApplication(id: number) {
+  if (partnerUpdatingId !== null) return;
+
+  const confirmed = window.confirm(
+    "Bu emlakçı başvurusunu onaylamak istediğinize emin misiniz?"
+  );
+
+  if (!confirmed) return;
+
+  setPartnerUpdatingId(id);
+  setPartnerUpdateError("");
+
+  try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+      throw new Error("Yönetici oturumu bulunamadı.");
+    }
+
+    const response = await fetch(
+      "/api/admin-approve-partner",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ id }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result.error || "Başvuru onaylanamadı."
+      );
+    }
+
+    setPartnerApplications((previous) =>
+      previous.map((application) =>
+        application.id === id
+          ? { ...application, status: "approved" }
+          : application
+      )
+    );
+
+    window.alert("Başvuru başarıyla onaylandı.");
+  } catch (error) {
+    setPartnerUpdateError(
+      error instanceof Error
+        ? error.message
+        : "Başvuru onaylanamadı."
+    );
+  } finally {
+    setPartnerUpdatingId(null);
+  }
+}
+
 async function updatePartnerStatus(
   id: number,
   status: string
