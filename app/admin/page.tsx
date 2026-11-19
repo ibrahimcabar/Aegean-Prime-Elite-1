@@ -1276,6 +1276,27 @@ useEffect(() => {
       {partnerUpdateError}
     </p>
   )}
+  
+{["new", "contacted"].includes(application.status) && (
+  <button
+    type="button"
+    disabled
+    style={{
+      marginTop: 12,
+      padding: "12px 20px",
+      borderRadius: 8,
+      border: "none",
+      background: "#b89b68",
+      color: "#18382c",
+      fontWeight: 700,
+      opacity: 0.6,
+      cursor: "not-allowed"
+    }}
+  >
+    ✓ Başvuruyu Onayla
+  </button>
+)}
+
 </div>
 
 
