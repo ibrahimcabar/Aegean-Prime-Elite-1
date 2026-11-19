@@ -700,3 +700,165 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* VELORA PRIME ELITE - PASSWORD PAGES */
+
+.velora-auth {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #263c32 0%,
+      #101a16 48%,
+      #080d0b 100%
+    );
+  font-family: 'DM Sans', sans-serif;
+}
+
+.velora-auth * {
+  box-sizing: border-box;
+}
+
+.velora-auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 42px 32px;
+  border: 1px solid rgba(185, 154, 98, 0.4);
+  border-radius: 20px;
+  background: #17231d;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+.velora-auth-brand {
+  margin: 0;
+  color: #d6b982;
+  text-align: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(25px, 6vw, 32px);
+  font-weight: 500;
+  letter-spacing: 2px;
+  line-height: 1.3;
+}
+
+.velora-auth-title {
+  margin: 30px 0 0;
+  color: #ffffff;
+  text-align: center;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.velora-auth-description {
+  margin: 16px 0 0;
+  color: #c6cbc7;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.velora-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.velora-auth-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid #526057;
+  border-radius: 9px;
+  background: #233129;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+}
+
+.velora-auth-input::placeholder {
+  color: #b3bdb5;
+}
+
+.velora-auth-input:focus {
+  border-color: #d6b982;
+  box-shadow: 0 0 0 3px rgba(214, 185, 130, 0.15);
+}
+
+.velora-auth-button {
+  display: block;
+  width: 100%;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(
+    135deg,
+    #e4cc98,
+    #b99a62,
+    #99753d
+  );
+  color: #111a15;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.velora-auth-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.velora-auth-message {
+  margin: 20px 0 0;
+  color: #e4cc98;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.velora-auth-error {
+  color: #ffb4b4;
+}
+
+.velora-auth-success {
+  color: #a9e6b9;
+}
+
+.velora-auth-link {
+  display: block;
+  margin-top: 24px;
+  color: #d6b982;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.velora-auth-link:hover {
+  color: #f2d9a4;
+}
+
+.velora-auth-card .velora-auth-button {
+  margin-top: 8px;
+}
+
+@media (max-width: 480px) {
+  .velora-auth-card {
+    padding: 34px 22px;
+    border-radius: 16px;
+  }
+
+  .velora-auth-brand {
+    letter-spacing: 1px;
+  }
+
+  .velora-auth-title {
+    font-size: 21px;
+  }
+}
