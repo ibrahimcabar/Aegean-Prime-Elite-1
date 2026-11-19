@@ -85,11 +85,21 @@ export default function ResetPasswordPage() {
 
     if (loading || !authorized) return;
 
-    if (password.length < 8) {
-      setMessage("Şifreniz en az 8 karakter olmalıdır.");
+    if (password.length < 12) {
+      setMessage("Şifreniz en az 12 karakter olmalıdır.");
       return;
     }
-
+if (
+  !/[a-z]/.test(password) ||
+  !/[A-Z]/.test(password) ||
+  !/[0-9]/.test(password) ||
+  !/[^a-zA-Z0-9]/.test(password)
+) {
+  setMessage(
+    "Şifreniz büyük harf, küçük harf, rakam ve özel karakter içermelidir."
+  );
+  return;
+}
     if (password !== confirmPassword) {
       setMessage("Şifreler eşleşmiyor.");
       return;
@@ -176,7 +186,7 @@ if (error) {
               required
               minLength={8}
               autoComplete="new-password"
-              placeholder="Yeni şifre (en az 8 karakter)"
+              placeholder="Yeni şifre (en az 12 karakter)"
               aria-label="Yeni şifre"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
