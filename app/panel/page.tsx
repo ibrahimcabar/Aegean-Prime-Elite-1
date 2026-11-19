@@ -55,7 +55,9 @@ const rejectedListings = myProperties.filter(
 
     setEmail(data.user.email || "");
 
-const { data: partner, error: partnerError } = await supabase
+
+const { data: accessPartner, error: accessPartnerError } = await supabase
+
   .from("partner_profiles")
   .select("status")
   .eq("user_id", data.user.id)
@@ -63,7 +65,9 @@ const { data: partner, error: partnerError } = await supabase
 
 if (cancelled) return;
 
-if (partnerError || partner?.status !== "active") {
+
+if (accessPartnerError || accessPartner?.status !== "active") {
+
   router.replace("/");
   return;
 }
