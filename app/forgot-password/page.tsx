@@ -13,6 +13,7 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,6 +21,7 @@ export default function ForgotPasswordPage() {
 
     setLoading(true);
     setMessage("");
+    setIsError(false);
 
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(
@@ -30,35 +32,45 @@ export default function ForgotPasswordPage() {
       );
 
       if (error) {
-        setMessage("İşlem gerçekleştirilemedi. Lütfen tekrar deneyin.");
+        setIsError(true);
+        setMessage(
+          "İşlem gerçekleştirilemedi. Lütfen tekrar deneyin."
+        );
       } else {
         setMessage(
           "E-posta adresiniz kayıtlıysa şifre sıfırlama bağlantısı gönderilecektir. Gelen kutunuzu kontrol edin."
         );
       }
     } catch {
-      setMessage("Bir bağlantı hatası oluştu. Tekrar deneyin.");
+      setIsError(true);
+      setMessage(
+        "Bir bağlantı hatası oluştu. Lütfen tekrar deneyin."
+      );
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-2xl border border-amber-500/30 bg-slate-900 p-8 shadow-2xl">
-        <h1 className="text-2xl font-bold text-amber-400 text-center">
+    <main className="velora-auth">
+      <div className="velora-auth-card">
+        <h1 className="velora-auth-brand">
           VELORA PRIME ELITE
         </h1>
 
-        <h2 className="mt-6 text-xl font-semibold text-center">
+        <h2 className="velora-auth-title">
           Şifremi Unuttum
         </h2>
 
-        <p className="mt-3 text-sm text-slate-300 text-center">
-          E-posta adresinizi girin. Size şifre sıfırlama bağlantısı gönderelim.
+        <p className="velora-auth-description">
+          E-posta adresinizi girin. Size güvenli bir
+          şifre sıfırlama bağlantısı gönderelim.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="velora-auth-form"
+        >
           <input
             type="email"
             required
@@ -66,28 +78,35 @@ export default function ForgotPasswordPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-posta adresiniz"
-            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-amber-400"
+            aria-label="E-posta adresiniz"
+            className="velora-auth-input"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-amber-500 px-4 py-3 font-semibold text-slate-950 disabled:opacity-50"
+            className="velora-auth-button"
           >
-            {loading ? "Gönderiliyor..." : "Şifre Sıfırlama Bağlantısı Gönder"}
+            {loading
+              ? "Gönderiliyor..."
+              : "Şifre Sıfırlama Bağlantısı Gönder"}
           </button>
         </form>
 
         {message && (
-          <p role="status" className="mt-5 text-sm text-center text-amber-300">
+          <p
+            role="status"
+            className={
+              isError
+                ? "velora-auth-message velora-auth-error"
+                : "velora-auth-message"
+            }
+          >
             {message}
           </p>
         )}
 
-        <a
-          href="/giris"
-          className="mt-6 block text-center text-sm text-slate-300 hover:text-amber-400"
-        >
+        <a href="/giris" className="velora-auth-link">
           Giriş sayfasına dön
         </a>
       </div>
