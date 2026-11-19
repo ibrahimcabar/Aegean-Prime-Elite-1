@@ -55,9 +55,30 @@ export default function GirisPage() {
         setMessage("Signed in successfully!");
             }
 
-      if (!kayit) {
-  window.location.href = "/panel";
+      
+if (!kayit) {
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("Kullanıcı doğrulanamadı.");
+  }
+
+  const { data: admin, error: adminError } = await supabase
+    .from("admin_users")
+    .select("user_id")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (adminError) {
+    throw new Error("Yönetici yetkisi kontrol edilemedi.");
+  }
+
+  window.location.href = admin ? "/admin" : "/panel";
 }
+
     } catch (err) {
       setMessage(
         err instanceof Error ? err.message : "An error occurred."
