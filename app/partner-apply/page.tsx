@@ -177,6 +177,20 @@ export default function PartnerApplyPage() {
   const t = translations[language];
   const selected = plans[form.package_name];
 const applicationsOpen = true;
+  const [campaignActive, setCampaignActive] = useState(false);
+
+useEffect(() => {
+  const checkCampaign = () => {
+    setCampaignActive(
+      Date.now() < Date.parse("2026-12-31T23:59:59+03:00")
+    );
+  };
+
+  checkCampaign();
+  const timer = setInterval(checkCampaign, 60000);
+
+  return () => clearInterval(timer);
+}, []);
   const updateField = (name: string, value: string) => {
     setForm(prev => ({
       ...prev,
@@ -345,16 +359,41 @@ const applicationsOpen = true;
                 color: "#18382c"
               }}
             >
-              €{selected.price}
-              <span
-                style={{
-                  fontSize: 16,
-                  color: "#777",
-                  fontWeight: 400
-                }}
-              >
-                {" / "}{t.month}
-              </span>
+              
+{campaignActive ? (
+  <>
+    <span
+      style={{
+        fontSize: 20,
+        color: "#999",
+        textDecoration: "line-through",
+        marginRight: 12
+      }}
+    >
+      €{selected.price}
+    </span>
+    <span style={{ color: "#b99a60" }}>
+      {language === "tr" ? "ÜCRETSİZ" :
+       language === "de" ? "KOSTENLOS" :
+       language === "ru" ? "БЕСПЛАТНО" :
+       language === "ar" ? "مجاناً" :
+       "FREE"}
+    </span>
+  </>
+) : (
+  <>
+    €{selected.price}
+    <span style={{
+      fontSize: 16,
+      color: "#777",
+      fontWeight: 400
+    }}>
+      {" / "}{t.month}
+    </span>
+  </>
+)}
+
+              
             </div>
 
             <p style={{ color: "#777", marginBottom: 0 }}>
