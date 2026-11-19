@@ -1183,7 +1183,7 @@ onChange={(e) => {
       </small>
     </>
   )}
-</div>
+</div><p>
 
   {language === "tr" ? `En fazla ${p.count} aktif gayrimenkul ilanı` :
    language === "de" ? `Bis zu ${p.count} aktive Immobilienanzeigen` :
