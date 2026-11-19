@@ -141,6 +141,26 @@ const [dbProperties,setDbProperties]=useState<any[]>(initialProperties);
   
 const [language, setLanguage] = useState(initialLanguage);
 
+const [campaignActive, setCampaignActive] = useState(false);
+
+useEffect(() => {
+  const checkCampaign = () => {
+    const now = Date.now();
+
+    const campaignEnd = Date.parse(
+      "2026-12-31T21:00:00Z"
+    );
+
+    setCampaignActive(now < campaignEnd);
+  };
+
+  checkCampaign();
+
+  const interval = setInterval(checkCampaign, 60000);
+
+  return () => clearInterval(interval);
+}, []);
+
   
 useEffect(() => {
   const supportedLanguages = ["en", "tr", "de", "ru", "ar"];
@@ -632,6 +652,132 @@ onChange={(e) => {
  language === "ar" ? "عالم من الفرص" :
  "A WORLD OF OPPORTUNITY"}</span></div></div></section>
 
+{campaignActive && (
+  <section
+    aria-label="Velora Prime Elite launch campaign"
+    style={{
+      padding: "55px 20px",
+      background: "#f8f7f4"
+    }}
+  >
+    <div
+      style={{
+        maxWidth: 1150,
+        margin: "0 auto",
+        padding: "45px 25px",
+        background: "linear-gradient(135deg, #102a22, #18382c, #294c3e)",
+        border: "1px solid #b99a60",
+        borderRadius: 22,
+        textAlign: "center",
+        boxShadow: "0 18px 50px rgba(24,56,44,0.2)"
+      }}
+    >
+      <div style={{
+        color: "#d9bd82",
+        fontSize: 13,
+        fontWeight: 700,
+        letterSpacing: 2,
+        marginBottom: 18
+      }}>
+        VELORA PRIME ELITE • 2026
+      </div>
+
+      <h2 style={{
+        color: "#ffffff",
+        fontSize: "clamp(29px, 5vw, 52px)",
+        lineHeight: 1.2,
+        margin: "0 0 20px"
+      }}>
+        {({
+          tr: "Tüm Üyelik Paketleri Ücretsiz!",
+          en: "All Membership Plans Are Free!",
+          de: "Alle Mitgliedschaftspakete kostenlos!",
+          ru: "Все тарифные планы бесплатно!",
+          ar: "جميع باقات العضوية مجانية!"
+        } as Record<string, string>)[language] ??
+          "All Membership Plans Are Free!"}
+      </h2>
+
+      <p style={{
+        color: "#e8e8e2",
+        fontSize: "clamp(16px, 2vw, 20px)",
+        lineHeight: 1.8,
+        maxWidth: 750,
+        margin: "0 auto 25px"
+      }}>
+        {({
+          tr: "Lansman kampanyamıza özel, Starter, Professional, Business ve Enterprise paketlerimizi 1 Ocak 2027'ye kadar ücretsiz deneyimleyin.",
+          en: "As part of our launch campaign, explore Starter, Professional, Business and Enterprise plans free until January 1, 2027.",
+          de: "Entdecken Sie im Rahmen unserer Startaktion die Pakete Starter, Professional, Business und Enterprise kostenlos bis zum 1. Januar 2027.",
+          ru: "В рамках стартовой акции попробуйте пакеты Starter, Professional, Business и Enterprise бесплатно до 1 января 2027 года.",
+          ar: "ضمن عرض الإطلاق، جرّب باقات Starter وProfessional وBusiness وEnterprise مجانًا حتى 1 يناير 2027."
+        } as Record<string, string>)[language]}
+      </p>
+
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: 12,
+        marginBottom: 30
+      }}>
+        {["Starter", "Professional", "Business", "Enterprise"].map(plan => (
+          <span
+            key={plan}
+            style={{
+              border: "1px solid #b99a60",
+              borderRadius: 9,
+              padding: "11px 17px",
+              color: "#ffffff",
+              fontWeight: 600,
+              fontSize: 14
+            }}
+          >
+            {plan}
+          </span>
+        ))}
+      </div>
+
+      <a
+        href="#packages"
+        style={{
+          display: "inline-block",
+          padding: "16px 30px",
+          background: "#d9bd82",
+          color: "#18382c",
+          borderRadius: 10,
+          fontWeight: 800,
+          textDecoration: "none",
+          fontSize: 16
+        }}
+      >
+        {({
+          tr: "Ücretsiz Paketleri İncele",
+          en: "Explore Free Plans",
+          de: "Kostenlose Pakete entdecken",
+          ru: "Посмотреть бесплатные тарифы",
+          ar: "استكشف الباقات المجانية"
+        } as Record<string, string>)[language]}
+      </a>
+
+      <p style={{
+        color: "#d9bd82",
+        fontSize: 13,
+        marginTop: 22,
+        marginBottom: 0
+      }}>
+        {({
+          tr: "Kampanya 31.12.2026 saat 23.59'da sona erer (Türkiye saati).",
+          en: "Offer ends December 31, 2026 at 23:59 (Türkiye time).",
+          de: "Angebot endet am 31.12.2026 um 23:59 Uhr (türkische Zeit).",
+          ru: "Акция заканчивается 31.12.2026 в 23:59 по времени Турции.",
+          ar: "ينتهي العرض في 31 ديسمبر 2026 الساعة 23:59 بتوقيت تركيا."
+        } as Record<string, string>)[language]}
+      </p>
+    </div>
+  </section>
+)}
+
 <section className="golden-life-showcase" style={{
   padding: "65px 20px",
   background: "#f8f7f4",
@@ -992,13 +1138,53 @@ onChange={(e) => {
    language === "ru" ? "ПОПУЛЯРНЫЙ" :
    language === "ar" ? "الأكثر شعبية" :
    "POPULAR"}
-</span>}</div><div className="price">€{p.price}<small>
-  {language === "tr" ? " / ay" :
-   language === "de" ? " / Monat" :
-   language === "ru" ? " / месяц" :
-   language === "ar" ? " / شهر" :
-   " / month"}
-</small></div><p>
+
+<div className="price">
+  {campaignActive ? (
+    <>
+      <div style={{
+        fontSize: 18,
+        textDecoration: "line-through",
+        opacity: 0.55
+      }}>
+        €{p.price}
+        <small>
+          {language === "tr" ? " / ay" :
+           language === "de" ? " / Monat" :
+           language === "ru" ? " / месяц" :
+           language === "ar" ? " / شهر" :
+           " / month"}
+        </small>
+      </div>
+
+      <div style={{
+        color: "#b99a60",
+        fontWeight: 800,
+        marginTop: 8
+      }}>
+        {({
+          tr: "ÜCRETSİZ",
+          en: "FREE",
+          de: "KOSTENLOS",
+          ru: "БЕСПЛАТНО",
+          ar: "مجانًا"
+        } as Record<string, string>)[language] ?? "FREE"}
+      </div>
+    </>
+  ) : (
+    <>
+      €{p.price}
+      <small>
+        {language === "tr" ? " / ay" :
+         language === "de" ? " / Monat" :
+         language === "ru" ? " / месяц" :
+         language === "ar" ? " / شهر" :
+         " / month"}
+      </small>
+    </>
+  )}
+</div>
+
   {language === "tr" ? `En fazla ${p.count} aktif gayrimenkul ilanı` :
    language === "de" ? `Bis zu ${p.count} aktive Immobilienanzeigen` :
    language === "ru" ? `До ${p.count} активных объявлений о недвижимости` :
