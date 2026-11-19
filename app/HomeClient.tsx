@@ -1138,7 +1138,7 @@ onChange={(e) => {
    language === "ru" ? "ПОПУЛЯРНЫЙ" :
    language === "ar" ? "الأكثر شعبية" :
    "POPULAR"}
-
+</span>}</div>
 <div className="price">
   {campaignActive ? (
     <>
@@ -1215,7 +1215,14 @@ onChange={(e) => {
   "Property listing management",
   "International visibility",
   "Buyer enquiry access"
-]).map(x=><div className="plan-benefit" key={x}><Check size={16}/>{x}</div>)}
+
+]).map(x => (
+  <div className="plan-benefit" key={x}>
+    <Check size={16}/>
+    {x}
+  </div>
+))}
+
 <button onClick={() => window.location.assign(
   `/partner-apply?plan=${encodeURIComponent(p.name)}&lang=${encodeURIComponent(language)}`
 )}>
