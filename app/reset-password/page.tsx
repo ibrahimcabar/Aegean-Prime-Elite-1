@@ -104,7 +104,9 @@ export default function ResetPasswordPage() {
       });
 
       if (error) {
-        setMessage("Şifre güncellenemedi. Yeni bağlantı isteyin.");
+        setMessage(
+          "Şifre güncellenemedi. Yeni bağlantı isteyin."
+        );
       } else {
         setSuccess(true);
         setMessage("Şifreniz başarıyla güncellendi.");
@@ -118,53 +120,65 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-2xl border border-amber-500/30 bg-slate-900 p-8 shadow-2xl">
-        <h1 className="text-2xl font-bold text-amber-400 text-center">
+    <main className="velora-auth">
+      <div className="velora-auth-card">
+        <h1 className="velora-auth-brand">
           VELORA PRIME ELITE
         </h1>
 
-        <h2 className="mt-6 text-xl font-semibold text-center">
+        <h2 className="velora-auth-title">
           Yeni Şifre Belirle
         </h2>
 
         {checking ? (
-          <p className="mt-6 text-center text-slate-300">
+          <p className="velora-auth-description">
             Bağlantı doğrulanıyor...
           </p>
         ) : !authorized ? (
-          <div className="mt-6 text-center">
-            <p className="text-red-300">
+          <div>
+            <p className="velora-auth-message velora-auth-error">
               Şifre sıfırlama bağlantısı geçersiz veya süresi dolmuş.
             </p>
+
             <a
               href="/forgot-password"
-              className="mt-5 block text-amber-400"
+              className="velora-auth-link"
             >
               Yeni bağlantı iste
             </a>
           </div>
         ) : success ? (
-          <div className="mt-6 text-center">
-            <p className="text-green-400">{message}</p>
+          <div>
+            <p className="velora-auth-message velora-auth-success">
+              {message}
+            </p>
+
             <a
               href="/giris"
-              className="mt-5 block rounded-lg bg-amber-500 px-4 py-3 font-semibold text-slate-950"
+              className="velora-auth-button velora-auth-link"
             >
               Giriş Yap
             </a>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <form
+            onSubmit={handleSubmit}
+            className="velora-auth-form"
+          >
+            <p className="velora-auth-description">
+              Hesabınız için güvenli bir yeni şifre oluşturun.
+            </p>
+
             <input
               type="password"
               required
               minLength={8}
               autoComplete="new-password"
               placeholder="Yeni şifre (en az 8 karakter)"
+              aria-label="Yeni şifre"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-amber-400"
+              className="velora-auth-input"
             />
 
             <input
@@ -173,21 +187,27 @@ export default function ResetPasswordPage() {
               minLength={8}
               autoComplete="new-password"
               placeholder="Yeni şifreyi tekrar girin"
+              aria-label="Yeni şifreyi tekrar girin"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-amber-400"
+              className="velora-auth-input"
             />
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg bg-amber-500 px-4 py-3 font-semibold text-slate-950 disabled:opacity-50"
+              className="velora-auth-button"
             >
-              {loading ? "Güncelleniyor..." : "Şifremi Güncelle"}
+              {loading
+                ? "Güncelleniyor..."
+                : "Şifremi Güncelle"}
             </button>
 
             {message && (
-              <p role="status" className="text-center text-sm text-red-300">
+              <p
+                role="alert"
+                className="velora-auth-message velora-auth-error"
+              >
                 {message}
               </p>
             )}
