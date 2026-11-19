@@ -55,6 +55,19 @@ const rejectedListings = myProperties.filter(
 
     setEmail(data.user.email || "");
 
+const { data: partner, error: partnerError } = await supabase
+  .from("partner_profiles")
+  .select("status")
+  .eq("user_id", data.user.id)
+  .maybeSingle();
+
+if (cancelled) return;
+
+if (partnerError || partner?.status !== "active") {
+  router.replace("/");
+  return;
+}
+
     setPropertiesLoading(true);
     setPropertiesError("");
 
