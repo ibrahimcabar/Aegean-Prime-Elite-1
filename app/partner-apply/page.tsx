@@ -176,7 +176,7 @@ export default function PartnerApplyPage() {
 
   const t = translations[language];
   const selected = plans[form.package_name];
-const applicationsOpen = false;
+const applicationsOpen = true;
   const updateField = (name: string, value: string) => {
     setForm(prev => ({
       ...prev,
