@@ -103,11 +103,13 @@ export default function ResetPasswordPage() {
         password,
       });
 
-      if (error) {
-        setMessage(
-          "Şifre güncellenemedi. Yeni bağlantı isteyin."
-        );
-      } else {
+if (error) {
+  setMessage(
+    `Şifre güncellenemedi. Hata kodu: ${error.code || "bilinmiyor"} (HTTP ${error.status || "bilinmiyor"})`
+  );
+}
+
+     else {
         setSuccess(true);
         setMessage("Şifreniz başarıyla güncellendi.");
         await supabase.auth.signOut();
