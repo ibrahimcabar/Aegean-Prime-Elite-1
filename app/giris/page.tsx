@@ -163,7 +163,13 @@ window.location.href = "/panel";
         <h2 style={{ marginTop: 35, color: "#222" }}>
           {kayit ? "Create Account" : "Welcome Back"}
         </h2>
-
+<p style={{ color: "#777", fontSize: 13 }}>
+  Davet edildiyseniz veya şifrenizi bilmiyorsanız,
+  şifre belirleme bağlantısı almak için
+  <a href="/forgot-password" style={{ color: "#b89b68" }}>
+    {" "}buraya tıklayın.
+  </a>
+</p>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
