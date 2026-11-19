@@ -1277,7 +1277,9 @@ useEffect(() => {
     </p>
   )}
   
-{["new", "contacted"].includes(application.status) && (
+
+{["new", "contacted"].includes(application.status ?? "new") && (
+
   <button
     type="button"
     disabled
