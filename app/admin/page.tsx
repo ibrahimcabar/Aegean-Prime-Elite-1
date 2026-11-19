@@ -1344,7 +1344,10 @@ useEffect(() => {
 
   <button
     type="button"
-    disabled
+    
+  disabled={partnerUpdatingId !== null}
+  onClick={() => approvePartnerApplication(application.id)}
+
     style={{
       marginTop: 12,
       padding: "12px 20px",
