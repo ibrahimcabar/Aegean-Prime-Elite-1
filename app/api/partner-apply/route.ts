@@ -154,7 +154,10 @@ export async function POST(request: Request) {
       city,
       message,
       package_name: packageName,
-      monthly_price_eur: plan.price,
+      monthly_price_eur:
+  Date.now() < Date.parse("2026-12-31T23:59:59+03:00")
+    ? 0
+    : plan.price,
       listing_limit: plan.count,
       privacy_consent: true,
       status: "new"
