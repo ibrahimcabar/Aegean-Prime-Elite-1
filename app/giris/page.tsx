@@ -76,7 +76,41 @@ if (!kayit) {
     throw new Error("Yönetici yetkisi kontrol edilemedi.");
   }
 
-  window.location.href = admin ? "/admin" : "/panel";
+  
+if (admin) {
+  window.location.href = "/admin";
+  return;
+}
+
+const {
+  data: { session },
+  error: sessionError,
+} = await supabase.auth.getSession();
+
+if (sessionError || !session?.access_token) {
+  throw new Error("Oturum doğrulanamadı.");
+}
+
+const activationResponse = await fetch(
+  "/api/activate-partner",
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+    },
+  }
+);
+
+const activationResult = await activationResponse.json();
+
+if (!activationResponse.ok) {
+  throw new Error(
+    activationResult.error || "Hesap kontrolü yapılamadı."
+  );
+}
+
+window.location.href = "/panel";
+
 }
 
     } catch (err) {
