@@ -132,7 +132,41 @@ const [saveSuccess, setSaveSuccess] = useState("");
         return;
       }
 
-      
+      if (property.status === "pending") {
+  const { data: updatedRows, error: updateError } = await supabase
+    .from("properties")
+    .update({
+      title: property.title.trim(),
+      property_type: property.property_type,
+      country: property.country,
+      city: property.city,
+      street_address: property.street_address,
+      price: property.price,
+      currency: property.currency,
+      area_sqm: property.area_sqm,
+      beds: property.beds,
+      description: property.description,
+      image: property.image,
+    })
+    .eq("id", propertyId)
+    .eq("owner_id", user.id)
+    .eq("status", "pending")
+    .select("id");
+
+  if (updateError) {
+  throw updateError;
+}
+
+if (!updatedRows || updatedRows.length !== 1) {
+  setSaveError(
+    "Property could not be updated. Please check your permissions."
+  );
+  return;
+}
+
+setSaveSuccess("Pending property updated successfully.");
+  return;
+}
 const { error: requestError } = await supabase
   .from("property_edit_requests")
   .insert({
