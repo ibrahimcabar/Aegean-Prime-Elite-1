@@ -583,6 +583,117 @@ fontSize: "clamp(32px, 6vw, 110px)",
         </div>
       </section>
 
+<section
+  id="cooperative-info"
+  style={{
+    background: "#f8f7f3",
+    padding: "65px 24px",
+    textAlign: "center",
+  }}
+>
+  <div
+    style={{
+      maxWidth: 850,
+      margin: "0 auto",
+      padding: "clamp(25px, 5vw, 50px)",
+      background: "#ffffff",
+      border: "1px solid #c8ad75",
+      borderRadius: 20,
+      boxShadow: "0 12px 35px rgba(24,56,44,0.08)",
+    }}
+  >
+    <p style={{ color: "#a58a59", letterSpacing: 3, fontSize: 12 }}>
+      GOLDEN LIFE
+    </p>
+
+    <h2
+      style={{
+        color: "#18382c",
+        fontSize: "clamp(26px, 4vw, 36px)",
+        margin: "15px 0",
+      }}
+    >
+      {({
+        tr: "Kooperatif Nedir?",
+        en: "What Is a Cooperative?",
+        de: "Was ist eine Genossenschaft?",
+        ru: "Что такое кооператив?",
+        ar: "ما هي التعاونية؟",
+      } as Record<string, string>)[language]}
+    </h2>
+
+    <h3
+      style={{
+        color: "#a88646",
+        fontSize: "clamp(17px, 2.5vw, 21px)",
+        lineHeight: 1.5,
+      }}
+    >
+      {({
+        tr: "Birlikte Güçlenmek, Birlikte Geleceği İnşa Etmek.",
+        en: "Growing Stronger Together, Building the Future Together.",
+        de: "Gemeinsam stärker werden, gemeinsam die Zukunft gestalten.",
+        ru: "Становимся сильнее вместе, строим будущее вместе.",
+        ar: "معاً نصبح أقوى، ومعاً نبني المستقبل.",
+      } as Record<string, string>)[language]}
+    </h3>
+
+    <p style={{ color: "#52645a", lineHeight: 1.9, fontSize: 16 }}>
+      {({
+        tr: "Kooperatif, insanların ortak bir hedef için bir araya gelerek güçlerini ve kaynaklarını birleştirdiği, dayanışma ve ortak yönetim esasına dayanan bir yapıdır.",
+        en: "A cooperative is an organization in which people unite their resources and efforts toward a common goal, based on solidarity and shared governance.",
+        de: "Eine Genossenschaft ist eine Organisation, in der Menschen ihre Kräfte und Ressourcen für ein gemeinsames Ziel bündeln, basierend auf Solidarität und gemeinschaftlicher Verwaltung.",
+        ru: "Кооператив — это организация, в которой люди объединяют усилия и ресурсы ради общей цели на основе солидарности и совместного управления.",
+        ar: "التعاونية هي كيان يجمع الأفراد ومواردهم لتحقيق هدف مشترك، ويقوم على التضامن والإدارة المشتركة.",
+      } as Record<string, string>)[language]}
+    </p>
+
+    <p style={{ color: "#52645a", lineHeight: 1.9, fontSize: 16 }}>
+      {({
+        tr: "Konut kooperatiflerinde amaç, üyelerin konut ihtiyaçlarını planlı ve ortak bir organizasyonla karşılamaktır.",
+        en: "Housing cooperatives aim to meet their members' housing needs through a planned and collective organization.",
+        de: "Wohnungsbaugenossenschaften haben das Ziel, den Wohnbedarf ihrer Mitglieder durch eine geplante und gemeinschaftliche Organisation zu decken.",
+        ru: "Жилищные кооперативы стремятся обеспечить жилищные потребности своих членов посредством совместной и планомерной организации.",
+        ar: "تهدف التعاونيات السكنية إلى تلبية احتياجات أعضائها السكنية من خلال تنظيم جماعي ومخطط.",
+      } as Record<string, string>)[language]}
+    </p>
+
+    <p
+      style={{
+        color: "#18382c",
+        lineHeight: 1.9,
+        fontSize: 17,
+        fontWeight: 600,
+      }}
+    >
+      {({
+        tr: "Golden Life, bu anlayışla doğayla iç içe, huzurlu ve kaliteli bir yaşam hedefini bir araya getiriyor.",
+        en: "With this philosophy, Golden Life brings together the vision of peaceful, high-quality living in harmony with nature.",
+        de: "Mit dieser Philosophie vereint Golden Life die Vision eines ruhigen, hochwertigen Lebens im Einklang mit der Natur.",
+        ru: "Следуя этой философии, Golden Life объединяет стремление к спокойной и качественной жизни в гармонии с природой.",
+        ar: "ومن هذا المنطلق، يجمع غولدن لايف بين الهدوء وجودة الحياة والانسجام مع الطبيعة.",
+      } as Record<string, string>)[language]}
+    </p>
+
+    <p
+      style={{
+        color: "#758078",
+        fontSize: 12,
+        lineHeight: 1.7,
+        marginTop: 25,
+      }}
+    >
+      {({
+        tr: "Kooperatif üyeliğine ilişkin haklar ve yükümlülükler, kooperatifin ana sözleşmesine ve ilgili mevzuata tabidir.",
+        en: "Membership rights and obligations are governed by the cooperative's articles of association and applicable legislation.",
+        de: "Die Rechte und Pflichten der Mitglieder richten sich nach der Satzung der Genossenschaft und den geltenden gesetzlichen Bestimmungen.",
+        ru: "Права и обязанности членов определяются уставом кооператива и действующим законодательством.",
+        ar: "تخضع حقوق الأعضاء والتزاماتهم للنظام الأساسي للتعاونية والتشريعات المعمول بها.",
+      } as Record<string, string>)[language]}
+    </p>
+  </div>
+</section>
+
       <section id="homes" style={{ background: "#f1ede4", padding: "75px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "auto" }}>
           <p style={{ color: "#94784a", letterSpacing: 3 }}>RESIDENCES</p>
