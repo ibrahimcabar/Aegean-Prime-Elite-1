@@ -1140,7 +1140,7 @@ onChange={(e) => {
    "POPULAR"}
 </span>}</div>
 <div className="price">
-  {campaignActive ? (
+  {campaignActive && p.name === "Starter" ? (
     <>
       <div style={{
         fontSize: 18,
