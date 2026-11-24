@@ -7,7 +7,7 @@ export const properties:Property[]=[
 ];
 
 export const packages = [
-  { name: 'Starter', count: 5, price: 0 },,
+  { name: 'Starter', count: 5, price: 0 },
   { name: 'Professional', count: 10, price: 59 },
   { name: 'Business', count: 20, price: 99 },
   { name: 'Enterprise', count: 50, price: 199 }
