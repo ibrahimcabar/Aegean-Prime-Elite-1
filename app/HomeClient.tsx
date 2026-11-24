@@ -689,13 +689,13 @@ onChange={(e) => {
         margin: "0 0 20px"
       }}>
         {({
-          tr: "Tüm Üyelik Paketleri Ücretsiz!",
-          en: "All Membership Plans Are Free!",
-          de: "Alle Mitgliedschaftspakete kostenlos!",
-          ru: "Все тарифные планы бесплатно!",
-          ar: "جميع باقات العضوية مجانية!"
-        } as Record<string, string>)[language] ??
-          "All Membership Plans Are Free!"}
+  tr: "Lansmana Özel Starter Paketi Ücretsiz!",
+  en: "Launch Special: Starter Plan for Free!",
+  de: "Zur Markteinführung: Starter-Paket kostenlos!",
+  ru: "Специальное предложение: тариф Starter бесплатно!",
+  ar: "عرض الإطلاق: باقة Starter مجانًا!"
+} as Record<string, string>)[language] ??
+  "Launch Special: Starter Plan for Free!"}
       </h2>
 
       <p style={{
@@ -706,12 +706,12 @@ onChange={(e) => {
         margin: "0 auto 25px"
       }}>
         {({
-          tr: "Lansman kampanyamıza özel, Starter, Professional, Business ve Enterprise paketlerimizi 1 Ocak 2027'ye kadar ücretsiz deneyimleyin.",
-          en: "As part of our launch campaign, explore Starter, Professional, Business and Enterprise plans free until January 1, 2027.",
-          de: "Entdecken Sie im Rahmen unserer Startaktion die Pakete Starter, Professional, Business und Enterprise kostenlos bis zum 1. Januar 2027.",
-          ru: "В рамках стартовой акции попробуйте пакеты Starter, Professional, Business и Enterprise бесплатно до 1 января 2027 года.",
-          ar: "ضمن عرض الإطلاق، جرّب باقات Starter وProfessional وBusiness وEnterprise مجانًا حتى 1 يناير 2027."
-        } as Record<string, string>)[language]}
+  tr: "Lansman kampanyamıza özel, normal fiyatı aylık 29 € olan Starter paketi 31 Aralık 2026'ya kadar ücretsiz! 5 aktif ilan hakkıyla uluslararası gayrimenkul pazarına adım atın. Başvurular yakında açılacaktır.",
+  en: "Exclusive launch offer: Our Starter plan, normally €29 per month, is free until December 31, 2026! Enter the international real estate market with 5 active listings. Applications will open soon.",
+  de: "Exklusives Einführungsangebot: Unser Starter-Paket im Wert von 29 € pro Monat ist bis zum 31. Dezember 2026 kostenlos! Starten Sie mit 5 aktiven Immobilienanzeigen auf dem internationalen Immobilienmarkt. Bewerbungen sind in Kürze möglich.",
+  ru: "Эксклюзивное стартовое предложение: тариф Starter стоимостью 29 € в месяц бесплатен до 31 декабря 2026 года! Выйдите на международный рынок недвижимости с 5 активными объявлениями. Приём заявок начнётся в ближайшее время.",
+  ar: "عرض إطلاق حصري: باقة Starter بقيمة 29 يورو شهريًا مجانًا حتى 31 ديسمبر 2026! انطلق في سوق العقارات الدولي مع 5 إعلانات عقارية نشطة. سيفتح باب التسجيل قريبًا."
+} as Record<string, string>)[language]}
       </p>
 
       <div style={{
@@ -721,7 +721,7 @@ onChange={(e) => {
         gap: 12,
         marginBottom: 30
       }}>
-        {["Starter", "Professional", "Business", "Enterprise"].map(plan => (
+        {["Starter"].map(plan => (
           <span
             key={plan}
             style={{
@@ -752,12 +752,12 @@ onChange={(e) => {
         }}
       >
         {({
-          tr: "Ücretsiz Paketleri İncele",
-          en: "Explore Free Plans",
-          de: "Kostenlose Pakete entdecken",
-          ru: "Посмотреть бесплатные тарифы",
-          ar: "استكشف الباقات المجانية"
-        } as Record<string, string>)[language]}
+  tr: "Ücretsiz Starter Paketini İncele",
+  en: "Explore the Free Starter Plan",
+  de: "Kostenloses Starter-Paket entdecken",
+  ru: "Посмотреть бесплатный тариф Starter",
+  ar: "استكشف باقة Starter المجانية"
+} as Record<string, string>)[language]}
       </a>
 
       <p style={{
