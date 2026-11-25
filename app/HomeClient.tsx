@@ -1226,11 +1226,11 @@ onChange={(e) => {
 <button onClick={() => window.location.assign(
   `/partner-apply?plan=${encodeURIComponent(p.name)}&lang=${encodeURIComponent(language)}`
 )}>
-{language === "tr" ? "Yakında" :
- language === "de" ? "Demnächst verfügbar" :
- language === "ru" ? "Скоро" :
- language === "ar" ? "قريباً" :
- "Coming soon"}
+{language === "tr" ? "Hemen Başvur" :
+ language === "de" ? "Jetzt bewerben" :
+ language === "ru" ? "Подать заявку" :
+ language === "ar" ? "قدم طلبك الآن" :
+ "Apply Now"}
 <ArrowUpRight size={16}/></button></div>)}</div></section>
 <section className="trust" id="about"><ShieldCheck size={28}/><div><h2>
   {language === "tr" ? "Güven üzerine kuruldu. Dünya için tasarlandı." :
