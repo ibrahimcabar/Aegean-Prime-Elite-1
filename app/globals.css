@@ -862,3 +862,75 @@
     font-size: 21px;
   }
 }
+/* VELORA PRIME ELITE - SIGNATURE LUXURY HEADER */
+
+.header {
+  background: linear-gradient(
+    135deg,
+    #10251d 0%,
+    #18382c 55%,
+    #10251d 100%
+  );
+  border-bottom: 2px solid #b99a62;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.header .nav a {
+  color: #f4efe5;
+}
+
+.header .nav a:hover {
+  color: #d6b982;
+}
+
+.header .outline-btn {
+  background: linear-gradient(
+    135deg,
+    #e2c68e,
+    #b99a62
+  );
+  color: #10251d;
+  border: 1px solid #d6b982;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.header .menu {
+  color: #d6b982;
+}
+
+@media (max-width: 700px) {
+  .header {
+    min-height: 0;
+    padding: 14px 18px;
+    gap: 12px;
+  }
+
+  .header .brand img {
+    height: 76px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .header .header-actions {
+    padding-top: 10px;
+    border-top: 1px solid rgba(185, 154, 98, 0.25);
+  }
+
+  .header .header-actions select {
+    width: 110px !important;
+    max-width: 110px !important;
+  }
+
+  .header .nav.show {
+    background: #18382c;
+    border-top: 1px solid #b99a62;
+  }
+
+  .header .nav.show a {
+    color: #f4efe5;
+    border-bottom-color: rgba(185, 154, 98, 0.2);
+  }
+}
