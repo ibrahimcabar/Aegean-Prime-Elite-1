@@ -934,3 +934,42 @@
     border-bottom-color: rgba(185, 154, 98, 0.2);
   }
 }
+/* VELORA PRIME ELITE - DESKTOP HEADER REFINEMENT */
+
+@media (min-width: 1101px) {
+  .header {
+    height: 110px;
+    padding: 0 5%;
+    gap: 24px;
+  }
+
+  .header .brand img {
+    height: 105px !important;
+    width: auto !important;
+    max-width: 290px !important;
+    object-fit: contain;
+  }
+
+  .header .nav {
+    gap: 28px;
+    font-size: 15px;
+    font-weight: 500;
+    align-items: center;
+  }
+
+  .header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header .header-actions select {
+    font-size: 14px;
+    min-height: 44px;
+  }
+
+  .header .outline-btn {
+    font-size: 14px;
+    padding: 13px 22px;
+  }
+}
