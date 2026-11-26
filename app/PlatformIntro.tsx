@@ -268,9 +268,18 @@ export default function PlatformIntro({
 
         .vpe-intro-card {
           padding: 30px 18px;
-          border: 1px solid rgba(213, 182, 124, 0.5);
+          border: 1px solid rgba(213, 182, 124, 0.8);
           border-radius: 15px;
-          background: rgba(255, 255, 255, 0.035);
+          background: linear-gradient(
+  145deg,
+  rgba(255, 255, 255, 0.09),
+  rgba(7, 19, 36, 0.65)
+);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+box-shadow:
+  inset 0 1px 0 rgba(213, 182, 124, 0.15),
+  0 8px 30px rgba(0, 0, 0, 0.25);
           transition: transform 0.3s, background 0.3s,
             box-shadow 0.3s;
           color: #d5b67c;
