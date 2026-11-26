@@ -183,6 +183,14 @@ export default function PlatformIntro({
 
       <style jsx>{`
         .vpe-intro {
+        max-width: 1350px;
+width: calc(100% - 32px);
+margin: 40px auto;
+border-radius: 22px;
+border: 1px solid #b99a60;
+overflow: hidden;
+box-shadow: 0 18px 50px rgba(24, 56, 44, 0.18);
+box-sizing: border-box;
           position: relative;
           overflow: hidden;
           isolation: isolate;
