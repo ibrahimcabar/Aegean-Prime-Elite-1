@@ -189,17 +189,17 @@ export default function PlatformIntro({
           padding: 65px 5%;
           color: #ffffff;
           background:
-            radial-gradient(
-              ellipse at top,
-              #183b63 0%,
-              transparent 65%
-            ),
-            linear-gradient(
-              135deg,
-              #071324,
-              #102b49,
-              #061221
-            );
+  linear-gradient(
+    180deg,
+    rgba(5, 30, 21, 0.25),
+    rgba(5, 30, 21, 0.55)
+  ),
+  url('/13703029-080C-498F-BE38-9B8A3105E25C.png');
+
+background-color: #102a22;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
         }
 
         .vpe-intro-glow {
@@ -273,7 +273,7 @@ export default function PlatformIntro({
           background: linear-gradient(
   145deg,
   rgba(255, 255, 255, 0.09),
-  rgba(7, 19, 36, 0.65)
+  rgba(16, 42, 34, 0.65)
 );
 backdrop-filter: blur(12px);
 -webkit-backdrop-filter: blur(12px);
