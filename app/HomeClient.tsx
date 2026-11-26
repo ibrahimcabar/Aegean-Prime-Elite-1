@@ -3,7 +3,7 @@ import {useEffect,useMemo,useState} from 'react';
 import {Search,MapPin,ArrowUpRight,Menu,X,MessageCircle,Send,Building2,Globe2,BedDouble,Ruler,Check,ShieldCheck} from 'lucide-react';
 
 import {packages} from '../lib/data';
-
+import PlatformIntro from "./PlatformIntro";
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -653,7 +653,7 @@ onChange={(e) => {
  language === "ru" ? "МИР ВОЗМОЖНОСТЕЙ" :
  language === "ar" ? "عالم من الفرص" :
  "A WORLD OF OPPORTUNITY"}</span></div></div></section>
-
+<PlatformIntro language={language} />
 {campaignActive && (
   <section
     aria-label="Velora Prime Elite launch campaign"
