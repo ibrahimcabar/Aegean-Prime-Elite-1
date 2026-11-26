@@ -349,10 +349,26 @@ box-shadow:
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
+@media (max-width: 768px) {
+  .vpe-intro {
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(16, 42, 34, 0.05) 0px,
+        rgba(16, 42, 34, 0.35) 150px,
+        #102a22 350px
+      ),
+      url('/13703029-080C-498F-BE38-9B8A3105E25C.png');
 
+    background-size: 100% 100%, 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+    padding-top: 180px;
+  }
+}
         @media (max-width: 480px) {
           .vpe-intro {
-            padding: 40px 16px;
+            padding: 180px 16px 40px;
           }
 
           .vpe-intro-grid {
