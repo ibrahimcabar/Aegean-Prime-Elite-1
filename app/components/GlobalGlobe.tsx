@@ -34,7 +34,7 @@ export default function GlobalGlobe() {
       100
     );
 
-    camera.position.set(0, 0, 7.6);
+    camera.position.set(0, 0, 6.4);
 
     renderer.setPixelRatio(
       Math.min(window.devicePixelRatio, 1.75)
@@ -145,13 +145,13 @@ export default function GlobalGlobe() {
               data[i + 2] * 0.114;
 
             const value = Math.min(
-              1,
-              Math.pow(brightness / 255, 0.65)
-            );
+  1,
+  Math.pow(brightness / 255, 0.40) * 1.35
+);
 
-            data[i] = 9 + value * 231;
-            data[i + 1] = 12 + value * 179;
-            data[i + 2] = 14 + value * 85;
+data[i] = 3 + value * 252;
+data[i + 1] = 5 + value * 205;
+data[i + 2] = 8 + value * 115;
           }
 
           ctx.putImageData(image, 0, 0);
@@ -171,7 +171,7 @@ export default function GlobalGlobe() {
           earthMaterial.map = goldTexture;
           earthMaterial.emissive.set(0x6b4819);
           earthMaterial.emissiveMap = goldTexture;
-          earthMaterial.emissiveIntensity = 0.35;
+          earthMaterial.emissiveIntensity = 0.85;
           earthMaterial.needsUpdate = true;
         } catch {
           setFailed(true);
@@ -252,12 +252,12 @@ export default function GlobalGlobe() {
     }
 
     const cities = [
-      { lat: 41.0082, lng: 28.9784 },
-      { lat: 52.52, lng: 13.405 },
-      { lat: 48.2082, lng: 16.3738 },
-      { lat: 25.2048, lng: 55.2708 },
-      { lat: 40.7128, lng: -74.006 },
-    ];
+  { name: "Istanbul", lat: 41.0082, lng: 28.9784 },
+  { name: "Berlin", lat: 52.52, lng: 13.405 },
+  { name: "Vienna", lat: 48.2082, lng: 16.3738 },
+  { name: "Dubai", lat: 25.2048, lng: 55.2708 },
+  { name: "New York", lat: 40.7128, lng: -74.006 },
+];
 
     const gold = new THREE.Color(0xffcf78);
 
@@ -321,9 +321,50 @@ export default function GlobalGlobe() {
       );
 
       sprite.position.copy(marker.position);
-      sprite.scale.set(0.18, 0.18, 1);
+      sprite.scale.set(0.26, 0.26, 1);
 
       globe.add(sprite);
+      const labelCanvas = document.createElement("canvas");
+labelCanvas.width = 512;
+labelCanvas.height = 128;
+
+const labelCtx = labelCanvas.getContext("2d");
+
+if (labelCtx) {
+  labelCtx.font = "600 42px Arial";
+  labelCtx.textAlign = "center";
+  labelCtx.textBaseline = "middle";
+
+  labelCtx.shadowColor = "#000000";
+  labelCtx.shadowBlur = 10;
+  labelCtx.fillStyle = "#ffe0a3";
+
+  labelCtx.fillText(city.name, 256, 64);
+
+  const labelTexture = new THREE.CanvasTexture(labelCanvas);
+  labelTexture.colorSpace = THREE.SRGBColorSpace;
+
+  const label = new THREE.Sprite(
+    new THREE.SpriteMaterial({
+      map: labelTexture,
+      transparent: true,
+      depthTest: true,
+      depthWrite: false,
+    })
+  );
+
+  label.position.copy(
+    positionFromLatLng(
+      city.lat,
+      city.lng,
+      radius + 0.13
+    )
+  );
+
+  label.scale.set(0.85, 0.2125, 1);
+
+  globe.add(label);
+}
     });
 
     const routes: {
@@ -386,10 +427,10 @@ export default function GlobalGlobe() {
       const line = new THREE.Line(
         geometry,
         new THREE.LineBasicMaterial({
-          color: 0xe0b46c,
-          transparent: true,
-          opacity: 0.65,
-        })
+  color: 0xffd580,
+  transparent: true,
+  opacity: 1,
+})
       );
 
       globe.add(line);
@@ -410,8 +451,8 @@ export default function GlobalGlobe() {
       });
     });
 
-    globe.rotation.y = 0.65;
-    globe.rotation.x = 0.12;
+    globe.rotation.y = -2.05;
+globe.rotation.x = 0.60;
 
     const resize = () => {
       const width = container.clientWidth;
