@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import GlobalGlobe from "./GlobalGlobe";
 import {
   Globe2,
   Users,
@@ -186,23 +187,7 @@ export default function GrowthPotential({
           <p>{t.description}</p>
         </div>
 
-        <div className="vgp-globe-area" aria-hidden="true">
-          <div className="vgp-globe">
-            <div className="vgp-orbit vgp-orbit-one" />
-            <div className="vgp-orbit vgp-orbit-two" />
-            <div className="vgp-orbit vgp-orbit-three" />
-
-            <Globe2
-              size={170}
-              strokeWidth={0.65}
-              className="vgp-globe-icon"
-            />
-
-            <span className="vgp-dot vgp-dot-one" />
-            <span className="vgp-dot vgp-dot-two" />
-            <span className="vgp-dot vgp-dot-three" />
-          </div>
-        </div>
+        <GlobalGlobe />
 
         <div className="vgp-scenario">{t.growth}</div>
 
