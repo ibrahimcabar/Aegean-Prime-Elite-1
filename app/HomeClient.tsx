@@ -4,6 +4,7 @@ import {Search,MapPin,ArrowUpRight,Menu,X,MessageCircle,Send,Building2,Globe2,Be
 
 import {packages} from '../lib/data';
 import PlatformIntro from "./PlatformIntro";
+import GrowthPotential from "./components/GrowthPotential";
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -1112,7 +1113,8 @@ onChange={(e) => {
   ['03', language === 'tr' ? 'Gayrimenkullerinizi ekleyin' : language === 'de' ? 'Fügen Sie Ihre Immobilien hinzu' : language === 'ru' ? 'Добавьте свои объекты' : language === 'ar' ? 'أضف عقاراتك' : 'Submit your properties'],
   ['04', language === 'tr' ? 'Uluslararası alıcılara ulaşın' : language === 'de' ? 'Erreichen Sie internationale Käufer' : language === 'ru' ? 'Привлекайте международных покупателей' : language === 'ar' ? 'تواصل مع المشترين الدوليين' : 'Connect with global buyers']
 ].map(([n,t])=><div key={n}><span>{n}</span><strong>{t}</strong><Check size={18}/></div>)}</div></section>
-<section className="section pricing" id="packages"><div className="center"><div className="kicker">
+<GrowthPotential language={language} />
+  <section className="section pricing" id="packages"><div className="center"><div className="kicker">
   {language === "tr" ? "GAYRİMENKUL PROFESYONELLERİ İÇİN" :
    language === "de" ? "FÜR IMMOBILIENPROFIS" :
    language === "ru" ? "ДЛЯ ПРОФЕССИОНАЛОВ НЕДВИЖИМОСТИ" :
